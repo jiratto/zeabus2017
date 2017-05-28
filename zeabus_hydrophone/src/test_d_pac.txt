@@ -1,0 +1,7639 @@
+READY TO GET THE DATA
+uint32
+['\xff', '\xff', '\x00', '\x80', '\x84', '\x1e', '\x00', '\x00']
+uint32
+['\xff', '\xff', '\x01', '\xb8', '\x88', '\x00', '\x00', '\x00']
+float
+['\xff', '\xff', '\x02', '\x9a', '\x99', '\x99', '>', '\x00']
+float
+['\xff', '\xff', '\x03', '\n', '\xd7', '\xa3', '<', '\x00']
+uint32
+['\xff', '\xff', '\x04', '\xdc', '\x05', '\x00', '\x00', '\x00']
+Test
+seq : 68
+freq = 25000
+==== Fail =====
+Test
+seq : 69
+freq = 30000
+==== Fail =====
+Test
+seq : 70
+freq = 30000
+==== Fail =====
+Test
+seq : 71
+freq = 30000
+==== Fail =====
+Test
+seq : 72
+freq = 30000
+==== Fail =====
+Test
+seq : 73
+freq = 25000
+==== Fail =====
+Test
+seq : 74
+freq = 30000
+==== Fail =====
+Test
+seq : 75
+freq = 30000
+==== Fail =====
+Test
+seq : 76
+freq = 30000
+==== Fail =====
+Test
+seq : 77
+freq = 30000
+==== Fail =====
+Test
+seq : 78
+freq = 25000
+==== Fail =====
+Test
+READY TO GET THE DATA
+uint32
+['\xff', '\xff', '\x00', '\x80', '\x84', '\x1e', '\x00', '\x00']
+uint32
+['\xff', '\xff', '\x01', '\xb8', '\x88', '\x00', '\x00', '\x00']
+float
+['\xff', '\xff', '\x02', '\x9a', '\x99', '\x99', '>', '\x00']
+float
+['\xff', '\xff', '\x03', '\n', '\xd7', '\xa3', '<', '\x00']
+uint32
+['\xff', '\xff', '\x04', '\xdc', '\x05', '\x00', '\x00', '\x00']
+Test
+seq : 112
+freq = 25000
+==== Fail =====
+Test
+seq : 113
+freq = 30000
+==== Fail =====
+Test
+seq : 114
+freq = 25000
+==== Fail =====
+Test
+seq : 115
+freq = 30000
+==== Fail =====
+Test
+seq : 116
+freq = 25000
+==== Fail =====
+Test
+seq : 117
+freq = 30000
+==== Fail =====
+Test
+seq : 118
+freq = 30000
+==== Fail =====
+Test
+seq : 119
+freq = 25000
+==== Fail =====
+Test
+seq : 120
+freq = 35000, po1 : -2
+c0r = 0.011434, c0i = 0.011350, c1r = 0.004973, c1i = 0.006163, c2r = -0.007068, c2i = -0.003761, c3r = -0.010978, c3i = 0.000420
+seq : 120
+Particle Filter Az: -91.92,Elv: 58.30,Ot: 2.096 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 121
+freq = 30000
+==== Fail =====
+Test
+seq : 122
+freq = 35000, po1 : -2
+c0r = 0.011434, c0i = 0.011350, c1r = 0.004973, c1i = 0.006163, c2r = -0.007068, c2i = -0.003761, c3r = -0.010978, c3i = 0.000420
+seq : 122
+Particle Filter Az: -97.66,Elv: 62.26,Ot: 2.088 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 123
+freq = 30000
+==== Fail =====
+Test
+seq : 124
+freq = 35000, po1 : -2
+c0r = 0.011434, c0i = 0.011350, c1r = 0.004973, c1i = 0.006163, c2r = -0.007068, c2i = -0.003761, c3r = -0.010978, c3i = 0.000420
+seq : 124
+Particle Filter Az: -97.39,Elv: 66.16,Ot: 2.116 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 125
+freq = 30000
+==== Fail =====
+Test
+seq : 126
+freq = 25000
+==== Fail =====
+Test
+seq : 127
+freq = 35000, po1 : -2
+c0r = 0.037024, c0i = 0.035324, c1r = 0.041539, c1i = 0.011207, c2r = -0.019579, c2i = 0.002545, c3r = -0.056254, c3i = -0.016691
+seq : 127
+Particle Filter Az: -81.64,Elv: 70.86,Ot: 1.841 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 128
+freq = 30000
+==== Fail =====
+Test
+seq : 129
+freq = 35000, po1 : -2
+c0r = 0.013506, c0i = 0.046423, c1r = 0.017138, c1i = 0.012069, c2r = -0.013707, c2i = -0.009750, c3r = -0.022115, c3i = -0.039475
+seq : 129
+Particle Filter Az: -79.20,Elv: 76.27,Ot: 2.472 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 130
+freq = 35000, po1 : -2
+c0r = 0.083041, c0i = -0.057530, c1r = 0.040242, c1i = -0.035360, c2r = -0.018201, c2i = 0.032102, c3r = -0.079260, c3i = 0.065039
+seq : 130
+Particle Filter Az: -85.94,Elv: 75.12,Ot: 1.230 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 131
+freq = 30000
+==== Fail =====
+Test
+seq : 132
+freq = 30000
+==== Fail =====
+Test
+seq : 133
+freq = 25000
+==== Fail =====
+Test
+seq : 134
+freq = 35000, po1 : -2
+c0r = -0.047473, c0i = 0.002837, c1r = -0.024338, c1i = 0.008496, c2r = 0.018036, c2i = -0.010838, c3r = 0.050754, c3i = -0.024528
+seq : 134
+Particle Filter Az: -94.00,Elv: 57.27,Ot: 2.243 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 135
+freq = 25000
+==== Fail =====
+Test
+seq : 136
+freq = 35000, po1 : -2
+c0r = 0.053444, c0i = 0.004252, c1r = 0.029748, c1i = -0.003405, c2r = -0.019274, c2i = 0.012553, c3r = -0.055381, c3i = 0.021181
+seq : 136
+Particle Filter Az: -83.20,Elv: 70.20,Ot: 1.454 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 137
+freq = 30000
+==== Fail =====
+Test
+seq : 138
+freq = 35000, po1 : -2
+c0r = 0.042178, c0i = -0.078192, c1r = 0.008207, c1i = -0.050240, c2r = 0.000782, c2i = 0.031864, c3r = -0.035579, c3i = 0.078097
+seq : 138
+Particle Filter Az: -82.91,Elv: 76.19,Ot: 0.461 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 139
+freq = 30000
+==== Fail =====
+Test
+seq : 140
+freq = 35000, po1 : -2
+c0r = 0.121759, c0i = -0.034417, c1r = 0.061757, c1i = -0.024231, c2r = -0.040995, c2i = 0.025189, c3r = -0.136562, c3i = 0.041030
+seq : 140
+Particle Filter Az: -86.49,Elv: 76.89,Ot: 1.190 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 141
+freq = 30000
+==== Fail =====
+Test
+seq : 142
+freq = 35000, po1 : -2
+c0r = 0.213529, c0i = -0.028196, c1r = 0.098011, c1i = -0.028878, c2r = -0.078592, c2i = 0.050015, c3r = -0.208595, c3i = 0.071567
+seq : 142
+Particle Filter Az: -85.55,Elv: 76.28,Ot: 1.251 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 143
+freq = 30000
+==== Fail =====
+Test
+seq : 144
+freq = 25000
+==== Fail =====
+Test
+seq : 145
+freq = 35000, po1 : -2
+c0r = 0.118902, c0i = 0.000870, c1r = 0.058386, c1i = -0.006862, c2r = -0.040929, c2i = 0.007360, c3r = -0.132695, c3i = 0.007169
+seq : 145
+Particle Filter Az: -87.20,Elv: 76.84,Ot: 1.479 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 146
+freq = 35000, po1 : -2
+c0r = 0.239580, c0i = -0.047551, c1r = 0.123174, c1i = -0.020395, c2r = -0.086769, c2i = 0.037717, c3r = -0.219689, c3i = 0.099979
+seq : 146
+Particle Filter Az: -90.01,Elv: 76.32,Ot: 1.280 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 147
+freq = 25000
+==== Fail =====
+Test
+seq : 148
+freq = 35000, po1 : -2
+c0r = 0.164442, c0i = -0.065641, c1r = 0.099061, c1i = -0.031566, c2r = -0.070646, c2i = 0.032975, c3r = -0.140507, c3i = 0.106055
+seq : 148
+Particle Filter Az: -93.30,Elv: 76.38,Ot: 1.140 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 149
+freq = 30000
+==== Fail =====
+Test
+seq : 150
+freq = 35000, po1 : -2
+c0r = 0.087797, c0i = -0.082128, c1r = 0.049400, c1i = -0.041560, c2r = -0.037534, c2i = 0.028459, c3r = -0.091714, c3i = 0.094744
+seq : 150
+Particle Filter Az: -92.12,Elv: 78.94,Ot: 0.851 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 151
+freq = 30000
+==== Fail =====
+Test
+seq : 152
+freq = 35000, po1 : -2
+c0r = 0.148389, c0i = 0.001401, c1r = 0.069253, c1i = 0.015730, c2r = -0.064055, c2i = -0.003686, c3r = -0.157647, c3i = 0.028293
+seq : 152
+Particle Filter Az: -93.88,Elv: 77.90,Ot: 1.581 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 153
+freq = 35000, po1 : -2
+c0r = 0.082164, c0i = -0.027852, c1r = 0.044099, c1i = -0.016236, c2r = -0.038737, c2i = 0.008571, c3r = -0.080512, c3i = 0.029516
+seq : 153
+Particle Filter Az: -91.16,Elv: 79.42,Ot: 1.255 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 154
+freq = 35000, po1 : -2
+c0r = 0.019582, c0i = -0.108947, c1r = 0.015358, c1i = -0.060453, c2r = -0.014967, c2i = 0.038072, c3r = 0.004052, c3i = 0.087015
+seq : 154
+Particle Filter Az: -94.84,Elv: 80.47,Ot: 0.290 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 155
+freq = 25000
+==== Fail =====
+Test
+seq : 156
+freq = 35000, po1 : -2
+c0r = 0.044925, c0i = -0.020588, c1r = 0.027692, c1i = -0.011769, c2r = -0.032813, c2i = -0.000008, c3r = -0.076882, c3i = 0.001109
+seq : 156
+Particle Filter Az: -89.88,Elv: 81.74,Ot: 1.225 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 157
+freq = 35000, po1 : -2
+c0r = 0.094561, c0i = -0.070525, c1r = 0.053476, c1i = -0.025823, c2r = -0.038609, c2i = 0.019173, c3r = -0.081158, c3i = 0.070680
+seq : 157
+Particle Filter Az: -93.33,Elv: 79.75,Ot: 0.998 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 158
+freq = 30000
+==== Fail =====
+Test
+seq : 159
+freq = 35000, po1 : -2
+c0r = 0.077325, c0i = -0.064076, c1r = 0.050289, c1i = -0.044007, c2r = -0.033641, c2i = 0.021025, c3r = -0.062446, c3i = 0.067429
+seq : 159
+Particle Filter Az: -92.37,Elv: 79.27,Ot: 0.848 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 160
+freq = 30000
+==== Fail =====
+Test
+seq : 161
+freq = 35000, po1 : -2
+c0r = 0.117391, c0i = 0.008239, c1r = 0.054709, c1i = -0.004414, c2r = -0.052705, c2i = -0.001892, c3r = -0.152766, c3i = 0.007166
+seq : 161
+Particle Filter Az: -89.37,Elv: 79.65,Ot: 1.564 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 162
+freq = 30000
+==== Fail =====
+Test
+seq : 163
+freq = 35000, po1 : -2
+c0r = 0.067643, c0i = -0.101144, c1r = 0.028477, c1i = -0.052611, c2r = -0.021543, c2i = 0.033697, c3r = -0.072354, c3i = 0.102192
+seq : 163
+Particle Filter Az: -88.64,Elv: 80.72,Ot: 0.652 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 164
+freq = 30000
+==== Fail =====
+Test
+seq : 165
+freq = 35000, po1 : -2
+c0r = 0.098198, c0i = -0.015211, c1r = 0.040878, c1i = -0.012265, c2r = -0.035501, c2i = 0.004696, c3r = -0.121048, c3i = 0.005093
+seq : 165
+Particle Filter Az: -88.13,Elv: 80.75,Ot: 1.390 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 166
+freq = 35000, po1 : -2
+c0r = 0.134612, c0i = 0.021462, c1r = 0.061494, c1i = 0.004488, c2r = -0.057144, c2i = 0.003365, c3r = -0.167806, c3i = -0.017349
+seq : 166
+Particle Filter Az: -88.02,Elv: 79.68,Ot: 1.621 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 167
+freq = 30000
+==== Fail =====
+Test
+seq : 168
+freq = 35000, po1 : -2
+c0r = 0.102112, c0i = 0.002872, c1r = 0.044412, c1i = -0.006354, c2r = -0.038088, c2i = 0.003246, c3r = -0.122029, c3i = -0.004627
+seq : 168
+Particle Filter Az: -87.40,Elv: 80.25,Ot: 1.526 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 169
+freq = 30000
+==== Fail =====
+Test
+seq : 170
+freq = 35000, po1 : -2
+c0r = 0.104398, c0i = -0.057922, c1r = 0.042530, c1i = -0.034399, c2r = -0.030259, c2i = 0.020853, c3r = -0.109967, c3i = 0.059565
+seq : 170
+Particle Filter Az: -88.31,Elv: 78.97,Ot: 1.006 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 171
+freq = 25000
+==== Fail =====
+Test
+seq : 172
+freq = 35000, po1 : -2
+c0r = 0.173092, c0i = -0.041495, c1r = 0.075442, c1i = -0.045475, c2r = -0.060715, c2i = 0.055282, c3r = -0.173841, c3i = 0.078227
+seq : 172
+Particle Filter Az: -84.29,Elv: 79.54,Ot: 1.103 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 173
+freq = 25000
+==== Fail =====
+Test
+seq : 174
+freq = 35000, po1 : -2
+c0r = -0.193116, c0i = -0.022045, c1r = -0.086674, c1i = -0.007113, c2r = 0.056511, c2i = -0.013595, c3r = 0.175542, c3i = -0.034560
+seq : 174
+Particle Filter Az: -76.77,Elv: 79.77,Ot: -0.288 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 175
+freq = 30000
+==== Fail =====
+Test
+seq : 176
+freq = 35000, po1 : -2
+c0r = -0.181288, c0i = -0.025214, c1r = -0.082244, c1i = -0.006464, c2r = 0.050569, c2i = -0.013791, c3r = 0.150588, c3i = -0.049349
+seq : 176
+Particle Filter Az: -89.03,Elv: 74.16,Ot: -1.285 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 177
+freq = 30000
+==== Fail =====
+Test
+seq : 178
+freq = 35000, po1 : -2
+c0r = 0.126062, c0i = -0.034172, c1r = 0.052169, c1i = -0.018121, c2r = -0.052157, c2i = 0.010949, c3r = -0.142423, c3i = 0.048194
+seq : 178
+Particle Filter Az: -86.03,Elv: 74.64,Ot: -0.154 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 179
+freq = 35000, po1 : -2
+c0r = 0.104975, c0i = -0.042620, c1r = 0.052307, c1i = -0.017837, c2r = -0.049881, c2i = 0.012598, c3r = -0.133563, c3i = 0.054734
+seq : 179
+Particle Filter Az: -91.82,Elv: 80.17,Ot: 0.832 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 180
+freq = 30000
+==== Fail =====
+Test
+seq : 181
+freq = 25000
+==== Fail =====
+Test
+seq : 182
+freq = 35000, po1 : -2
+c0r = 0.207906, c0i = -0.063661, c1r = 0.110644, c1i = 0.002740, c2r = -0.088428, c2i = 0.022486, c3r = -0.181935, c3i = 0.119778
+seq : 182
+Particle Filter Az: -96.23,Elv: 78.94,Ot: 1.278 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 183
+freq = 30000
+==== Fail =====
+Test
+seq : 184
+freq = 35000, po1 : -2
+c0r = 0.080820, c0i = 0.013946, c1r = 0.031716, c1i = 0.010683, c2r = -0.042079, c2i = -0.014453, c3r = -0.115596, c3i = -0.016891
+seq : 184
+Particle Filter Az: -92.11,Elv: 78.93,Ot: 1.797 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 185
+freq = 30000
+==== Fail =====
+Test
+seq : 186
+freq = 25000
+==== Fail =====
+Test
+seq : 187
+freq = 35000, po1 : -2
+c0r = -0.075773, c0i = 0.012382, c1r = -0.030530, c1i = 0.002726, c2r = 0.018099, c2i = -0.014353, c3r = 0.033889, c3i = -0.038948
+seq : 187
+Particle Filter Az: -98.76,Elv: 70.68,Ot: 3.111 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 188
+freq = 30000
+==== Fail =====
+Test
+seq : 189
+freq = 25000
+==== Fail =====
+Test
+seq : 190
+freq = 35000, po1 : -2
+c0r = 0.048331, c0i = -0.126840, c1r = 0.033680, c1i = -0.057456, c2r = -0.023850, c2i = 0.040442, c3r = -0.022899, c3i = 0.102862
+seq : 190
+Particle Filter Az: -100.85,Elv: 69.18,Ot: 2.078 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 191
+freq = 35000, po1 : -2
+c0r = 0.104866, c0i = -0.015275, c1r = 0.047913, c1i = -0.006113, c2r = -0.052306, c2i = -0.000989, c3r = -0.126319, c3i = 0.020395
+seq : 191
+Particle Filter Az: -93.20,Elv: 75.88,Ot: 1.495 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 192
+freq = 30000
+==== Fail =====
+Test
+seq : 193
+freq = 35000, po1 : -2
+c0r = 0.068224, c0i = -0.097681, c1r = 0.028967, c1i = -0.041065, c2r = -0.027324, c2i = 0.031649, c3r = -0.031303, c3i = 0.090992
+seq : 193
+Particle Filter Az: -94.43,Elv: 77.07,Ot: 0.617 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 194
+freq = 25000
+==== Fail =====
+Test
+seq : 195
+freq = 35000, po1 : -2
+c0r = -0.043887, c0i = -0.091922, c1r = -0.000643, c1i = -0.067318, c2r = 0.005315, c2i = 0.041635, c3r = 0.075431, c3i = 0.077155
+seq : 195
+Particle Filter Az: -100.22,Elv: 76.85,Ot: -0.287 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 196
+freq = 25000
+==== Fail =====
+Test
+seq : 197
+freq = 35000, po1 : -2
+c0r = -0.034418, c0i = -0.264169, c1r = 0.046447, c1i = -0.090100, c2r = -0.018879, c2i = 0.097512, c3r = 0.094144, c3i = 0.245021
+seq : 197
+Particle Filter Az: -101.20,Elv: 76.25,Ot: 0.029 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 198
+freq = 25000
+==== Fail =====
+Test
+seq : 199
+freq = 35000, po1 : -2
+c0r = 0.110275, c0i = -0.083574, c1r = 0.053531, c1i = -0.006059, c2r = -0.058343, c2i = 0.026184, c3r = -0.117135, c3i = 0.153437
+seq : 199
+Particle Filter Az: -101.02,Elv: 76.83,Ot: 0.952 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 200
+freq = 30000
+==== Fail =====
+Test
+seq : 201
+freq = 25000
+==== Fail =====
+Test
+seq : 202
+freq = 35000, po1 : -2
+c0r = 0.138278, c0i = -0.070295, c1r = 0.053284, c1i = 0.025107, c2r = -0.074257, c2i = 0.006320, c3r = -0.133059, c3i = 0.138865
+seq : 202
+Particle Filter Az: -107.27,Elv: 75.19,Ot: 1.328 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 203
+freq = 30000
+==== Fail =====
+Test
+seq : 204
+freq = 25000
+==== Fail =====
+Test
+seq : 205
+freq = 35000, po1 : -2
+c0r = 0.067098, c0i = -0.117206, c1r = 0.053649, c1i = -0.024207, c2r = -0.045413, c2i = 0.032513, c3r = -0.043558, c3i = 0.136613
+seq : 205
+Particle Filter Az: -102.56,Elv: 77.95,Ot: 0.740 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 206
+freq = 30000
+==== Fail =====
+Test
+seq : 207
+freq = 25000
+==== Fail =====
+Test
+seq : 208
+freq = 35000, po1 : -2
+c0r = 0.017009, c0i = -0.154817, c1r = 0.063351, c1i = -0.031965, c2r = -0.042710, c2i = 0.068669, c3r = 0.137933, c3i = 0.154514
+seq : 208
+Particle Filter Az: -114.72,Elv: 74.52,Ot: 0.272 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 209
+freq = 25000
+==== Fail =====
+Test
+seq : 210
+freq = 35000, po1 : -2
+c0r = 0.038190, c0i = 0.124079, c1r = -0.056383, c1i = 0.004426, c2r = -0.025280, c2i = -0.026062, c3r = -0.068843, c3i = 0.036909
+seq : 210
+Particle Filter Az: -114.29,Elv: 68.60,Ot: 1.640 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 211
+freq = 25000
+==== Fail =====
+Test
+seq : 212
+freq = 35000, po1 : -2
+c0r = -0.180812, c0i = 0.076824, c1r = -0.062473, c1i = 0.025122, c2r = 0.045173, c2i = -0.045477, c3r = 0.082504, c3i = -0.185446
+seq : 212
+Particle Filter Az: -100.19,Elv: 66.85,Ot: 2.696 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 213
+freq = 25000
+==== Fail =====
+Test
+seq : 214
+freq = 35000, po1 : -2
+c0r = -0.180812, c0i = 0.076824, c1r = -0.062473, c1i = 0.025122, c2r = 0.045173, c2i = -0.045477, c3r = 0.082504, c3i = -0.185446
+seq : 214
+Particle Filter Az: -95.47,Elv: 65.40,Ot: -2.618 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 215
+freq = 35000, po1 : -2
+c0r = -0.226040, c0i = -0.077337, c1r = 0.089363, c1i = 0.000259, c2r = 0.100856, c2i = -0.016131, c3r = -0.153162, c3i = -0.099234
+seq : 215
+Particle Filter Az: -126.51,Elv: 41.68,Ot: -1.724 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 216
+freq = 30000
+==== Fail =====
+Test
+seq : 217
+freq = 35000, po1 : -2
+c0r = -0.016572, c0i = 0.092899, c1r = -0.063911, c1i = 0.023342, c2r = 0.064256, c2i = -0.012851, c3r = 0.030811, c3i = -0.129557
+seq : 217
+Particle Filter Az: -111.22,Elv: 77.84,Ot: -2.263 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 218
+freq = 25000
+==== Fail =====
+Test
+seq : 219
+freq = 35000, po1 : -2
+c0r = -0.098187, c0i = 0.038276, c1r = 0.001396, c1i = 0.054010, c2r = 0.029819, c2i = -0.051170, c3r = 0.119281, c3i = -0.021058
+seq : 219
+Particle Filter Az: -85.81,Elv: 79.68,Ot: -2.374 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 220
+freq = 30000
+==== Fail =====
+Test
+seq : 221
+freq = 25000
+==== Fail =====
+Test
+seq : 222
+freq = 35000, po1 : -2
+c0r = -0.019708, c0i = -0.047560, c1r = -0.029236, c1i = -0.012982, c2r = -0.002098, c2i = -0.000392, c3r = 0.026185, c3i = 0.028634
+seq : 222
+Particle Filter Az: -61.91,Elv: 68.36,Ot: -1.482 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 223
+freq = 35000, po1 : -2
+c0r = -0.176312, c0i = 0.124285, c1r = -0.026014, c1i = 0.081719, c2r = 0.049490, c2i = -0.057848, c3r = 0.175908, c3i = -0.074810
+seq : 223
+Particle Filter Az: -79.23,Elv: 80.26,Ot: -2.314 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 224
+freq = 30000
+==== Fail =====
+Test
+seq : 225
+freq = 25000
+==== Fail =====
+Test
+seq : 226
+freq = 35000, po1 : -2
+c0r = -0.174037, c0i = 0.080432, c1r = -0.059638, c1i = 0.061899, c2r = 0.066559, c2i = -0.056262, c3r = 0.178677, c3i = -0.071670
+seq : 226
+Particle Filter Az: -84.67,Elv: 80.61,Ot: -2.146 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 227
+freq = 25000
+==== Fail =====
+Test
+seq : 228
+freq = 35000, po1 : -2
+c0r = -0.085134, c0i = 0.024546, c1r = -0.040408, c1i = 0.032584, c2r = 0.038273, c2i = -0.039889, c3r = 0.056774, c3i = -0.042888
+seq : 228
+Particle Filter Az: -85.35,Elv: 78.21,Ot: -2.185 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 229
+freq = 35000, po1 : -2
+c0r = -0.148396, c0i = -0.001948, c1r = -0.093719, c1i = 0.036115, c2r = 0.077398, c2i = -0.033812, c3r = 0.132828, c3i = -0.031546
+seq : 229
+Particle Filter Az: -84.60,Elv: 78.89,Ot: -1.826 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 230
+freq = 30000
+==== Fail =====
+Test
+seq : 231
+freq = 25000
+==== Fail =====
+Test
+seq : 232
+freq = 35000, po1 : -2
+c0r = -0.163658, c0i = 0.093839, c1r = -0.059888, c1i = 0.075262, c2r = 0.096097, c2i = -0.032903, c3r = 0.198863, c3i = -0.083343
+seq : 232
+Particle Filter Az: -87.06,Elv: 81.56,Ot: -2.096 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 233
+freq = 30000
+==== Fail =====
+Test
+seq : 234
+freq = 25000
+==== Fail =====
+Test
+seq : 235
+freq = 35000, po1 : -2
+c0r = -0.163658, c0i = 0.093839, c1r = -0.059888, c1i = 0.075262, c2r = 0.096097, c2i = -0.032903, c3r = 0.198863, c3i = -0.083343
+seq : 235
+Particle Filter Az: -86.90,Elv: 81.67,Ot: -2.131 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 236
+freq = 35000, po1 : -2
+c0r = -0.038238, c0i = 0.067327, c1r = -0.032706, c1i = 0.005781, c2r = 0.029100, c2i = -0.004850, c3r = 0.038738, c3i = -0.049415
+seq : 236
+Particle Filter Az: -102.72,Elv: 80.73,Ot: -2.134 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 237
+freq = 30000
+==== Fail =====
+Test
+seq : 238
+freq = 35000, po1 : -2
+c0r = -0.042736, c0i = 0.020316, c1r = -0.020426, c1i = -0.009404, c2r = 0.020904, c2i = 0.003557, c3r = 0.044063, c3i = -0.006634
+seq : 238
+Particle Filter Az: -100.82,Elv: 79.09,Ot: -1.576 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 239
+freq = 30000
+==== Fail =====
+Test
+seq : 240
+freq = 35000, po1 : -2
+c0r = -0.042736, c0i = 0.020316, c1r = -0.020426, c1i = -0.009404, c2r = 0.020904, c2i = 0.003557, c3r = 0.044063, c3i = -0.006634
+seq : 240
+Particle Filter Az: -99.76,Elv: 79.42,Ot: -1.557 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 241
+freq = 30000
+==== Fail =====
+Test
+seq : 242
+freq = 30000
+==== Fail =====
+Test
+seq : 243
+freq = 30000
+==== Fail =====
+Test
+seq : 244
+freq = 35000, po1 : -2
+c0r = 0.036361, c0i = 0.013314, c1r = -0.014360, c1i = 0.000772, c2r = -0.014067, c2i = -0.008044, c3r = 0.006150, c3i = 0.038344
+seq : 244
+Particle Filter Az: -62.38,Elv: 87.39,Ot: -0.800 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 245
+freq = 30000
+==== Fail =====
+Test
+seq : 246
+freq = 30000
+==== Fail =====
+Test
+seq : 247
+freq = 25000
+==== Fail =====
+Test
+seq : 248
+freq = 30000
+==== Fail =====
+Test
+seq : 249
+freq = 25000
+==== Fail =====
+Test
+seq : 250
+freq = 25000
+==== Fail =====
+Test
+seq : 251
+freq = 30000
+==== Fail =====
+Test
+seq : 252
+freq = 30000
+==== Fail =====
+Test
+seq : 253
+freq = 30000
+==== Fail =====
+Test
+seq : 254
+freq = 25000
+==== Fail =====
+Test
+seq : 255
+freq = 25000
+==== Fail =====
+Test
+seq : 256
+freq = 25000
+==== Fail =====
+Test
+seq : 257
+freq = 25000
+==== Fail =====
+Test
+seq : 258
+freq = 25000
+==== Fail =====
+Test
+seq : 259
+freq = 30000
+==== Fail =====
+Test
+seq : 260
+freq = 25000
+==== Fail =====
+Test
+seq : 261
+freq = 30000
+==== Fail =====
+Test
+seq : 262
+freq = 30000
+==== Fail =====
+Test
+seq : 263
+freq = 25000
+==== Fail =====
+Test
+seq : 264
+freq = 30000
+==== Fail =====
+Test
+seq : 265
+freq = 30000
+==== Fail =====
+Test
+seq : 266
+freq = 30000
+==== Fail =====
+Test
+seq : 267
+freq = 25000
+==== Fail =====
+Test
+seq : 268
+freq = 30000
+==== Fail =====
+Test
+seq : 269
+freq = 25000
+==== Fail =====
+Test
+seq : 270
+freq = 35000, po1 : -2
+c0r = 0.005091, c0i = 0.002096, c1r = 0.009149, c1i = -0.006777, c2r = 0.002889, c2i = 0.001054, c3r = -0.010338, c3i = 0.018540
+seq : 270
+Particle Filter Az: -47.11,Elv: 76.92,Ot: 0.198 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 271
+freq = 25000
+==== Fail =====
+Test
+seq : 272
+freq = 25000
+==== Fail =====
+Test
+seq : 273
+freq = 35000, po1 : -2
+c0r = 0.005091, c0i = 0.002096, c1r = 0.009149, c1i = -0.006777, c2r = 0.002889, c2i = 0.001054, c3r = -0.010338, c3i = 0.018540
+seq : 273
+Particle Filter Az: -44.31,Elv: 61.57,Ot: 0.554 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 274
+freq = 30000
+==== Fail =====
+Test
+seq : 275
+freq = 25000
+==== Fail =====
+Test
+seq : 276
+freq = 35000, po1 : -2
+c0r = -0.031877, c0i = -0.025431, c1r = -0.024384, c1i = -0.005987, c2r = 0.017505, c2i = 0.001473, c3r = 0.024392, c3i = 0.000389
+seq : 276
+Particle Filter Az: -69.92,Elv: 53.96,Ot: -0.573 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 277
+freq = 30000
+==== Fail =====
+Test
+seq : 278
+freq = 25000
+==== Fail =====
+Test
+seq : 279
+freq = 35000, po1 : -2
+c0r = -0.031877, c0i = -0.025431, c1r = -0.024384, c1i = -0.005987, c2r = 0.017505, c2i = 0.001473, c3r = 0.024392, c3i = 0.000389
+seq : 279
+Particle Filter Az: -83.99,Elv: 61.13,Ot: -1.333 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 280
+freq = 30000
+==== Fail =====
+Test
+seq : 281
+freq = 25000
+==== Fail =====
+Test
+seq : 282
+freq = 35000, po1 : -2
+c0r = -0.031877, c0i = -0.025431, c1r = -0.024384, c1i = -0.005987, c2r = 0.017505, c2i = 0.001473, c3r = 0.024392, c3i = 0.000389
+seq : 282
+Particle Filter Az: -85.88,Elv: 67.09,Ot: -1.315 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 283
+freq = 30000
+==== Fail =====
+Test
+seq : 284
+freq = 25000
+==== Fail =====
+Test
+seq : 285
+freq = 30000
+==== Fail =====
+Test
+seq : 286
+freq = 35000, po1 : -2
+c0r = -0.031877, c0i = -0.025431, c1r = -0.024384, c1i = -0.005987, c2r = 0.017505, c2i = 0.001473, c3r = 0.024392, c3i = 0.000389
+seq : 286
+Particle Filter Az: -85.92,Elv: 68.49,Ot: -1.307 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 287
+freq = 30000
+==== Fail =====
+Test
+seq : 288
+freq = 35000, po1 : -2
+c0r = 0.045706, c0i = 0.036673, c1r = 0.030529, c1i = 0.006549, c2r = -0.026616, c2i = 0.004055, c3r = -0.056163, c3i = -0.011687
+seq : 288
+Particle Filter Az: -81.73,Elv: 64.21,Ot: -2.522 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 289
+freq = 30000
+==== Fail =====
+Test
+seq : 290
+freq = 25000
+==== Fail =====
+Test
+seq : 291
+freq = 35000, po1 : -2
+c0r = 0.102060, c0i = 0.020903, c1r = 0.054388, c1i = 0.009593, c2r = -0.046146, c2i = 0.007036, c3r = -0.114263, c3i = -0.000164
+seq : 291
+Particle Filter Az: -90.56,Elv: 71.30,Ot: 1.076 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 292
+freq = 30000
+==== Fail =====
+Test
+seq : 293
+freq = 35000, po1 : -2
+c0r = 0.098510, c0i = 0.030319, c1r = 0.050295, c1i = 0.012217, c2r = -0.048467, c2i = 0.001008, c3r = -0.123210, c3i = -0.012361
+seq : 293
+Particle Filter Az: -89.20,Elv: 75.22,Ot: 1.700 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 294
+freq = 30000
+==== Fail =====
+Test
+seq : 295
+freq = 25000
+==== Fail =====
+Test
+seq : 296
+freq = 35000, po1 : -2
+c0r = 0.101330, c0i = 0.017672, c1r = 0.051439, c1i = 0.008088, c2r = -0.045830, c2i = 0.007125, c3r = -0.119783, c3i = 0.007975
+seq : 296
+Particle Filter Az: -87.83,Elv: 75.78,Ot: 1.590 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 297
+freq = 30000
+==== Fail =====
+Test
+seq : 298
+freq = 35000, po1 : -2
+c0r = 0.092370, c0i = 0.057193, c1r = 0.050429, c1i = 0.037319, c2r = -0.049466, c2i = -0.000792, c3r = -0.127734, c3i = -0.035005
+seq : 298
+Particle Filter Az: -88.00,Elv: 73.53,Ot: 1.946 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 299
+freq = 30000
+==== Fail =====
+Test
+seq : 300
+freq = 35000, po1 : -2
+c0r = 0.097282, c0i = 0.034898, c1r = 0.038424, c1i = 0.017800, c2r = -0.038398, c2i = -0.006469, c3r = -0.111710, c3i = -0.025495
+seq : 300
+Particle Filter Az: -89.43,Elv: 75.77,Ot: 1.834 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 301
+freq = 30000
+==== Fail =====
+Test
+seq : 302
+freq = 25000
+==== Fail =====
+Test
+seq : 303
+freq = 35000, po1 : -2
+c0r = 0.115904, c0i = 0.024003, c1r = 0.057382, c1i = 0.003742, c2r = -0.057464, c2i = 0.005109, c3r = -0.149912, c3i = 0.008540
+seq : 303
+Particle Filter Az: -88.02,Elv: 77.18,Ot: 1.602 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 304
+freq = 30000
+==== Fail =====
+Test
+seq : 305
+freq = 35000, po1 : -2
+c0r = 0.158097, c0i = -0.055277, c1r = 0.078868, c1i = -0.021192, c2r = -0.063673, c2i = 0.032457, c3r = -0.161591, c3i = 0.080498
+seq : 305
+Particle Filter Az: -90.59,Elv: 79.62,Ot: 1.185 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 306
+freq = 30000
+==== Fail =====
+Test
+seq : 307
+freq = 25000
+==== Fail =====
+Test
+seq : 308
+freq = 35000, po1 : -2
+c0r = 0.110908, c0i = 0.022675, c1r = 0.045555, c1i = 0.015247, c2r = -0.055464, c2i = -0.004780, c3r = -0.149215, c3i = -0.002472
+seq : 308
+Particle Filter Az: -92.64,Elv: 78.52,Ot: 1.703 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 309
+freq = 30000
+==== Fail =====
+Test
+seq : 310
+freq = 35000, po1 : -2
+c0r = 0.063181, c0i = -0.077491, c1r = 0.022587, c1i = -0.035052, c2r = -0.023001, c2i = 0.020457, c3r = -0.020249, c3i = 0.047992
+seq : 310
+Particle Filter Az: -92.68,Elv: 80.23,Ot: 0.748 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 311
+freq = 30000
+==== Fail =====
+Test
+seq : 312
+freq = 35000, po1 : -2
+c0r = 0.116200, c0i = -0.096229, c1r = 0.064525, c1i = -0.048787, c2r = -0.045089, c2i = 0.051106, c3r = -0.099543, c3i = 0.106822
+seq : 312
+Particle Filter Az: -90.43,Elv: 77.66,Ot: 0.826 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 313
+freq = 25000
+==== Fail =====
+Test
+seq : 314
+freq = 35000, po1 : -2
+c0r = 0.167281, c0i = -0.045457, c1r = 0.082826, c1i = -0.001541, c2r = -0.071892, c2i = 0.024077, c3r = -0.141964, c3i = 0.061861
+seq : 314
+Particle Filter Az: -92.69,Elv: 77.55,Ot: 1.322 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 315
+freq = 30000
+==== Fail =====
+Test
+seq : 316
+freq = 35000, po1 : -2
+c0r = 0.081920, c0i = -0.079905, c1r = 0.055058, c1i = -0.037814, c2r = -0.032744, c2i = 0.041715, c3r = -0.058184, c3i = 0.086834
+seq : 316
+Particle Filter Az: -92.98,Elv: 76.50,Ot: 0.762 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 317
+freq = 30000
+==== Fail =====
+Test
+seq : 318
+freq = 35000, po1 : -2
+c0r = 0.170943, c0i = -0.054683, c1r = 0.085403, c1i = -0.039091, c2r = -0.068081, c2i = 0.046253, c3r = -0.169491, c3i = 0.099767
+seq : 318
+Particle Filter Az: -88.64,Elv: 77.85,Ot: 1.102 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 319
+freq = 35000, po1 : -2
+c0r = 0.094847, c0i = -0.092053, c1r = 0.049970, c1i = -0.037250, c2r = -0.044357, c2i = 0.028198, c3r = -0.042543, c3i = 0.048537
+seq : 319
+Particle Filter Az: -93.98,Elv: 80.33,Ot: 0.860 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 320
+freq = 30000
+==== Fail =====
+Test
+seq : 321
+freq = 35000, po1 : -2
+c0r = 0.086202, c0i = 0.069127, c1r = 0.022118, c1i = 0.028371, c2r = -0.042694, c2i = -0.024390, c3r = -0.109288, c3i = -0.043581
+seq : 321
+Particle Filter Az: -93.74,Elv: 75.80,Ot: 1.984 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 322
+freq = 30000
+==== Fail =====
+Test
+seq : 323
+freq = 25000
+==== Fail =====
+Test
+seq : 324
+freq = 35000, po1 : -2
+c0r = -0.073990, c0i = -0.066533, c1r = -0.035844, c1i = -0.038168, c2r = 0.042595, c2i = -0.003786, c3r = 0.112543, c3i = 0.009621
+seq : 324
+Particle Filter Az: -87.70,Elv: 77.12,Ot: -2.582 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 325
+freq = 30000
+==== Fail =====
+Test
+seq : 326
+freq = 25000
+==== Fail =====
+Test
+seq : 327
+freq = 35000, po1 : -2
+c0r = 0.175037, c0i = -0.065874, c1r = 0.078737, c1i = -0.030655, c2r = -0.065658, c2i = 0.024673, c3r = -0.121464, c3i = 0.098606
+seq : 327
+Particle Filter Az: -89.99,Elv: 79.08,Ot: 1.289 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 328
+freq = 35000, po1 : -2
+c0r = -0.109133, c0i = 0.061807, c1r = -0.056817, c1i = 0.030150, c2r = 0.032987, c2i = -0.044822, c3r = 0.051701, c3i = -0.124507
+seq : 328
+Particle Filter Az: -89.75,Elv: 77.37,Ot: 2.447 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 329
+freq = 25000
+==== Fail =====
+Test
+seq : 330
+freq = 35000, po1 : -2
+c0r = -0.196126, c0i = 0.044728, c1r = -0.111417, c1i = 0.017232, c2r = 0.069433, c2i = -0.057711, c3r = 0.117553, c3i = -0.154019
+seq : 330
+Particle Filter Az: -95.07,Elv: 69.65,Ot: -2.820 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 331
+freq = 30000
+==== Fail =====
+Test
+seq : 332
+freq = 25000
+==== Fail =====
+Test
+seq : 333
+freq = 35000, po1 : -2
+c0r = -0.131178, c0i = 0.060452, c1r = -0.063530, c1i = 0.034342, c2r = 0.026360, c2i = -0.046295, c3r = 0.043161, c3i = -0.102127
+seq : 333
+Particle Filter Az: -91.53,Elv: 65.77,Ot: -2.352 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 334
+freq = 25000
+==== Fail =====
+Test
+seq : 335
+freq = 35000, po1 : -2
+c0r = -0.001949, c0i = 0.036345, c1r = -0.019399, c1i = 0.020665, c2r = -0.012525, c2i = -0.026321, c3r = -0.034406, c3i = -0.039505
+seq : 335
+Particle Filter Az: -102.15,Elv: 55.04,Ot: 1.224 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 336
+freq = 30000
+==== Fail =====
+Test
+seq : 337
+freq = 35000, po1 : -2
+c0r = 0.137874, c0i = -0.262107, c1r = 0.092368, c1i = -0.107984, c2r = -0.046637, c2i = 0.113858, c3r = -0.025403, c3i = 0.285048
+seq : 337
+Particle Filter Az: -102.93,Elv: 44.87,Ot: 1.668 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 338
+freq = 30000
+==== Fail =====
+Test
+seq : 339
+freq = 25000
+==== Fail =====
+Test
+seq : 340
+freq = 35000, po1 : -2
+c0r = -0.013432, c0i = -0.171277, c1r = -0.044059, c1i = -0.069832, c2r = 0.034816, c2i = 0.035354, c3r = 0.100616, c3i = 0.123454
+seq : 340
+Particle Filter Az: -89.17,Elv: 50.07,Ot: 0.649 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 341
+freq = 30000
+==== Fail =====
+Test
+seq : 342
+freq = 35000, po1 : -2
+c0r = 0.276261, c0i = -0.146444, c1r = 0.143806, c1i = -0.032370, c2r = -0.117151, c2i = 0.067145, c3r = -0.189098, c3i = 0.226458
+seq : 342
+Particle Filter Az: -95.91,Elv: 62.47,Ot: 1.040 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 343
+freq = 30000
+==== Fail =====
+Test
+seq : 344
+freq = 25000
+==== Fail =====
+Test
+seq : 345
+freq = 35000, po1 : -2
+c0r = 0.151476, c0i = 0.051378, c1r = 0.065482, c1i = 0.035035, c2r = -0.070710, c2i = -0.018260, c3r = -0.152011, c3i = -0.034350
+seq : 345
+Particle Filter Az: -91.41,Elv: 70.95,Ot: 1.887 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 346
+freq = 30000
+==== Fail =====
+Test
+seq : 347
+freq = 25000
+==== Fail =====
+Test
+seq : 348
+freq = 35000, po1 : -2
+c0r = 0.038289, c0i = -0.088298, c1r = 0.014255, c1i = -0.029547, c2r = -0.012956, c2i = 0.021068, c3r = -0.022852, c3i = 0.044224
+seq : 348
+Particle Filter Az: -92.01,Elv: 80.49,Ot: 0.738 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 349
+freq = 30000
+==== Fail =====
+Test
+seq : 350
+freq = 25000
+==== Fail =====
+Test
+seq : 351
+freq = 35000, po1 : -2
+c0r = 0.077002, c0i = -0.230092, c1r = 0.047147, c1i = -0.066461, c2r = -0.019387, c2i = 0.072169, c3r = -0.006824, c3i = 0.175804
+seq : 351
+Particle Filter Az: -94.50,Elv: 77.98,Ot: 0.310 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 352
+freq = 30000
+==== Fail =====
+Test
+seq : 353
+freq = 25000
+==== Fail =====
+Test
+seq : 354
+freq = 35000, po1 : -2
+c0r = -0.103032, c0i = -0.118704, c1r = -0.003582, c1i = -0.056477, c2r = 0.029101, c2i = 0.037848, c3r = 0.083792, c3i = 0.027204
+seq : 354
+Particle Filter Az: -103.13,Elv: 73.39,Ot: -0.585 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 355
+freq = 30000
+==== Fail =====
+Test
+seq : 356
+freq = 25000
+==== Fail =====
+Test
+seq : 357
+freq = 35000, po1 : -2
+c0r = -0.001661, c0i = 0.004799, c1r = -0.000869, c1i = -0.004958, c2r = -0.001086, c2i = -0.001671, c3r = -0.002340, c3i = 0.003108
+seq : 357
+Particle Filter Az: -105.65,Elv: 76.15,Ot: -0.696 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 358
+freq = 30000
+==== Fail =====
+Test
+seq : 359
+freq = 25000
+==== Fail =====
+Test
+seq : 360
+freq = 35000, po1 : -2
+c0r = -0.072094, c0i = 0.035821, c1r = -0.026693, c1i = 0.003624, c2r = 0.013315, c2i = -0.022778, c3r = 0.036021, c3i = -0.054553
+seq : 360
+Particle Filter Az: -110.83,Elv: 71.86,Ot: -2.207 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 361
+freq = 30000
+==== Fail =====
+Test
+seq : 362
+freq = 25000
+==== Fail =====
+Test
+seq : 363
+freq = 35000, po1 : -2
+c0r = 0.126503, c0i = 0.000068, c1r = 0.041394, c1i = 0.024782, c2r = -0.054451, c2i = -0.010588, c3r = -0.139105, c3i = 0.027785
+seq : 363
+Particle Filter Az: -111.17,Elv: 64.87,Ot: 2.743 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 364
+freq = 30000
+==== Fail =====
+Test
+seq : 365
+freq = 25000
+==== Fail =====
+Test
+seq : 366
+freq = 35000, po1 : -2
+c0r = -0.078930, c0i = 0.004891, c1r = -0.025964, c1i = -0.014628, c2r = 0.033924, c2i = 0.010323, c3r = 0.076745, c3i = -0.020941
+seq : 366
+Particle Filter Az: -98.52,Elv: 58.09,Ot: -2.346 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 367
+freq = 25000
+==== Fail =====
+Test
+seq : 368
+freq = 35000, po1 : -2
+c0r = 0.232743, c0i = -0.137226, c1r = 0.098443, c1i = 0.012202, c2r = -0.100838, c2i = 0.048454, c3r = -0.168276, c3i = 0.159071
+seq : 368
+Particle Filter Az: -104.56,Elv: 66.83,Ot: 2.762 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 369
+freq = 30000
+==== Fail =====
+Test
+seq : 370
+freq = 25000
+==== Fail =====
+Test
+seq : 371
+freq = 35000, po1 : -2
+c0r = 0.220967, c0i = -0.111413, c1r = 0.074436, c1i = 0.009633, c2r = -0.085884, c2i = 0.026733, c3r = -0.173941, c3i = 0.131157
+seq : 371
+Particle Filter Az: -98.59,Elv: 74.00,Ot: 1.746 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 372
+freq = 30000
+==== Fail =====
+Test
+seq : 373
+freq = 25000
+==== Fail =====
+Test
+seq : 374
+freq = 35000, po1 : -2
+c0r = 0.059871, c0i = -0.191326, c1r = 0.082286, c1i = -0.058697, c2r = -0.040301, c2i = 0.065618, c3r = 0.010741, c3i = 0.175874
+seq : 374
+Particle Filter Az: -103.35,Elv: 72.79,Ot: 0.745 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 375
+freq = 30000
+==== Fail =====
+Test
+seq : 376
+freq = 35000, po1 : -2
+c0r = 0.144217, c0i = -0.271683, c1r = 0.095391, c1i = -0.050002, c2r = -0.064413, c2i = 0.097749, c3r = -0.073404, c3i = 0.252678
+seq : 376
+Particle Filter Az: -98.60,Elv: 73.30,Ot: 0.612 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 377
+freq = 30000
+==== Fail =====
+Test
+seq : 378
+freq = 25000
+==== Fail =====
+Test
+seq : 379
+freq = 35000, po1 : -2
+c0r = 0.112537, c0i = -0.256485, c1r = 0.085868, c1i = -0.040233, c2r = -0.039070, c2i = 0.084621, c3r = -0.032089, c3i = 0.224363
+seq : 379
+Particle Filter Az: -100.69,Elv: 72.15,Ot: 0.509 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 380
+freq = 30000
+==== Fail =====
+Test
+seq : 381
+freq = 25000
+==== Fail =====
+Test
+seq : 382
+freq = 35000, po1 : -2
+c0r = 0.064511, c0i = -0.024507, c1r = 0.034883, c1i = 0.010961, c2r = -0.043318, c2i = 0.014268, c3r = -0.079024, c3i = 0.029190
+seq : 382
+Particle Filter Az: -98.04,Elv: 75.66,Ot: 1.332 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 383
+freq = 30000
+==== Fail =====
+Test
+seq : 384
+freq = 25000
+==== Fail =====
+Test
+seq : 385
+freq = 35000, po1 : -2
+c0r = 0.128341, c0i = -0.024833, c1r = 0.033867, c1i = 0.027107, c2r = -0.054589, c2i = 0.001789, c3r = -0.141868, c3i = 0.039071
+seq : 385
+Particle Filter Az: -101.54,Elv: 73.91,Ot: 1.622 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 386
+freq = 30000
+==== Fail =====
+Test
+seq : 387
+freq = 25000
+==== Fail =====
+Test
+seq : 388
+freq = 35000, po1 : -2
+c0r = 0.004676, c0i = -0.120164, c1r = 0.036321, c1i = -0.030872, c2r = -0.021220, c2i = 0.043526, c3r = 0.031502, c3i = 0.090429
+seq : 388
+Particle Filter Az: -105.85,Elv: 78.44,Ot: 0.441 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 389
+freq = 25000
+==== Fail =====
+Test
+seq : 390
+freq = 35000, po1 : -2
+c0r = 0.206405, c0i = -0.072699, c1r = 0.086003, c1i = 0.007402, c2r = -0.095825, c2i = 0.033827, c3r = -0.170787, c3i = 0.099658
+seq : 390
+Particle Filter Az: -96.89,Elv: 79.03,Ot: 1.261 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 391
+freq = 30000
+==== Fail =====
+Test
+seq : 392
+freq = 25000
+==== Fail =====
+Test
+seq : 393
+freq = 35000, po1 : -2
+c0r = 0.163911, c0i = -0.008376, c1r = 0.048235, c1i = 0.024578, c2r = -0.076353, c2i = 0.001792, c3r = -0.154389, c3i = 0.022885
+seq : 393
+Particle Filter Az: -95.93,Elv: 76.66,Ot: 1.646 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 394
+freq = 30000
+==== Fail =====
+Test
+seq : 395
+freq = 25000
+==== Fail =====
+Test
+seq : 396
+freq = 35000, po1 : -2
+c0r = 0.116865, c0i = -0.035913, c1r = 0.033541, c1i = 0.017902, c2r = -0.048631, c2i = -0.003966, c3r = -0.115877, c3i = 0.031425
+seq : 396
+Particle Filter Az: -100.60,Elv: 76.24,Ot: 1.558 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 397
+freq = 30000
+==== Fail =====
+Test
+seq : 398
+freq = 25000
+==== Fail =====
+Test
+seq : 399
+freq = 35000, po1 : -2
+c0r = 0.106795, c0i = -0.065058, c1r = 0.035524, c1i = 0.014736, c2r = -0.038183, c2i = -0.001891, c3r = -0.105554, c3i = 0.066297
+seq : 399
+Particle Filter Az: -104.77,Elv: 77.69,Ot: 1.410 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 400
+freq = 30000
+==== Fail =====
+Test
+seq : 401
+freq = 25000
+==== Fail =====
+Test
+seq : 402
+freq = 35000, po1 : -2
+c0r = 0.047879, c0i = -0.053196, c1r = 0.028323, c1i = 0.000534, c2r = -0.020524, c2i = 0.009626, c3r = -0.053082, c3i = 0.033219
+seq : 402
+Particle Filter Az: -99.20,Elv: 77.78,Ot: 1.107 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 403
+freq = 30000
+==== Fail =====
+Test
+seq : 404
+freq = 25000
+==== Fail =====
+Test
+seq : 405
+freq = 35000, po1 : -2
+c0r = 0.043404, c0i = -0.067265, c1r = 0.029416, c1i = -0.012313, c2r = -0.036433, c2i = 0.020467, c3r = -0.088858, c3i = 0.046289
+seq : 405
+Particle Filter Az: -94.93,Elv: 80.92,Ot: 0.990 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 406
+freq = 30000
+==== Fail =====
+Test
+seq : 407
+freq = 25000
+==== Fail =====
+Test
+seq : 408
+freq = 35000, po1 : -2
+c0r = 0.216750, c0i = -0.054512, c1r = 0.071444, c1i = 0.019239, c2r = -0.094708, c2i = 0.022023, c3r = -0.178628, c3i = 0.087034
+seq : 408
+Particle Filter Az: -97.16,Elv: 78.23,Ot: 1.398 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 409
+freq = 25000
+==== Fail =====
+Test
+seq : 410
+freq = 35000, po1 : -2
+c0r = 0.110410, c0i = -0.104555, c1r = 0.065413, c1i = -0.019232, c2r = -0.058465, c2i = 0.031796, c3r = -0.142008, c3i = 0.110760
+seq : 410
+Particle Filter Az: -96.42,Elv: 77.09,Ot: 1.014 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 411
+freq = 30000
+==== Fail =====
+Test
+seq : 412
+freq = 25000
+==== Fail =====
+Test
+seq : 413
+freq = 35000, po1 : -2
+c0r = 0.046385, c0i = 0.008765, c1r = -0.001734, c1i = -0.007413, c2r = -0.017464, c2i = -0.004734, c3r = -0.072201, c3i = -0.006438
+seq : 413
+Particle Filter Az: -80.29,Elv: 82.09,Ot: 1.357 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 414
+freq = 30000
+==== Fail =====
+Test
+seq : 415
+freq = 35000, po1 : -2
+c0r = -0.191906, c0i = -0.086255, c1r = -0.032619, c1i = -0.082164, c2r = 0.040809, c2i = 0.035900, c3r = 0.177448, c3i = 0.034399
+seq : 415
+Particle Filter Az: -95.39,Elv: 75.08,Ot: -0.056 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 416
+freq = 25000
+==== Fail =====
+Test
+seq : 417
+freq = 35000, po1 : -2
+c0r = -0.022684, c0i = 0.086688, c1r = -0.029352, c1i = 0.018933, c2r = -0.004127, c2i = -0.027853, c3r = -0.007710, c3i = -0.114292
+seq : 417
+Particle Filter Az: -86.49,Elv: 75.83,Ot: -1.091 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 418
+freq = 30000
+==== Fail =====
+Test
+seq : 419
+freq = 25000
+==== Fail =====
+Test
+seq : 420
+freq = 35000, po1 : -2
+c0r = 0.078029, c0i = -0.271487, c1r = 0.090557, c1i = -0.065100, c2r = -0.041292, c2i = 0.084289, c3r = -0.040332, c3i = 0.256403
+seq : 420
+Particle Filter Az: -96.31,Elv: 75.45,Ot: -0.065 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 421
+freq = 30000
+==== Fail =====
+Test
+seq : 422
+freq = 25000
+==== Fail =====
+Test
+seq : 423
+freq = 35000, po1 : -2
+c0r = -0.135255, c0i = -0.216658, c1r = 0.019735, c1i = -0.090219, c2r = 0.028994, c2i = 0.068983, c3r = 0.156558, c3i = 0.177977
+seq : 423
+Particle Filter Az: -100.42,Elv: 77.30,Ot: -0.382 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 424
+freq = 30000
+==== Fail =====
+Test
+seq : 425
+freq = 35000, po1 : -2
+c0r = -0.198632, c0i = -0.290203, c1r = 0.073883, c1i = -0.134165, c2r = 0.027686, c2i = 0.134439, c3r = 0.235606, c3i = 0.228013
+seq : 425
+Particle Filter Az: -107.97,Elv: 77.03,Ot: -0.276 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 426
+freq = 30000
+==== Fail =====
+Test
+seq : 427
+freq = 25000
+==== Fail =====
+Test
+seq : 428
+freq = 35000, po1 : -2
+c0r = 0.059930, c0i = -0.242603, c1r = 0.107988, c1i = -0.063709, c2r = -0.053559, c2i = 0.079800, c3r = 0.025853, c3i = 0.222520
+seq : 428
+Particle Filter Az: -105.30,Elv: 75.55,Ot: 0.431 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 429
+freq = 30000
+==== Fail =====
+Test
+seq : 430
+freq = 25000
+==== Fail =====
+Test
+seq : 431
+freq = 35000, po1 : -2
+c0r = 0.194560, c0i = -0.291149, c1r = 0.143416, c1i = 0.001257, c2r = -0.116471, c2i = 0.072654, c3r = -0.121318, c3i = 0.323387
+seq : 431
+Particle Filter Az: -105.08,Elv: 75.11,Ot: 0.890 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 432
+freq = 30000
+==== Fail =====
+Test
+seq : 433
+freq = 35000, po1 : -2
+c0r = -0.081940, c0i = -0.261286, c1r = 0.070042, c1i = -0.098048, c2r = -0.018262, c2i = 0.100224, c3r = 0.174244, c3i = 0.194127
+seq : 433
+Particle Filter Az: -108.83,Elv: 76.13,Ot: 0.001 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 434
+freq = 30000
+==== Fail =====
+Test
+seq : 435
+freq = 35000, po1 : -2
+c0r = -0.190054, c0i = 0.191947, c1r = -0.130428, c1i = 0.002818, c2r = 0.076918, c2i = -0.051431, c3r = 0.053657, c3i = -0.207993
+seq : 435
+Particle Filter Az: -110.13,Elv: 75.51,Ot: -1.138 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 436
+freq = 30000
+==== Fail =====
+Test
+seq : 437
+freq = 35000, po1 : -2
+c0r = 0.085682, c0i = -0.007465, c1r = 0.031312, c1i = 0.023770, c2r = -0.040735, c2i = -0.008474, c3r = -0.036456, c3i = 0.017907
+seq : 437
+Particle Filter Az: -130.57,Elv: 77.29,Ot: -0.110 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 438
+freq = 30000
+==== Fail =====
+Test
+seq : 439
+freq = 25000
+==== Fail =====
+Test
+seq : 440
+freq = 35000, po1 : -2
+c0r = -0.044216, c0i = -0.260623, c1r = 0.071898, c1i = -0.042035, c2r = -0.018739, c2i = 0.070312, c3r = 0.118658, c3i = 0.222505
+seq : 440
+Particle Filter Az: -110.21,Elv: 75.90,Ot: 0.156 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 441
+freq = 30000
+==== Fail =====
+Test
+seq : 442
+freq = 25000
+==== Fail =====
+Test
+seq : 443
+freq = 35000, po1 : -2
+c0r = -0.026151, c0i = -0.162640, c1r = 0.071509, c1i = -0.034009, c2r = -0.035542, c2i = 0.042273, c3r = 0.054522, c3i = 0.117083
+seq : 443
+Particle Filter Az: -113.73,Elv: 78.54,Ot: 0.311 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 444
+freq = 30000
+==== Fail =====
+Test
+seq : 445
+freq = 35000, po1 : -2
+c0r = -0.073126, c0i = -0.197544, c1r = 0.076750, c1i = -0.074686, c2r = -0.027829, c2i = 0.074250, c3r = 0.134554, c3i = 0.142367
+seq : 445
+Particle Filter Az: -113.39,Elv: 77.13,Ot: 0.013 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 446
+freq = 30000
+==== Fail =====
+Test
+seq : 447
+freq = 25000
+==== Fail =====
+Test
+seq : 448
+freq = 35000, po1 : -2
+c0r = -0.025148, c0i = -0.310153, c1r = 0.092325, c1i = -0.069632, c2r = -0.029938, c2i = 0.110995, c3r = 0.087471, c3i = 0.289192
+seq : 448
+Particle Filter Az: -106.47,Elv: 77.00,Ot: 0.198 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 449
+freq = 25000
+==== Fail =====
+Test
+seq : 450
+freq = 35000, po1 : -2
+c0r = 0.047232, c0i = -0.322057, c1r = 0.091077, c1i = -0.056744, c2r = -0.044130, c2i = 0.101717, c3r = 0.018184, c3i = 0.304281
+seq : 450
+Particle Filter Az: -104.70,Elv: 76.09,Ot: 0.381 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 451
+freq = 30000
+==== Fail =====
+Test
+seq : 452
+freq = 25000
+==== Fail =====
+Test
+seq : 453
+freq = 35000, po1 : -2
+c0r = 0.224946, c0i = -0.304746, c1r = 0.152865, c1i = 0.020392, c2r = -0.134322, c2i = 0.070878, c3r = -0.126307, c3i = 0.331847
+seq : 453
+Particle Filter Az: -107.94,Elv: 75.79,Ot: 0.927 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 454
+freq = 30000
+==== Fail =====
+Test
+seq : 455
+freq = 25000
+==== Fail =====
+Test
+seq : 456
+freq = 35000, po1 : -2
+c0r = 0.238096, c0i = -0.296244, c1r = 0.152288, c1i = 0.038328, c2r = -0.140226, c2i = 0.055796, c3r = -0.153889, c3i = 0.333070
+seq : 456
+Particle Filter Az: -108.36,Elv: 76.49,Ot: 1.027 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 457
+freq = 30000
+==== Fail =====
+Test
+seq : 458
+freq = 25000
+==== Fail =====
+Test
+seq : 459
+freq = 35000, po1 : -2
+c0r = -0.222849, c0i = 0.289569, c1r = -0.108466, c1i = -0.009430, c2r = 0.093918, c2i = -0.080216, c3r = 0.124752, c3i = -0.321987
+seq : 459
+Particle Filter Az: -126.05,Elv: 68.66,Ot: 2.449 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 460
+freq = 30000
+==== Fail =====
+Test
+seq : 461
+freq = 25000
+==== Fail =====
+Test
+seq : 462
+freq = 35000, po1 : -2
+c0r = 0.291346, c0i = -0.191021, c1r = 0.107324, c1i = 0.060630, c2r = -0.131939, c2i = 0.014540, c3r = -0.210198, c3i = 0.279414
+seq : 462
+Particle Filter Az: -111.23,Elv: 71.86,Ot: 1.480 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 463
+freq = 30000
+==== Fail =====
+Test
+seq : 464
+freq = 25000
+==== Fail =====
+Test
+seq : 465
+freq = 35000, po1 : -2
+c0r = 0.214452, c0i = -0.156712, c1r = 0.095934, c1i = 0.031785, c2r = -0.105061, c2i = 0.015286, c3r = -0.154404, c3i = 0.216547
+seq : 465
+Particle Filter Az: -107.40,Elv: 75.05,Ot: 1.224 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 466
+freq = 30000
+==== Fail =====
+Test
+seq : 467
+freq = 25000
+==== Fail =====
+Test
+seq : 468
+freq = 35000, po1 : -2
+c0r = 0.103299, c0i = -0.293454, c1r = 0.125717, c1i = -0.004204, c2r = -0.097804, c2i = 0.054874, c3r = -0.034835, c3i = 0.289665
+seq : 468
+Particle Filter Az: -110.91,Elv: 76.15,Ot: 0.763 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 469
+freq = 30000
+==== Fail =====
+Test
+seq : 470
+freq = 25000
+==== Fail =====
+Test
+seq : 471
+freq = 35000, po1 : -2
+c0r = 0.312405, c0i = -0.152632, c1r = 0.080101, c1i = 0.062174, c2r = -0.124188, c2i = -0.001116, c3r = -0.246538, c3i = 0.225318
+seq : 471
+Particle Filter Az: -109.82,Elv: 75.48,Ot: 1.412 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 472
+freq = 30000
+==== Fail =====
+Test
+seq : 473
+freq = 25000
+==== Fail =====
+Test
+seq : 474
+freq = 35000, po1 : -2
+c0r = 0.152897, c0i = -0.267380, c1r = 0.094858, c1i = 0.015851, c2r = -0.088814, c2i = 0.048944, c3r = -0.063566, c3i = 0.248346
+seq : 474
+Particle Filter Az: -110.66,Elv: 76.63,Ot: 0.885 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 475
+freq = 30000
+==== Fail =====
+Test
+seq : 476
+freq = 25000
+==== Fail =====
+Test
+seq : 477
+freq = 35000, po1 : -2
+c0r = 0.156688, c0i = -0.251333, c1r = 0.109510, c1i = 0.008266, c2r = -0.093916, c2i = 0.042322, c3r = -0.077208, c3i = 0.240458
+seq : 477
+Particle Filter Az: -108.25,Elv: 77.38,Ot: 0.933 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 478
+freq = 30000
+==== Fail =====
+Test
+seq : 479
+freq = 25000
+==== Fail =====
+Test
+seq : 480
+freq = 35000, po1 : -2
+c0r = 0.157816, c0i = -0.236485, c1r = 0.123169, c1i = 0.029679, c2r = -0.100879, c2i = 0.025625, c3r = -0.090316, c3i = 0.242728
+seq : 480
+Particle Filter Az: -110.63,Elv: 78.37,Ot: 1.028 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 481
+freq = 30000
+==== Fail =====
+Test
+seq : 482
+freq = 25000
+==== Fail =====
+Test
+seq : 483
+freq = 35000, po1 : -2
+c0r = 0.106672, c0i = -0.037152, c1r = 0.038243, c1i = 0.028447, c2r = -0.056438, c2i = -0.012607, c3r = -0.109309, c3i = 0.036576
+seq : 483
+Particle Filter Az: -103.92,Elv: 78.83,Ot: 1.629 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 484
+freq = 30000
+==== Fail =====
+Test
+seq : 485
+freq = 25000
+==== Fail =====
+Test
+seq : 486
+freq = 35000, po1 : -2
+c0r = 0.092107, c0i = -0.036554, c1r = 0.075309, c1i = 0.040071, c2r = -0.072101, c2i = -0.011367, c3r = -0.082606, c3i = 0.088054
+seq : 486
+Particle Filter Az: -107.77,Elv: 78.10,Ot: 1.444 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 487
+freq = 25000
+==== Fail =====
+Test
+seq : 488
+freq = 35000, po1 : -2
+c0r = 0.105005, c0i = -0.066033, c1r = 0.065361, c1i = 0.045543, c2r = -0.079843, c2i = -0.005176, c3r = -0.054261, c3i = 0.113813
+seq : 488
+Particle Filter Az: -114.38,Elv: 77.21,Ot: 1.343 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 489
+freq = 30000
+==== Fail =====
+Test
+seq : 490
+freq = 25000
+==== Fail =====
+Test
+seq : 491
+freq = 35000, po1 : -2
+c0r = 0.054391, c0i = -0.036948, c1r = 0.045819, c1i = 0.020645, c2r = -0.052176, c2i = -0.004675, c3r = -0.054277, c3i = 0.057243
+seq : 491
+Particle Filter Az: -108.48,Elv: 76.75,Ot: 1.339 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 492
+freq = 30000
+==== Fail =====
+Test
+seq : 493
+freq = 25000
+==== Fail =====
+Test
+seq : 494
+freq = 35000, po1 : -2
+c0r = 0.032575, c0i = -0.048485, c1r = 0.024805, c1i = 0.029496, c2r = -0.030615, c2i = -0.013583, c3r = -0.023569, c3i = 0.009791
+seq : 494
+Particle Filter Az: -112.57,Elv: 80.78,Ot: 1.531 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 495
+freq = 30000
+==== Fail =====
+Test
+seq : 496
+freq = 25000
+==== Fail =====
+Test
+seq : 497
+freq = 35000, po1 : -2
+c0r = 0.094557, c0i = -0.020291, c1r = 0.047473, c1i = 0.033477, c2r = -0.048112, c2i = -0.020990, c3r = -0.145974, c3i = 0.064239
+seq : 497
+Particle Filter Az: -106.76,Elv: 79.90,Ot: 1.663 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 498
+freq = 30000
+==== Fail =====
+Test
+seq : 499
+freq = 25000
+==== Fail =====
+Test
+seq : 500
+freq = 35000, po1 : -2
+c0r = -0.026016, c0i = 0.022955, c1r = 0.006066, c1i = 0.024879, c2r = -0.007122, c2i = -0.016849, c3r = -0.038754, c3i = -0.095227
+seq : 500
+Particle Filter Az: -82.85,Elv: 78.86,Ot: 2.808 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 501
+freq = 30000
+==== Fail =====
+Test
+seq : 502
+freq = 25000
+==== Fail =====
+Test
+seq : 503
+freq = 35000, po1 : -2
+c0r = -0.008129, c0i = -0.083395, c1r = 0.055469, c1i = 0.017168, c2r = -0.031998, c2i = 0.010726, c3r = -0.021416, c3i = 0.078279
+seq : 503
+Particle Filter Az: -101.86,Elv: 84.53,Ot: 1.568 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 504
+freq = 30000
+==== Fail =====
+Test
+seq : 505
+freq = 25000
+==== Fail =====
+Test
+seq : 506
+freq = 35000, po1 : -2
+c0r = -0.069953, c0i = -0.088270, c1r = 0.011972, c1i = 0.013524, c2r = 0.000413, c2i = 0.002770, c3r = 0.022982, c3i = -0.008513
+seq : 506
+Particle Filter Az: -125.15,Elv: 83.65,Ot: 0.557 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 507
+freq = 30000
+==== Fail =====
+Test
+seq : 508
+freq = 25000
+==== Fail =====
+Test
+seq : 509
+freq = 35000, po1 : -2
+c0r = -0.031856, c0i = 0.132401, c1r = -0.020813, c1i = -0.021358, c2r = 0.014317, c2i = -0.004035, c3r = 0.026878, c3i = -0.081415
+seq : 509
+Particle Filter Az: -117.63,Elv: 81.54,Ot: -0.496 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 510
+freq = 30000
+==== Fail =====
+Test
+seq : 511
+freq = 25000
+==== Fail =====
+Test
+seq : 512
+freq = 35000, po1 : -2
+c0r = -0.198544, c0i = -0.053538, c1r = 0.018221, c1i = -0.035265, c2r = 0.034480, c2i = 0.030239, c3r = 0.115565, c3i = -0.072190
+seq : 512
+Particle Filter Az: -125.53,Elv: 73.76,Ot: -0.955 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 513
+freq = 30000
+==== Fail =====
+Test
+seq : 514
+freq = 25000
+==== Fail =====
+Test
+seq : 515
+freq = 35000, po1 : -2
+c0r = 0.001600, c0i = 0.021867, c1r = 0.035787, c1i = 0.013289, c2r = -0.035968, c2i = -0.011696, c3r = 0.019748, c3i = 0.011614
+seq : 515
+Particle Filter Az: -133.23,Elv: 78.84,Ot: 0.244 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 516
+freq = 30000
+==== Fail =====
+Test
+seq : 517
+freq = 25000
+==== Fail =====
+Test
+seq : 518
+freq = 35000, po1 : -2
+c0r = -0.122974, c0i = -0.033724, c1r = 0.020489, c1i = -0.024154, c2r = 0.001119, c2i = 0.004828, c3r = 0.006986, c3i = -0.010437
+seq : 518
+Particle Filter Az: -137.08,Elv: 79.22,Ot: -0.730 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 519
+freq = 30000
+==== Fail =====
+Test
+seq : 520
+freq = 25000
+==== Fail =====
+Test
+seq : 521
+freq = 35000, po1 : -2
+c0r = -0.183656, c0i = 0.129271, c1r = -0.022624, c1i = -0.046626, c2r = 0.059625, c2i = -0.016942, c3r = 0.012541, c3i = -0.136822
+seq : 521
+Particle Filter Az: -126.38,Elv: 73.80,Ot: -1.762 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 522
+freq = 30000
+==== Fail =====
+Test
+seq : 523
+freq = 25000
+==== Fail =====
+Test
+seq : 524
+freq = 35000, po1 : -2
+c0r = -0.142258, c0i = 0.086585, c1r = -0.023725, c1i = -0.042658, c2r = 0.030089, c2i = -0.017046, c3r = 0.053949, c3i = -0.076715
+seq : 524
+Particle Filter Az: -116.90,Elv: 67.86,Ot: -1.820 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 525
+freq = 30000
+==== Fail =====
+Test
+seq : 526
+freq = 25000
+==== Fail =====
+Test
+seq : 527
+freq = 35000, po1 : -2
+c0r = -0.143886, c0i = 0.041839, c1r = -0.023253, c1i = -0.006467, c2r = 0.042136, c2i = -0.000510, c3r = 0.079409, c3i = -0.011453
+seq : 527
+Particle Filter Az: -98.67,Elv: 76.20,Ot: -1.601 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 528
+freq = 30000
+==== Fail =====
+Test
+seq : 529
+freq = 25000
+==== Fail =====
+Test
+seq : 530
+freq = 35000, po1 : -2
+c0r = -0.069265, c0i = 0.009941, c1r = 0.023794, c1i = -0.021123, c2r = -0.010916, c2i = -0.002194, c3r = 0.059911, c3i = 0.012771
+seq : 530
+Particle Filter Az: -121.63,Elv: 82.60,Ot: -0.501 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 531
+freq = 30000
+==== Fail =====
+Test
+seq : 532
+freq = 25000
+==== Fail =====
+Test
+seq : 533
+freq = 35000, po1 : -2
+c0r = -0.128250, c0i = -0.119377, c1r = 0.039918, c1i = -0.049380, c2r = 0.019007, c2i = 0.037646, c3r = 0.105029, c3i = 0.051206
+seq : 533
+Particle Filter Az: -113.65,Elv: 77.68,Ot: -0.425 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 534
+freq = 30000
+==== Fail =====
+Test
+seq : 535
+freq = 25000
+==== Fail =====
+Test
+seq : 536
+freq = 35000, po1 : -2
+c0r = -0.045429, c0i = -0.073244, c1r = -0.005306, c1i = -0.019404, c2r = 0.012977, c2i = 0.023761, c3r = 0.037857, c3i = 0.028965
+seq : 536
+Particle Filter Az: -98.37,Elv: 77.92,Ot: -0.560 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 537
+freq = 30000
+==== Fail =====
+Test
+seq : 538
+freq = 25000
+==== Fail =====
+Test
+seq : 539
+freq = 35000, po1 : -2
+c0r = -0.244412, c0i = 0.130953, c1r = -0.049559, c1i = -0.098421, c2r = 0.113192, c2i = -0.001284, c3r = 0.069836, c3i = -0.227900
+seq : 539
+Particle Filter Az: -116.41,Elv: 78.59,Ot: -1.614 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 540
+freq = 30000
+==== Fail =====
+Test
+seq : 541
+freq = 25000
+==== Fail =====
+Test
+seq : 542
+freq = 35000, po1 : -2
+c0r = 0.023034, c0i = -0.038364, c1r = 0.057727, c1i = 0.020894, c2r = -0.033958, c2i = -0.004655, c3r = 0.059933, c3i = 0.060671
+seq : 542
+Particle Filter Az: -121.92,Elv: 63.45,Ot: -0.395 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 543
+freq = 30000
+==== Fail =====
+Test
+seq : 544
+freq = 25000
+==== Fail =====
+Test
+seq : 545
+freq = 35000, po1 : -2
+c0r = -0.077103, c0i = 0.043545, c1r = -0.035466, c1i = -0.022430, c2r = 0.019151, c2i = -0.002171, c3r = -0.001444, c3i = -0.072202
+seq : 545
+Particle Filter Az: -117.78,Elv: 69.39,Ot: -1.477 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 546
+freq = 30000
+==== Fail =====
+Test
+seq : 547
+freq = 25000
+==== Fail =====
+Test
+seq : 548
+freq = 35000, po1 : -2
+c0r = -0.099082, c0i = -0.067719, c1r = 0.027981, c1i = -0.052466, c2r = -0.002754, c2i = 0.041796, c3r = 0.114156, c3i = -0.017728
+seq : 548
+Particle Filter Az: -122.15,Elv: 77.34,Ot: -0.583 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 549
+freq = 30000
+==== Fail =====
+Test
+seq : 550
+freq = 25000
+==== Fail =====
+Test
+seq : 551
+freq = 35000, po1 : -2
+c0r = -0.070317, c0i = 0.060293, c1r = -0.040748, c1i = -0.050264, c2r = 0.045727, c2i = 0.019890, c3r = -0.018194, c3i = -0.131392
+seq : 551
+Particle Filter Az: -127.67,Elv: 78.15,Ot: -1.650 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 552
+freq = 30000
+==== Fail =====
+Test
+seq : 553
+freq = 25000
+==== Fail =====
+Test
+seq : 554
+freq = 35000, po1 : -2
+c0r = -0.206797, c0i = -0.097288, c1r = 0.052080, c1i = -0.076515, c2r = 0.040806, c2i = 0.080366, c3r = 0.191415, c3i = -0.061309
+seq : 554
+Particle Filter Az: -124.94,Elv: 75.36,Ot: -0.782 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 555
+freq = 30000
+==== Fail =====
+Test
+seq : 556
+freq = 35000, po1 : -2
+c0r = 0.115004, c0i = 0.067970, c1r = -0.087008, c1i = 0.025100, c2r = 0.025076, c2i = -0.039104, c3r = -0.228675, c3i = -0.039751
+seq : 556
+Particle Filter Az: -137.94,Elv: 77.13,Ot: -2.098 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 557
+freq = 30000
+==== Fail =====
+Test
+seq : 558
+freq = 25000
+==== Fail =====
+Test
+seq : 559
+freq = 35000, po1 : -2
+c0r = 0.154675, c0i = -0.105860, c1r = 0.058514, c1i = 0.026586, c2r = -0.094003, c2i = 0.021580, c3r = 0.038118, c3i = 0.127632
+seq : 559
+Particle Filter Az: -168.47,Elv: 77.10,Ot: -1.017 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 560
+freq = 30000
+==== Fail =====
+Test
+seq : 561
+freq = 25000
+==== Fail =====
+Test
+seq : 562
+freq = 35000, po1 : -2
+c0r = 0.101867, c0i = -0.266905, c1r = 0.076978, c1i = 0.053993, c2r = -0.106060, c2i = 0.045912, c3r = 0.101732, c3i = 0.218747
+seq : 562
+Particle Filter Az: -139.61,Elv: 74.05,Ot: 1.289 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 563
+freq = 30000
+==== Fail =====
+Test
+seq : 564
+freq = 25000
+==== Fail =====
+Test
+seq : 565
+freq = 35000, po1 : -2
+c0r = 0.115967, c0i = 0.164491, c1r = -0.109930, c1i = 0.008749, c2r = 0.013686, c2i = -0.091070, c3r = -0.240643, c3i = -0.035297
+seq : 565
+Particle Filter Az: -132.91,Elv: 74.08,Ot: 2.880 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 566
+freq = 30000
+==== Fail =====
+Test
+seq : 567
+freq = 25000
+==== Fail =====
+Test
+seq : 568
+freq = 35000, po1 : -2
+c0r = 0.216688, c0i = 0.076073, c1r = -0.045970, c1i = 0.049319, c2r = -0.042057, c2i = -0.074665, c3r = -0.222257, c3i = 0.067943
+seq : 568
+Particle Filter Az: -126.70,Elv: 75.92,Ot: 2.447 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 569
+freq = 30000
+==== Fail =====
+Test
+seq : 570
+freq = 25000
+==== Fail =====
+Test
+seq : 571
+freq = 35000, po1 : -2
+c0r = -0.061957, c0i = -0.077525, c1r = 0.028723, c1i = -0.015753, c2r = 0.002159, c2i = 0.025038, c3r = 0.094596, c3i = 0.009429
+seq : 571
+Particle Filter Az: -124.37,Elv: 71.64,Ot: 1.121 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 572
+freq = 30000
+==== Fail =====
+Test
+seq : 573
+freq = 25000
+==== Fail =====
+Test
+seq : 574
+freq = 35000, po1 : -2
+c0r = 0.109640, c0i = -0.316194, c1r = 0.064263, c1i = 0.058476, c2r = -0.108231, c2i = 0.061655, c3r = 0.149337, c3i = 0.263960
+seq : 574
+Particle Filter Az: -130.44,Elv: 72.78,Ot: 0.800 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 575
+freq = 30000
+==== Fail =====
+Test
+seq : 576
+freq = 25000
+==== Fail =====
+Test
+seq : 577
+freq = 35000, po1 : -2
+c0r = -0.042844, c0i = -0.190166, c1r = 0.074921, c1i = 0.001820, c2r = -0.018219, c2i = 0.080841, c3r = 0.177337, c3i = 0.083547
+seq : 577
+Particle Filter Az: -128.46,Elv: 69.23,Ot: 0.133 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 578
+freq = 30000
+==== Fail =====
+Test
+seq : 579
+freq = 25000
+==== Fail =====
+Test
+seq : 580
+freq = 35000, po1 : -2
+c0r = 0.061445, c0i = -0.229529, c1r = 0.059942, c1i = 0.035192, c2r = -0.064908, c2i = 0.061174, c3r = 0.086519, c3i = 0.149446
+seq : 580
+Particle Filter Az: -127.25,Elv: 69.57,Ot: 0.662 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 581
+freq = 30000
+==== Fail =====
+Test
+seq : 582
+freq = 25000
+==== Fail =====
+Test
+seq : 583
+freq = 35000, po1 : -2
+c0r = -0.196452, c0i = 0.090269, c1r = -0.011626, c1i = -0.032927, c2r = 0.070081, c2i = -0.016398, c3r = 0.019259, c3i = -0.089717
+seq : 583
+Particle Filter Az: -118.69,Elv: 64.05,Ot: -0.524 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 584
+freq = 25000
+==== Fail =====
+Test
+seq : 585
+freq = 35000, po1 : -2
+c0r = -0.057777, c0i = -0.135282, c1r = 0.068704, c1i = 0.008715, c2r = -0.044320, c2i = 0.049014, c3r = 0.166358, c3i = 0.047974
+seq : 585
+Particle Filter Az: -131.28,Elv: 74.77,Ot: 0.160 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 586
+freq = 30000
+==== Fail =====
+Test
+seq : 587
+freq = 25000
+==== Fail =====
+Test
+seq : 588
+freq = 35000, po1 : -2
+c0r = -0.175551, c0i = 0.108902, c1r = -0.026719, c1i = -0.032852, c2r = 0.073810, c2i = -0.024400, c3r = -0.028745, c3i = -0.103346
+seq : 588
+Particle Filter Az: -122.82,Elv: 69.89,Ot: -1.239 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 589
+freq = 30000
+==== Fail =====
+Test
+seq : 590
+freq = 25000
+==== Fail =====
+Test
+True
+seq : 591
+freq = 35000, po1 : -2
+c0r = -0.187062, c0i = 0.088006, c1r = -0.010959, c1i = -0.038181, c2r = 0.072040, c2i = -0.016944, c3r = 0.002212, c3i = -0.085264
+seq : 591
+Particle Filter Az: -128.86,Elv: 65.98,Ot: -1.795 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+True
+--- RESET ---
+Test
+seq : 592
+freq = 30000
+==== Fail =====
+Test
+seq : 593
+freq = 25000
+==== Fail =====
+Test
+seq : 594
+freq = 35000, po1 : -2
+c0r = -0.093299, c0i = -0.125312, c1r = 0.063097, c1i = -0.014948, c2r = -0.019639, c2i = 0.054273, c3r = 0.157378, c3i = 0.000935
+seq : 594
+Particle Filter Az: -129.86,Elv: 80.70,Ot: -0.049 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 595
+freq = 30000
+==== Fail =====
+Test
+seq : 596
+freq = 25000
+==== Fail =====
+Test
+seq : 597
+freq = 35000, po1 : -2
+c0r = -0.004323, c0i = -0.140808, c1r = 0.023390, c1i = -0.044397, c2r = -0.004110, c2i = 0.048641, c3r = 0.012884, c3i = 0.121226
+seq : 597
+Particle Filter Az: -103.72,Elv: 78.25,Ot: 0.112 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 598
+freq = 30000
+==== Fail =====
+Test
+seq : 599
+freq = 25000
+==== Fail =====
+Test
+seq : 600
+freq = 35000, po1 : -2
+c0r = 0.050674, c0i = 0.057560, c1r = 0.024329, c1i = -0.054237, c2r = -0.007262, c2i = -0.007292, c3r = -0.028849, c3i = 0.073470
+seq : 600
+Particle Filter Az: -89.85,Elv: 77.28,Ot: 1.120 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 601
+freq = 25000
+==== Fail =====
+Test
+seq : 602
+freq = 35000, po1 : -2
+c0r = 0.135528, c0i = -0.016792, c1r = -0.052508, c1i = -0.048519, c2r = -0.031177, c2i = -0.038639, c3r = 0.083393, c3i = 0.085561
+seq : 602
+Particle Filter Az: -136.96,Elv: 74.13,Ot: 2.086 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 603
+freq = 30000
+==== Fail =====
+Test
+seq : 604
+freq = 25000
+==== Fail =====
+Test
+seq : 605
+freq = 35000, po1 : -2
+c0r = -0.178143, c0i = 0.103925, c1r = 0.069056, c1i = -0.049145, c2r = 0.014697, c2i = -0.096090, c3r = -0.000625, c3i = 0.200356
+seq : 605
+Particle Filter Az: -161.14,Elv: 77.01,Ot: -2.672 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 606
+freq = 30000
+==== Fail =====
+Test
+seq : 607
+freq = 25000
+==== Fail =====
+Test
+seq : 608
+freq = 35000, po1 : -2
+c0r = -0.138587, c0i = 0.120387, c1r = 0.053965, c1i = -0.058064, c2r = 0.056576, c2i = -0.027595, c3r = -0.081957, c3i = 0.094153
+seq : 608
+Particle Filter Az: -65.86,Elv: 79.41,Ot: -2.319 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 609
+freq = 25000
+==== Fail =====
+Test
+seq : 610
+freq = 35000, po1 : -2
+c0r = 0.117274, c0i = -0.081353, c1r = -0.030233, c1i = 0.012570, c2r = 0.021515, c2i = 0.071114, c3r = -0.144490, c3i = -0.076772
+seq : 610
+Particle Filter Az: 158.98,Elv: 79.23,Ot: -0.975 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 611
+freq = 30000
+==== Fail =====
+Test
+seq : 612
+freq = 25000
+==== Fail =====
+Test
+seq : 613
+freq = 35000, po1 : -2
+c0r = 0.150167, c0i = 0.049083, c1r = -0.071020, c1i = -0.044273, c2r = -0.057227, c2i = 0.005484, c3r = 0.146676, c3i = -0.056351
+seq : 613
+Particle Filter Az: -130.50,Elv: 63.83,Ot: 2.694 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 614
+freq = 30000
+==== Fail =====
+Test
+seq : 615
+freq = 25000
+==== Fail =====
+Test
+seq : 616
+freq = 35000, po1 : -2
+c0r = 0.148631, c0i = -0.093727, c1r = -0.073843, c1i = 0.031209, c2r = -0.053354, c2i = 0.026318, c3r = 0.099546, c3i = -0.103671
+seq : 616
+Particle Filter Az: 162.44,Elv: 78.69,Ot: 0.997 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 617
+freq = 30000
+==== Fail =====
+Test
+seq : 618
+freq = 25000
+==== Fail =====
+Test
+seq : 619
+freq = 35000, po1 : -2
+c0r = 0.056470, c0i = -0.095177, c1r = -0.020419, c1i = -0.044789, c2r = 0.009853, c2i = 0.062449, c3r = -0.154361, c3i = 0.050360
+seq : 619
+Particle Filter Az: 159.12,Elv: 84.28,Ot: 0.222 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 620
+freq = 25000
+==== Fail =====
+Test
+seq : 621
+freq = 35000, po1 : -2
+c0r = 0.056752, c0i = -0.262147, c1r = 0.152866, c1i = -0.048653, c2r = -0.136018, c2i = 0.008524, c3r = -0.124536, c3i = 0.240480
+seq : 621
+Particle Filter Az: 137.45,Elv: 84.46,Ot: -1.256 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 622
+freq = 25000
+==== Fail =====
+Test
+seq : 623
+freq = 35000, po1 : -2
+c0r = 0.035999, c0i = -0.209007, c1r = 0.112348, c1i = 0.056076, c2r = -0.000484, c2i = -0.112469, c3r = -0.223380, c3i = 0.091438
+seq : 623
+Particle Filter Az: 132.46,Elv: 80.16,Ot: -1.521 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 624
+freq = 30000
+==== Fail =====
+Test
+seq : 625
+freq = 25000
+==== Fail =====
+Test
+seq : 626
+freq = 35000, po1 : -2
+c0r = -0.222672, c0i = 0.108231, c1r = 0.073092, c1i = -0.084828, c2r = 0.076094, c2i = -0.069265, c3r = -0.219303, c3i = -0.000579
+seq : 626
+Particle Filter Az: 164.03,Elv: 76.64,Ot: -2.058 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 627
+freq = 30000
+==== Fail =====
+Test
+seq : 628
+freq = 25000
+==== Fail =====
+Test
+seq : 629
+freq = 35000, po1 : -2
+c0r = 0.086541, c0i = 0.228096, c1r = -0.049084, c1i = 0.045945, c2r = -0.012117, c2i = -0.090381, c3r = -0.173908, c3i = -0.178222
+seq : 629
+Particle Filter Az: -106.75,Elv: 62.04,Ot: -2.559 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 630
+freq = 30000
+==== Fail =====
+Test
+seq : 631
+freq = 25000
+==== Fail =====
+Test
+seq : 632
+freq = 35000, po1 : -2
+c0r = 0.168273, c0i = 0.002864, c1r = -0.025538, c1i = -0.056571, c2r = 0.023270, c2i = -0.025661, c3r = -0.013432, c3i = 0.116639
+seq : 632
+Particle Filter Az: -161.22,Elv: 78.88,Ot: 2.334 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 633
+freq = 25000
+==== Fail =====
+Test
+seq : 634
+freq = 35000, po1 : -2
+c0r = -0.183155, c0i = 0.029419, c1r = 0.059672, c1i = -0.005327, c2r = 0.030152, c2i = -0.077725, c3r = -0.015015, c3i = 0.130642
+seq : 634
+Particle Filter Az: 164.48,Elv: 83.23,Ot: -2.442 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 635
+freq = 30000
+==== Fail =====
+Test
+seq : 636
+freq = 25000
+==== Fail =====
+Test
+seq : 637
+freq = 35000, po1 : -2
+c0r = -0.105502, c0i = -0.004344, c1r = -0.018566, c1i = -0.010596, c2r = 0.019940, c2i = -0.033043, c3r = 0.078806, c3i = 0.054574
+seq : 637
+Particle Filter Az: 114.44,Elv: 77.97,Ot: -0.544 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 638
+freq = 30000
+==== Fail =====
+Test
+seq : 639
+freq = 25000
+==== Fail =====
+Test
+seq : 640
+freq = 35000, po1 : -2
+c0r = 0.188106, c0i = -0.068163, c1r = -0.038151, c1i = 0.129353, c2r = 0.124212, c2i = -0.018120, c3r = -0.152042, c3i = -0.183490
+seq : 640
+Particle Filter Az: -121.74,Elv: 81.51,Ot: 2.121 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 641
+freq = 30000
+==== Fail =====
+Test
+seq : 642
+freq = 25000
+==== Fail =====
+Test
+seq : 643
+freq = 35000, po1 : -2
+c0r = -0.115972, c0i = 0.168718, c1r = 0.051282, c1i = -0.113941, c2r = 0.047925, c2i = -0.120986, c3r = -0.204265, c3i = 0.138552
+seq : 643
+Particle Filter Az: -161.95,Elv: 74.63,Ot: -2.779 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 644
+freq = 25000
+==== Fail =====
+Test
+seq : 645
+freq = 35000, po1 : -2
+c0r = -0.056412, c0i = 0.188941, c1r = -0.058002, c1i = 0.032178, c2r = 0.014877, c2i = -0.054385, c3r = -0.041242, c3i = -0.169614
+seq : 645
+Particle Filter Az: -137.95,Elv: 60.36,Ot: -2.725 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 646
+freq = 30000
+==== Fail =====
+Test
+seq : 647
+freq = 25000
+==== Fail =====
+Test
+seq : 648
+freq = 35000, po1 : -2
+c0r = -0.199819, c0i = -0.088369, c1r = -0.125280, c1i = -0.016103, c2r = 0.076020, c2i = -0.040435, c3r = 0.189966, c3i = -0.033934
+seq : 648
+Particle Filter Az: -112.17,Elv: 64.16,Ot: -1.795 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 649
+freq = 30000
+==== Fail =====
+Test
+seq : 650
+freq = 25000
+==== Fail =====
+Test
+seq : 651
+freq = 35000, po1 : -2
+c0r = 0.010826, c0i = -0.132027, c1r = -0.072777, c1i = 0.027868, c2r = -0.018996, c2i = -0.010443, c3r = 0.084379, c3i = -0.055076
+seq : 651
+Particle Filter Az: -88.94,Elv: 38.08,Ot: -1.912 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 652
+freq = 30000
+==== Fail =====
+Test
+seq : 653
+freq = 25000
+==== Fail =====
+Test
+seq : 654
+freq = 35000, po1 : -2
+c0r = -0.077684, c0i = 0.093149, c1r = 0.068817, c1i = -0.059484, c2r = 0.041886, c2i = -0.023464, c3r = -0.095869, c3i = 0.072576
+seq : 654
+Particle Filter Az: -119.23,Elv: 41.81,Ot: -2.256 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 655
+freq = 25000
+==== Fail =====
+Test
+seq : 656
+freq = 35000, po1 : -2
+c0r = -0.069158, c0i = 0.112196, c1r = 0.032617, c1i = -0.082885, c2r = 0.061835, c2i = -0.057169, c3r = -0.093202, c3i = 0.112793
+seq : 656
+Particle Filter Az: -146.52,Elv: 65.95,Ot: -2.436 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 657
+freq = 30000
+==== Fail =====
+Test
+seq : 658
+freq = 25000
+==== Fail =====
+Test
+seq : 659
+freq = 35000, po1 : -2
+c0r = 0.029115, c0i = 0.001744, c1r = 0.005110, c1i = -0.009541, c2r = -0.019849, c2i = 0.012492, c3r = 0.027463, c3i = -0.060637
+seq : 659
+Particle Filter Az: -134.49,Elv: 80.15,Ot: -1.355 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 660
+freq = 30000
+==== Fail =====
+Test
+seq : 661
+freq = 25000
+==== Fail =====
+Test
+seq : 662
+freq = 35000, po1 : -2
+c0r = 0.092285, c0i = 0.136849, c1r = 0.057742, c1i = -0.044797, c2r = -0.093426, c2i = -0.008744, c3r = 0.082369, c3i = -0.113312
+seq : 662
+Particle Filter Az: -137.79,Elv: 82.44,Ot: -0.639 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 663
+freq = 30000
+==== Fail =====
+Test
+seq : 664
+freq = 25000
+==== Fail =====
+Test
+seq : 665
+freq = 35000, po1 : -2
+c0r = 0.249712, c0i = -0.008971, c1r = 0.090211, c1i = -0.029356, c2r = -0.100807, c2i = 0.008120, c3r = -0.199318, c3i = -0.054175
+seq : 665
+Particle Filter Az: -110.04,Elv: 79.14,Ot: 0.668 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 666
+freq = 30000
+==== Fail =====
+Test
+seq : 667
+freq = 25000
+==== Fail =====
+Test
+seq : 668
+freq = 35000, po1 : -2
+c0r = 0.056771, c0i = -0.167373, c1r = 0.017738, c1i = 0.134887, c2r = 0.127752, c2i = -0.052774, c3r = -0.197671, c3i = -0.108843
+seq : 668
+Particle Filter Az: -114.56,Elv: 82.67,Ot: 1.658 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 669
+freq = 30000
+==== Fail =====
+Test
+seq : 670
+freq = 25000
+==== Fail =====
+Test
+seq : 671
+freq = 35000, po1 : -2
+c0r = 0.200121, c0i = -0.230108, c1r = -0.038653, c1i = 0.173518, c2r = 0.178722, c2i = -0.005469, c3r = -0.237078, c3i = -0.252960
+seq : 671
+Particle Filter Az: -115.37,Elv: 84.55,Ot: 2.579 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 672
+freq = 30000
+==== Fail =====
+Test
+seq : 673
+freq = 25000
+==== Fail =====
+Test
+seq : 674
+freq = 35000, po1 : -2
+c0r = 0.291690, c0i = -0.162817, c1r = -0.083404, c1i = 0.106454, c2r = -0.119478, c2i = 0.029517, c3r = 0.215542, c3i = 0.105115
+seq : 674
+Particle Filter Az: -145.83,Elv: 80.34,Ot: 1.504 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 675
+freq = 30000
+==== Fail =====
+Test
+seq : 676
+freq = 25000
+==== Fail =====
+Test
+seq : 677
+freq = 35000, po1 : -2
+c0r = -0.264053, c0i = 0.175346, c1r = 0.053189, c1i = -0.111877, c2r = 0.107819, c2i = -0.013256, c3r = -0.127807, c3i = -0.186617
+seq : 677
+Particle Filter Az: -135.88,Elv: 73.81,Ot: 2.829 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 678
+freq = 30000
+==== Fail =====
+Test
+seq : 679
+freq = 25000
+==== Fail =====
+Test
+seq : 680
+freq = 35000, po1 : -2
+c0r = -0.001745, c0i = 0.008183, c1r = 0.001048, c1i = -0.009168, c2r = -0.000406, c2i = -0.000827, c3r = -0.002843, c3i = 0.004887
+seq : 680
+Particle Filter Az: 114.28,Elv: 72.97,Ot: -1.578 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 681
+freq = 30000
+==== Fail =====
+Test
+seq : 682
+freq = 25000
+==== Fail =====
+Test
+seq : 683
+freq = 35000, po1 : -2
+c0r = 0.155247, c0i = -0.054214, c1r = -0.052587, c1i = -0.070543, c2r = 0.037343, c2i = -0.023988, c3r = 0.041339, c3i = 0.118588
+seq : 683
+Particle Filter Az: -164.11,Elv: 83.69,Ot: 2.599 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 684
+freq = 30000
+==== Fail =====
+Test
+seq : 685
+freq = 25000
+==== Fail =====
+Test
+seq : 686
+freq = 35000, po1 : -2
+c0r = 0.109113, c0i = 0.106705, c1r = 0.003118, c1i = -0.082183, c2r = 0.026929, c2i = -0.010651, c3r = -0.063118, c3i = 0.092861
+seq : 686
+Particle Filter Az: -161.82,Elv: 84.01,Ot: -2.425 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 687
+freq = 30000
+==== Fail =====
+Test
+seq : 688
+freq = 25000
+==== Fail =====
+Test
+seq : 689
+freq = 35000, po1 : -2
+c0r = 0.104662, c0i = -0.139950, c1r = -0.073377, c1i = 0.027939, c2r = 0.027114, c2i = 0.067356, c3r = -0.122851, c3i = -0.100121
+seq : 689
+Particle Filter Az: -130.77,Elv: 83.18,Ot: -1.538 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 690
+freq = 30000
+==== Fail =====
+Test
+seq : 691
+freq = 25000
+==== Fail =====
+Test
+seq : 692
+freq = 35000, po1 : -2
+c0r = -0.025246, c0i = -0.112505, c1r = -0.080652, c1i = -0.001798, c2r = 0.044118, c2i = 0.019321, c3r = 0.006678, c3i = 0.071812
+seq : 692
+Particle Filter Az: -105.71,Elv: 87.54,Ot: -1.158 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 693
+freq = 25000
+==== Fail =====
+Test
+seq : 694
+freq = 35000, po1 : -2
+c0r = 0.214481, c0i = -0.234149, c1r = 0.136745, c1i = -0.020839, c2r = -0.107355, c2i = 0.021620, c3r = -0.262533, c3i = 0.088065
+seq : 694
+Particle Filter Az: -103.77,Elv: 79.96,Ot: -0.139 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 695
+freq = 30000
+==== Fail =====
+Test
+seq : 696
+freq = 25000
+==== Fail =====
+Test
+seq : 697
+freq = 35000, po1 : -2
+c0r = 0.167024, c0i = -0.043528, c1r = -0.059532, c1i = 0.080766, c2r = 0.077389, c2i = -0.032918, c3r = -0.080251, c3i = -0.084310
+seq : 697
+Particle Filter Az: -62.68,Elv: 76.70,Ot: -0.438 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 698
+freq = 30000
+==== Fail =====
+Test
+seq : 699
+freq = 25000
+==== Fail =====
+Test
+seq : 700
+freq = 35000, po1 : -2
+c0r = 0.181397, c0i = -0.000464, c1r = -0.085120, c1i = 0.075022, c2r = 0.083139, c2i = -0.022713, c3r = -0.061633, c3i = -0.103470
+seq : 700
+Particle Filter Az: -43.64,Elv: 82.65,Ot: -0.357 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 701
+freq = 30000
+==== Fail =====
+Test
+seq : 702
+freq = 35000, po1 : -2
+c0r = 0.088968, c0i = -0.126808, c1r = -0.007016, c1i = 0.082820, c2r = 0.083404, c2i = -0.048959, c3r = -0.145281, c3i = -0.017371
+seq : 702
+Particle Filter Az: -49.04,Elv: 83.12,Ot: -0.754 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 703
+freq = 30000
+==== Fail =====
+Test
+seq : 704
+freq = 25000
+==== Fail =====
+Test
+seq : 705
+freq = 35000, po1 : -2
+c0r = 0.059922, c0i = -0.104771, c1r = -0.008005, c1i = 0.080147, c2r = 0.085964, c2i = -0.048005, c3r = -0.130765, c3i = -0.010705
+seq : 705
+Particle Filter Az: -50.00,Elv: 83.61,Ot: -0.831 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 706
+freq = 30000
+==== Fail =====
+Test
+seq : 707
+freq = 25000
+==== Fail =====
+Test
+seq : 708
+freq = 35000, po1 : -2
+c0r = -0.020213, c0i = -0.003827, c1r = 0.029391, c1i = 0.022027, c2r = 0.012354, c2i = -0.043780, c3r = -0.055180, c3i = 0.018277
+seq : 708
+Particle Filter Az: -65.99,Elv: 85.94,Ot: -2.311 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 709
+freq = 30000
+==== Fail =====
+Test
+seq : 710
+freq = 25000
+==== Fail =====
+Test
+seq : 711
+freq = 35000, po1 : -2
+c0r = -0.051884, c0i = 0.015042, c1r = -0.021607, c1i = -0.033162, c2r = -0.036392, c2i = 0.019237, c3r = 0.063727, c3i = 0.011623
+seq : 711
+Particle Filter Az: -87.25,Elv: 79.43,Ot: -1.389 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 712
+freq = 30000
+==== Fail =====
+Test
+seq : 713
+freq = 25000
+==== Fail =====
+Test
+seq : 714
+freq = 35000, po1 : -2
+c0r = 0.068354, c0i = 0.009650, c1r = -0.050359, c1i = 0.038456, c2r = 0.034289, c2i = 0.044727, c3r = 0.011850, c3i = -0.102530
+seq : 714
+Particle Filter Az: -110.83,Elv: 84.20,Ot: -2.381 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 715
+freq = 30000
+==== Fail =====
+Test
+seq : 716
+freq = 25000
+==== Fail =====
+Test
+seq : 717
+freq = 35000, po1 : -2
+c0r = -0.073660, c0i = 0.041149, c1r = -0.033010, c1i = -0.049006, c2r = -0.071686, c2i = 0.034771, c3r = 0.151943, c3i = 0.034021
+seq : 717
+Particle Filter Az: -111.95,Elv: 84.21,Ot: -1.187 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 718
+freq = 30000
+==== Fail =====
+Test
+seq : 719
+freq = 25000
+==== Fail =====
+Test
+seq : 720
+freq = 35000, po1 : -2
+c0r = 0.014561, c0i = -0.018983, c1r = -0.004016, c1i = 0.000953, c2r = 0.021901, c2i = -0.016178, c3r = -0.017228, c3i = 0.048880
+seq : 720
+Particle Filter Az: -65.61,Elv: 67.31,Ot: -0.640 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 721
+freq = 30000
+==== Fail =====
+Test
+seq : 722
+freq = 25000
+==== Fail =====
+Test
+seq : 723
+freq = 25000
+==== Fail =====
+Test
+seq : 724
+freq = 35000, po1 : -2
+c0r = -0.079081, c0i = 0.028579, c1r = 0.027937, c1i = -0.060475, c2r = -0.059918, c2i = -0.006356, c3r = 0.080388, c3i = 0.093634
+seq : 724
+Particle Filter Az: -93.64,Elv: 77.45,Ot: -0.306 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 725
+freq = 30000
+==== Fail =====
+Test
+seq : 726
+freq = 25000
+==== Fail =====
+Test
+seq : 727
+freq = 35000, po1 : -2
+c0r = -0.054266, c0i = -0.019901, c1r = 0.038366, c1i = 0.005209, c2r = -0.002544, c2i = 0.002490, c3r = -0.050619, c3i = 0.047305
+seq : 727
+Particle Filter Az: -108.70,Elv: 81.61,Ot: 0.607 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 728
+freq = 25000
+==== Fail =====
+Test
+seq : 729
+freq = 35000, po1 : -2
+c0r = 0.002087, c0i = -0.118267, c1r = -0.007758, c1i = 0.042459, c2r = 0.007106, c2i = 0.022297, c3r = 0.017967, c3i = -0.137961
+seq : 729
+Particle Filter Az: -140.89,Elv: 81.52,Ot: -0.087 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 730
+freq = 30000
+==== Fail =====
+Test
+seq : 731
+freq = 25000
+==== Fail =====
+Test
+seq : 732
+freq = 35000, po1 : -2
+c0r = 0.021243, c0i = 0.001547, c1r = -0.011775, c1i = 0.002146, c2r = -0.022139, c2i = -0.007028, c3r = 0.004969, c3i = 0.003154
+seq : 732
+Particle Filter Az: -155.14,Elv: 65.97,Ot: 1.287 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 733
+freq = 30000
+==== Fail =====
+Test
+seq : 734
+freq = 25000
+==== Fail =====
+Test
+seq : 735
+freq = 35000, po1 : -2
+c0r = -0.004906, c0i = 0.044068, c1r = -0.020334, c1i = -0.018163, c2r = 0.007557, c2i = -0.005179, c3r = 0.014979, c3i = -0.004415
+seq : 735
+Particle Filter Az: -39.80,Elv: 70.65,Ot: 2.250 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 736
+freq = 30000
+==== Fail =====
+Test
+seq : 737
+freq = 25000
+==== Fail =====
+Test
+seq : 738
+freq = 35000, po1 : -2
+c0r = 0.010177, c0i = -0.006139, c1r = 0.015233, c1i = 0.000655, c2r = -0.005265, c2i = -0.005204, c3r = 0.026142, c3i = -0.004292
+seq : 738
+Particle Filter Az: -153.81,Elv: 78.63,Ot: 1.261 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 739
+freq = 30000
+==== Fail =====
+Test
+seq : 740
+freq = 25000
+==== Fail =====
+Test
+seq : 741
+freq = 35000, po1 : -2
+c0r = 0.020968, c0i = 0.007022, c1r = 0.025946, c1i = 0.003551, c2r = -0.024882, c2i = -0.010124, c3r = -0.015798, c3i = -0.002764
+seq : 741
+Particle Filter Az: -123.32,Elv: 71.62,Ot: 1.927 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 742
+freq = 30000
+==== Fail =====
+Test
+seq : 743
+freq = 35000, po1 : -2
+c0r = 0.032886, c0i = -0.002912, c1r = -0.010822, c1i = 0.003734, c2r = -0.009366, c2i = 0.017509, c3r = 0.030152, c3i = -0.040167
+seq : 743
+Particle Filter Az: -148.33,Elv: 64.45,Ot: 1.275 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 744
+freq = 30000
+==== Fail =====
+Test
+seq : 745
+freq = 25000
+==== Fail =====
+Test
+seq : 746
+freq = 35000, po1 : -2
+c0r = -0.013998, c0i = 0.020673, c1r = 0.005187, c1i = -0.005112, c2r = 0.001561, c2i = 0.001564, c3r = 0.015327, c3i = 0.025119
+seq : 746
+Particle Filter Az: -124.50,Elv: 37.05,Ot: 0.338 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 747
+freq = 30000
+==== Fail =====
+Test
+seq : 748
+freq = 25000
+==== Fail =====
+Test
+seq : 749
+freq = 35000, po1 : -2
+c0r = -0.032903, c0i = 0.005514, c1r = 0.021080, c1i = -0.009092, c2r = -0.003533, c2i = -0.002961, c3r = 0.030752, c3i = 0.009947
+seq : 749
+Particle Filter Az: -127.92,Elv: 76.79,Ot: 0.066 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 750
+freq = 30000
+==== Fail =====
+Test
+seq : 751
+freq = 25000
+==== Fail =====
+Test
+seq : 752
+freq = 35000, po1 : -2
+c0r = -0.126313, c0i = -0.122327, c1r = 0.048756, c1i = 0.060467, c2r = 0.091315, c2i = -0.022479, c3r = -0.146378, c3i = 0.142975
+seq : 752
+Particle Filter Az: -160.05,Elv: 63.76,Ot: -0.842 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 753
+freq = 30000
+==== Fail =====
+Test
+seq : 754
+freq = 25000
+==== Fail =====
+Test
+seq : 755
+freq = 35000, po1 : -2
+c0r = -0.103743, c0i = 0.025889, c1r = 0.047576, c1i = -0.006338, c2r = 0.018204, c2i = -0.048435, c3r = 0.007896, c3i = 0.094375
+seq : 755
+Particle Filter Az: 170.08,Elv: 80.52,Ot: -1.948 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 756
+freq = 35000, po1 : -2
+c0r = 0.106637, c0i = -0.067455, c1r = -0.053252, c1i = 0.029749, c2r = -0.050289, c2i = 0.036316, c3r = 0.074328, c3i = -0.078085
+seq : 756
+Particle Filter Az: 142.21,Elv: 56.60,Ot: -0.732 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 757
+freq = 30000
+==== Fail =====
+Test
+seq : 758
+freq = 35000, po1 : -2
+c0r = -0.177049, c0i = 0.125809, c1r = 0.084151, c1i = -0.066642, c2r = 0.073890, c2i = -0.052096, c3r = -0.148471, c3i = 0.113299
+seq : 758
+Particle Filter Az: 71.33,Elv: 69.34,Ot: -1.730 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 759
+freq = 30000
+==== Fail =====
+Test
+seq : 760
+freq = 25000
+==== Fail =====
+Test
+seq : 761
+freq = 35000, po1 : -2
+c0r = 0.264230, c0i = 0.015439, c1r = -0.019917, c1i = -0.113024, c2r = -0.088311, c2i = 0.050333, c3r = -0.112584, c3i = -0.110777
+seq : 761
+Particle Filter Az: -142.86,Elv: 80.38,Ot: -2.425 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 762
+freq = 30000
+==== Fail =====
+Test
+seq : 763
+freq = 25000
+==== Fail =====
+Test
+seq : 764
+freq = 35000, po1 : -2
+c0r = -0.129186, c0i = -0.196355, c1r = 0.005897, c1i = -0.114428, c2r = -0.043264, c2i = 0.081430, c3r = 0.062364, c3i = 0.217795
+seq : 764
+Particle Filter Az: -98.92,Elv: 83.49,Ot: -0.965 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 765
+freq = 25000
+==== Fail =====
+Test
+seq : 766
+freq = 35000, po1 : -2
+c0r = 0.210609, c0i = -0.126356, c1r = -0.093057, c1i = 0.095280, c2r = -0.020674, c2i = 0.073610, c3r = 0.084622, c3i = -0.147715
+seq : 766
+Particle Filter Az: -146.02,Elv: 77.84,Ot: 0.162 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 767
+freq = 30000
+==== Fail =====
+Test
+seq : 768
+freq = 25000
+==== Fail =====
+Test
+seq : 769
+freq = 35000, po1 : -2
+c0r = 0.081533, c0i = -0.048514, c1r = 0.012482, c1i = 0.022561, c2r = -0.018811, c2i = -0.004598, c3r = -0.035493, c3i = 0.063537
+seq : 769
+Particle Filter Az: -125.75,Elv: 77.37,Ot: 1.168 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 770
+freq = 30000
+==== Fail =====
+Test
+seq : 771
+freq = 25000
+==== Fail =====
+Test
+seq : 772
+freq = 35000, po1 : -2
+c0r = 0.169710, c0i = -0.143460, c1r = 0.077376, c1i = -0.013077, c2r = -0.067241, c2i = 0.037061, c3r = -0.136947, c3i = 0.173932
+seq : 772
+Particle Filter Az: -103.70,Elv: 77.56,Ot: 0.997 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 773
+freq = 30000
+==== Fail =====
+Test
+seq : 774
+freq = 25000
+==== Fail =====
+Test
+seq : 775
+freq = 35000, po1 : -2
+c0r = 0.064247, c0i = -0.033025, c1r = 0.048451, c1i = 0.013522, c2r = -0.029476, c2i = 0.021420, c3r = -0.097303, c3i = 0.031622
+seq : 775
+Particle Filter Az: -94.36,Elv: 75.16,Ot: 1.269 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 776
+freq = 30000
+==== Fail =====
+Test
+seq : 777
+freq = 25000
+==== Fail =====
+Test
+seq : 778
+freq = 35000, po1 : -2
+c0r = 0.076789, c0i = -0.005022, c1r = -0.013896, c1i = -0.011847, c2r = -0.017543, c2i = -0.003651, c3r = -0.079238, c3i = -0.032483
+seq : 778
+Particle Filter Az: -85.69,Elv: 81.51,Ot: 1.528 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 779
+freq = 30000
+==== Fail =====
+Test
+seq : 780
+freq = 25000
+==== Fail =====
+Test
+seq : 781
+freq = 35000, po1 : -2
+c0r = 0.083398, c0i = -0.131079, c1r = 0.066348, c1i = -0.004402, c2r = -0.055846, c2i = 0.030372, c3r = -0.005080, c3i = 0.149278
+seq : 781
+Particle Filter Az: -106.54,Elv: 80.76,Ot: 0.813 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 782
+freq = 30000
+==== Fail =====
+Test
+seq : 783
+freq = 35000, po1 : -2
+c0r = 0.079015, c0i = -0.090814, c1r = 0.047852, c1i = 0.018543, c2r = -0.030777, c2i = 0.034295, c3r = -0.049977, c3i = 0.153282
+seq : 783
+Particle Filter Az: -108.45,Elv: 74.57,Ot: 0.958 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 784
+freq = 30000
+==== Fail =====
+Test
+seq : 785
+freq = 25000
+==== Fail =====
+Test
+seq : 786
+freq = 35000, po1 : -2
+c0r = -0.108461, c0i = 0.129214, c1r = -0.071266, c1i = 0.025298, c2r = 0.026126, c2i = -0.033588, c3r = 0.012349, c3i = -0.113128
+seq : 786
+Particle Filter Az: -86.39,Elv: 68.31,Ot: 2.311 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 787
+freq = 30000
+==== Fail =====
+Test
+seq : 788
+freq = 25000
+==== Fail =====
+Test
+seq : 789
+freq = 35000, po1 : -2
+c0r = -0.007001, c0i = -0.167100, c1r = 0.084077, c1i = -0.022977, c2r = -0.039644, c2i = 0.036528, c3r = 0.037625, c3i = 0.114921
+seq : 789
+Particle Filter Az: -108.68,Elv: 76.96,Ot: 1.241 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 790
+freq = 30000
+==== Fail =====
+Test
+True
+seq : 791
+freq = 25000
+==== Fail =====
+True
+--- RESET ---
+Test
+seq : 792
+freq = 35000, po1 : -2
+c0r = -0.090131, c0i = 0.080579, c1r = -0.040834, c1i = 0.002668, c2r = 0.022009, c2i = -0.049981, c3r = 0.048864, c3i = -0.137307
+seq : 792
+Particle Filter Az: -94.71,Elv: 61.22,Ot: -2.310 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 793
+freq = 25000
+==== Fail =====
+Test
+seq : 794
+freq = 35000, po1 : -2
+c0r = -0.097451, c0i = 0.171998, c1r = -0.079998, c1i = 0.034200, c2r = 0.043654, c2i = -0.070591, c3r = 0.041991, c3i = -0.203978
+seq : 794
+Particle Filter Az: -100.07,Elv: 70.19,Ot: -2.562 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 795
+freq = 30000
+==== Fail =====
+Test
+seq : 796
+freq = 25000
+==== Fail =====
+Test
+seq : 797
+freq = 35000, po1 : -2
+c0r = -0.042442, c0i = -0.213131, c1r = 0.076692, c1i = -0.029322, c2r = -0.001953, c2i = 0.064157, c3r = 0.134055, c3i = 0.180991
+seq : 797
+Particle Filter Az: -96.55,Elv: 68.90,Ot: -1.143 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+True
+seq : 798
+freq = 25000
+==== Fail =====
+True
+--- RESET ---
+Test
+seq : 799
+freq = 35000, po1 : -2
+c0r = -0.017726, c0i = -0.090696, c1r = 0.059729, c1i = 0.005134, c2r = -0.011063, c2i = 0.035280, c3r = 0.142381, c3i = 0.063867
+seq : 799
+Particle Filter Az: -126.80,Elv: 61.69,Ot: 0.184 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 800
+freq = 30000
+==== Fail =====
+Test
+seq : 801
+freq = 25000
+==== Fail =====
+Test
+seq : 802
+freq = 35000, po1 : -2
+c0r = -0.090241, c0i = -0.109217, c1r = 0.060813, c1i = -0.022572, c2r = -0.009277, c2i = 0.056525, c3r = 0.140591, c3i = 0.001785
+seq : 802
+Particle Filter Az: -130.24,Elv: 69.89,Ot: -0.232 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 803
+freq = 25000
+==== Fail =====
+Test
+seq : 804
+freq = 35000, po1 : -2
+c0r = -0.075222, c0i = -0.192143, c1r = 0.085272, c1i = -0.008583, c2r = -0.042687, c2i = 0.063376, c3r = 0.174126, c3i = 0.059791
+seq : 804
+Particle Filter Az: -128.74,Elv: 73.65,Ot: 0.127 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 805
+freq = 25000
+==== Fail =====
+Test
+seq : 806
+freq = 35000, po1 : -2
+c0r = 0.127000, c0i = 0.007935, c1r = -0.015250, c1i = 0.029718, c2r = -0.021394, c2i = -0.028601, c3r = -0.097864, c3i = 0.053833
+seq : 806
+Particle Filter Az: -132.97,Elv: 84.82,Ot: 1.409 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 807
+freq = 25000
+==== Fail =====
+Test
+seq : 808
+freq = 35000, po1 : -2
+c0r = -0.091390, c0i = -0.046781, c1r = 0.011527, c1i = -0.026363, c2r = 0.008661, c2i = 0.028925, c3r = 0.108111, c3i = -0.026970
+seq : 808
+Particle Filter Az: -115.63,Elv: 78.30,Ot: 0.202 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 809
+freq = 25000
+==== Fail =====
+Test
+seq : 810
+freq = 35000, po1 : -2
+c0r = 0.049568, c0i = 0.061763, c1r = 0.000114, c1i = 0.018026, c2r = -0.008711, c2i = -0.031974, c3r = -0.093197, c3i = -0.003466
+seq : 810
+Particle Filter Az: -119.40,Elv: 78.80,Ot: 1.370 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 811
+freq = 25000
+==== Fail =====
+Test
+seq : 812
+freq = 35000, po1 : -2
+c0r = -0.049444, c0i = -0.131796, c1r = 0.068939, c1i = -0.023480, c2r = -0.024937, c2i = 0.047959, c3r = 0.119427, c3i = 0.059610
+seq : 812
+Particle Filter Az: -124.71,Elv: 79.85,Ot: 0.370 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 813
+freq = 25000
+==== Fail =====
+Test
+seq : 814
+freq = 35000, po1 : -2
+c0r = 0.079128, c0i = 0.087926, c1r = -0.059410, c1i = 0.014046, c2r = -0.002268, c2i = -0.057450, c3r = -0.120298, c3i = 0.004671
+seq : 814
+Particle Filter Az: -136.38,Elv: 88.10,Ot: 1.665 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 815
+freq = 25000
+==== Fail =====
+Test
+seq : 816
+freq = 35000, po1 : -2
+c0r = -0.170275, c0i = 0.106971, c1r = -0.018109, c1i = -0.057312, c2r = 0.076472, c2i = -0.017229, c3r = -0.030028, c3i = -0.179579
+seq : 816
+Particle Filter Az: -147.05,Elv: 80.84,Ot: 2.679 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 817
+freq = 25000
+==== Fail =====
+Test
+seq : 818
+freq = 35000, po1 : -2
+c0r = -0.053924, c0i = -0.194534, c1r = 0.086522, c1i = 0.018661, c2r = -0.054425, c2i = 0.067822, c3r = 0.201365, c3i = 0.073121
+seq : 818
+Particle Filter Az: -115.51,Elv: 86.59,Ot: 1.495 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 819
+freq = 30000
+==== Fail =====
+Test
+seq : 820
+freq = 25000
+==== Fail =====
+Test
+seq : 821
+freq = 35000, po1 : -2
+c0r = -0.041220, c0i = -0.246917, c1r = 0.095878, c1i = 0.013018, c2r = -0.059819, c2i = 0.087791, c3r = 0.205889, c3i = 0.074660
+seq : 821
+Particle Filter Az: -130.08,Elv: 79.19,Ot: 0.515 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 822
+freq = 30000
+==== Fail =====
+Test
+seq : 823
+freq = 25000
+==== Fail =====
+Test
+seq : 824
+freq = 35000, po1 : -2
+c0r = -0.143817, c0i = -0.178855, c1r = 0.089610, c1i = -0.021979, c2r = -0.014945, c2i = 0.088897, c3r = 0.193018, c3i = -0.032556
+seq : 824
+Particle Filter Az: -134.12,Elv: 76.94,Ot: -0.223 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 825
+freq = 25000
+==== Fail =====
+Test
+seq : 826
+freq = 35000, po1 : -2
+c0r = -0.030095, c0i = -0.192022, c1r = 0.072442, c1i = 0.032240, c2r = -0.055930, c2i = 0.053640, c3r = 0.154843, c3i = 0.053770
+seq : 826
+Particle Filter Az: -136.83,Elv: 76.35,Ot: 0.344 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 827
+freq = 25000
+==== Fail =====
+Test
+seq : 828
+freq = 35000, po1 : -2
+c0r = 0.010132, c0i = -0.217881, c1r = 0.073223, c1i = 0.054908, c2r = -0.077433, c2i = 0.048009, c3r = 0.170104, c3i = 0.109651
+seq : 828
+Particle Filter Az: -135.98,Elv: 76.41,Ot: 0.590 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 829
+freq = 30000
+==== Fail =====
+Test
+seq : 830
+freq = 25000
+==== Fail =====
+Test
+seq : 831
+freq = 35000, po1 : -2
+c0r = -0.164972, c0i = 0.028808, c1r = 0.019832, c1i = -0.011568, c2r = 0.062640, c2i = -0.006323, c3r = -0.062270, c3i = -0.050506
+seq : 831
+Particle Filter Az: -159.23,Elv: 77.36,Ot: -0.686 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 832
+freq = 30000
+==== Fail =====
+Test
+seq : 833
+freq = 25000
+==== Fail =====
+Test
+seq : 834
+freq = 35000, po1 : -2
+c0r = -0.098380, c0i = -0.159750, c1r = 0.056879, c1i = 0.016233, c2r = -0.016756, c2i = 0.060737, c3r = 0.129282, c3i = -0.039692
+seq : 834
+Particle Filter Az: -144.17,Elv: 75.58,Ot: -0.076 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 835
+freq = 30000
+==== Fail =====
+Test
+seq : 836
+freq = 35000, po1 : -2
+c0r = 0.078615, c0i = -0.174650, c1r = 0.030418, c1i = 0.089932, c2r = -0.082928, c2i = 0.043023, c3r = 0.199358, c3i = 0.023071
+seq : 836
+Particle Filter Az: -151.08,Elv: 75.75,Ot: 0.689 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 837
+freq = 30000
+==== Fail =====
+Test
+seq : 838
+freq = 25000
+==== Fail =====
+Test
+seq : 839
+freq = 35000, po1 : -2
+c0r = 0.097415, c0i = -0.153122, c1r = -0.007551, c1i = 0.061928, c2r = -0.060658, c2i = 0.020940, c3r = 0.133514, c3i = 0.049821
+seq : 839
+Particle Filter Az: -154.29,Elv: 74.77,Ot: 0.981 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 840
+freq = 30000
+==== Fail =====
+Test
+seq : 841
+freq = 25000
+==== Fail =====
+Test
+seq : 842
+freq = 35000, po1 : -2
+c0r = 0.042223, c0i = -0.360063, c1r = 0.039034, c1i = 0.151312, c2r = -0.066918, c2i = 0.131821, c3r = 0.210663, c3i = -0.067713
+seq : 842
+Particle Filter Az: -159.90,Elv: 74.69,Ot: 0.388 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 843
+freq = 30000
+==== Fail =====
+Test
+seq : 844
+freq = 25000
+==== Fail =====
+Test
+seq : 845
+freq = 35000, po1 : -2
+c0r = 0.193234, c0i = -0.308975, c1r = -0.052183, c1i = 0.159807, c2r = -0.086986, c2i = 0.142721, c3r = 0.323966, c3i = -0.101921
+seq : 845
+Particle Filter Az: -153.57,Elv: 73.42,Ot: 0.669 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 846
+freq = 30000
+==== Fail =====
+Test
+seq : 847
+freq = 25000
+==== Fail =====
+Test
+seq : 848
+freq = 35000, po1 : -2
+c0r = -0.135969, c0i = 0.084362, c1r = 0.029288, c1i = -0.039773, c2r = 0.041962, c2i = -0.042284, c3r = -0.137538, c3i = 0.011000
+seq : 848
+Particle Filter Az: -161.72,Elv: 85.60,Ot: -0.783 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 849
+freq = 30000
+==== Fail =====
+Test
+seq : 850
+freq = 25000
+==== Fail =====
+Test
+seq : 851
+freq = 35000, po1 : -2
+c0r = -0.223170, c0i = 0.043081, c1r = 0.068651, c1i = -0.059662, c2r = 0.059039, c2i = -0.033783, c3r = -0.147645, c3i = 0.011684
+seq : 851
+Particle Filter Az: -69.97,Elv: 79.40,Ot: -1.734 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 852
+freq = 25000
+==== Fail =====
+Test
+seq : 853
+freq = 35000, po1 : -2
+c0r = 0.168644, c0i = -0.228256, c1r = -0.037046, c1i = 0.123853, c2r = -0.047751, c2i = 0.105060, c3r = 0.119106, c3i = -0.155361
+seq : 853
+Particle Filter Az: 51.98,Elv: 79.61,Ot: -0.630 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 854
+freq = 25000
+==== Fail =====
+Test
+seq : 855
+freq = 35000, po1 : -2
+c0r = 0.003658, c0i = -0.094361, c1r = 0.005399, c1i = 0.034703, c2r = -0.007131, c2i = 0.041340, c3r = -0.010498, c3i = -0.051139
+seq : 855
+Particle Filter Az: -14.90,Elv: 80.80,Ot: -0.045 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 856
+freq = 25000
+==== Fail =====
+Test
+seq : 857
+freq = 35000, po1 : -2
+c0r = 0.073457, c0i = -0.120767, c1r = -0.043070, c1i = 0.047101, c2r = -0.037434, c2i = 0.063044, c3r = 0.056639, c3i = -0.102391
+seq : 857
+Particle Filter Az: 32.23,Elv: 80.99,Ot: 0.568 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 858
+freq = 30000
+==== Fail =====
+Test
+seq : 859
+freq = 25000
+==== Fail =====
+Test
+seq : 860
+freq = 35000, po1 : -2
+c0r = 0.105958, c0i = -0.073420, c1r = -0.055333, c1i = 0.032740, c2r = -0.056481, c2i = 0.051819, c3r = 0.092378, c3i = -0.076019
+seq : 860
+Particle Filter Az: 54.56,Elv: 80.20,Ot: 0.925 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 861
+freq = 30000
+==== Fail =====
+Test
+seq : 862
+freq = 25000
+==== Fail =====
+Test
+seq : 863
+freq = 35000, po1 : -2
+c0r = 0.037528, c0i = -0.146670, c1r = 0.016044, c1i = 0.051682, c2r = -0.002660, c2i = 0.046627, c3r = 0.003720, c3i = -0.114373
+seq : 863
+Particle Filter Az: -50.90,Elv: 78.50,Ot: 0.062 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 864
+freq = 30000
+==== Fail =====
+Test
+seq : 865
+freq = 25000
+==== Fail =====
+Test
+seq : 866
+freq = 35000, po1 : -2
+c0r = 0.107610, c0i = -0.260780, c1r = -0.007874, c1i = 0.139899, c2r = 0.013517, c2i = 0.139787, c3r = 0.034205, c3i = -0.264188
+seq : 866
+Particle Filter Az: 89.31,Elv: 77.60,Ot: 0.123 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 867
+freq = 30000
+==== Fail =====
+Test
+seq : 868
+freq = 25000
+==== Fail =====
+Test
+seq : 869
+freq = 35000, po1 : -2
+c0r = -0.191235, c0i = -0.023839, c1r = 0.079077, c1i = -0.032031, c2r = 0.073637, c2i = -0.028616, c3r = -0.146254, c3i = -0.011574
+seq : 869
+Particle Filter Az: 117.73,Elv: 82.04,Ot: -1.176 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+True
+seq : 870
+freq = 26000
+==== Fail =====
+True
+--- RESET ---
+Test
+seq : 871
+freq = 35000, po1 : -2
+c0r = -0.211091, c0i = 0.144127, c1r = 0.052344, c1i = -0.100779, c2r = 0.047484, c2i = -0.101476, c3r = -0.185846, c3i = 0.149020
+seq : 871
+Particle Filter Az: 5.87,Elv: 63.58,Ot: -2.392 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 872
+freq = 25000
+==== Fail =====
+Test
+seq : 873
+freq = 35000, po1 : -2
+c0r = 0.200703, c0i = -0.298777, c1r = -0.037745, c1i = 0.147248, c2r = -0.059333, c2i = 0.117384, c3r = 0.146182, c3i = -0.168962
+seq : 873
+Particle Filter Az: 124.41,Elv: 51.73,Ot: -1.192 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 874
+freq = 25000
+==== Fail =====
+Test
+seq : 875
+freq = 35000, po1 : -2
+c0r = -0.242761, c0i = 0.129847, c1r = 0.085662, c1i = -0.086549, c2r = 0.082497, c2i = -0.106786, c3r = -0.192464, c3i = 0.134638
+seq : 875
+Particle Filter Az: 62.09,Elv: 65.10,Ot: -2.102 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 876
+freq = 25000
+==== Fail =====
+Test
+seq : 877
+freq = 35000, po1 : -2
+c0r = -0.288689, c0i = -0.090836, c1r = 0.150567, c1i = -0.007481, c2r = 0.165667, c2i = -0.048807, c3r = -0.299381, c3i = -0.133387
+seq : 877
+Particle Filter Az: 18.36,Elv: 65.44,Ot: -1.483 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 878
+freq = 25000
+==== Fail =====
+Test
+seq : 879
+freq = 35000, po1 : -2
+c0r = -0.230221, c0i = 0.243191, c1r = -0.025242, c1i = -0.080513, c2r = 0.112285, c2i = -0.032730, c3r = -0.107099, c3i = -0.234683
+seq : 879
+Particle Filter Az: -152.55,Elv: 67.65,Ot: -2.043 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 880
+freq = 30000
+==== Fail =====
+Test
+seq : 881
+freq = 25000
+==== Fail =====
+Test
+seq : 882
+freq = 35000, po1 : -2
+c0r = 0.074061, c0i = -0.092177, c1r = 0.064919, c1i = -0.019175, c2r = -0.060255, c2i = 0.060425, c3r = -0.006884, c3i = 0.164599
+seq : 882
+Particle Filter Az: -132.33,Elv: 65.58,Ot: -0.927 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 883
+freq = 25000
+==== Fail =====
+Test
+seq : 884
+freq = 35000, po1 : -2
+c0r = 0.273028, c0i = 0.191751, c1r = -0.081864, c1i = 0.138552, c2r = -0.081773, c2i = -0.071788, c3r = -0.195605, c3i = 0.005786
+seq : 884
+Particle Filter Az: 25.55,Elv: 80.53,Ot: -0.082 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 885
+freq = 25000
+==== Fail =====
+Test
+seq : 886
+freq = 35000, po1 : -2
+c0r = 0.233165, c0i = 0.111507, c1r = -0.071977, c1i = 0.072865, c2r = -0.079219, c2i = -0.052880, c3r = -0.050639, c3i = 0.161431
+seq : 886
+Particle Filter Az: -149.23,Elv: 77.68,Ot: 2.271 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 887
+freq = 25000
+==== Fail =====
+Test
+seq : 888
+freq = 35000, po1 : -2
+c0r = -0.203853, c0i = -0.104296, c1r = 0.119490, c1i = -0.001738, c2r = 0.099974, c2i = 0.024935, c3r = -0.090141, c3i = -0.212990
+seq : 888
+Particle Filter Az: -145.04,Elv: 80.14,Ot: -2.713 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 889
+freq = 25000
+==== Fail =====
+Test
+seq : 890
+freq = 35000, po1 : -2
+c0r = -0.067858, c0i = 0.166049, c1r = -0.005917, c1i = -0.081439, c2r = 0.032253, c2i = -0.011361, c3r = -0.108631, c3i = -0.039088
+seq : 890
+Particle Filter Az: -151.16,Elv: 78.83,Ot: -2.291 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 891
+freq = 30000
+==== Fail =====
+Test
+seq : 892
+freq = 25000
+==== Fail =====
+Test
+seq : 893
+freq = 35000, po1 : -2
+c0r = 0.231025, c0i = -0.155424, c1r = -0.046476, c1i = 0.085053, c2r = -0.070437, c2i = 0.003307, c3r = 0.110704, c3i = 0.103457
+seq : 893
+Particle Filter Az: -146.86,Elv: 68.31,Ot: 2.753 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 894
+freq = 25000
+==== Fail =====
+Test
+seq : 895
+freq = 35000, po1 : -2
+c0r = 0.094521, c0i = -0.122061, c1r = -0.017891, c1i = 0.053315, c2r = -0.014281, c2i = 0.045444, c3r = 0.056106, c3i = -0.072921
+seq : 895
+Particle Filter Az: -163.66,Elv: 66.26,Ot: 1.737 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+True
+seq : 896
+freq = 30000
+==== Fail =====
+True
+--- RESET ---
+Test
+seq : 897
+freq = 25000
+==== Fail =====
+Test
+seq : 898
+freq = 35000, po1 : -2
+c0r = -0.034145, c0i = 0.123964, c1r = -0.023167, c1i = -0.033268, c2r = 0.033841, c2i = -0.043152, c3r = -0.074424, c3i = -0.023137
+seq : 898
+Particle Filter Az: -146.76,Elv: 64.79,Ot: -2.654 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 899
+freq = 25000
+==== Fail =====
+Test
+seq : 900
+freq = 35000, po1 : -2
+c0r = 0.005194, c0i = -0.180586, c1r = 0.055926, c1i = -0.036823, c2r = -0.038606, c2i = 0.049097, c3r = 0.051179, c3i = 0.173386
+seq : 900
+Particle Filter Az: -160.49,Elv: 61.22,Ot: -1.022 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+True
+seq : 901
+freq = 25000
+==== Fail =====
+True
+--- RESET ---
+Test
+seq : 902
+freq = 35000, po1 : -2
+c0r = -0.008531, c0i = -0.090091, c1r = 0.054572, c1i = -0.008210, c2r = -0.036939, c2i = 0.040359, c3r = 0.077256, c3i = 0.091092
+seq : 902
+Particle Filter Az: -120.32,Elv: 71.35,Ot: 0.300 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 903
+freq = 30000
+==== Fail =====
+Test
+seq : 904
+freq = 25000
+==== Fail =====
+Test
+True
+seq : 905
+freq = 35000, po1 : -2
+c0r = -0.103360, c0i = 0.099600, c1r = -0.082921, c1i = -0.041880, c2r = 0.020390, c2i = -0.017158, c3r = -0.022444, c3i = -0.052738
+seq : 905
+Particle Filter Az: -117.51,Elv: 74.26,Ot: -0.935 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+True
+--- RESET ---
+Test
+seq : 906
+freq = 30000
+==== Fail =====
+Test
+seq : 907
+freq = 25000
+==== Fail =====
+Test
+seq : 908
+freq = 35000, po1 : -2
+c0r = -0.176709, c0i = 0.093758, c1r = -0.022917, c1i = -0.094589, c2r = 0.062259, c2i = -0.023174, c3r = -0.069518, c3i = -0.186326
+seq : 908
+Particle Filter Az: -140.38,Elv: 54.52,Ot: -1.807 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 909
+freq = 30000
+==== Fail =====
+Test
+seq : 910
+freq = 25000
+==== Fail =====
+Test
+seq : 911
+freq = 35000, po1 : -2
+c0r = -0.015475, c0i = -0.196939, c1r = 0.061444, c1i = 0.030573, c2r = 0.023081, c2i = -0.011711, c3r = -0.040910, c3i = -0.065449
+seq : 911
+Particle Filter Az: -51.37,Elv: 44.97,Ot: -1.091 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 912
+freq = 30000
+==== Fail =====
+Test
+True
+seq : 913
+freq = 25000
+==== Fail =====
+True
+--- RESET ---
+Test
+seq : 914
+freq = 35000, po1 : -2
+c0r = -0.240127, c0i = 0.113602, c1r = -0.026385, c1i = -0.094860, c2r = 0.081371, c2i = -0.005068, c3r = 0.000804, c3i = -0.196575
+seq : 914
+Particle Filter Az: -129.89,Elv: 60.03,Ot: -1.778 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 915
+freq = 30000
+==== Fail =====
+Test
+seq : 916
+freq = 25000
+==== Fail =====
+Test
+seq : 917
+freq = 35000, po1 : -2
+c0r = 0.205668, c0i = -0.024580, c1r = -0.017072, c1i = 0.070755, c2r = -0.055902, c2i = -0.032731, c3r = -0.107091, c3i = 0.130190
+seq : 917
+Particle Filter Az: -152.99,Elv: 49.29,Ot: -3.078 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 918
+freq = 30000
+==== Fail =====
+Test
+seq : 919
+freq = 25000
+==== Fail =====
+Test
+seq : 920
+freq = 35000, po1 : -2
+c0r = 0.205895, c0i = 0.041192, c1r = -0.068534, c1i = 0.088180, c2r = -0.043504, c2i = -0.053833, c3r = -0.136003, c3i = 0.105309
+seq : 920
+Particle Filter Az: -135.27,Elv: 59.27,Ot: 2.317 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 921
+freq = 30000
+==== Fail =====
+Test
+seq : 922
+freq = 25000
+==== Fail =====
+Test
+seq : 923
+freq = 35000, po1 : -2
+c0r = -0.134456, c0i = 0.135439, c1r = -0.072735, c1i = -0.018058, c2r = 0.048584, c2i = -0.054748, c3r = -0.021751, c3i = -0.162400
+seq : 923
+Particle Filter Az: -119.91,Elv: 55.81,Ot: -2.749 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 924
+freq = 30000
+==== Fail =====
+Test
+seq : 925
+freq = 25000
+==== Fail =====
+Test
+seq : 926
+freq = 35000, po1 : -2
+c0r = 0.232796, c0i = -0.186867, c1r = 0.070414, c1i = 0.048095, c2r = -0.080376, c2i = 0.045458, c3r = -0.090015, c3i = 0.231421
+seq : 926
+Particle Filter Az: -109.62,Elv: 45.88,Ot: 2.351 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 927
+freq = 30000
+==== Fail =====
+Test
+seq : 928
+freq = 25000
+==== Fail =====
+Test
+seq : 929
+freq = 35000, po1 : -2
+c0r = 0.120431, c0i = 0.227450, c1r = 0.013003, c1i = 0.046307, c2r = -0.050145, c2i = -0.080974, c3r = -0.256607, c3i = -0.077940
+seq : 929
+Particle Filter Az: -100.38,Elv: 58.03,Ot: 2.500 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 930
+freq = 30000
+==== Fail =====
+Test
+seq : 931
+freq = 25000
+==== Fail =====
+Test
+seq : 932
+freq = 35000, po1 : -2
+c0r = -0.091610, c0i = 0.138908, c1r = -0.052528, c1i = -0.013702, c2r = 0.040461, c2i = -0.047502, c3r = -0.008879, c3i = -0.154502
+seq : 932
+Particle Filter Az: -113.68,Elv: 62.98,Ot: -2.563 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 933
+freq = 30000
+==== Fail =====
+Test
+seq : 934
+freq = 25000
+==== Fail =====
+Test
+seq : 935
+freq = 35000, po1 : -2
+c0r = 0.097870, c0i = -0.178988, c1r = 0.053844, c1i = -0.011589, c2r = -0.059646, c2i = 0.055014, c3r = -0.021399, c3i = 0.173154
+seq : 935
+Particle Filter Az: -95.77,Elv: 28.71,Ot: 2.261 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 936
+freq = 30000
+==== Fail =====
+Test
+seq : 937
+freq = 25000
+==== Fail =====
+Test
+seq : 938
+freq = 35000, po1 : -2
+c0r = -0.157485, c0i = 0.170973, c1r = -0.069458, c1i = 0.015321, c2r = 0.040547, c2i = -0.069823, c3r = 0.024091, c3i = -0.215786
+seq : 938
+Particle Filter Az: -104.96,Elv: 40.79,Ot: -2.877 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 939
+freq = 30000
+==== Fail =====
+Test
+seq : 940
+freq = 25000
+==== Fail =====
+Test
+seq : 941
+freq = 35000, po1 : -2
+c0r = 0.084433, c0i = -0.270804, c1r = 0.063153, c1i = -0.054643, c2r = -0.049100, c2i = 0.122738, c3r = 0.075659, c3i = 0.274670
+seq : 941
+Particle Filter Az: -91.32,Elv: 29.79,Ot: 2.190 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 942
+freq = 25000
+==== Fail =====
+Test
+seq : 943
+freq = 35000, po1 : -2
+c0r = 0.097401, c0i = -0.214818, c1r = 0.059684, c1i = -0.024912, c2r = -0.055908, c2i = 0.066269, c3r = -0.027883, c3i = 0.212545
+seq : 943
+Particle Filter Az: -106.01,Elv: 59.68,Ot: 1.177 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 944
+freq = 30000
+==== Fail =====
+Test
+seq : 945
+freq = 25000
+==== Fail =====
+Test
+seq : 946
+freq = 35000, po1 : -2
+c0r = 0.122922, c0i = -0.235578, c1r = 0.060334, c1i = -0.000736, c2r = -0.061978, c2i = 0.070163, c3r = -0.019763, c3i = 0.231717
+seq : 946
+Particle Filter Az: -108.66,Elv: 65.77,Ot: 0.726 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 947
+freq = 30000
+==== Fail =====
+Test
+True
+seq : 948
+freq = 25000
+==== Fail =====
+True
+--- RESET ---
+Test
+seq : 949
+freq = 35000, po1 : -2
+c0r = 0.003392, c0i = -0.208907, c1r = 0.047171, c1i = -0.036955, c2r = -0.025639, c2i = 0.068519, c3r = 0.082066, c3i = 0.158260
+seq : 949
+Particle Filter Az: -84.30,Elv: 65.47,Ot: -0.083 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 950
+freq = 30000
+==== Fail =====
+Test
+seq : 951
+freq = 25000
+==== Fail =====
+Test
+seq : 952
+freq = 35000, po1 : -2
+c0r = 0.075175, c0i = 0.171244, c1r = -0.050310, c1i = 0.042773, c2r = -0.021713, c2i = -0.056938, c3r = -0.170706, c3i = -0.081842
+seq : 952
+Particle Filter Az: -107.00,Elv: 71.64,Ot: 1.605 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 953
+freq = 30000
+==== Fail =====
+Test
+seq : 954
+freq = 25000
+==== Fail =====
+Test
+seq : 955
+freq = 35000, po1 : -2
+c0r = -0.019592, c0i = -0.149324, c1r = -0.099051, c1i = 0.030265, c2r = 0.007423, c2i = -0.044705, c3r = 0.154604, c3i = -0.016941
+seq : 955
+Particle Filter Az: -149.44,Elv: 79.36,Ot: 1.443 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 956
+freq = 30000
+==== Fail =====
+Test
+seq : 957
+freq = 25000
+==== Fail =====
+Test
+seq : 958
+freq = 35000, po1 : -2
+c0r = -0.193408, c0i = -0.067660, c1r = 0.033181, c1i = 0.079576, c2r = -0.049403, c2i = 0.006246, c3r = 0.031209, c3i = -0.117930
+seq : 958
+Particle Filter Az: -158.44,Elv: 84.40,Ot: 0.204 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 959
+freq = 30000
+==== Fail =====
+Test
+seq : 960
+freq = 25000
+==== Fail =====
+Test
+seq : 961
+freq = 35000, po1 : -2
+c0r = -0.219466, c0i = 0.173044, c1r = 0.135052, c1i = -0.031555, c2r = 0.066000, c2i = -0.018489, c3r = -0.244831, c3i = 0.034337
+seq : 961
+Particle Filter Az: -138.71,Elv: 82.05,Ot: -0.986 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 962
+freq = 30000
+==== Fail =====
+Test
+seq : 963
+freq = 25000
+==== Fail =====
+Test
+seq : 964
+freq = 35000, po1 : -2
+c0r = -0.222010, c0i = 0.020470, c1r = 0.089558, c1i = 0.012219, c2r = 0.044793, c2i = -0.096331, c3r = 0.001070, c3i = 0.194694
+seq : 964
+Particle Filter Az: 163.10,Elv: 83.99,Ot: -1.912 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 965
+freq = 30000
+==== Fail =====
+Test
+seq : 966
+freq = 25000
+==== Fail =====
+Test
+seq : 967
+freq = 35000, po1 : -2
+c0r = 0.214219, c0i = 0.167880, c1r = 0.059171, c1i = -0.103358, c2r = -0.152426, c2i = 0.038477, c3r = 0.060028, c3i = -0.250995
+seq : 967
+Particle Filter Az: 143.91,Elv: 79.81,Ot: -2.958 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 968
+freq = 30000
+==== Fail =====
+Test
+seq : 969
+freq = 25000
+==== Fail =====
+Test
+seq : 970
+freq = 35000, po1 : -2
+c0r = 0.026103, c0i = 0.269947, c1r = -0.120108, c1i = 0.067712, c2r = 0.115497, c2i = -0.025486, c3r = 0.087651, c3i = -0.289314
+seq : 970
+Particle Filter Az: -138.66,Elv: 66.32,Ot: -2.148 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 971
+freq = 30000
+==== Fail =====
+Test
+seq : 972
+freq = 25000
+==== Fail =====
+Test
+seq : 973
+freq = 35000, po1 : -2
+c0r = 0.199167, c0i = -0.026014, c1r = -0.102011, c1i = 0.063516, c2r = -0.018603, c2i = 0.076412, c3r = 0.078026, c3i = -0.143792
+seq : 973
+Particle Filter Az: -116.13,Elv: 78.96,Ot: -2.400 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 974
+freq = 30000
+==== Fail =====
+Test
+seq : 975
+freq = 35000, po1 : -2
+c0r = -0.205572, c0i = 0.123044, c1r = -0.000822, c1i = -0.026828, c2r = 0.076058, c2i = -0.023073, c3r = -0.082225, c3i = -0.089074
+seq : 975
+Particle Filter Az: -139.70,Elv: 70.36,Ot: -1.991 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 976
+freq = 30000
+==== Fail =====
+Test
+seq : 977
+freq = 25000
+==== Fail =====
+Test
+seq : 978
+freq = 35000, po1 : -2
+c0r = -0.187273, c0i = 0.146437, c1r = -0.019469, c1i = 0.081954, c2r = -0.023930, c2i = -0.035491, c3r = 0.035781, c3i = -0.148205
+seq : 978
+Particle Filter Az: -111.84,Elv: 64.53,Ot: -2.718 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 979
+freq = 30000
+==== Fail =====
+Test
+seq : 980
+freq = 25000
+==== Fail =====
+Test
+seq : 981
+freq = 35000, po1 : -2
+c0r = 0.281556, c0i = 0.067580, c1r = 0.145759, c1i = -0.077976, c2r = -0.070431, c2i = 0.091413, c3r = -0.333459, c3i = 0.087175
+seq : 981
+Particle Filter Az: -90.98,Elv: 87.15,Ot: 2.256 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 982
+freq = 30000
+==== Fail =====
+Test
+seq : 983
+freq = 35000, po1 : -2
+c0r = 0.021623, c0i = -0.314852, c1r = -0.076580, c1i = 0.155523, c2r = -0.079841, c2i = 0.056317, c3r = 0.176740, c3i = -0.250409
+seq : 983
+Particle Filter Az: -71.17,Elv: 76.85,Ot: 0.423 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 984
+freq = 30000
+==== Fail =====
+Test
+seq : 985
+freq = 25000
+==== Fail =====
+Test
+seq : 986
+freq = 35000, po1 : -2
+c0r = -0.039536, c0i = -0.168634, c1r = -0.037366, c1i = 0.085082, c2r = -0.031316, c2i = 0.030614, c3r = 0.070408, c3i = -0.127905
+seq : 986
+Particle Filter Az: -75.88,Elv: 74.25,Ot: -1.751 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 987
+freq = 30000
+==== Fail =====
+Test
+seq : 988
+freq = 25000
+==== Fail =====
+Test
+seq : 989
+freq = 35000, po1 : -2
+c0r = -0.039536, c0i = -0.168634, c1r = -0.037366, c1i = 0.085082, c2r = -0.031316, c2i = 0.030614, c3r = 0.070408, c3i = -0.127905
+seq : 989
+Particle Filter Az: -36.62,Elv: 78.87,Ot: -2.313 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 990
+freq = 30000
+==== Fail =====
+Test
+seq : 991
+freq = 25000
+==== Fail =====
+Test
+seq : 992
+freq = 35000, po1 : -2
+c0r = 0.241648, c0i = -0.134068, c1r = -0.145774, c1i = 0.058821, c2r = -0.119197, c2i = -0.021056, c3r = 0.218996, c3i = -0.054152
+seq : 992
+Particle Filter Az: -13.14,Elv: 77.54,Ot: -1.763 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 993
+freq = 30000
+==== Fail =====
+Test
+seq : 994
+freq = 25000
+==== Fail =====
+Test
+seq : 995
+freq = 35000, po1 : -2
+c0r = -0.121814, c0i = 0.174308, c1r = 0.076205, c1i = -0.104329, c2r = 0.084363, c2i = -0.042405, c3r = -0.163922, c3i = 0.098471
+seq : 995
+Particle Filter Az: 5.20,Elv: 85.09,Ot: -0.415 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 996
+freq = 30000
+==== Fail =====
+Test
+seq : 997
+freq = 25000
+==== Fail =====
+Test
+seq : 998
+freq = 35000, po1 : -2
+c0r = -0.118404, c0i = -0.190972, c1r = -0.164792, c1i = 0.009366, c2r = 0.063025, c2i = -0.067567, c3r = 0.286068, c3i = 0.046262
+seq : 998
+Particle Filter Az: -34.96,Elv: 47.69,Ot: -1.593 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 999
+freq = 30000
+==== Fail =====
+Test
+seq : 1000
+freq = 25000
+==== Fail =====
+Test
+seq : 1001
+freq = 35000, po1 : -2
+c0r = 0.133677, c0i = -0.221467, c1r = -0.145742, c1i = 0.018370, c2r = 0.002936, c2i = -0.071753, c3r = 0.157601, c3i = 0.062676
+seq : 1001
+Particle Filter Az: -36.56,Elv: 56.35,Ot: -1.353 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1002
+freq = 30000
+==== Fail =====
+Test
+seq : 1003
+freq = 25000
+==== Fail =====
+Test
+seq : 1004
+freq = 35000, po1 : -2
+c0r = 0.098971, c0i = 0.190988, c1r = 0.030168, c1i = -0.105030, c2r = 0.084926, c2i = 0.018246, c3r = -0.145556, c3i = 0.137896
+seq : 1004
+Particle Filter Az: -36.43,Elv: 69.36,Ot: -0.067 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1005
+freq = 30000
+==== Fail =====
+Test
+seq : 1006
+freq = 25000
+==== Fail =====
+Test
+seq : 1007
+freq = 35000, po1 : -2
+c0r = -0.079583, c0i = 0.144667, c1r = 0.081840, c1i = -0.044889, c2r = 0.037038, c2i = 0.018911, c3r = -0.172595, c3i = 0.020514
+seq : 1007
+Particle Filter Az: -22.14,Elv: 74.55,Ot: 0.936 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1008
+freq = 25000
+==== Fail =====
+Test
+seq : 1009
+freq = 35000, po1 : -2
+c0r = 0.143923, c0i = -0.060165, c1r = -0.070803, c1i = -0.026222, c2r = -0.024915, c2i = -0.062945, c3r = 0.096982, c3i = 0.106345
+seq : 1009
+Particle Filter Az: -20.79,Elv: 78.50,Ot: -0.188 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1010
+freq = 30000
+==== Fail =====
+Test
+seq : 1011
+freq = 25000
+==== Fail =====
+Test
+seq : 1012
+freq = 35000, po1 : -2
+c0r = 0.217423, c0i = 0.058028, c1r = -0.036178, c1i = -0.108724, c2r = 0.062411, c2i = -0.040881, c3r = -0.043667, c3i = 0.224953
+seq : 1012
+Particle Filter Az: -31.39,Elv: 75.85,Ot: -0.119 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1013
+freq = 30000
+==== Fail =====
+Test
+seq : 1014
+freq = 25000
+==== Fail =====
+Test
+seq : 1015
+freq = 35000, po1 : -2
+c0r = 0.228007, c0i = 0.079379, c1r = -0.057881, c1i = -0.110393, c2r = 0.060406, c2i = -0.070549, c3r = -0.051357, c3i = 0.243925
+seq : 1015
+Particle Filter Az: -27.84,Elv: 75.26,Ot: -0.206 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1016
+freq = 30000
+==== Fail =====
+Test
+seq : 1017
+freq = 25000
+==== Fail =====
+Test
+seq : 1018
+freq = 35000, po1 : -2
+c0r = -0.228202, c0i = -0.013647, c1r = 0.031802, c1i = 0.054329, c2r = -0.086024, c2i = 0.028551, c3r = 0.064956, c3i = -0.125381
+seq : 1018
+Particle Filter Az: -43.14,Elv: 55.98,Ot: -1.756 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1019
+freq = 30000
+==== Fail =====
+Test
+seq : 1020
+freq = 25000
+==== Fail =====
+Test
+seq : 1021
+freq = 35000, po1 : -2
+c0r = 0.225367, c0i = 0.285006, c1r = 0.019390, c1i = -0.188710, c2r = 0.152275, c2i = -0.063736, c3r = -0.171000, c3i = 0.314999
+seq : 1021
+Particle Filter Az: -20.68,Elv: 72.72,Ot: -0.580 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1022
+freq = 30000
+==== Fail =====
+Test
+seq : 1023
+freq = 25000
+==== Fail =====
+Test
+seq : 1024
+freq = 35000, po1 : -2
+c0r = 0.153859, c0i = 0.149876, c1r = -0.016758, c1i = -0.123100, c2r = 0.058015, c2i = -0.047234, c3r = -0.046255, c3i = 0.187485
+seq : 1024
+Particle Filter Az: -22.73,Elv: 72.24,Ot: 0.045 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1025
+freq = 30000
+==== Fail =====
+Test
+seq : 1026
+freq = 25000
+==== Fail =====
+Test
+seq : 1027
+freq = 35000, po1 : -2
+c0r = 0.255958, c0i = -0.238610, c1r = -0.176760, c1i = -0.078510, c2r = 0.068855, c2i = -0.129175, c3r = 0.240632, c3i = 0.233679
+seq : 1027
+Particle Filter Az: -38.32,Elv: 70.30,Ot: -0.867 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1028
+freq = 25000
+==== Fail =====
+Test
+seq : 1029
+freq = 35000, po1 : -2
+c0r = 0.308624, c0i = 0.128321, c1r = 0.040975, c1i = -0.184348, c2r = 0.143932, c2i = 0.035579, c3r = -0.171256, c3i = 0.279049
+seq : 1029
+Particle Filter Az: -41.47,Elv: 66.13,Ot: 0.210 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1030
+freq = 30000
+==== Fail =====
+Test
+seq : 1031
+freq = 25000
+==== Fail =====
+Test
+seq : 1032
+freq = 35000, po1 : -2
+c0r = -0.321448, c0i = -0.081522, c1r = 0.032016, c1i = 0.143318, c2r = -0.063703, c2i = 0.052628, c3r = 0.052482, c3i = -0.213831
+seq : 1032
+Particle Filter Az: -48.10,Elv: 62.93,Ot: 1.505 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1033
+freq = 25000
+==== Fail =====
+Test
+seq : 1034
+freq = 35000, po1 : -2
+c0r = 0.111299, c0i = -0.176447, c1r = -0.139583, c1i = -0.011156, c2r = 0.023564, c2i = -0.073303, c3r = 0.196781, c3i = 0.043890
+seq : 1034
+Particle Filter Az: -36.85,Elv: 74.74,Ot: 0.404 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1035
+freq = 25000
+==== Fail =====
+Test
+seq : 1036
+freq = 35000, po1 : -2
+c0r = -0.134005, c0i = 0.173193, c1r = 0.136010, c1i = 0.033071, c2r = 0.008635, c2i = 0.106246, c3r = -0.247059, c3i = -0.093609
+seq : 1036
+Particle Filter Az: -37.74,Elv: 58.45,Ot: 1.430 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1037
+freq = 30000
+==== Fail =====
+Test
+seq : 1038
+freq = 25000
+==== Fail =====
+Test
+seq : 1039
+freq = 35000, po1 : -2
+c0r = 0.000119, c0i = -0.254855, c1r = -0.107382, c1i = 0.009528, c2r = -0.016329, c2i = -0.113784, c3r = 0.144397, c3i = 0.050021
+seq : 1039
+Particle Filter Az: -4.29,Elv: 73.02,Ot: 0.426 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1040
+freq = 30000
+==== Fail =====
+Test
+seq : 1041
+freq = 25000
+==== Fail =====
+Test
+seq : 1042
+freq = 35000, po1 : -2
+c0r = 0.266266, c0i = -0.088899, c1r = -0.025379, c1i = -0.109228, c2r = 0.070851, c2i = -0.069024, c3r = 0.017978, c3i = 0.185547
+seq : 1042
+Particle Filter Az: -33.48,Elv: 59.85,Ot: -0.352 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1043
+freq = 25000
+==== Fail =====
+Test
+seq : 1044
+freq = 35000, po1 : -2
+c0r = 0.158036, c0i = -0.180295, c1r = -0.037897, c1i = -0.110860, c2r = -0.003641, c2i = -0.095391, c3r = 0.112124, c3i = 0.174440
+seq : 1044
+Particle Filter Az: -30.57,Elv: 52.74,Ot: -0.844 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1045
+freq = 30000
+==== Fail =====
+Test
+seq : 1046
+freq = 25000
+==== Fail =====
+Test
+seq : 1047
+freq = 35000, po1 : -2
+c0r = 0.030952, c0i = 0.028673, c1r = 0.019080, c1i = 0.008373, c2r = 0.012301, c2i = 0.003329, c3r = 0.010860, c3i = -0.018666
+seq : 1047
+Particle Filter Az: -10.32,Elv: 26.52,Ot: 0.056 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1048
+freq = 30000
+==== Fail =====
+Test
+seq : 1049
+freq = 25000
+==== Fail =====
+Test
+seq : 1050
+freq = 35000, po1 : -2
+c0r = 0.053078, c0i = -0.008740, c1r = -0.022966, c1i = -0.019265, c2r = 0.000887, c2i = -0.019067, c3r = 0.051435, c3i = -0.017436
+seq : 1050
+Particle Filter Az: -11.67,Elv: 36.06,Ot: -0.967 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1051
+freq = 35000, po1 : -2
+c0r = 0.012992, c0i = -0.044149, c1r = -0.004465, c1i = -0.001659, c2r = -0.003795, c2i = -0.014316, c3r = -0.036457, c3i = -0.047382
+seq : 1051
+Particle Filter Az: -8.78,Elv: 18.35,Ot: -1.891 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1052
+freq = 30000
+==== Fail =====
+Test
+seq : 1053
+freq = 35000, po1 : -2
+c0r = -0.018620, c0i = -0.074610, c1r = -0.015595, c1i = -0.025008, c2r = 0.019706, c2i = -0.003908, c3r = 0.075091, c3i = -0.040540
+seq : 1053
+Particle Filter Az: -66.36,Elv: 25.31,Ot: -1.354 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1054
+freq = 35000, po1 : -2
+c0r = -0.023478, c0i = -0.090891, c1r = -0.011218, c1i = -0.027462, c2r = 0.023892, c2i = -0.004222, c3r = 0.105380, c3i = -0.024536
+seq : 1054
+Particle Filter Az: -84.67,Elv: 34.03,Ot: -1.056 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1055
+freq = 25000
+==== Fail =====
+Test
+seq : 1056
+freq = 35000, po1 : -2
+c0r = -0.035268, c0i = 0.000309, c1r = 0.002439, c1i = 0.017896, c2r = -0.039550, c2i = 0.001552, c3r = -0.098364, c3i = -0.006278
+seq : 1056
+Particle Filter Az: -60.68,Elv: 35.12,Ot: -2.461 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1057
+freq = 35000, po1 : -2
+c0r = 0.098977, c0i = 0.101668, c1r = 0.036572, c1i = 0.007707, c2r = 0.022912, c2i = 0.014976, c3r = -0.005522, c3i = -0.000759
+seq : 1057
+Particle Filter Az: -72.56,Elv: 44.72,Ot: 2.835 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1058
+freq = 35000, po1 : -2
+c0r = 0.104569, c0i = 0.030344, c1r = 0.009285, c1i = -0.017679, c2r = 0.031277, c2i = -0.000655, c3r = 0.024137, c3i = -0.020987
+seq : 1058
+Particle Filter Az: -97.30,Elv: 59.16,Ot: -2.234 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1059
+freq = 35000, po1 : -2
+c0r = -0.061255, c0i = -0.011291, c1r = 0.030123, c1i = 0.000897, c2r = 0.022795, c2i = 0.015052, c3r = 0.004656, c3i = 0.095484
+seq : 1059
+Particle Filter Az: -17.65,Elv: 42.73,Ot: 1.348 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1060
+freq = 30000
+==== Fail =====
+Test
+seq : 1061
+freq = 35000, po1 : -2
+c0r = 0.075554, c0i = 0.063507, c1r = -0.017640, c1i = -0.053838, c2r = -0.021620, c2i = -0.041486, c3r = 0.189670, c3i = -0.020357
+seq : 1061
+Particle Filter Az: -3.01,Elv: 39.68,Ot: 0.186 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1062
+freq = 25000
+==== Fail =====
+Test
+seq : 1063
+freq = 35000, po1 : -2
+c0r = 0.075653, c0i = 0.036353, c1r = -0.017443, c1i = -0.074710, c2r = -0.003800, c2i = -0.066903, c3r = 0.159439, c3i = -0.033906
+seq : 1063
+Particle Filter Az: 6.42,Elv: 39.92,Ot: -0.703 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1064
+freq = 25000
+==== Fail =====
+Test
+seq : 1065
+freq = 35000, po1 : -2
+c0r = 0.124518, c0i = 0.019789, c1r = 0.015806, c1i = -0.022326, c2r = 0.033465, c2i = -0.005293, c3r = 0.023695, c3i = -0.021575
+seq : 1065
+Particle Filter Az: 8.91,Elv: 14.50,Ot: -0.459 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1066
+freq = 35000, po1 : -2
+c0r = -0.041245, c0i = 0.011024, c1r = -0.036354, c1i = 0.018429, c2r = -0.017218, c2i = 0.009981, c3r = 0.034372, c3i = 0.050919
+seq : 1066
+Particle Filter Az: 27.02,Elv: 16.68,Ot: 0.664 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1067
+freq = 25000
+==== Fail =====
+Test
+seq : 1068
+freq = 35000, po1 : -2
+c0r = -0.010625, c0i = -0.073243, c1r = -0.017086, c1i = -0.035093, c2r = 0.025546, c2i = -0.009547, c3r = 0.070800, c3i = -0.049689
+seq : 1068
+Particle Filter Az: -38.37,Elv: 22.46,Ot: -1.034 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1069
+freq = 25000
+==== Fail =====
+Test
+seq : 1070
+freq = 35000, po1 : -2
+c0r = -0.082155, c0i = 0.043167, c1r = -0.013701, c1i = -0.007773, c2r = -0.022063, c2i = 0.021256, c3r = -0.064151, c3i = -0.037930
+seq : 1070
+Particle Filter Az: -30.13,Elv: 18.97,Ot: -2.564 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1071
+freq = 35000, po1 : -2
+c0r = -0.059653, c0i = -0.064839, c1r = -0.013068, c1i = -0.046851, c2r = -0.024398, c2i = -0.022612, c3r = 0.035543, c3i = -0.149110
+seq : 1071
+Particle Filter Az: -31.20,Elv: 9.40,Ot: -1.986 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1072
+freq = 25000
+==== Fail =====
+Test
+seq : 1073
+freq = 35000, po1 : -2
+c0r = -0.026404, c0i = -0.224617, c1r = 0.095366, c1i = -0.051496, c2r = -0.006677, c2i = -0.011568, c3r = 0.253867, c3i = -0.051874
+seq : 1073
+Particle Filter Az: -27.11,Elv: 6.97,Ot: -1.187 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1074
+freq = 25000
+==== Fail =====
+Test
+seq : 1075
+freq = 35000, po1 : -2
+c0r = -0.174401, c0i = -0.073388, c1r = -0.014576, c1i = -0.105976, c2r = -0.005543, c2i = 0.004579, c3r = -0.054796, c3i = -0.226996
+seq : 1075
+Particle Filter Az: -16.87,Elv: 5.78,Ot: -2.224 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1076
+freq = 25000
+==== Fail =====
+Test
+seq : 1077
+freq = 35000, po1 : -2
+c0r = -0.092407, c0i = -0.052744, c1r = -0.002442, c1i = -0.094221, c2r = -0.011097, c2i = 0.003345, c3r = -0.044876, c3i = -0.197861
+seq : 1077
+Particle Filter Az: 0.94,Elv: 7.61,Ot: -2.355 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1078
+freq = 30000
+==== Fail =====
+Test
+seq : 1079
+freq = 35000, po1 : -2
+c0r = 0.052644, c0i = -0.252542, c1r = 0.112050, c1i = -0.000453, c2r = -0.038886, c2i = -0.026456, c3r = 0.239313, c3i = 0.034696
+seq : 1079
+Particle Filter Az: 16.36,Elv: 14.62,Ot: -1.210 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1080
+freq = 30000
+==== Fail =====
+Test
+seq : 1081
+freq = 25000
+==== Fail =====
+Test
+seq : 1082
+freq = 35000, po1 : -2
+c0r = -0.031225, c0i = -0.243959, c1r = 0.130527, c1i = -0.020710, c2r = -0.038378, c2i = -0.001447, c3r = 0.255502, c3i = -0.059261
+seq : 1082
+Particle Filter Az: 26.91,Elv: 16.57,Ot: -1.274 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1083
+freq = 30000
+==== Fail =====
+Test
+seq : 1084
+freq = 25000
+==== Fail =====
+Test
+seq : 1085
+freq = 35000, po1 : -2
+c0r = -0.089462, c0i = -0.002524, c1r = -0.015450, c1i = -0.074352, c2r = -0.082862, c2i = 0.012784, c3r = -0.107938, c3i = -0.145411
+seq : 1085
+Particle Filter Az: 44.96,Elv: 7.32,Ot: -2.407 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1086
+freq = 30000
+==== Fail =====
+Test
+seq : 1087
+freq = 25000
+==== Fail =====
+Test
+seq : 1088
+freq = 35000, po1 : -2
+c0r = -0.102749, c0i = 0.210941, c1r = -0.096052, c1i = -0.012740, c2r = 0.005204, c2i = -0.053788, c3r = -0.075549, c3i = -0.009039
+seq : 1088
+Particle Filter Az: 45.76,Elv: 1.44,Ot: -1.138 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1089
+freq = 35000, po1 : -2
+c0r = -0.150389, c0i = -0.041401, c1r = -0.036511, c1i = -0.052756, c2r = -0.146797, c2i = -0.003780, c3r = -0.054008, c3i = -0.082029
+seq : 1089
+Particle Filter Az: 45.71,Elv: 5.85,Ot: -2.574 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1090
+freq = 35000, po1 : -2
+c0r = -0.207730, c0i = -0.072638, c1r = 0.006876, c1i = -0.119335, c2r = -0.004668, c2i = 0.036231, c3r = -0.024387, c3i = -0.235885
+seq : 1090
+Particle Filter Az: 48.11,Elv: 14.53,Ot: -2.497 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1091
+freq = 30000
+==== Fail =====
+Test
+seq : 1092
+freq = 25000
+==== Fail =====
+Test
+seq : 1093
+freq = 35000, po1 : -2
+c0r = -0.196222, c0i = -0.022746, c1r = 0.018190, c1i = -0.143832, c2r = 0.059670, c2i = 0.061144, c3r = 0.015228, c3i = -0.217208
+seq : 1093
+Particle Filter Az: 46.59,Elv: 3.25,Ot: -1.812 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1094
+freq = 25000
+==== Fail =====
+Test
+seq : 1095
+freq = 35000, po1 : -2
+c0r = -0.171462, c0i = 0.042508, c1r = -0.022582, c1i = -0.142269, c2r = 0.040125, c2i = 0.020788, c3r = -0.058769, c3i = -0.213773
+seq : 1095
+Particle Filter Az: 77.02,Elv: 5.30,Ot: -1.933 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1096
+freq = 30000
+==== Fail =====
+Test
+seq : 1097
+freq = 35000, po1 : -2
+c0r = -0.209435, c0i = -0.003410, c1r = -0.028060, c1i = -0.134797, c2r = 0.041255, c2i = 0.025943, c3r = -0.072704, c3i = -0.212224
+seq : 1097
+Particle Filter Az: -108.75,Elv: 24.50,Ot: -1.757 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1098
+freq = 35000, po1 : -2
+c0r = -0.206104, c0i = 0.006139, c1r = -0.034179, c1i = -0.139626, c2r = 0.045042, c2i = 0.024686, c3r = -0.081275, c3i = -0.217938
+seq : 1098
+Particle Filter Az: -154.01,Elv: 42.64,Ot: -1.628 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1099
+freq = 30000
+==== Fail =====
+Test
+seq : 1100
+freq = 25000
+==== Fail =====
+Test
+seq : 1101
+freq = 35000, po1 : -2
+c0r = -0.200358, c0i = 0.004696, c1r = 0.001088, c1i = -0.143137, c2r = 0.034895, c2i = 0.032930, c3r = -0.021731, c3i = -0.241528
+seq : 1101
+Particle Filter Az: -138.00,Elv: 56.02,Ot: -1.426 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1102
+freq = 30000
+==== Fail =====
+Test
+seq : 1103
+freq = 35000, po1 : -2
+c0r = -0.097769, c0i = 0.264687, c1r = -0.116588, c1i = -0.039801, c2r = 0.035644, c2i = -0.000515, c3r = -0.145019, c3i = -0.078529
+seq : 1103
+Particle Filter Az: -133.16,Elv: 66.74,Ot: -2.398 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1104
+freq = 30000
+==== Fail =====
+Test
+seq : 1105
+freq = 35000, po1 : -2
+c0r = -0.229122, c0i = -0.012918, c1r = -0.000882, c1i = -0.137229, c2r = 0.021755, c2i = 0.038712, c3r = 0.002678, c3i = -0.210760
+seq : 1105
+Particle Filter Az: -135.33,Elv: 71.20,Ot: -1.411 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1106
+freq = 35000, po1 : -2
+c0r = -0.123491, c0i = 0.243895, c1r = -0.085343, c1i = -0.067593, c2r = 0.029053, c2i = 0.046424, c3r = -0.151681, c3i = -0.094824
+seq : 1106
+Particle Filter Az: -135.51,Elv: 79.46,Ot: -2.105 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1107
+freq = 35000, po1 : -2
+c0r = -0.134217, c0i = -0.251156, c1r = 0.137576, c1i = -0.039102, c2r = -0.012840, c2i = 0.039553, c3r = 0.231921, c3i = -0.089775
+seq : 1107
+Particle Filter Az: -137.29,Elv: 75.60,Ot: -0.839 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1108
+freq = 35000, po1 : -2
+c0r = -0.224333, c0i = -0.124341, c1r = 0.022874, c1i = -0.128044, c2r = 0.035234, c2i = 0.036106, c3r = -0.024036, c3i = -0.231849
+seq : 1108
+Particle Filter Az: -139.43,Elv: 70.71,Ot: -1.242 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1109
+freq = 30000
+==== Fail =====
+Test
+seq : 1110
+freq = 25000
+==== Fail =====
+Test
+seq : 1111
+freq = 35000, po1 : -2
+c0r = 0.133926, c0i = 0.285952, c1r = -0.119558, c1i = 0.047059, c2r = 0.022828, c2i = -0.032404, c3r = -0.190841, c3i = 0.099433
+seq : 1111
+Particle Filter Az: -134.70,Elv: 81.16,Ot: -2.501 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1112
+freq = 30000
+==== Fail =====
+Test
+seq : 1113
+freq = 25000
+==== Fail =====
+Test
+seq : 1114
+freq = 35000, po1 : -2
+c0r = -0.263244, c0i = 0.104499, c1r = -0.063140, c1i = -0.113247, c2r = 0.032786, c2i = -0.000487, c3r = -0.111200, c3i = -0.159720
+seq : 1114
+Particle Filter Az: -136.14,Elv: 75.72,Ot: -1.946 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1115
+freq = 25000
+==== Fail =====
+Test
+seq : 1116
+freq = 35000, po1 : -2
+c0r = -0.249898, c0i = -0.111773, c1r = 0.034378, c1i = -0.130052, c2r = 0.047511, c2i = 0.025520, c3r = -0.057307, c3i = -0.199747
+seq : 1116
+Particle Filter Az: -144.65,Elv: 65.28,Ot: -1.340 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1117
+freq = 30000
+==== Fail =====
+Test
+seq : 1118
+freq = 25000
+==== Fail =====
+Test
+seq : 1119
+freq = 35000, po1 : -2
+c0r = -0.198982, c0i = -0.135099, c1r = 0.077396, c1i = -0.106324, c2r = 0.061369, c2i = 0.040266, c3r = -0.041373, c3i = -0.223159
+seq : 1119
+Particle Filter Az: -149.28,Elv: 57.09,Ot: -1.167 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1120
+freq = 30000
+==== Fail =====
+Test
+seq : 1121
+freq = 25000
+==== Fail =====
+Test
+seq : 1122
+freq = 35000, po1 : -2
+c0r = -0.209792, c0i = 0.170091, c1r = -0.092171, c1i = -0.069760, c2r = 0.032130, c2i = -0.046424, c3r = -0.176116, c3i = -0.016728
+seq : 1122
+Particle Filter Az: -145.63,Elv: 49.76,Ot: -2.351 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1123
+freq = 25000
+==== Fail =====
+Test
+seq : 1124
+freq = 35000, po1 : -2
+c0r = -0.112496, c0i = -0.203975, c1r = 0.115264, c1i = -0.038615, c2r = 0.051770, c2i = 0.049080, c3r = 0.019548, c3i = -0.219989
+seq : 1124
+Particle Filter Az: -155.22,Elv: 51.83,Ot: -1.146 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1125
+freq = 30000
+==== Fail =====
+Test
+seq : 1126
+freq = 25000
+==== Fail =====
+Test
+seq : 1127
+freq = 35000, po1 : -2
+c0r = -0.141188, c0i = 0.128142, c1r = -0.085077, c1i = -0.066030, c2r = 0.004353, c2i = -0.063592, c3r = -0.159404, c3i = 0.018622
+seq : 1127
+Particle Filter Az: -154.05,Elv: 46.08,Ot: -2.372 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1128
+freq = 30000
+==== Fail =====
+Test
+seq : 1129
+freq = 35000, po1 : -2
+c0r = -0.258370, c0i = -0.034941, c1r = 0.044820, c1i = -0.099699, c2r = 0.086426, c2i = -0.046154, c3r = -0.146488, c3i = -0.101924
+seq : 1129
+Particle Filter Az: -153.90,Elv: 44.54,Ot: -1.805 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1130
+freq = 25000
+==== Fail =====
+Test
+seq : 1131
+freq = 35000, po1 : -2
+c0r = -0.321597, c0i = 0.145849, c1r = 0.073525, c1i = -0.095899, c2r = 0.098444, c2i = -0.045484, c3r = -0.146872, c3i = -0.037536
+seq : 1131
+Particle Filter Az: -157.23,Elv: 55.70,Ot: -1.941 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1132
+freq = 30000
+==== Fail =====
+Test
+seq : 1133
+freq = 25000
+==== Fail =====
+Test
+seq : 1134
+freq = 35000, po1 : -2
+c0r = -0.187182, c0i = -0.070756, c1r = 0.081550, c1i = -0.015117, c2r = 0.101432, c2i = 0.037745, c3r = -0.059408, c3i = -0.105174
+seq : 1134
+Particle Filter Az: -155.53,Elv: 59.79,Ot: -1.189 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1135
+freq = 30000
+==== Fail =====
+Test
+seq : 1136
+freq = 25000
+==== Fail =====
+Test
+seq : 1137
+freq = 35000, po1 : -2
+c0r = -0.196586, c0i = -0.038383, c1r = 0.086793, c1i = -0.032179, c2r = 0.107945, c2i = 0.021859, c3r = -0.067469, c3i = -0.096773
+seq : 1137
+Particle Filter Az: -160.66,Elv: 63.59,Ot: -1.311 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1138
+freq = 35000, po1 : -2
+c0r = -0.083001, c0i = 0.152011, c1r = -0.010954, c1i = -0.062622, c2r = 0.039619, c2i = -0.089523, c3r = -0.125344, c3i = 0.069329
+seq : 1138
+Particle Filter Az: -158.92,Elv: 66.55,Ot: -2.462 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1139
+freq = 25000
+==== Fail =====
+Test
+seq : 1140
+freq = 35000, po1 : -2
+c0r = -0.173581, c0i = 0.095799, c1r = 0.035014, c1i = -0.061004, c2r = 0.084650, c2i = -0.054450, c3r = -0.153521, c3i = -0.003123
+seq : 1140
+Particle Filter Az: -153.51,Elv: 68.38,Ot: -2.107 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1141
+freq = 30000
+==== Fail =====
+Test
+seq : 1142
+freq = 35000, po1 : -2
+c0r = -0.216452, c0i = -0.057054, c1r = 0.058098, c1i = -0.025116, c2r = 0.092155, c2i = 0.012402, c3r = -0.115838, c3i = -0.115070
+seq : 1142
+Particle Filter Az: -150.16,Elv: 66.96,Ot: -1.397 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1143
+freq = 30000
+==== Fail =====
+Test
+seq : 1144
+freq = 25000
+==== Fail =====
+Test
+seq : 1145
+freq = 35000, po1 : -2
+c0r = 0.211948, c0i = -0.087257, c1r = -0.047515, c1i = 0.059477, c2r = -0.080496, c2i = 0.038840, c3r = 0.132013, c3i = 0.015268
+seq : 1145
+Particle Filter Az: -170.06,Elv: 81.61,Ot: -0.040 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1146
+freq = 25000
+==== Fail =====
+Test
+seq : 1147
+freq = 35000, po1 : -2
+c0r = 0.288572, c0i = -0.048685, c1r = -0.069275, c1i = 0.034320, c2r = -0.104753, c2i = 0.029932, c3r = 0.110610, c3i = 0.041534
+seq : 1147
+Particle Filter Az: -127.13,Elv: 78.63,Ot: 0.955 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1148
+freq = 35000, po1 : -2
+c0r = -0.233967, c0i = -0.021275, c1r = 0.072985, c1i = -0.034497, c2r = 0.075717, c2i = -0.000744, c3r = -0.074157, c3i = -0.062358
+seq : 1148
+Particle Filter Az: -148.15,Elv: 82.50,Ot: -0.209 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1149
+freq = 30000
+==== Fail =====
+Test
+seq : 1150
+freq = 25000
+==== Fail =====
+Test
+seq : 1151
+freq = 35000, po1 : -2
+c0r = 0.278174, c0i = -0.051114, c1r = -0.067982, c1i = 0.043789, c2r = -0.100393, c2i = 0.029643, c3r = 0.116117, c3i = 0.042207
+seq : 1151
+Particle Filter Az: -168.62,Elv: 71.05,Ot: 0.894 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1152
+freq = 25000
+==== Fail =====
+Test
+seq : 1153
+freq = 35000, po1 : -2
+c0r = -0.233181, c0i = 0.073388, c1r = 0.048702, c1i = -0.069907, c2r = 0.072882, c2i = -0.031534, c3r = -0.124369, c3i = -0.044465
+seq : 1153
+Particle Filter Az: -56.41,Elv: 75.19,Ot: -0.236 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1154
+freq = 30000
+==== Fail =====
+Test
+seq : 1155
+freq = 25000
+==== Fail =====
+Test
+seq : 1156
+freq = 35000, po1 : -2
+c0r = 0.282315, c0i = -0.048799, c1r = -0.068955, c1i = 0.043269, c2r = -0.096882, c2i = 0.023390, c3r = 0.105667, c3i = 0.044301
+seq : 1156
+Particle Filter Az: -121.33,Elv: 77.07,Ot: 0.788 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1157
+freq = 30000
+==== Fail =====
+Test
+seq : 1158
+freq = 25000
+==== Fail =====
+Test
+seq : 1159
+freq = 35000, po1 : -2
+c0r = 0.248625, c0i = 0.009991, c1r = -0.059499, c1i = 0.016096, c2r = -0.086187, c2i = 0.010677, c3r = 0.107334, c3i = 0.067070
+seq : 1159
+Particle Filter Az: -122.29,Elv: 73.44,Ot: 1.596 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1160
+freq = 30000
+==== Fail =====
+Test
+seq : 1161
+freq = 25000
+==== Fail =====
+Test
+seq : 1162
+freq = 35000, po1 : -2
+c0r = -0.140091, c0i = 0.127921, c1r = -0.019223, c1i = -0.049699, c2r = 0.050726, c2i = -0.054101, c3r = -0.150845, c3i = 0.017334
+seq : 1162
+Particle Filter Az: -137.54,Elv: 68.64,Ot: 2.839 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1163
+freq = 30000
+==== Fail =====
+Test
+seq : 1164
+freq = 25000
+==== Fail =====
+Test
+seq : 1165
+freq = 35000, po1 : -2
+c0r = -0.139057, c0i = 0.131181, c1r = -0.022548, c1i = -0.049583, c2r = 0.046129, c2i = -0.054015, c3r = -0.144933, c3i = 0.014404
+seq : 1165
+Particle Filter Az: -156.76,Elv: 62.73,Ot: -2.565 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1166
+freq = 25000
+==== Fail =====
+Test
+seq : 1167
+freq = 35000, po1 : -2
+c0r = -0.231063, c0i = -0.156760, c1r = 0.090904, c1i = -0.005406, c2r = 0.090028, c2i = 0.042629, c3r = -0.034315, c3i = -0.153454
+seq : 1167
+Particle Filter Az: -160.24,Elv: 58.70,Ot: -1.423 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1168
+freq = 30000
+==== Fail =====
+Test
+seq : 1169
+freq = 25000
+==== Fail =====
+Test
+seq : 1170
+freq = 35000, po1 : -2
+c0r = 0.226932, c0i = 0.054935, c1r = -0.055979, c1i = -0.004141, c2r = -0.078754, c2i = -0.004549, c3r = 0.105065, c3i = 0.084745
+seq : 1170
+Particle Filter Az: -122.45,Elv: 63.31,Ot: -2.431 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1171
+freq = 25000
+==== Fail =====
+Test
+seq : 1172
+freq = 35000, po1 : -2
+c0r = -0.207563, c0i = 0.077223, c1r = 0.043758, c1i = -0.061061, c2r = 0.092771, c2i = -0.044553, c3r = -0.165641, c3i = -0.048903
+seq : 1172
+Particle Filter Az: -155.11,Elv: 62.85,Ot: -1.950 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1173
+freq = 30000
+==== Fail =====
+Test
+seq : 1174
+freq = 25000
+==== Fail =====
+Test
+seq : 1175
+freq = 35000, po1 : -2
+c0r = -0.232105, c0i = 0.137235, c1r = 0.030698, c1i = -0.073850, c2r = 0.067474, c2i = -0.053539, c3r = -0.120386, c3i = -0.019750
+seq : 1175
+Particle Filter Az: -162.20,Elv: 61.08,Ot: -2.110 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1176
+freq = 35000, po1 : -2
+c0r = -0.244633, c0i = -0.054975, c1r = 0.073767, c1i = -0.031919, c2r = 0.087622, c2i = 0.007563, c3r = -0.074445, c3i = -0.096991
+seq : 1176
+Particle Filter Az: -158.08,Elv: 61.44,Ot: -1.385 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1177
+freq = 25000
+==== Fail =====
+Test
+seq : 1178
+freq = 35000, po1 : -2
+c0r = -0.327556, c0i = 0.118358, c1r = 0.055213, c1i = -0.082844, c2r = 0.092117, c2i = -0.052743, c3r = -0.194510, c3i = -0.082174
+seq : 1178
+Particle Filter Az: -154.45,Elv: 61.15,Ot: -1.915 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1179
+freq = 25000
+==== Fail =====
+Test
+seq : 1180
+freq = 35000, po1 : -2
+c0r = -0.231511, c0i = -0.080575, c1r = 0.090649, c1i = -0.082202, c2r = 0.100352, c2i = -0.005887, c3r = -0.144653, c3i = -0.168208
+seq : 1180
+Particle Filter Az: -160.41,Elv: 54.82,Ot: -1.471 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1181
+freq = 30000
+==== Fail =====
+Test
+seq : 1182
+freq = 35000, po1 : -2
+c0r = -0.253746, c0i = -0.043377, c1r = 0.044846, c1i = -0.084530, c2r = 0.097635, c2i = -0.040635, c3r = -0.121281, c3i = -0.154521
+seq : 1182
+Particle Filter Az: -155.73,Elv: 47.45,Ot: -1.690 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1183
+freq = 30000
+==== Fail =====
+Test
+seq : 1184
+freq = 25000
+==== Fail =====
+Test
+seq : 1185
+freq = 35000, po1 : -2
+c0r = -0.143151, c0i = -0.214906, c1r = 0.108037, c1i = -0.021808, c2r = 0.088689, c2i = 0.038925, c3r = 0.035092, c3i = -0.175591
+seq : 1185
+Particle Filter Az: -156.69,Elv: 44.48,Ot: -0.880 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1186
+freq = 35000, po1 : -2
+c0r = -0.125866, c0i = -0.248070, c1r = 0.113762, c1i = 0.006535, c2r = 0.073420, c2i = 0.047059, c3r = 0.061439, c3i = -0.224690
+seq : 1186
+Particle Filter Az: -157.03,Elv: 45.25,Ot: -0.700 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1187
+freq = 30000
+==== Fail =====
+Test
+seq : 1188
+freq = 25000
+==== Fail =====
+Test
+seq : 1189
+freq = 35000, po1 : -2
+c0r = -0.199953, c0i = -0.144770, c1r = 0.115671, c1i = -0.044812, c2r = 0.094738, c2i = 0.009942, c3r = -0.077408, c3i = -0.237159
+seq : 1189
+Particle Filter Az: -154.98,Elv: 46.49,Ot: -1.177 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1190
+freq = 35000, po1 : -2
+c0r = -0.160167, c0i = -0.018260, c1r = 0.075968, c1i = -0.019846, c2r = 0.091251, c2i = 0.002102, c3r = -0.113370, c3i = -0.072422
+seq : 1190
+Particle Filter Az: -144.26,Elv: 59.25,Ot: -1.442 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1191
+freq = 30000
+==== Fail =====
+Test
+seq : 1192
+freq = 35000, po1 : -2
+c0r = 0.187515, c0i = 0.160322, c1r = -0.116470, c1i = 0.023567, c2r = -0.072138, c2i = -0.007967, c3r = -0.030473, c3i = 0.138234
+seq : 1192
+Particle Filter Az: -63.09,Elv: 69.72,Ot: -2.757 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+True
+seq : 1193
+freq = 35000, po1 : -2
+c0r = 0.135529, c0i = 0.189036, c1r = -0.114670, c1i = 0.010626, c2r = -0.081870, c2i = -0.031834, c3r = -0.068933, c3i = 0.184068
+seq : 1193
+Particle Filter Az: -157.90,Elv: 51.53,Ot: 2.605 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+True
+--- RESET ---
+Test
+seq : 1194
+freq = 25000
+==== Fail =====
+Test
+seq : 1195
+freq = 35000, po1 : -2
+c0r = -0.240135, c0i = -0.037181, c1r = 0.065244, c1i = -0.091979, c2r = 0.100855, c2i = -0.035659, c3r = -0.146989, c3i = -0.166754
+seq : 1195
+Particle Filter Az: -148.52,Elv: 56.58,Ot: -1.651 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1196
+freq = 30000
+==== Fail =====
+Test
+seq : 1197
+freq = 25000
+==== Fail =====
+Test
+seq : 1198
+freq = 35000, po1 : -2
+c0r = -0.239225, c0i = -0.033450, c1r = -0.052834, c1i = -0.069963, c2r = 0.109387, c2i = -0.022339, c3r = 0.129141, c3i = -0.121001
+seq : 1198
+Particle Filter Az: -120.53,Elv: 49.32,Ot: -1.589 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1199
+freq = 30000
+==== Fail =====
+Test
+seq : 1200
+freq = 35000, po1 : -2
+c0r = -0.016204, c0i = -0.185721, c1r = -0.111553, c1i = 0.006994, c2r = -0.058722, c2i = -0.045162, c3r = 0.270932, c3i = -0.020106
+seq : 1200
+Particle Filter Az: -92.33,Elv: 32.83,Ot: -1.855 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1201
+freq = 30000
+==== Fail =====
+Test
+seq : 1202
+freq = 35000, po1 : -2
+c0r = 0.204893, c0i = -0.048071, c1r = -0.079333, c1i = -0.073180, c2r = -0.019769, c2i = -0.089946, c3r = 0.201563, c3i = 0.099974
+seq : 1202
+Particle Filter Az: -67.50,Elv: 36.25,Ot: -1.043 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1203
+freq = 30000
+==== Fail =====
+Test
+seq : 1204
+freq = 25000
+==== Fail =====
+Test
+seq : 1205
+freq = 35000, po1 : -2
+c0r = 0.286949, c0i = -0.017518, c1r = -0.098072, c1i = -0.072273, c2r = -0.095899, c2i = -0.086475, c3r = 0.273154, c3i = -0.038001
+seq : 1205
+Particle Filter Az: -42.27,Elv: 34.70,Ot: -1.228 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1206
+freq = 25000
+==== Fail =====
+Test
+seq : 1207
+freq = 35000, po1 : -2
+c0r = 0.196069, c0i = 0.018003, c1r = -0.046885, c1i = -0.027064, c2r = -0.034541, c2i = -0.037841, c3r = 0.210973, c3i = 0.025827
+seq : 1207
+Particle Filter Az: -18.79,Elv: 49.24,Ot: -1.175 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1208
+freq = 25000
+==== Fail =====
+Test
+seq : 1209
+freq = 35000, po1 : -2
+c0r = 0.243972, c0i = 0.003207, c1r = -0.007210, c1i = -0.095078, c2r = 0.081358, c2i = -0.059443, c3r = -0.023648, c3i = 0.238163
+seq : 1209
+Particle Filter Az: -32.41,Elv: 56.45,Ot: -0.237 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1210
+freq = 30000
+==== Fail =====
+Test
+seq : 1211
+freq = 25000
+==== Fail =====
+Test
+seq : 1212
+freq = 35000, po1 : -2
+c0r = 0.172636, c0i = -0.071075, c1r = -0.063181, c1i = -0.036794, c2r = -0.023462, c2i = -0.054733, c3r = 0.249026, c3i = 0.095788
+seq : 1212
+Particle Filter Az: -19.15,Elv: 58.65,Ot: -1.110 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1213
+freq = 30000
+==== Fail =====
+Test
+seq : 1214
+freq = 25000
+==== Fail =====
+Test
+seq : 1215
+freq = 35000, po1 : -2
+c0r = 0.257359, c0i = -0.074031, c1r = -0.016403, c1i = -0.098683, c2r = 0.072193, c2i = -0.035840, c3r = -0.008747, c3i = 0.224518
+seq : 1215
+Particle Filter Az: -38.61,Elv: 59.45,Ot: -0.253 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1216
+freq = 25000
+==== Fail =====
+Test
+seq : 1217
+freq = 35000, po1 : -2
+c0r = -0.123617, c0i = -0.179005, c1r = -0.115139, c1i = 0.026877, c2r = -0.054076, c2i = -0.064326, c3r = 0.224342, c3i = -0.074687
+seq : 1217
+Particle Filter Az: -40.55,Elv: 49.25,Ot: -1.385 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1218
+freq = 30000
+==== Fail =====
+Test
+seq : 1219
+freq = 25000
+==== Fail =====
+Test
+seq : 1220
+freq = 35000, po1 : -2
+c0r = 0.265261, c0i = -0.064843, c1r = -0.013834, c1i = -0.075670, c2r = 0.065590, c2i = -0.027703, c3r = -0.025369, c3i = 0.218783
+seq : 1220
+Particle Filter Az: -41.98,Elv: 55.63,Ot: -0.411 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1221
+freq = 30000
+==== Fail =====
+Test
+seq : 1222
+freq = 25000
+==== Fail =====
+Test
+seq : 1223
+freq = 35000, po1 : -2
+c0r = -0.146968, c0i = -0.243297, c1r = -0.114734, c1i = 0.047100, c2r = -0.055951, c2i = -0.082388, c3r = 0.279302, c3i = -0.050306
+seq : 1223
+Particle Filter Az: -39.79,Elv: 63.74,Ot: -1.558 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1224
+freq = 30000
+==== Fail =====
+Test
+seq : 1225
+freq = 25000
+==== Fail =====
+Test
+seq : 1226
+freq = 35000, po1 : -2
+c0r = -0.158601, c0i = 0.254593, c1r = 0.172725, c1i = 0.043094, c2r = -0.058105, c2i = 0.094862, c3r = -0.133247, c3i = -0.131179
+seq : 1226
+Particle Filter Az: -39.84,Elv: 73.38,Ot: -2.699 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1227
+freq = 25000
+==== Fail =====
+Test
+seq : 1228
+freq = 35000, po1 : -2
+c0r = 0.289728, c0i = 0.030333, c1r = -0.008117, c1i = -0.090746, c2r = 0.121023, c2i = 0.002548, c3r = -0.105504, c3i = 0.116401
+seq : 1228
+Particle Filter Az: -1.38,Elv: 81.16,Ot: -0.108 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1229
+freq = 30000
+==== Fail =====
+Test
+seq : 1230
+freq = 25000
+==== Fail =====
+Test
+seq : 1231
+freq = 35000, po1 : -2
+c0r = -0.059882, c0i = -0.305982, c1r = -0.122912, c1i = 0.013162, c2r = -0.023998, c2i = -0.095181, c3r = 0.266755, c3i = 0.047144
+seq : 1231
+Particle Filter Az: -42.86,Elv: 63.62,Ot: -1.635 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1232
+freq = 25000
+==== Fail =====
+Test
+seq : 1233
+freq = 35000, po1 : -2
+c0r = -0.296621, c0i = 0.007248, c1r = -0.027370, c1i = 0.128740, c2r = -0.076302, c2i = 0.016463, c3r = 0.064707, c3i = -0.175834
+seq : 1233
+Particle Filter Az: -43.80,Elv: 60.96,Ot: -2.816 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1234
+freq = 30000
+==== Fail =====
+Test
+seq : 1235
+freq = 25000
+==== Fail =====
+Test
+seq : 1236
+freq = 35000, po1 : -2
+c0r = -0.188697, c0i = -0.185950, c1r = -0.108484, c1i = 0.067008, c2r = -0.073113, c2i = -0.026421, c3r = 0.115863, c3i = -0.079794
+seq : 1236
+Particle Filter Az: -36.94,Elv: 55.52,Ot: -2.377 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1237
+freq = 30000
+==== Fail =====
+Test
+seq : 1238
+freq = 25000
+==== Fail =====
+Test
+seq : 1239
+freq = 35000, po1 : -2
+c0r = -0.213636, c0i = -0.114996, c1r = -0.089467, c1i = 0.098840, c2r = -0.073299, c2i = -0.010449, c3r = 0.106531, c3i = -0.105814
+seq : 1239
+Particle Filter Az: -39.18,Elv: 53.39,Ot: -2.578 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1240
+freq = 30000
+==== Fail =====
+Test
+seq : 1241
+freq = 25000
+==== Fail =====
+Test
+seq : 1242
+freq = 35000, po1 : -2
+c0r = 0.000944, c0i = -0.275033, c1r = -0.099202, c1i = -0.040864, c2r = -0.025048, c2i = -0.078551, c3r = 0.165584, c3i = 0.062127
+seq : 1242
+Particle Filter Az: -42.61,Elv: 49.99,Ot: -1.574 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1243
+freq = 30000
+==== Fail =====
+Test
+seq : 1244
+freq = 25000
+==== Fail =====
+Test
+seq : 1245
+freq = 35000, po1 : -2
+c0r = 0.063236, c0i = -0.172364, c1r = -0.024291, c1i = -0.057297, c2r = 0.004712, c2i = -0.064839, c3r = 0.027858, c3i = 0.043633
+seq : 1245
+Particle Filter Az: -38.84,Elv: 48.60,Ot: -0.931 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1246
+freq = 35000, po1 : -2
+c0r = 0.036219, c0i = 0.048362, c1r = 0.028061, c1i = 0.014853, c2r = 0.016581, c2i = 0.008306, c3r = -0.025906, c3i = -0.015100
+seq : 1246
+Particle Filter Az: -27.81,Elv: 45.93,Ot: 0.358 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1247
+freq = 25000
+==== Fail =====
+Test
+seq : 1248
+freq = 35000, po1 : -2
+c0r = 0.109745, c0i = 0.033027, c1r = 0.004580, c1i = -0.026909, c2r = 0.033931, c2i = -0.005510, c3r = 0.018215, c3i = 0.012033
+seq : 1248
+Particle Filter Az: -30.96,Elv: 32.32,Ot: -0.155 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1249
+freq = 35000, po1 : -2
+c0r = -0.029975, c0i = -0.032782, c1r = -0.027328, c1i = -0.001462, c2r = -0.001066, c2i = 0.002880, c3r = -0.025844, c3i = 0.006434
+seq : 1249
+Particle Filter Az: -71.66,Elv: 68.23,Ot: -0.425 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1250
+freq = 25000
+==== Fail =====
+Test
+seq : 1251
+freq = 35000, po1 : -2
+c0r = 0.094608, c0i = 0.057215, c1r = -0.005844, c1i = -0.040040, c2r = 0.000343, c2i = -0.034387, c3r = 0.022703, c3i = 0.090714
+seq : 1251
+Particle Filter Az: -47.79,Elv: 59.29,Ot: -0.247 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1252
+freq = 30000
+==== Fail =====
+Test
+seq : 1253
+freq = 35000, po1 : -2
+c0r = -0.024196, c0i = -0.069919, c1r = -0.023063, c1i = -0.002639, c2r = -0.001849, c2i = -0.001261, c3r = -0.009023, c3i = -0.025023
+seq : 1253
+Particle Filter Az: -27.94,Elv: 45.74,Ot: -1.633 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1254
+freq = 30000
+==== Fail =====
+Test
+seq : 1255
+freq = 25000
+==== Fail =====
+Test
+seq : 1256
+freq = 35000, po1 : -2
+c0r = 0.170832, c0i = -0.036222, c1r = 0.009491, c1i = -0.023916, c2r = 0.023430, c2i = -0.007910, c3r = -0.035909, c3i = -0.033212
+seq : 1256
+Particle Filter Az: -35.43,Elv: 29.53,Ot: -0.706 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1257
+freq = 25000
+==== Fail =====
+Test
+seq : 1258
+freq = 35000, po1 : -2
+c0r = -0.027137, c0i = -0.040695, c1r = -0.027100, c1i = 0.002239, c2r = -0.000576, c2i = 0.002451, c3r = -0.028695, c3i = -0.006991
+seq : 1258
+Particle Filter Az: -20.49,Elv: 18.59,Ot: -1.929 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1259
+freq = 35000, po1 : -2
+c0r = -0.034798, c0i = -0.069331, c1r = 0.000136, c1i = -0.001242, c2r = -0.020707, c2i = -0.017708, c3r = 0.008442, c3i = -0.023498
+seq : 1259
+Particle Filter Az: -22.91,Elv: 6.96,Ot: -1.794 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1260
+freq = 35000, po1 : -2
+c0r = -0.001394, c0i = 0.007562, c1r = 0.000127, c1i = -0.002731, c2r = -0.000376, c2i = 0.000248, c3r = 0.001655, c3i = 0.009769
+seq : 1260
+Particle Filter Az: 7.37,Elv: 32.80,Ot: -1.400 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1261
+freq = 30000
+==== Fail =====
+Test
+seq : 1262
+freq = 35000, po1 : -2
+c0r = -0.013761, c0i = -0.146743, c1r = 0.006790, c1i = -0.015210, c2r = 0.008935, c2i = -0.007164, c3r = -0.047581, c3i = -0.015100
+seq : 1262
+Particle Filter Az: -40.35,Elv: 1.92,Ot: -1.900 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1263
+freq = 25000
+==== Fail =====
+Test
+seq : 1264
+freq = 35000, po1 : -2
+c0r = 0.002505, c0i = 0.005931, c1r = 0.002557, c1i = 0.000321, c2r = 0.003152, c2i = -0.000802, c3r = 0.000076, c3i = 0.003021
+seq : 1264
+Particle Filter Az: -46.06,Elv: 12.74,Ot: -0.112 ,Freq : 35
+
+P: 0  True
+==== Sending ====
+Test
+seq : 1265
+freq = 35000, po1 : -2
+c0r = -0.001720, c0i = 0.016524, c1r = 0.020896, c1i = 0.017305, c2r = 0.005420, c2i = 0.019798, c3r = -0.028731, c3i = 0.009629
+seq : 1265
+Particle Filter Az: -35.95,Elv: 24.60,Ot: 0.892 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1266
+freq = 25000
+==== Fail =====
+Test
+seq : 1267
+freq = 35000, po1 : -2
+c0r = 0.023316, c0i = 0.018127, c1r = 0.028545, c1i = 0.009332, c2r = 0.011439, c2i = -0.000829, c3r = 0.005287, c3i = 0.003318
+seq : 1267
+Particle Filter Az: -25.60,Elv: 9.41,Ot: 0.344 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1268
+freq = 35000, po1 : -2
+c0r = 0.026363, c0i = 0.019753, c1r = 0.026486, c1i = 0.008729, c2r = 0.013721, c2i = 0.003573, c3r = 0.005414, c3i = 0.001410
+seq : 1268
+Particle Filter Az: -21.23,Elv: 4.94,Ot: 0.360 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1269
+freq = 25000
+==== Fail =====
+Test
+seq : 1270
+freq = 35000, po1 : -2
+c0r = -0.001937, c0i = -0.029762, c1r = -0.028083, c1i = -0.010642, c2r = -0.018095, c2i = -0.020027, c3r = 0.019574, c3i = -0.015262
+seq : 1270
+Particle Filter Az: -26.60,Elv: 14.61,Ot: -0.963 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1271
+freq = 30000
+==== Fail =====
+Test
+seq : 1272
+freq = 25000
+==== Fail =====
+Test
+seq : 1273
+freq = 35000, po1 : -2
+c0r = 0.026034, c0i = 0.025075, c1r = 0.025893, c1i = 0.016012, c2r = 0.017308, c2i = 0.007971, c3r = 0.003384, c3i = -0.004144
+seq : 1273
+Particle Filter Az: -29.52,Elv: 2.02,Ot: 0.006 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1274
+freq = 30000
+==== Fail =====
+Test
+seq : 1275
+freq = 35000, po1 : -2
+c0r = 0.025775, c0i = 0.023226, c1r = 0.024350, c1i = 0.015377, c2r = 0.014140, c2i = 0.007596, c3r = 0.006921, c3i = -0.008223
+seq : 1275
+Particle Filter Az: -22.76,Elv: 2.42,Ot: 0.298 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1276
+freq = 25000
+==== Fail =====
+Test
+seq : 1277
+freq = 35000, po1 : -2
+c0r = -0.030216, c0i = 0.001334, c1r = 0.004224, c1i = -0.001374, c2r = -0.003588, c2i = 0.001856, c3r = -0.034006, c3i = 0.034952
+seq : 1277
+Particle Filter Az: -35.65,Elv: 19.36,Ot: 1.518 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1278
+freq = 25000
+==== Fail =====
+Test
+seq : 1279
+freq = 35000, po1 : -2
+c0r = -0.040041, c0i = -0.050821, c1r = -0.019456, c1i = -0.000905, c2r = -0.021840, c2i = -0.020563, c3r = -0.000564, c3i = -0.020407
+seq : 1279
+Particle Filter Az: -26.40,Elv: 15.83,Ot: 2.691 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1280
+freq = 25000
+==== Fail =====
+Test
+seq : 1281
+freq = 35000, po1 : -2
+c0r = 0.079615, c0i = -0.005656, c1r = -0.001558, c1i = -0.015316, c2r = 0.028422, c2i = 0.004721, c3r = 0.051165, c3i = -0.008643
+seq : 1281
+Particle Filter Az: 10.65,Elv: 38.27,Ot: -2.356 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1282
+freq = 25000
+==== Fail =====
+Test
+seq : 1283
+freq = 35000, po1 : -2
+c0r = -0.000417, c0i = -0.028375, c1r = -0.004615, c1i = -0.005781, c2r = 0.000694, c2i = -0.016946, c3r = -0.010784, c3i = -0.018377
+seq : 1283
+Particle Filter Az: 3.56,Elv: 13.38,Ot: -1.873 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1284
+freq = 25000
+==== Fail =====
+Test
+seq : 1285
+freq = 35000, po1 : -2
+c0r = 0.006280, c0i = 0.032118, c1r = 0.015640, c1i = 0.011826, c2r = -0.029393, c2i = 0.011618, c3r = -0.052040, c3i = -0.006967
+seq : 1285
+Particle Filter Az: -15.36,Elv: 25.16,Ot: 2.228 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1286
+freq = 25000
+==== Fail =====
+Test
+seq : 1287
+freq = 35000, po1 : -2
+c0r = -0.034964, c0i = -0.062028, c1r = -0.021465, c1i = -0.022649, c2r = 0.030480, c2i = 0.001447, c3r = 0.078774, c3i = -0.020570
+seq : 1287
+Particle Filter Az: -42.58,Elv: 18.48,Ot: -2.137 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1288
+freq = 25000
+==== Fail =====
+Test
+seq : 1289
+freq = 35000, po1 : -2
+c0r = 0.074024, c0i = 0.000541, c1r = 0.019968, c1i = 0.000070, c2r = 0.018664, c2i = 0.001095, c3r = 0.065629, c3i = -0.000576
+seq : 1289
+Particle Filter Az: -18.56,Elv: 3.05,Ot: -0.945 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1290
+freq = 25000
+==== Fail =====
+Test
+seq : 1291
+freq = 35000, po1 : -2
+c0r = -0.063633, c0i = 0.043302, c1r = -0.004773, c1i = -0.000289, c2r = -0.027702, c2i = -0.027426, c3r = -0.085176, c3i = -0.124346
+seq : 1291
+Particle Filter Az: -41.39,Elv: 10.44,Ot: -2.001 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1292
+freq = 25000
+==== Fail =====
+Test
+seq : 1293
+freq = 35000, po1 : -2
+c0r = -0.119902, c0i = -0.156861, c1r = -0.001469, c1i = -0.056299, c2r = 0.062857, c2i = 0.043690, c3r = 0.153319, c3i = -0.151442
+seq : 1293
+Particle Filter Az: -73.02,Elv: 27.68,Ot: -1.124 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1294
+freq = 30000
+==== Fail =====
+Test
+seq : 1295
+freq = 25000
+==== Fail =====
+Test
+seq : 1296
+freq = 35000, po1 : -2
+c0r = -0.108752, c0i = -0.008126, c1r = -0.051358, c1i = -0.026071, c2r = 0.037417, c2i = -0.014554, c3r = 0.043384, c3i = -0.021892
+seq : 1296
+Particle Filter Az: -93.59,Elv: 47.45,Ot: -1.656 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1297
+freq = 25000
+==== Fail =====
+Test
+seq : 1298
+freq = 35000, po1 : -2
+c0r = -0.235483, c0i = 0.151564, c1r = -0.115601, c1i = -0.052444, c2r = 0.104700, c2i = -0.063560, c3r = 0.065467, c3i = -0.264080
+seq : 1298
+Particle Filter Az: -108.46,Elv: 54.83,Ot: -2.062 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1299
+freq = 25000
+==== Fail =====
+Test
+seq : 1300
+freq = 35000, po1 : -2
+c0r = 0.046316, c0i = 0.240080, c1r = -0.063272, c1i = 0.026299, c2r = -0.005293, c2i = -0.111917, c3r = -0.262633, c3i = -0.191804
+seq : 1300
+Particle Filter Az: -117.00,Elv: 56.67,Ot: -1.617 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1301
+freq = 25000
+==== Fail =====
+Test
+seq : 1302
+freq = 35000, po1 : -2
+c0r = 0.053248, c0i = 0.320761, c1r = -0.121955, c1i = 0.041489, c2r = 0.009322, c2i = -0.109674, c3r = -0.145660, c3i = -0.103508
+seq : 1302
+Particle Filter Az: -118.99,Elv: 60.11,Ot: -1.057 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1303
+freq = 30000
+==== Fail =====
+Test
+seq : 1304
+freq = 25000
+==== Fail =====
+Test
+seq : 1305
+freq = 35000, po1 : -2
+c0r = -0.092066, c0i = 0.305116, c1r = -0.107536, c1i = -0.060778, c2r = 0.039937, c2i = -0.046743, c3r = -0.208937, c3i = -0.185129
+seq : 1305
+Particle Filter Az: -130.84,Elv: 62.12,Ot: -2.609 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1306
+freq = 30000
+==== Fail =====
+Test
+seq : 1307
+freq = 25000
+==== Fail =====
+Test
+seq : 1308
+freq = 35000, po1 : -2
+c0r = 0.208409, c0i = -0.044631, c1r = -0.026142, c1i = 0.076185, c2r = -0.091604, c2i = -0.003445, c3r = 0.000987, c3i = 0.209884
+seq : 1308
+Particle Filter Az: -140.36,Elv: 60.20,Ot: 2.249 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1309
+freq = 25000
+==== Fail =====
+Test
+seq : 1310
+freq = 35000, po1 : -2
+c0r = -0.011336, c0i = 0.193570, c1r = -0.098438, c1i = -0.030912, c2r = 0.029385, c2i = -0.059493, c3r = -0.239661, c3i = -0.002794
+seq : 1310
+Particle Filter Az: -140.19,Elv: 61.27,Ot: -1.184 ,Freq : 35
+
+P: 0  False
+==== Sending ====
+Test
+seq : 1311
+freq = 25000
+==== Fail =====
+Test
+seq : 1312
+freq = 25000
+==== Fail =====
+Test
+seq : 1313
+freq = 30000
+==== Fail =====
+Test
+seq : 1314
+freq = 25000
+==== Fail =====
+Test
+seq : 1315
+freq = 25000
+==== Fail =====
+Test
+seq : 1316
+freq = 30000
+==== Fail =====
+Test
+seq : 1317
+freq = 25000
+==== Fail =====
+Test
+seq : 1318
+freq = 32000
+==== Fail =====
+Test
+seq : 1319
+freq = 25000
+==== Fail =====
+Test
+seq : 1320
+freq = 30000
+==== Fail =====
+Test
+seq : 1321
+freq = 30000
+==== Fail =====
+Test
+seq : 1322
+freq = 30000
+==== Fail =====
+Test
+seq : 1323
+freq = 25000
+==== Fail =====
+Test
+seq : 1324
+freq = 25000
+==== Fail =====
+Test
+seq : 1325
+freq = 25000
+==== Fail =====
+Test
+seq : 1326
+freq = 30000
+==== Fail =====
+Test
+seq : 1327
+freq = 25000
+==== Fail =====
+Test
+seq : 1328
+freq = 30000
+==== Fail =====
+Test
+seq : 1329
+freq = 25000
+==== Fail =====
+Test
+seq : 1330
+freq = 25000
+==== Fail =====
+Test
+seq : 1331
+freq = 25000
+==== Fail =====
+Test
+seq : 1332
+freq = 25000
+==== Fail =====
+Test
+seq : 1333
+freq = 25000
+==== Fail =====
+Test
+seq : 1334
+freq = 30000
+==== Fail =====
+Test
+seq : 1335
+freq = 25000
+==== Fail =====
+Test
+seq : 1336
+freq = 25000
+==== Fail =====
+Test
+seq : 1337
+freq = 30000
+==== Fail =====
+Test
+seq : 1338
+freq = 30000
+==== Fail =====
+Test
+seq : 1339
+freq = 25000
+==== Fail =====
+Test
+seq : 1340
+freq = 30000
+==== Fail =====
+Test
+seq : 1341
+freq = 25000
+==== Fail =====
+Test
+seq : 1342
+freq = 30000
+==== Fail =====
+Test
+seq : 1343
+freq = 25000
+==== Fail =====
+Test
+seq : 1344
+freq = 30000
+==== Fail =====
+Test
+seq : 1345
+freq = 25000
+==== Fail =====
+Test
+seq : 1346
+freq = 30000
+==== Fail =====
+Test
+seq : 1347
+freq = 25000
+==== Fail =====
+Test
+seq : 1348
+freq = 30000
+==== Fail =====
+Test
+seq : 1349
+freq = 25000
+==== Fail =====
+Test
+seq : 1350
+freq = 30000
+==== Fail =====
+Test
+seq : 1351
+freq = 25000
+==== Fail =====
+Test
+seq : 1352
+freq = 25000
+==== Fail =====
+Test
+seq : 1353
+freq = 25000
+==== Fail =====
+Test
+seq : 1354
+freq = 30000
+==== Fail =====
+Test
+seq : 1355
+freq = 25000
+==== Fail =====
+Test
+seq : 1356
+freq = 25000
+==== Fail =====
+Test
+seq : 1357
+freq = 30000
+==== Fail =====
+Test
+seq : 1358
+freq = 25000
+==== Fail =====
+Test
+seq : 1359
+freq = 30000
+==== Fail =====
+Test
+seq : 1360
+freq = 25000
+==== Fail =====
+Test
+seq : 1361
+freq = 25000
+==== Fail =====
+Test
+seq : 1362
+freq = 25000
+==== Fail =====
+Test
+seq : 1363
+freq = 30000
+==== Fail =====
+Test
+seq : 1364
+freq = 25000
+==== Fail =====
+Test
+seq : 1365
+freq = 30000
+==== Fail =====
+Test
+seq : 1366
+freq = 25000
+==== Fail =====
+Test
+seq : 1367
+freq = 30000
+==== Fail =====
+Test
+seq : 1368
+freq = 30000
+==== Fail =====
+Test
+seq : 1369
+freq = 30000
+==== Fail =====
+Test
+seq : 1370
+freq = 30000
+==== Fail =====
+Test
+seq : 1371
+freq = 30000
+==== Fail =====
+Test
+seq : 1372
+freq = 30000
+==== Fail =====
+Test
+seq : 1373
+freq = 30000
+==== Fail =====
+Test
+seq : 1374
+freq = 25000
+==== Fail =====
+Test
+seq : 1375
+freq = 30000
+==== Fail =====
+Test
+seq : 1376
+freq = 30000
+==== Fail =====
+Test
+seq : 1377
+freq = 25000
+==== Fail =====
+Test
+seq : 1378
+freq = 30000
+==== Fail =====
+Test
+seq : 1379
+freq = 25000
+==== Fail =====
+Test
+seq : 1380
+freq = 30000
+==== Fail =====
+Test
+seq : 1381
+freq = 25000
+==== Fail =====
+Test
+seq : 1382
+freq = 30000
+==== Fail =====
+Test
+seq : 1383
+freq = 30000
+==== Fail =====
+Test
+seq : 1384
+freq = 25000
+==== Fail =====
+Test
+seq : 1385
+freq = 25000
+==== Fail =====
+Test
+seq : 1386
+freq = 25000
+==== Fail =====
+Test
+seq : 1387
+freq = 30000
+==== Fail =====
+Test
+seq : 1388
+freq = 25000
+==== Fail =====
+Test
+seq : 1389
+freq = 30000
+==== Fail =====
+Test
+seq : 1390
+freq = 30000
+==== Fail =====
+Test
+seq : 1391
+freq = 25000
+==== Fail =====
+Test
+seq : 1392
+freq = 30000
+==== Fail =====
+Test
+seq : 1393
+freq = 30000
+==== Fail =====
+Test
+seq : 1394
+freq = 30000
+==== Fail =====
+Test
+seq : 1395
+freq = 30000
+==== Fail =====
+Test
+seq : 1396
+freq = 30000
+==== Fail =====
+Test
+seq : 1397
+freq = 25000
+==== Fail =====
+Test
+seq : 1398
+freq = 25000
+==== Fail =====
+Test
+seq : 1399
+freq = 30000
+==== Fail =====
+Test
+seq : 1400
+freq = 36000
+==== Fail =====
+Test
+seq : 1401
+freq = 36000
+==== Fail =====
+Test
+seq : 1402
+freq = 34000
+==== Fail =====
+Test
+seq : 1403
+freq = 32000
+==== Fail =====
+Test
+seq : 1404
+freq = 32000
+==== Fail =====
+Test
+seq : 1405
+freq = 31000
+==== Fail =====
+Test

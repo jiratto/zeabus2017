@@ -1,0 +1,11 @@
+READY TO GET THE DATA
+uint32
+['\xff', '\xff', '\x00', '\x80', '\x84', '\x1e', '\x00', '\x00']
+float
+['\xff', '\xff', '\x02', '\x9a', '\x99', '\x99', '>', '\x00']
+float
+['\xff', '\xff', '\x03', '\n', '\xd7', '\xa3', '<', '\x00']
+uint32
+['\xff', '\xff', '\x04', '\xdc', '\x05', '\x00', '\x00', '\x00']
+Test
+0

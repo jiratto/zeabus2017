@@ -1,0 +1,4344 @@
+READY TO GET THE DATA
+uint32
+['\xff', '\xff', '\x00', '\xa0', '\x86', '\x01', '\x00', '\x00']
+uint32
+['\xff', '\xff', '\x01', '@', '\x9c', '\x00', '\x00', '\x00']
+float
+['\xff', '\xff', '\x02', '\n', '\xd7', '#', '<', '\x00']
+float
+['\xff', '\xff', '\x03', '\n', '\xd7', '\xa3', '<', '\x00']
+uint32
+['\xff', '\xff', '\x04', '\xdc', '\x05', '\x00', '\x00', '\x00']
+False
+Test
+0
+READY TO GET THE DATA
+uint32
+['\xff', '\xff', '\x00', '\xa0', '\x86', '\x01', '\x00', '\x00']
+uint32
+['\xff', '\xff', '\x01', '@', '\x9c', '\x00', '\x00', '\x00']
+float
+['\xff', '\xff', '\x02', '\xcd', '\xcc', 'L', '>', '\x00']
+float
+['\xff', '\xff', '\x03', '\n', '\xd7', '\xa3', '<', '\x00']
+uint32
+['\xff', '\xff', '\x04', '\xdc', '\x05', '\x00', '\x00', '\x00']
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = -0.032849, c0i = 0.007096, c1r = -0.005537, c1i = 0.001057, c2r = 0.001400, c2i = 0.007910, c3r = 0.008563, c3i = 0.085444
+-1.0
+40000.0
+8.96631263458e-06
+4.44242286903e-05
+seq : 844
+fthres : 0.200000
+Particle Filter Az: 79.95,Elv: 29.44,Ot: 2.159 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = -0.015684, c0i = 0.015214, c1r = 0.002931, c1i = 0.012378, c2r = 0.009496, c2i = -0.012431, c3r = 0.040859, c3i = 0.016207
+-1.0
+40000.0
+7.6194473877e-06
+3.66350650438e-05
+seq : 850
+fthres : 0.200000
+Particle Filter Az: 67.44,Elv: 43.07,Ot: 1.193 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = -0.017285, c0i = -0.002292, c1r = -0.005772, c1i = 0.004820, c2r = 0.009848, c2i = 0.004515, c3r = -0.018728, c3i = 0.018131
+-1.0
+40000.0
+0.00023575949308
+0.00188178941607
+seq : 854
+fthres : 0.200000
+Particle Filter Az: 53.32,Elv: 38.84,Ot: 2.042 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = -0.014345, c0i = 0.015215, c1r = 0.006299, c1i = 0.021032, c2r = 0.011359, c2i = 0.005509, c3r = 0.012737, c3i = 0.037308
+-1.0
+40000.0
+8.600003639e-06
+4.32787710452e-05
+seq : 858
+fthres : 0.200000
+Particle Filter Az: 47.87,Elv: 25.60,Ot: 1.340 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = 0.005607, c0i = 0.028986, c1r = 0.011623, c1i = 0.020376, c2r = 0.010098, c2i = -0.025035, c3r = 0.029049, c3i = -0.035727
+-1.0
+40000.0
+7.42299471312e-06
+3.59629520972e-05
+seq : 864
+fthres : 0.200000
+Particle Filter Az: 72.95,Elv: 39.91,Ot: 0.264 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = 0.005034, c0i = 0.038083, c1r = 0.005588, c1i = 0.001871, c2r = -0.001735, c2i = -0.004811, c3r = 0.023262, c3i = 0.032091
+-1.0
+40000.0
+9.34989657253e-06
+4.44836041424e-05
+seq : 869
+fthres : 0.200000
+Particle Filter Az: 44.40,Elv: 45.01,Ot: 0.194 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = -0.020465, c0i = -0.000697, c1r = -0.004204, c1i = 0.008733, c2r = 0.008124, c2i = 0.005332, c3r = 0.001523, c3i = 0.027166
+-1.0
+40000.0
+8.55373946251e-06
+4.23351557401e-05
+seq : 875
+fthres : 0.200000
+Particle Filter Az: 57.43,Elv: 29.69,Ot: 1.457 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = 0.015724, c0i = -0.001792, c1r = -0.023462, c1i = -0.009731, c2r = -0.015554, c2i = 0.009416, c3r = -0.008539, c3i = -0.026558
+-1.0
+40000.0
+8.09022185422e-06
+3.84254999517e-05
+seq : 880
+fthres : 0.200000
+Particle Filter Az: 72.48,Elv: 7.66,Ot: 2.607 ,Freq : 40
+
+P: 1 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = 0.009164, c0i = 0.027614, c1r = -0.001902, c1i = 0.013814, c2r = -0.012766, c2i = -0.007692, c3r = -0.025609, c3i = -0.019402
+-1.0
+40000.0
+8.83451411937e-06
+4.35474685219e-05
+seq : 891
+fthres : 0.200000
+Particle Filter Az: 66.10,Elv: 1.04,Ot: 2.433 ,Freq : 40
+
+P: 2 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = -0.021326, c0i = -0.005269, c1r = -0.003497, c1i = -0.018596, c2r = -0.003062, c2i = 0.014593, c3r = 0.013647, c3i = 0.016677
+-1.0
+40000.0
+8.65111087478e-06
+4.2885014409e-05
+seq : 898
+fthres : 0.200000
+Particle Filter Az: 101.92,Elv: 18.36,Ot: 2.656 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = 0.020549, c0i = 0.010835, c1r = -0.008686, c1i = -0.012358, c2r = -0.018885, c2i = 0.012082, c3r = 0.013406, c3i = -0.014168
+-1.0
+40000.0
+7.35995445211e-06
+3.64225925296e-05
+seq : 908
+fthres : 0.200000
+Particle Filter Az: 136.17,Elv: 32.68,Ot: 1.774 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = 0.019635, c0i = 0.029002, c1r = 0.021408, c1i = 0.026756, c2r = 0.005271, c2i = -0.035125, c3r = 0.002499, c3i = -0.000005
+-1.0
+40000.0
+7.85923748481e-06
+3.86361862184e-05
+seq : 913
+fthres : 0.200000
+Particle Filter Az: 123.13,Elv: 25.28,Ot: 0.622 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = 0.043563, c0i = 0.015503, c1r = -0.003631, c1i = -0.010698, c2r = -0.027560, c2i = 0.004491, c3r = -0.011291, c3i = -0.002908
+-1.0
+40000.0
+8.39337280922e-06
+4.06024846598e-05
+seq : 918
+fthres : 0.200000
+Particle Filter Az: 153.30,Elv: 37.47,Ot: 1.277 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = -0.018881, c0i = -0.027874, c1r = -0.028202, c1i = -0.007730, c2r = 0.000886, c2i = 0.028668, c3r = -0.004131, c3i = 0.014526
+-1.0
+40000.0
+7.0422133831e-06
+3.4240380046e-05
+seq : 923
+fthres : 0.200000
+Particle Filter Az: 115.96,Elv: 46.68,Ot: 2.556 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = -0.029769, c0i = 0.006819, c1r = -0.006356, c1i = 0.010122, c2r = 0.000673, c2i = -0.008768, c3r = 0.014351, c3i = 0.054359
+-1.0
+40000.0
+7.75348962634e-06
+3.75897034246e-05
+seq : 928
+fthres : 0.200000
+Particle Filter Az: 91.53,Elv: 47.41,Ot: 1.665 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 36000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 37000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = 0.018421, c0i = 0.017006, c1r = 0.006598, c1i = -0.012313, c2r = -0.024098, c2i = 0.003634, c3r = 0.004438, c3i = -0.027811
+-1.0
+40000.0
+4.31081898569e-05
+0.00014988334442
+seq : 938
+fthres : 0.200000
+Particle Filter Az: 142.54,Elv: 43.02,Ot: 2.499 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = 0.034748, c0i = 0.003348, c1r = 0.004685, c1i = 0.011968, c2r = -0.019917, c2i = -0.004430, c3r = -0.023635, c3i = 0.011612
+-1.0
+40000.0
+2.32528273045e-05
+0.000159970790264
+seq : 945
+fthres : 0.200000
+Particle Filter Az: -165.51,Elv: 32.75,Ot: 2.114 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = 0.015181, c0i = 0.044105, c1r = -0.005525, c1i = 0.007590, c2r = -0.006011, c2i = -0.024070, c3r = -0.002984, c3i = -0.013542
+-1.0
+40000.0
+1.82290332305e-05
+7.17279472155e-05
+seq : 952
+fthres : 0.200000
+Particle Filter Az: -137.11,Elv: 34.99,Ot: 2.714 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = -0.025641, c0i = 0.016428, c1r = -0.005158, c1i = 0.002108, c2r = 0.008263, c2i = -0.004274, c3r = 0.031440, c3i = -0.039096
+-1.0
+40000.0
+3.29080285155e-05
+9.37166551012e-05
+seq : 957
+fthres : 0.200000
+Particle Filter Az: -113.50,Elv: 47.77,Ot: -2.363 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = 0.020443, c0i = 0.041324, c1r = 0.005047, c1i = 0.012615, c2r = -0.020074, c2i = -0.024536, c3r = -0.023979, c3i = -0.014359
+-1.0
+40000.0
+2.96741472994e-05
+0.000225200827117
+seq : 963
+fthres : 0.200000
+Particle Filter Az: -94.79,Elv: 47.81,Ot: 2.779 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = -0.055038, c0i = 0.002451, c1r = 0.012133, c1i = -0.002583, c2r = 0.013970, c2i = -0.004583, c3r = 0.026513, c3i = 0.004921
+-1.0
+40000.0
+4.43147546321e-05
+0.00020003321697
+seq : 968
+fthres : 0.200000
+Particle Filter Az: -70.11,Elv: 75.40,Ot: -2.420 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = 0.026695, c0i = 0.001547, c1r = 0.002017, c1i = -0.000313, c2r = -0.005129, c2i = -0.007964, c3r = -0.003112, c3i = 0.005469
+-1.0
+40000.0
+4.41083793703e-05
+0.000151703789015
+seq : 975
+fthres : 0.200000
+Particle Filter Az: -85.39,Elv: 86.23,Ot: 2.611 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = -0.009823, c0i = -0.006608, c1r = -0.002063, c1i = -0.012388, c2r = 0.005016, c2i = 0.009944, c3r = -0.014749, c3i = -0.001334
+-1.0
+40000.0
+0.000108748812636
+0.000309102499159
+seq : 981
+fthres : 0.200000
+Particle Filter Az: -62.56,Elv: 79.28,Ot: 1.614 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = -0.003974, c0i = -0.051713, c1r = 0.010848, c1i = -0.005721, c2r = -0.001878, c2i = 0.017096, c3r = -0.007313, c3i = 0.022277
+-1.0
+40000.0
+3.14485296258e-05
+0.000115916976938
+seq : 988
+fthres : 0.200000
+Particle Filter Az: -84.73,Elv: 71.21,Ot: 0.621 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 27000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = 0.043404, c0i = -0.002275, c1r = 0.004189, c1i = 0.002100, c2r = -0.007333, c2i = 0.005127, c3r = -0.020060, c3i = -0.007993
+-1.0
+40000.0
+3.24540415022e-05
+0.000164596553077
+seq : 1005
+fthres : 0.200000
+Particle Filter Az: -85.31,Elv: 66.02,Ot: 1.510 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = 0.025160, c0i = 0.030201, c1r = 0.005476, c1i = 0.006776, c2r = -0.017902, c2i = -0.017471, c3r = -0.002008, c3i = -0.026794
+-1.0
+40000.0
+3.45887965523e-05
+0.000122877463582
+seq : 1013
+fthres : 0.200000
+Particle Filter Az: -84.43,Elv: 73.76,Ot: 2.486 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 27000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = -0.051211, c0i = -0.020527, c1r = -0.008135, c1i = 0.002175, c2r = -0.007188, c2i = 0.005177, c3r = 0.014292, c3i = 0.058115
+-1.0
+40000.0
+3.93308582716e-05
+0.000133290217491
+seq : 1020
+fthres : 0.200000
+Particle Filter Az: -51.58,Elv: 64.52,Ot: -2.799 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = -0.015093, c0i = -0.005695, c1r = 0.022932, c1i = -0.024323, c2r = -0.016028, c2i = -0.006742, c3r = -0.017114, c3i = 0.024305
+-1.0
+40000.0
+2.79439209407e-05
+0.000151210755575
+seq : 1027
+fthres : 0.200000
+Particle Filter Az: -45.50,Elv: 74.34,Ot: 1.042 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = -0.020236, c0i = 0.012677, c1r = -0.024081, c1i = -0.013764, c2r = -0.009689, c2i = 0.008935, c3r = 0.009927, c3i = 0.047547
+-1.0
+40000.0
+2.31838748732e-05
+0.000206281198189
+seq : 1033
+fthres : 0.200000
+Particle Filter Az: -42.41,Elv: 16.66,Ot: 0.465 ,Freq : 40
+
+P: 1 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = -0.038334, c0i = 0.000464, c1r = -0.008027, c1i = -0.015627, c2r = -0.000371, c2i = 0.005731, c3r = -0.012335, c3i = 0.043474
+-1.0
+40000.0
+0.000107906933408
+0.00018986343639
+seq : 1040
+fthres : 0.200000
+Particle Filter Az: -40.51,Elv: 1.44,Ot: 2.544 ,Freq : 40
+
+P: 2 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = 0.000861, c0i = -0.028346, c1r = -0.004456, c1i = 0.007334, c2r = -0.002290, c2i = 0.004277, c3r = -0.021038, c3i = -0.007500
+-1.0
+40000.0
+2.39537694142e-05
+0.000149530591443
+seq : 1048
+fthres : 0.200000
+Particle Filter Az: -5.88,Elv: 21.96,Ot: -2.096 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = -0.008139, c0i = 0.001273, c1r = -0.007076, c1i = 0.000895, c2r = 0.001286, c2i = -0.000980, c3r = 0.002456, c3i = 0.023217
+-1.0
+40000.0
+3.01725849567e-05
+0.000189419733942
+seq : 1055
+fthres : 0.200000
+Particle Filter Az: 11.57,Elv: 12.23,Ot: 2.331 ,Freq : 40
+
+P: 1 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 26000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = -0.009732, c0i = -0.000416, c1r = -0.010035, c1i = 0.005953, c2r = 0.009246, c2i = -0.004589, c3r = 0.001600, c3i = 0.025717
+-1.0
+40000.0
+5.60350636079e-05
+0.00019543794042
+seq : 1066
+fthres : 0.200000
+Particle Filter Az: 47.25,Elv: 37.98,Ot: 1.708 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = -0.002336, c0i = 0.016921, c1r = 0.004073, c1i = 0.007484, c2r = -0.004058, c2i = -0.007032, c3r = 0.024793, c3i = 0.017725
+-1.0
+40000.0
+3.50502086803e-05
+0.000196556051378
+seq : 1073
+fthres : 0.200000
+Particle Filter Az: 53.16,Elv: 49.14,Ot: 0.533 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = -0.006710, c0i = -0.021945, c1r = -0.006554, c1i = -0.002779, c2r = 0.001471, c2i = 0.016079, c3r = -0.031731, c3i = -0.018063
+-1.0
+40000.0
+2.56817875197e-05
+0.000114350477816
+seq : 1080
+fthres : 0.200000
+Particle Filter Az: 41.98,Elv: 46.32,Ot: 1.878 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = -0.015840, c0i = 0.013127, c1r = 0.009861, c1i = 0.007420, c2r = 0.003319, c2i = -0.020094, c3r = 0.020032, c3i = 0.026410
+-1.0
+40000.0
+2.2635456844e-05
+8.56379920151e-05
+seq : 1086
+fthres : 0.200000
+Particle Filter Az: 42.06,Elv: 51.87,Ot: 0.924 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = 0.016338, c0i = -0.009276, c1r = 0.005669, c1i = -0.000377, c2r = -0.010818, c2i = 0.010762, c3r = 0.000405, c3i = -0.042837
+-1.0
+40000.0
+2.74509493465e-05
+0.000101481287857
+seq : 1092
+fthres : 0.200000
+Particle Filter Az: 63.16,Elv: 48.33,Ot: -0.103 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = 0.014419, c0i = -0.014418, c1r = 0.020552, c1i = -0.013897, c2r = -0.010569, c2i = -0.010983, c3r = 0.000794, c3i = -0.023405
+-1.0
+40000.0
+1.55142934091e-05
+7.75047301431e-05
+seq : 1098
+fthres : 0.200000
+Particle Filter Az: 75.41,Elv: 28.74,Ot: -1.112 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = 0.015579, c0i = 0.011050, c1r = 0.017733, c1i = 0.000309, c2r = -0.002933, c2i = -0.011644, c3r = 0.026625, c3i = -0.021198
+-1.0
+40000.0
+3.72089198208e-05
+0.000248820870183
+seq : 1104
+fthres : 0.200000
+Particle Filter Az: 64.24,Elv: 33.24,Ot: -0.483 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = -0.002426, c0i = -0.006581, c1r = -0.004238, c1i = 0.021902, c2r = 0.014908, c2i = 0.001671, c3r = -0.004695, c3i = 0.009360
+-1.0
+40000.0
+1.94092972379e-05
+9.67685264186e-05
+seq : 1111
+fthres : 0.200000
+Particle Filter Az: 55.24,Elv: 38.07,Ot: 0.821 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 36000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = 0.013422, c0i = -0.014692, c1r = -0.005794, c1i = 0.007917, c2r = 0.001695, c2i = 0.012292, c3r = -0.006702, c3i = -0.026732
+-1.0
+40000.0
+2.64683421847e-05
+0.000145947036799
+seq : 1120
+fthres : 0.200000
+Particle Filter Az: 113.35,Elv: 28.88,Ot: 0.438 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = 0.009796, c0i = 0.014009, c1r = 0.000033, c1i = 0.005987, c2r = -0.005117, c2i = -0.004390, c3r = 0.032958, c3i = 0.008226
+-1.0
+40000.0
+2.58721211139e-05
+0.000161283707712
+seq : 1126
+fthres : 0.200000
+Particle Filter Az: 91.97,Elv: 37.98,Ot: 0.263 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 27000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = 0.004383, c0i = 0.014960, c1r = -0.002211, c1i = 0.004741, c2r = 0.002375, c2i = -0.000515, c3r = 0.005252, c3i = 0.020413
+-1.0
+40000.0
+2.20839283429e-05
+0.000105514314782
+seq : 1141
+fthres : 0.200000
+Particle Filter Az: 80.52,Elv: 23.73,Ot: 1.071 ,Freq : 40
+
+P: 1 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = -0.004872, c0i = 0.002622, c1r = -0.000603, c1i = -0.004274, c2r = 0.001185, c2i = 0.002652, c3r = -0.004962, c3i = -0.001642
+-1.0
+40000.0
+0.000298604718409
+0.00247704447247
+seq : 1148
+fthres : 0.200000
+Particle Filter Az: 89.74,Elv: 28.83,Ot: 2.220 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = 0.017272, c0i = 0.014196, c1r = -0.022880, c1i = -0.006979, c2r = -0.018045, c2i = 0.009910, c3r = 0.019252, c3i = -0.014540
+-1.0
+40000.0
+5.14719067723e-05
+9.99254043563e-05
+seq : 1155
+fthres : 0.200000
+Particle Filter Az: 138.45,Elv: 41.66,Ot: 1.691 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = -0.024481, c0i = 0.000675, c1r = 0.012737, c1i = -0.010339, c2r = 0.004868, c2i = -0.009586, c3r = -0.037163, c3i = 0.005458
+-1.0
+40000.0
+1.9400862584e-05
+9.91101842374e-05
+seq : 1163
+fthres : 0.200000
+Particle Filter Az: 145.97,Elv: 52.31,Ot: 2.825 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = -0.000162, c0i = -0.024357, c1r = 0.008797, c1i = 0.004551, c2r = 0.005014, c2i = 0.001313, c3r = -0.014325, c3i = -0.012676
+-1.0
+40000.0
+1.30506095957e-05
+9.49618624873e-05
+seq : 1168
+fthres : 0.200000
+Particle Filter Az: 123.21,Elv: 57.23,Ot: -2.373 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = 0.022266, c0i = 0.014479, c1r = -0.016278, c1i = -0.013399, c2r = -0.016106, c2i = -0.000108, c3r = 0.007259, c3i = 0.002250
+-1.0
+40000.0
+2.02376941161e-05
+0.000110457505798
+seq : 1176
+fthres : 0.200000
+Particle Filter Az: -175.03,Elv: 58.43,Ot: 2.798 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = 0.021706, c0i = -0.009777, c1r = -0.011575, c1i = -0.013574, c2r = -0.007037, c2i = 0.005638, c3r = -0.021041, c3i = -0.022165
+-1.0
+40000.0
+2.74114245258e-05
+8.93017058843e-05
+seq : 1182
+fthres : 0.200000
+Particle Filter Az: 160.96,Elv: 71.41,Ot: 1.820 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = -0.009821, c0i = -0.020817, c1r = -0.011295, c1i = 0.003617, c2r = -0.006961, c2i = 0.011581, c3r = -0.018297, c3i = -0.006843
+-1.0
+40000.0
+1.44840560097e-05
+9.44674175116e-05
+seq : 1188
+fthres : 0.200000
+Particle Filter Az: 128.98,Elv: 80.03,Ot: 0.825 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = -0.009986, c0i = 0.008356, c1r = 0.020543, c1i = -0.012929, c2r = 0.004031, c2i = -0.018725, c3r = 0.006535, c3i = 0.009652
+-1.0
+40000.0
+1.70613602677e-05
+7.2140363045e-05
+seq : 1194
+fthres : 0.200000
+Particle Filter Az: -13.31,Elv: 76.72,Ot: 1.942 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = 0.018623, c0i = 0.003024, c1r = -0.008612, c1i = -0.008826, c2r = -0.008544, c2i = 0.006834, c3r = -0.010757, c3i = -0.025933
+-1.0
+40000.0
+1.96864293684e-05
+0.000100444034615
+seq : 1200
+fthres : 0.200000
+Particle Filter Az: 157.28,Elv: 82.90,Ot: 1.182 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = 0.006987, c0i = 0.004233, c1r = 0.014857, c1i = -0.023010, c2r = -0.000359, c2i = -0.013805, c3r = -0.019112, c3i = -0.007241
+-1.0
+40000.0
+1.65718793141e-05
+7.86321688793e-05
+seq : 1205
+fthres : 0.200000
+Particle Filter Az: -47.71,Elv: 74.62,Ot: 2.334 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = 0.000805, c0i = -0.005027, c1r = -0.012008, c1i = -0.005582, c2r = -0.002793, c2i = 0.005356, c3r = -0.035342, c3i = -0.001895
+-1.0
+40000.0
+2.58540621871e-05
+0.000128580111777
+seq : 1212
+fthres : 0.200000
+Particle Filter Az: 158.97,Elv: 77.05,Ot: 0.015 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = 0.007044, c0i = 0.025126, c1r = 0.000319, c1i = -0.016360, c2r = -0.004954, c2i = -0.019284, c3r = 0.014342, c3i = 0.031111
+-1.0
+40000.0
+2.05041524168e-05
+6.35858814348e-05
+seq : 1219
+fthres : 0.200000
+Particle Filter Az: 167.38,Elv: 81.69,Ot: 2.071 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = 0.015419, c0i = 0.016554, c1r = -0.004000, c1i = -0.023711, c2r = -0.019866, c2i = -0.009098, c3r = 0.022217, c3i = 0.003683
+-1.0
+40000.0
+2.05446140171e-05
+8.67030175868e-05
+seq : 1225
+fthres : 0.200000
+Particle Filter Az: 164.58,Elv: 79.81,Ot: 2.280 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = -0.006524, c0i = 0.024900, c1r = 0.012444, c1i = -0.015104, c2r = -0.001483, c2i = -0.020968, c3r = 0.014401, c3i = 0.024317
+-1.0
+40000.0
+1.72428844962e-05
+7.49634200474e-05
+seq : 1233
+fthres : 0.200000
+Particle Filter Az: 164.89,Elv: 81.12,Ot: -0.142 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = -0.001533, c0i = -0.004160, c1r = -0.016866, c1i = -0.009363, c2r = -0.003582, c2i = 0.000722, c3r = -0.026876, c3i = 0.006479
+-1.0
+40000.0
+2.46094477916e-05
+8.60105647007e-05
+seq : 1240
+fthres : 0.200000
+Particle Filter Az: 141.71,Elv: 50.09,Ot: -2.643 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = 0.021523, c0i = -0.023828, c1r = -0.008826, c1i = 0.010226, c2r = -0.001431, c2i = 0.018461, c3r = -0.021116, c3i = -0.038405
+-1.0
+40000.0
+1.40915390148e-05
+6.91986933816e-05
+seq : 1246
+fthres : 0.200000
+Particle Filter Az: 125.40,Elv: 72.65,Ot: -1.129 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = -0.003108, c0i = -0.010369, c1r = 0.009898, c1i = 0.007261, c2r = 0.009814, c2i = -0.003008, c3r = -0.014862, c3i = -0.014327
+-1.0
+40000.0
+2.71968365269e-05
+0.000114230002509
+seq : 1251
+fthres : 0.200000
+Particle Filter Az: 158.31,Elv: 44.72,Ot: -0.944 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = 0.008524, c0i = -0.026048, c1r = -0.000321, c1i = 0.017266, c2r = 0.003109, c2i = 0.018730, c3r = -0.004636, c3i = -0.039123
+-1.0
+40000.0
+1.47448445205e-05
+8.56726037455e-05
+seq : 1256
+fthres : 0.200000
+Particle Filter Az: 143.90,Elv: 56.84,Ot: -0.012 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = 0.032664, c0i = -0.005333, c1r = 0.000276, c1i = 0.008319, c2r = 0.001420, c2i = -0.001887, c3r = 0.001525, c3i = -0.019179
+-1.0
+40000.0
+1.55018278747e-05
+0.000101050958619
+seq : 1262
+fthres : 0.200000
+Particle Filter Az: 143.81,Elv: 40.19,Ot: -0.271 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = 0.011907, c0i = -0.011472, c1r = 0.023884, c1i = 0.002725, c2r = 0.008785, c2i = -0.005228, c3r = -0.011026, c3i = -0.025169
+-1.0
+40000.0
+2.60799097305e-05
+8.76021731528e-05
+seq : 1270
+fthres : 0.200000
+Particle Filter Az: 140.73,Elv: 28.40,Ot: -0.786 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = 0.015183, c0i = -0.006846, c1r = -0.000352, c1i = -0.016721, c2r = -0.004258, c2i = -0.012686, c3r = -0.027368, c3i = 0.000460
+-1.0
+40000.0
+2.97290589515e-05
+0.000128679472255
+seq : 1275
+fthres : 0.200000
+Particle Filter Az: 109.02,Elv: 25.79,Ot: -1.712 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = 0.017479, c0i = 0.008298, c1r = -0.001962, c1i = -0.004458, c2r = -0.012547, c2i = -0.006350, c3r = 0.018765, c3i = -0.007105
+-1.0
+40000.0
+2.17787910515e-05
+9.04006956262e-05
+seq : 1280
+fthres : 0.200000
+Particle Filter Az: 69.77,Elv: 30.22,Ot: -1.203 ,Freq : 40
+
+P: 0 
+success
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 35000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 30000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+False Freq : 25000.000000
+Fail
+False
+Test
+0
+1
+2
+3
+find signal
+c0r = 0.006365, c0i = -0.000513, c1r = -0.001171, c1i = 0.003536, c2r = 0.002005, c2i = 0.011029, c3r = 0.017069, c3i = -0.029921
+-1.0
+40000.0
+2.33595019381e-05
+0.000100582539744
+seq : 1289
+fthres : 0.200000
+Particle Filter Az: 95.74,Elv: 22.28,Ot: -0.238 ,Freq : 40
+
+P: 1 
+success
+False
+Test
+0
