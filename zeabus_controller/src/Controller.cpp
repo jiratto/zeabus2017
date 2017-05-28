@@ -23,7 +23,7 @@
 #include "PID_constant_helper.h"
 #include <iostream>
 #include <controller/drive_x.h>
-#include <modbus_ascii_ros/Switch.h>
+// #include <modbus_ascii_ros/Switch.h>
 
 #define boolToStr(a) a?"true":"false"
 #define abs(a) a<0?-a:a
@@ -54,7 +54,7 @@ nav_msgs::Odometry previousState;
 nav_msgs::Odometry currentState;
 double cmd_vel[6]={0,0,0,0,0,0},position[7],vel[6];
 double prevPosition[6],prevVel[6];
-volatile bool is_switch_on = false;
+// volatile bool is_switch_on = false;
 volatile bool isStateArrived = false;
 bool isFixed[] = {false,false,true,true,true,true};
 bool canFixed[] = {true,true,true,true,true,true};
@@ -94,7 +94,7 @@ void fixAbsDepthCallBack(const std_msgs::Float64 msg);
 void fixAbsYawCallBack(const std_msgs::Float64 msg);
 void fixRelYawCallBack(const std_msgs::Float64 msg);
 void fixRelXCallBack(const std_msgs::Float64 msg);
-void switch_callback(const modbus_ascii_ros::Switch msg);
+// void switch_callback(const modbus_ascii_ros::Switch msg);
 void pushSlerp(tf::Quaternion fq);
 bool is_at_fix_position_bool(double err);
 bool is_at_fix_orientation_bool(double err);
@@ -135,7 +135,7 @@ int main(int argc,char **argv) {
 	ros::Subscriber sub_fixRelYaw = nh.subscribe("/fix/rel/yaw", 1000, &fixRelYawCallBack);
 	ros::Subscriber sub_fixAbsYaw = nh.subscribe("/fix/abs/yaw", 1000, &fixAbsYawCallBack);
 	ros::Subscriber sub_fixRelX = nh.subscribe("/fix/rel/x",1000, &fixRelXCallBack);
-	ros::Subscriber sub_switch = nh.subscribe("/switch/data",100, &switch_callback);
+	// ros::Subscriber sub_switch = nh.subscribe("/switch/data",100, &switch_callback);
 	ros::ServiceServer service = nh.advertiseService("/fix_rel_x_srv",fix_rel_x_srv_callback);
 	ros::Publisher pub = nh.advertise<geometry_msgs::Twist>("/zeabus/cmd_vel",1000);
 	ros::Publisher is_at_fix_position_pub = nh.advertise<std_msgs::Bool>("/controller/is_at_fix_position",1000);
@@ -149,7 +149,7 @@ int main(int argc,char **argv) {
 	ros::Rate rate(50);
 	while(nh.ok()) {
 		ros::spinOnce();
-		if(!isStateArrived || !is_switch_on){
+		if(!isStateArrived){ //|| !is_switch_on){
 			ROS_INFO("No state arrived or motor switch is off wait 1 sec");
 			ros::Duration(1).sleep();
 			continue;
@@ -192,7 +192,7 @@ void stateListenerCallBack(const nav_msgs::Odometry msg){
 
 	currentState = msg;
 	//ROS_INFO("%d",is_switch_on);
-	if(isStateArrived == false && is_switch_on){
+	if(isStateArrived == false){// && is_switch_on){
 		tf::Quaternion ini(msg.pose.pose.orientation.x,msg.pose.pose.orientation.y,msg.pose.pose.orientation.z,msg.pose.pose.orientation.w);
 		tfScalar R,P,Y;
 		tf::Matrix3x3(ini).getRPY(R,P,Y);
@@ -719,6 +719,6 @@ bool fix_rel_x_srv_callback(controller::drive_x::Request &req,controller::drive_
 	return true;
 }
 
-void switch_callback(const modbus_ascii_ros::Switch msg){
-	is_switch_on =  msg.motor_switch;
-}
+// void switch_callback(const modbus_ascii_ros::Switch msg){
+// 	is_switch_on =  msg.motor_switch;
+// }
