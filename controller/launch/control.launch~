@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<launch>
+
+
+    
+    <node name="thrustmapper" pkg="zeabus_control" type="thrust_mapper.py"/>
+
+    <node name="smoother" pkg="zeabus_control" type="smoother.py"/>
+    
+    <include file="$(find zeabus_teleop)/launch/joy_F710.launch">
+        <arg name="topic" default="/cmd_vel"/>
+    </include>
+
+    <node name="Controller" pkg="zeabus_controller" type="Controller" output="screen"/>
+    <node name="TranformFrameBroadcaster" pkg="zeabus_controller" type="TranformFrameBroadcaster" output="screen"/>
+    
+</launch>
