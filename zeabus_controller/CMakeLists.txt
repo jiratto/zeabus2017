@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(controller)
+project(zeabus_controller)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -51,9 +51,9 @@ catkin_package(
 
 
 
-add_executable(Controller src/Controller.cpp)
-add_dependencies(Controller ${PROJECT_NAME}_gencfg controller_gencpp)
-target_link_libraries(Controller ${catkin_LIBRARIES})
+add_executable(zeabus_controller src/zeabus_controller.cpp)
+add_dependencies(zeabus_controller ${PROJECT_NAME}_gencfg zeabus_controller_gencpp)
+target_link_libraries(zeabus_controller ${catkin_LIBRARIES})
 
 # add_executable(TranformFrameBroadcaster src/tf-broadcaster.cpp)
 # target_link_libraries(TranformFrameBroadcaster ${catkin_LIBRARIES})
