@@ -18,11 +18,11 @@
 #include <tf/transform_listener.h>
 #include <geometry_msgs/Vector3.h>
 #include <dynamic_reconfigure/server.h>
-#include <controller/PIDConstantConfig.h>
+#include <zeabus_controller/PIDConstantConfig.h>
 #include <queue>
 #include "PID_constant_helper.h"
 #include <iostream>
-#include <controller/drive_x.h>
+#include <zeabus_controller/drive_x.h>
 #include <modbus_ascii_ros/Switch.h>
 
 #define boolToStr(a) a?"true":"false"
@@ -54,7 +54,7 @@ nav_msgs::Odometry previousState;
 nav_msgs::Odometry currentState;
 double cmd_vel[6]={0,0,0,0,0,0},position[7],vel[6];
 double prevPosition[6],prevVel[6];
-// volatile bool is_switch_on = false;
+volatile bool is_switch_on = false;
 volatile bool isStateArrived = false;
 bool isFixed[] = {false,false,true,true,true,true};
 bool canFixed[] = {true,true,true,true,true,true};
