@@ -4,8 +4,9 @@
 #include "std_msgs/Header.h"
 #include "sensor_msgs/CompressedImage.h"
 #include <sstream>
+#include "opencv2/opencv.hpp"
+#include <opencv2/highgui/highgui.hpp>
 #include "opencv2/imgproc.hpp"
-#include "opencv2/highgui.hpp"
 #include <iostream>
 #include <rosbag/bag.h>
 #include "std_msgs/UInt8MultiArray.h"
