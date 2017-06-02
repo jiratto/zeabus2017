@@ -54,7 +54,7 @@ nav_msgs::Odometry previousState;
 nav_msgs::Odometry currentState;
 double cmd_vel[6]={0,0,0,0,0,0},position[7],vel[6];
 double prevPosition[6],prevVel[6];
-// volatile bool is_switch_on = false;
+volatile bool is_switch_on = false;
 volatile bool isStateArrived = false;
 bool isFixed[] = {false,false,true,true,true,true};
 bool canFixed[] = {true,true,true,true,true,true};
