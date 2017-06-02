@@ -71,7 +71,7 @@ int freeMode = 2; // free roll pitch control
 int barrelRollMode = 3; // for doing barrel roll fix depth yaw
 int controllerMode = normalMode;
 void validateValue(double&);
-void PIDConstantCallBack(controller::PIDConstantConfig &config,uint32_t level);
+void PIDConstantCallBack(zeabus_controller::PIDConstantConfig &config,uint32_t level);
 void stateListenerCallBack(const nav_msgs::Odometry msg);
 void cmd_velCallBack(const geometry_msgs::Twist msg);
 void fixDepthCallBack(const std_msgs::Float64 msg);
@@ -98,7 +98,7 @@ void switch_callback(const modbus_ascii_ros::Switch msg);
 void pushSlerp(tf::Quaternion fq);
 bool is_at_fix_position_bool(double err);
 bool is_at_fix_orientation_bool(double err);
-bool fix_rel_x_srv_callback(controller::drive_x::Request &req,controller::drive_x::Response &res);
+bool fix_rel_x_srv_callback(zeabus_controller::drive_x::Request &req,zeabus_controller::drive_x::Response &res);
 
 
 void init(){
@@ -141,8 +141,8 @@ int main(int argc,char **argv) {
 	ros::Publisher is_at_fix_position_pub = nh.advertise<std_msgs::Bool>("/controller/is_at_fix_position",1000);
 	ros::Publisher is_at_fix_orientation_pub = nh.advertise<std_msgs::Bool>("/controller/is_at_fix_orientation",1000);
 	//ros::Publisher fixedPositionPublisher = nh.advertise<geometry_msgs::Pose>("/controller/fixed_position",10);
-	dynamic_reconfigure::Server<controller::PIDConstantConfig> server;
-  	dynamic_reconfigure::Server<controller::PIDConstantConfig>::CallbackType f;
+	dynamic_reconfigure::Server<zeabus_controller::PIDConstantConfig> server;
+  	dynamic_reconfigure::Server<zeabus_controller::PIDConstantConfig>::CallbackType f;
 	init();
   	f = boost::bind(&PIDConstantCallBack, _1, _2);
   	server.setCallback(f);
@@ -510,7 +510,7 @@ bool isClose(double a,double b){ // for sensor error
 	return fabs(a - b) < MIN_ERROR;
 }
 
-void PIDConstantCallBack(controller::PIDConstantConfig &config,uint32_t level){
+void PIDConstantCallBack(zeabus_controller::PIDConstantConfig &config,uint32_t level){
 	ROS_INFO("!!!--K changed--!!!");
 
 	cmdVelK[0][0] = config.KPVx;
@@ -701,7 +701,7 @@ std_msgs::Bool is_at_fix_position(double err){
 	return result;
 }
 
-bool fix_rel_x_srv_callback(controller::drive_x::Request &req,controller::drive_x::Response &res){
+bool fix_rel_x_srv_callback(zeabus_controller::drive_x::Request &req,zeabus_controller::drive_x::Response &res){
 	//std::cout << "fix rel x->" << msg.data << std::endl;
 	cmd_vel[0] = 0;
 	cmd_vel[1] = 0;
