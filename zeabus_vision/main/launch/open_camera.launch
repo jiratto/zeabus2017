@@ -1,0 +1,8 @@
+<launch>
+  <include file="$(find zeabus_vision)/launch/leftcam_top.launch">
+  </include>
+  <include file="$(find zeabus_vision)/launch/rightcam_bottom.launch">
+  </include>
+  <include file="$(find zeabus_vision)/launch/leftcam_bottom.launch">
+  </include>
+</launch>
