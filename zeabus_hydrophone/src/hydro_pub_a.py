@@ -16,6 +16,7 @@ ser = serial.Serial('/dev/usb2serial/ftdi_AJ038YFU', 115200)
 freq_s = 0
 fre = 0
 k = 0
+hello = 0
 
 status = False
 check = False
