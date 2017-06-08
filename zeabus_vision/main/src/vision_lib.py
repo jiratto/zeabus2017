@@ -4,9 +4,10 @@ import numpy as np
 import math
 import rospy
 
+
 def range_str2list(str):
     str = str.split(',')
-    return [int(str[0]), int(str[1]), int(str[2])]
+    return np.array([int(str[0]), int(str[1]), int(str[2])],np.uint8)
 
 
 def getColor(color, camera):
@@ -16,10 +17,8 @@ def getColor(color, camera):
     if camera == 'down':
         for c in color_list_down:
             if color == c:
-                lower = np.array(rospy.get_param(
-                    '/color_range/color_down/lower_' + c), np.uint8)
-                upper = np.array(rospy.get_param(
-                    '/color_range/color_down/upper_' + c), np.uint8)
+                lower = rospy.get_param('/color_range/color_down/lower_' + c)
+                upper = rospy.get_param('/color_range/color_down/upper_' + c)
     else:
         for c in color_list_top:
             if color == c:
@@ -27,10 +26,23 @@ def getColor(color, camera):
                     '/color_range/color_top/lower_' + c), np.uint8)
                 upper = np.array(rospy.get_param(
                     '/color_range/color_top/upper_' + c), np.uint8)
-    lower = range_str2list(param_lower)
-    upper = range_str2list(param_upper)
+    lower = range_str2list(lower)
+    upper = range_str2list(upper)
     return lower, upper
 
+
+def find_shape(cnt, req):
+    peri = cv2.arcLength(cnt, True)
+    approx = cv2.approxPolyDP(cnt, 0.04 * peri, True)
+    if len(approx) == 3 and req == 'tri':
+		return True
+    elif len(approx) == 4 and req == 'rect':
+		return True
+    elif len(approx) >= 25 and req == 'cir':
+	    return True
+    elif len(approx) == req:
+        return True
+	return False
 
 def equalization(frame):
     img = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
