@@ -17,8 +17,6 @@ freq_s = 0
 fre = 0
 k = 0
 
-Earth=456
-
 status = False
 check = False
 def float_hex4(f):
