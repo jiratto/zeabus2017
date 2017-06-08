@@ -29,7 +29,7 @@ class window:
         self.lower_tmp = {}
         self.upper_tmp = {}
         self.select = {}
-        self.path = rospkg.RosPack().get_path('zeabus_vision_sk')
+        self.path = rospkg.RosPack().get_path('zeabus_vision')
 
     def create(self, window_name):
         for name in window_name:
