@@ -16,11 +16,10 @@ ser = serial.Serial('/dev/usb2serial/ftdi_AJ038YFU', 115200)
 freq_s = 0
 fre = 0
 k = 0
-passon = 0
+
+GoOOO = 2432
+
 status = False
-p = 0
-sending = False
-check_elv = True
 check = False
 def float_hex4(f):
     return ''.join(('%2.2x'%ord(c)) for c in struct.pack('<f', f))
