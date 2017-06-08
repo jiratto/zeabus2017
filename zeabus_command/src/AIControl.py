@@ -28,7 +28,7 @@ class AIControl():
 		self.turnYawAbsolute = rospy.Publisher ('/fix/abs/yaw', Float64, queue_size = 10)	# publish turn angle absolute mode
 
 		rospy.wait_for_service ('fix_rel_x_srv')							# turn yaw relative by service
-		self.driveXService = rospy.ServiceProxy ('fix_rel_x_srv', drive_x)	# drive x [forward or backword] by service
+		self.driveXService = rospy.ServiceProxy ('fix_rel_x_srv', drive_xaxis)	# drive x [forward or backword] by service
 		self.wait_for_subscriber ()											# method check subscribtion
 
 	# subscribe from /auv/state
@@ -98,5 +98,30 @@ class AIControl():
 		self.command.publish (tw)
 		rospy.sleep (0.05)
 
+	# get current position from /auv/state
 	def get_position (self): 	
 		return self.auvState
+
+	# check Did we reach the point ?
+	def wait_reach_fix_position (self, delay = 0.1, check_interval = 0.1, timeout_threshold = 10):
+		rospy.sleep (delay)
+		waitedTime = 0
+		while not rospy.is_shutdown () and not self.isFixPostion and waitedTime < timeout_threshold:
+			waitedTime += check_interval
+			rospy.sleep (check_interval)
+
+#########################################################################################################################################################
+	
+	# forward or backward
+	def drive_xaxis (self, x):
+		self.driveXService (x, 0)
+		self.wait_reach_fix_position ()
+		print 'Drive x : %f'%x
+
+	def stop (self, time):
+		stopList = [0, 0, 0, 0, 0, 0]
+		self.published (self.list_to_twist(stopList))
+		rospy.sleep (time)
+
+if __name__ == '__main__':
+	aicontrol = AIControl()

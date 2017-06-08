@@ -18,70 +18,70 @@ class AIControl():
     #         cls._instance = super(Singleton, cls).__new__(cls, *args, **kwargs)
     #     return cls._instance
 
-    def __init__ (self):
-        self.is_at_fix_position = True
-        self.err = 0.1
-        self.pose = Pose()
-        self.auv = [0,0,0,0,0,0]
-        self.goal = [-999,-999,-999]
-        self.stopt = True
-        rospy.Subscriber ('/auv/state', Odometry, self.set_position)
-        rospy.Subscriber ('/controller/is_at_fix_position', Bool, self.posi)
-        rospy.Subscriber ('/controller/is_at_fix_orientation', Bool, self.ck_turn)
+    # def __init__ (self):
+    #     self.is_at_fix_position = True
+    #     self.err = 0.1
+    #     self.pose = Pose()
+    #     self.auv = [0,0,0,0,0,0]
+    #     self.goal = [-999,-999,-999]
+    #     self.stopt = True
+    #     rospy.Subscriber ('/auv/state', Odometry, self.set_position)
+    #     rospy.Subscriber ('/controller/is_at_fix_position', Bool, self.posi)
+    #     rospy.Subscriber ('/controller/is_at_fix_orientation', Bool, self.ck_turn)
         
-        self.command = rospy.Publisher('/cmd_vel', Twist, queue_size = 10)
-        self.turn_yaw_rel = rospy.Publisher('/fix/rel/yaw', Float64, queue_size = 10)
-        self.turn_yaw_abs = rospy.Publisher('/fix/abs/yaw', Float64, queue_size = 10)
-        self.depth = rospy.Publisher('/fix/abs/depth', Float64, queue_size = 10)
-        self.go_to_point_publisher = rospy.Publisher('/cmd_fix_position', Point, queue_size = 10)
+    #     self.command = rospy.Publisher('/cmd_vel', Twist, queue_size = 10)
+    #     self.turn_yaw_rel = rospy.Publisher('/fix/rel/yaw', Float64, queue_size = 10)
+    #     self.turn_yaw_abs = rospy.Publisher('/fix/abs/yaw', Float64, queue_size = 10)
+    #     self.depth = rospy.Publisher('/fix/abs/depth', Float64, queue_size = 10)
+    #     self.go_to_point_publisher = rospy.Publisher('/cmd_fix_position', Point, queue_size = 10)
         
-        rospy.wait_for_service('fix_rel_x_srv')
-        print 'service starts drive_x'
-        self.drive_x_srv = rospy.ServiceProxy('fix_rel_x_srv', drive_x)
-        self.wait_for_subscriber()
+    #     rospy.wait_for_service('fix_rel_x_srv')
+    #     print 'service starts drive_x'
+    #     self.drive_x_srv = rospy.ServiceProxy('fix_rel_x_srv', drive_x)
+    #     self.wait_for_subscriber()
 
     ##### start set environment #####
-    def ck_turn(self, data):
-        self.stopt = data.data
+    # def ck_turn(self, data):
+    #     self.stopt = data.data
 
-    def stop_turn (self):
-        return self.stopt
+    # def stop_turn (self):
+    #     return self.stopt
 
-    def listToTwist (self, list):
-        temp = Twist()
-        temp.linear.x = list[0]
-        temp.linear.y = list[1]
-        temp.linear.z = list[2]
-        temp.angular.x = list[3]
-        temp.angular.y = list[4]
-        temp.angular.z = list[5]
-        return temp
+    # def listToTwist (self, list):
+    #     temp = Twist()
+    #     temp.linear.x = list[0]
+    #     temp.linear.y = list[1]
+    #     temp.linear.z = list[2]
+    #     temp.angular.x = list[3]
+    #     temp.angular.y = list[4]
+    #     temp.angular.z = list[5]
+    #     return temp
 
-    def pub (self, tw):
-        print "linear  x:%f y:%f z:%f"%(tw.linear.x,tw.linear.y,tw.linear.z)
-        # print "angular x:%f y:%f z:%f"%(tw.angular.x,tw.angular.y,tw.angular.z)
-        for i in xrange(5):
-            self.command.publish(tw)
-            rospy.sleep(0.05)
+    # def pub (self, tw):
+    #     print "linear  x:%f y:%f z:%f"%(tw.linear.x,tw.linear.y,tw.linear.z)
+    #     # print "angular x:%f y:%f z:%f"%(tw.angular.x,tw.angular.y,tw.angular.z)
+    #     for i in xrange(5):
+    #         self.command.publish(tw)
+    #         rospy.sleep(0.05)
 
-    def set_position (self, data):
-        self.pose = data.pose.pose
-        pose = data.pose.pose
-        tmp = (pose.orientation.x, pose.orientation.y, pose.orientation.z, pose.orientation.w)
-        ang = tf.transformations.euler_from_quaternion(tmp)
-        self.auv[0] = pose.position.x
-        self.auv[1] = pose.position.y
-        self.auv[2] = pose.position.z
-        self.auv[3] = ang[0]
-        self.auv[4] = ang[1]
-        self.auv[5] = ang[2]
-        # print self.auv
+    # def set_position (self, data):
+    #     self.pose = data.pose.pose
+    #     pose = data.pose.pose
+    #     tmp = (pose.orientation.x, pose.orientation.y, pose.orientation.z, pose.orientation.w)
+    #     ang = tf.transformations.euler_from_quaternion(tmp)
+    #     self.auv[0] = pose.position.x
+    #     self.auv[1] = pose.position.y
+    #     self.auv[2] = pose.position.z
+    #     self.auv[3] = ang[0]
+    #     self.auv[4] = ang[1]
+    #     self.auv[5] = ang[2]
+    #     # print self.auv
 
-    def get_pose(self):
-        return self.auv
+    # def get_pose(self):
+    #     return self.auv
     
-    def posi (self, data):
-        self.is_at_fix_position = data.data
+    # def posi (self, data):
+    #     self.is_at_fix_position = data.data
     
     ##### end set environment #####
 
@@ -89,9 +89,9 @@ class AIControl():
     def drive (self, list):
         self.pub(self.listToTwist(list))
 
-    def stop (self, time):
-        self.pub(self.listToTwist([0,0,0,0,0,0]))
-        rospy.sleep(time)
+    # def stop (self, time):
+    #     self.pub(self.listToTwist([0,0,0,0,0,0]))
+    #     rospy.sleep(time)
 
     def turn_yaw_relative (self, degree):
         rad = math.radians(degree)
