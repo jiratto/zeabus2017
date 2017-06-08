@@ -17,7 +17,7 @@ freq_s = 0
 fre = 0
 k = 0
 
-GoOOO = 2432
+Earth=456
 
 status = False
 check = False
