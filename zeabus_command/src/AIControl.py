@@ -232,7 +232,7 @@ class AIControl():
                 return pMax
             if value < pMin:
                 return pMin
-        elif value < o:
+        elif value < 0:
             if value > nMax:
                 return nMax
             if value < nMin:
