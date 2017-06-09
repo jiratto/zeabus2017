@@ -28,7 +28,7 @@ class AIControl():
 		self.turnYawAbsolute = rospy.Publisher ('/fix/abs/yaw', Float64, queue_size = 10)	# publish turn angle absolute mode
 
 		rospy.wait_for_service ('fix_rel_x_srv')							# turn yaw relative by service
-		self.driveXService = rospy.ServiceProxy ('fix_rel_x_srv', drive_xaxis)	# drive x [forward or backword] by service
+		self.driveXYService = rospy.ServiceProxy ('fix_rel_x_srv', drive_xaxis)	# drive x [forward or backword] by service
 		self.wait_for_subscriber ()											# method check subscribtion
 
 	# subscribe from /auv/state
@@ -114,14 +114,122 @@ class AIControl():
 	
 	# forward or backward
 	def drive_xaxis (self, x):
-		self.driveXService (x, 0)
+		self.driveXYService (x, 0)
 		self.wait_reach_fix_position ()
 		print 'Drive x : %f'%x
+
+	def drive_yaxis (self, y):
+		self.driveXYService (0, y)
+		self.wait_reach_fix_position ()
+		print 'Drive y : %f'%y
+
+	def drive_zaxis (self, z):
+		z_dis = Float64 (z)
+		for i in xrange (3):
+			self.zAxisNow.publish (z_dis)
+			rospy.sleep (0.2)
+		self.wait_reach_fix_position (timeout_threshold = 10)
+		self.stop (1)
+		for i in xrange (3):
+			self.zAxisNow.publish (self.auvState[2])
+			rospy.sleep (0.2)
+		print 'drive z complete %f'%z_dis
+
+	def drive_xyaxis (self, x, y, bit):
+		v = [0, 0, 0, 0, 0, 0]
+		while not rospy.is_shutdown ():
+			delta_y = abs (x - self.auvState[1])
+			delta_x = abs (y - self.auvState[2])
+			rad = abs (self.auvState[5] - math.atan2 (delta_x, delta_y))
+			disnow = self.distance ((x, y), (self.auvState[0], self.auvState[1]))
+			v[0] = min (disnow, 0.3) * bit
+			if disnow >= 1:
+				v[5] = self.w_yaw (self.delta_radians (x, y, bit))
+			if disnow <= self.err:
+				self.stop ()
+				rospy.sleep (0.25)
+				break
+			self.drive (v)
+			rospy.sleep (0.25)
+		print 'Drive xy'
+
+	def go_to_xyz (self, x, y, z):
+		point = Point ()
+		point.x = Float64 (x)
+		point.y = Float64 (y)
+		point.z = Float64 (z)
+		self.fixPoint.publish (point)
+		self.wait_reach_fix_position ()
+
+	def drive (self, list):
+		self.published (self.list_to_twist (list))
+
+	def turn_yaw_relative (self, degree):
+		rad = math.radians (degree)
+		rad = Float64 (rad)
+		self.turnYawRelative.publish (rad)
+		while not self.stop_turn ():
+			rospy.sleep (0.1)
+		print 'turn yaw relative %f'%rad
+
+	def turn_yaw_absolute (self, degree):
+		rad = math.radians (degree)
+		rad = Float64 (rad)
+		self.turnYawAbsolute.publish (rad)
+		while not self.stopTurn ():
+			rospy.sleep (0.1)
+		print 'turn yaw absolute %f'%rad
+
+	def turn_yaw (self, radians):
+		self.turn_yaw_absolute (math.degrees (radians))
+		while not rospy.is_shutdown () and not (self.auvState[5] >= radians - self.err and self.auvState[5] <= radians + self.err):
+			pass
+		self.stop ()
 
 	def stop (self, time):
 		stopList = [0, 0, 0, 0, 0, 0]
 		self.published (self.list_to_twist(stopList))
 		rospy.sleep (time)
+
+	def stop_turn (self):
+		return self.stopTurn
+
+	def goto (self, x, y, z, bit):
+		self.drive_zaxis (z)
+		radians = self.delta_radians (x, y, bit)
+		self.turn_yaw_relative (math.degrees (radians))
+		self.drive_xyaxis (x, y, bit)
+
+#########################################################################################################################################################
+
+	def distance (self, x, y):
+		return sum (map (lambda x, y : (x - y) ** 2, x, y)) ** 0.5
+
+	def twopi (self, rad):
+		if rad <= 0:
+			return abs (rad)
+		else:
+			return 2 * math.pi - rad
+
+	def w_yaw (self, setyaw):
+		degi = self.twopi (self.auvState[5])
+		degf = self.twopi (setyaw)
+		diff = (degi - 2 * math.pi - degf, degi - degf, 2 * math.pi - degf + degi)
+		diff = min (diff, key = abs)
+		diff *= 2
+		if diff >= 0:
+			return abs (diff)
+		return -abs(diff)
+
+	def delta_radians (self, x, y, bit):
+		radians = math.atan2 ((x - self.auvState[0]) * bit, (y - self.auvState[1]) * bit)
+		radians -= math.pi / 2
+		radians *= -1
+		if radians > math.pi:
+			return radians - 2 * math.pi
+		if radians < -math.pi:
+			return radians + 2 * math.pi
+		return radians
 
 if __name__ == '__main__':
 	aicontrol = AIControl()
