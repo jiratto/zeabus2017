@@ -24,31 +24,22 @@ if __name__ == '__main__':
 	# rospy.sleep (0.5)
 	# print 'drive z la na eiei'
 
-	# aicontrol.go_to_xyz (3, 3, -3)
-	# rospy.sleep (0.5)
+	# aicontrol.go_to_xyz (10, 10, -5)
+	# rospy.sleep (1)
+	# print 'Go to XYZ complete'
 
-	# aicontrol.drive ([1, 1, 1, 0, 0, 0])
-	# rospy.sleep (0.5)
+	# aicontrol.drive ([-1, -1, 1, 0, 0, 0])
+	# rospy.sleep (2)
+	# aicontrol.stop (0.5)
 
 	# aicontrol.turn_yaw_relative (15)
+	# rospy.sleep (0.5)
 	# aicontrol.turn_yaw_relative (-15)
 	# rospy.sleep (0.5)
 
-	# aicontrol.turn_yaw_absolute (25)
-	# aicontrol.turn_yaw_absolute (-25)
-	# rospy.sleep (0.5)
-
-	# aicontrol.turn_yaw (30)
-	# rospy.sleep (0.5)
+	# aicontrol.turn_yaw_absolute (70)
+	# rospy.sleep (5)
+	# aicontrol.turn_yaw_absolute (-40)
+	# rospy.sleep (5)
 
 	# aicontrol.stop (5)
-
-	# aicontrol.goto (10, 10, -2, 1)
-	# rospy.sleep (0.5)
-
-	# i = 0.1
-	# while i < 10:
-	# 	aicontrol.stop (1)
-	# 	rospy.sleep (0.1)
-	# 	print 'STOP !!'
-	# 	i += 0.1

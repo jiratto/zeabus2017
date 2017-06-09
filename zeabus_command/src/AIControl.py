@@ -12,7 +12,7 @@ from controller.srv import drive_x
 
 class AIControl():
     def __init__(self):
-        self.isFixPostion = True 			# use in fix_position call back function
+        self.isFixPosition = True 			# use in fix_position call back function
         self.err = 0.1						# error constant
         self.pose = Pose()					# pose varible type Pose
         # x, y, z in linear and angular of auv from /auv/
@@ -60,7 +60,7 @@ class AIControl():
 
     # call back check fix position
     def fix_position(self, data):
-        self.isFixPostion = data.data
+        self.isFixPosition = data.data
 
     # call back check finish of turn
     def check_turn(self, data):
@@ -120,7 +120,7 @@ class AIControl():
     def wait_reach_fix_position(self, delay=0.1, check_interval=0.1, timeout_threshold=10):
         rospy.sleep(delay)
         waitedTime = 0
-        while not rospy.is_shutdown() and not self.isFixPostion and waitedTime < timeout_threshold:
+        while not rospy.is_shutdown() and not self.isFixPosition and waitedTime < timeout_threshold:
             waitedTime += check_interval
             rospy.sleep(check_interval)
 
@@ -166,15 +166,15 @@ class AIControl():
         self.turnYawRelative.publish(rad)
         while not self.stop_turn():
             rospy.sleep(0.1)
-        print 'turn yaw relative %f' % rad
+        print ('turn yaw relative: ', rad)
 
     def turn_yaw_absolute(self, degree):
         rad = math.radians(degree)
         rad = Float64(rad)
         self.turnYawAbsolute.publish(rad)
-        while not self.stopTurn():
+        while not self.stop_turn ():
             rospy.sleep(0.1)
-        print 'turn yaw absolute %f' % rad
+        print ('turn yaw absolute: ', rad)
 
     def stop(self, time):
         stopList = [0, 0, 0, 0, 0, 0]
@@ -183,12 +183,6 @@ class AIControl():
 
     def stop_turn(self):
         return self.stopTurn
-
-    def goto(self, x, y, z, bit):
-        self.drive_zaxis(z)
-        radians = self.delta_radians(x, y, bit)
-        self.turn_yaw_relative(math.degrees(radians))
-        self.drive_xyaxis(x, y, bit)
 
 #########################################################################################################################################################
 
