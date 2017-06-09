@@ -123,5 +123,68 @@ class AIControl():
 		self.published (self.list_to_twist(stopList))
 		rospy.sleep (time)
 
+	##### image function #####
+
+	# check Are we at center now ?
+	def is_center (self, point, xMin, xMax, yMin, yMax):
+		if (xMin <= point[0] <= xMax) and (yMin <= point[1] <= yMax):
+			return True
+		return False
+
+	# adjust value in scope that we set min-max of negative and positive value
+	def adjust (self, value, nMin, nMax, pMin, pMax):
+		if value > 0:
+			if value > pMax : return pMax
+			if value < pMin : return pMin
+		elif value < o:
+			if value > nMax : return nMax
+			if value < nMin : return nMin
+		return value
+
+	# check fail
+	def is_fail (self, count):
+		if count > 0:
+			return False
+		return True
+
+	# barrel roll movement
+	def roll (self, time):
+        q = Queue.Queue ()
+        rotate_45 = [0.3826834,0,0,0.9238795]        
+        cmd_vel_publisher = rospy.Publisher ('/cmd_vel', Twist, queue_size=10)
+        fix_orientation_publisher = rospy.Publisher ('/cmd_fix_orientation', Quaternion, queue_size=10)
+
+        # calculate trajectory point and put to queue
+        start_orientation = tf.transformations.quaternion_from_euler (0, 0, self.auvState[5]);
+        x = start_orientation
+
+        l = []
+        for i in range (0, 8):
+            x = tf.transformations.quaternion_multiply (x, rotate_45)
+            l.append (x)
+        for i in range (0, time):
+            for quat in l:
+                q.put (quat)
+        
+        q.put (start_orientation)
+        
+        twist = Twist ()
+        twist.linear.x = 1.5;
+        cmd = 0;
+        last_cmd = q.qsize ();
+        print ("START ROLLING")
+        r = rospy.Rate (2)
+        while not q.empty () and not rospy.is_shutdown ():
+            quat = q.get ();
+            cmd_vel_publisher.publish (twist)
+            fix_orientation_publisher.publish (*quat)
+            cmd = cmd + 1
+            print cmd,"/",last_cmd;
+            r.sleep()
+        print ("END OF ROLLING")
+        twist.linear.x = 0;
+        cmd_vel_publisher.publish (twist)
+
+
 if __name__ == '__main__':
 	aicontrol = AIControl()

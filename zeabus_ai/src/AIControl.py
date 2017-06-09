@@ -228,91 +228,91 @@ class AIControl():
     ##### endNavigation function #####
 
     ##### image function #####
-    def is_center (self, point, xmin, xmax, ymin, ymax):
-        if (xmin <= point[0] and point[0] <= xmax) and (ymin <= point[1] and point[1] <= ymax):
-            return True
-        return False
+    # def is_center (self, point, xmin, xmax, ymin, ymax):
+    #     if (xmin <= point[0] and point[0] <= xmax) and (ymin <= point[1] and point[1] <= ymax):
+    #         return True
+    #     return False
 
-    def adjust (self, value, m_min, m_max, p_min, p_max):
-        if value > 0:
-            if value > p_max : return p_max
-            if value < p_min : return p_min
-        elif value < 0:
-            if value < m_min : return m_min
-            if value > m_max : return m_max
-        return value
+    # def adjust (self, value, m_min, m_max, p_min, p_max):
+    #     if value > 0:
+    #         if value > p_max : return p_max
+    #         if value < p_min : return p_min
+    #     elif value < 0:
+    #         if value < m_min : return m_min
+    #         if value > m_max : return m_max
+    #     return value
 
-    def is_fail(self,count):
-        if count>0:
-            return False
-        return True
+    # def is_fail(self,count):
+    #     if count>0:
+    #         return False
+    #     return True
 
-    def roll(self,time):
-        q = Queue.Queue()
-        rotate_45 = [0.3826834,0,0,0.9238795]        
-        cmd_vel_publisher = rospy.Publisher('/cmd_vel',Twist,queue_size=10)
-        fix_orientation_publisher = rospy.Publisher('/cmd_fix_orientation',Quaternion,queue_size=10)
+    # def roll(self,time):
+    #     q = Queue.Queue()
+    #     rotate_45 = [0.3826834,0,0,0.9238795]        
+    #     cmd_vel_publisher = rospy.Publisher('/cmd_vel',Twist,queue_size=10)
+    #     fix_orientation_publisher = rospy.Publisher('/cmd_fix_orientation',Quaternion,queue_size=10)
 
-        # calculate trajectory point and put to queue
-        start_orientation = tf.transformations.quaternion_from_euler(0,0,self.auv[5]);
-        x = start_orientation
+    #     # calculate trajectory point and put to queue
+    #     start_orientation = tf.transformations.quaternion_from_euler(0,0,self.auv[5]);
+    #     x = start_orientation
 
-        l = []
-        for i in range(0,8):
-            x = tf.transformations.quaternion_multiply(x,rotate_45)
-            l.append(x)
-        for i in range(0,time):
-            for quat in l:
-                q.put(quat)
+    #     l = []
+    #     for i in range(0,8):
+    #         x = tf.transformations.quaternion_multiply(x,rotate_45)
+    #         l.append(x)
+    #     for i in range(0,time):
+    #         for quat in l:
+    #             q.put(quat)
         
-        q.put(start_orientation)
+    #     q.put(start_orientation)
         
-        twist = Twist()
-        twist.linear.x = 1.5;
-        cmd = 0;
-        last_cmd = q.qsize();
-        print("START ROLLING")
-        r = rospy.Rate(2)
-        while not q.empty() and not rospy.is_shutdown():
-            quat = q.get();
-            cmd_vel_publisher.publish(twist)
-            fix_orientation_publisher.publish(*quat)
-            cmd = cmd + 1
-            print cmd,"/",last_cmd;
-            r.sleep()
-        print("END OF ROLLING")
-        twist.linear.x = 0;
-        cmd_vel_publisher.publish(twist)
+    #     twist = Twist()
+    #     twist.linear.x = 1.5;
+    #     cmd = 0;
+    #     last_cmd = q.qsize();
+    #     print("START ROLLING")
+    #     r = rospy.Rate(2)
+    #     while not q.empty() and not rospy.is_shutdown():
+    #         quat = q.get();
+    #         cmd_vel_publisher.publish(twist)
+    #         fix_orientation_publisher.publish(*quat)
+    #         cmd = cmd + 1
+    #         print cmd,"/",last_cmd;
+    #         r.sleep()
+    #     print("END OF ROLLING")
+    #     twist.linear.x = 0;
+    #     cmd_vel_publisher.publish(twist)
 
-    def wait_reach_fix_position(self, delay = 0.1,check_interval = 0.1,timeout_threshold = 10):
-        rospy.sleep(delay)
-        waited_time = 0;
-        while not rospy.is_shutdown() and not self.is_at_fix_position and waited_time <timeout_threshold:
-            waited_time += check_interval
-            rospy.sleep(check_interval)
+    # def wait_reach_fix_position(self, delay = 0.1,check_interval = 0.1,timeout_threshold = 10):
+    #     rospy.sleep(delay)
+    #     waited_time = 0;
+    #     while not rospy.is_shutdown() and not self.is_at_fix_position and waited_time <timeout_threshold:
+    #         waited_time += check_interval
+    #         rospy.sleep(check_interval)
 
-    def wait_for_subscriber(self, check_interval = 0.3):
-        fin = False
-        while not rospy.is_shutdown() and not fin :
-            count = 0
-            print count
+    # def wait_for_subscriber(self, check_interval = 0.3):
+    #     fin = False
+    #     while not rospy.is_shutdown() and not fin :
+    #         count = 0
+    #         print count
             
-            if self.command.get_num_connections() > 0:
-                count = count + 1
-            if self.turn_yaw_rel.get_num_connections() > 0:
-                count = count + 1
-            if self.turn_yaw_abs.get_num_connections() > 0:
-                count = count + 1
-            if self.depth.get_num_connections() > 0:
-                count = count + 1
-            if self.go_to_point_publisher.get_num_connections() > 0:
-                count = count + 1
-            if count >= 5:
-                fin = True
-            if not fin:
-                rospy.sleep(check_interval)
-                print 'some sub not connected!'
-                # print count
+    #         if self.command.get_num_connections() > 0:
+    #             count = count + 1
+    #         if self.turn_yaw_rel.get_num_connections() > 0:
+    #             count = count + 1
+    #         if self.turn_yaw_abs.get_num_connections() > 0:
+    #             count = count + 1
+    #         if self.depth.get_num_connections() > 0:
+    #             count = count + 1
+    #         if self.go_to_point_publisher.get_num_connections() > 0:
+    #             count = count + 1
+    #         if count >= 5:
+    #             fin = True
+    #         if not fin:
+    #             rospy.sleep(check_interval)
+    #             print 'some sub not connected!'
+    #             # print count
 
 
 if __name__=='__main__':
