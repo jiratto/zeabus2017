@@ -16,7 +16,9 @@ catkin_package(
 ## Build ##
 ###########
 add_executable(zeabus_joy src/zeabus_joy.cpp)
+add_executable(zeabus_joy1 src/zeabus_joy1.cpp)
 target_link_libraries(zeabus_joy ${catkin_LIBRARIES})
+target_link_libraries(zeabus_joy1 ${catkin_LIBRARIES})
 
 #############
 ## Install ##

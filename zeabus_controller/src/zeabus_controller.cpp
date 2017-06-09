@@ -56,7 +56,8 @@ double cmd_vel[6]={0,0,0,0,0,0},position[7],vel[6];
 double prevPosition[6],prevVel[6];
 volatile bool is_switch_on = false;
 volatile bool isStateArrived = false;
-bool isFixed[] = {false,false,true,true,true,true};
+//bool isFixed[] = {false,false,true,true,true,true};
+bool isFixed[] = {false,false,false,true,true,true};
 bool canFixed[] = {true,true,true,true,true,true};
 bool nearZeroBeforeFix[] = {false,false,false,false,false,false};
 // double fixedPosition[7] = {0,0,-1,0,0,0,1}; // x y z ? ? ? set for default fix position;
@@ -127,7 +128,7 @@ int main(int argc,char **argv) {
 	ros::init(argc,argv, "Controller");
 	ros::NodeHandle nh;
 	ros::Subscriber sub_state = nh.subscribe("/auv/state", 1000, &stateListenerCallBack);
-	ros::Subscriber sub_cmd_vel = nh.subscribe("/cmd_vel", 1000, &cmd_velCallBack);
+	ros::Subscriber sub_cmd_vel = nh.subscribe("/zeabus/cmd_vel", 1000, &cmd_velCallBack);
 	ros::Subscriber sub_cmd_fix_pos = nh.subscribe("/cmd_fix_position", 1000, &cmd_fix_positionCallBack);
 	ros::Subscriber sub_cmd_fix_orientation = nh.subscribe("/cmd_fix_orientation", 1000, &cmd_fix_orientationCallBack);
 	ros::Subscriber sub_controllerMode =  nh.subscribe("/controller/mode",1000,&modeCallback);
@@ -137,9 +138,9 @@ int main(int argc,char **argv) {
 	ros::Subscriber sub_fixRelX = nh.subscribe("/fix/rel/x",1000, &fixRelXCallBack);
 	ros::Subscriber sub_switch = nh.subscribe("/switch/data",100, &switch_callback);
 	ros::ServiceServer service = nh.advertiseService("/fix_rel_x_srv",fix_rel_x_srv_callback);
-	ros::Publisher pub = nh.advertise<geometry_msgs::Twist>("/zeabus/cmd_vel",1000);
-	ros::Publisher is_at_fix_position_pub = nh.advertise<std_msgs::Bool>("/controller/is_at_fix_position",1000);
-	ros::Publisher is_at_fix_orientation_pub = nh.advertise<std_msgs::Bool>("/controller/is_at_fix_orientation",1000);
+	ros::Publisher pub = nh.advertise<geometry_msgs::Twist>("/cmd_vel",1000);
+	ros::Publisher is_at_fix_position_pub = nh.advertise<std_msgs::Bool>("/zeabbus_controller/is_at_fix_position",1000);
+	ros::Publisher is_at_fix_orientation_pub = nh.advertise<std_msgs::Bool>("zeabus_controller/is_at_fix_orientation",1000);
 	//ros::Publisher fixedPositionPublisher = nh.advertise<geometry_msgs::Pose>("/controller/fixed_position",10);
 	dynamic_reconfigure::Server<zeabus_controller::PIDConstantConfig> server;
   	dynamic_reconfigure::Server<zeabus_controller::PIDConstantConfig>::CallbackType f;
@@ -242,6 +243,16 @@ void cmd_fix_positionCallBack(const geometry_msgs::Point msg){
 	fixPosition.position = msg;
 }
 
+/*
+void cmd_fix_positionCallBack(const geometry_msgs::Point msg){
+	isFixed[0] = false;
+	isFixed[1] = false;
+	isFixed[2] = false;
+	fixPosition.position = msg;
+}
+*/
+//
+
 void cmd_fix_orientationCallBack(const geometry_msgs::Quaternion msg){
 	isFixed[3] = true;
 	isFixed[4] = true;
@@ -271,7 +282,7 @@ void changeFixedState(){
 	for(int i = 0;i < 6;i++){
 		// !fix -> fix
 		if(equal(0.0,cmd_vel[i]) && !isFixed[i] && (isClose(vel[i],0.0) || !nearZeroBeforeFix[i]) && canFixed[i]){
-			isFixed[i] = true;
+			isFixed[i] = false;//true;
 			fixedPosition[i] = position[i];
 			pidP[i].resetPD();
 		}
