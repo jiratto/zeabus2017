@@ -24,6 +24,8 @@ if __name__ == '__main__':
 		data.append (0.5)
 
 	aicontrol.trackback (data, 0.2)
+	while True:
+		aicontrol.stop (1)
 
 	# aicontrol.drive_xaxis (5)
 	# aicontrol.drive_xaxis (-5)

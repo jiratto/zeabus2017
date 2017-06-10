@@ -198,6 +198,7 @@ class AIControl ():
 			else:
 				self.drive_zaxis (-data[i])
 			rospy.sleep (time)
+		self.stop (5)
 
 	# barrel roll movement
 	def roll (self, time):
