@@ -12,6 +12,19 @@ if __name__ == '__main__':
 	rospy.init_node ('testMethod')
 	print 'Init complete'
 
+	data = []
+	for i in xrange(10):
+		aicontrol.drive_yaxis (1)
+		rospy.sleep (0.2)
+		data.append (1)
+
+	for i in xrange(10):
+		aicontrol.drive_zaxis (0.5)
+		rospy.sleep (0.2)
+		data.append (0.5)
+
+	aicontrol.trackback (data, 0.2)
+
 	# aicontrol.drive_xaxis (5)
 	# aicontrol.drive_xaxis (-5)
 	# rospy.sleep (0.5)

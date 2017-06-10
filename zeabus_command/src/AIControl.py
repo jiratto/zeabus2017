@@ -194,9 +194,9 @@ class AIControl ():
 	def trackback (self, data, time):
 		for i in xrange (len(data)):
 			if i % 2 == 0:
-				self.drive_yaxis (data[i])
+				self.drive_yaxis (-data[i])
 			else:
-				self.drive_zaxis (data[i])
+				self.drive_zaxis (-data[i])
 			rospy.sleep (time)
 
 	# barrel roll movement
