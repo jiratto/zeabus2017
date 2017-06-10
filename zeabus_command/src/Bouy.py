@@ -20,7 +20,8 @@ class Bouy (object):
 		self.state = 1
         self.command = rospy.Publisher ('/cmd_vel', Twist, queue_size=10)
         self.turn_yaw_rel = rospy.Publisher ('/fix/rel/yaw', Float64, queue_size=10)
-        
+        self.distance = []
+
         # bouy_srv = 'bouy'
         # rospy.wait_for_service (bouy_srv)
         # self.detect_bouy = rospy.ServiceProxy (bouy_srv, bouy_sim)
@@ -30,7 +31,32 @@ class Bouy (object):
 		self.data = self.data.data
 
 		return self.data.num
+	
+	def three_ball (self):
+		while not rospy.is_shutdown ():
+			self.data = self.detect_bouy (String ('bouy'), String ('red'))
+			self.data = self.data.data
+			xImg = self.data.x[0]
+			yImg = self.data.y[0]
 
+			if self.aicontrol.is_center ([xImg, yImg], -0.05, -0.05, -0.05, 0.05):
+				print 'Target at Center'
+				break
+
+			vx = self.aicontrol.adjust (xImg, -0.6, -0.2, 0.2, 0.6)
+			vy = self.aicontrol.adjust (yImg, -0.6, -0.2, 0.2, 0.6)
+			
+			self.distance.append (vx)
+			self.distance.append (vy)
+
+			self.aicontrol.drive ([0, vx, 0, 0, 0, 0])
+			rospy.sleep (0.5)
+			self.aicontrol.drive ([0, 0, vy, 0, 0, 0])
+			rospy.sleep (0.5)
+			self.aicontrol.stop (0.2)
+
+		self.aicontrol.drive ([1, 0, 0, 0, 0, 0])
+		rospy.sleep (5)
 
 	def run (self):
 		while find_num () <= 0:
