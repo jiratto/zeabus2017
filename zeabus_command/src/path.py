@@ -85,13 +85,13 @@ class Path (object):
                         vx = self.aicontrol.adjust (px, -0.6, -0.3, 0.3, 0.6)
                         vy = self.aicontrol.adjust (py, -0.6, -0.3, 0.3, 0.6)
 
-                        self.aicontrol.drive([-vx, -vy, 0, 0, 0, 0])
-                    rospy.sleep(0.1)
+                        self.aicontrol.drive ([-vx, -vy, 0, 0, 0, 0])
+                    rospy.sleep (0.1)
                     
                 self.aicontrol.stop(0.1)
 
             except rospy.ServiceException as exc:
-                print("Service did not process request: " + str(exc))
+                print ("Service did not process request: " + str (exc))
                 break
 
 if __name__ == '__main__':
