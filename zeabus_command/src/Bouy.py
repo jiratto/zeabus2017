@@ -54,7 +54,7 @@ class Bouy (object):
 			self.aicontrol.drive ([0, vx, 0, 0, 0, 0])
 			rospy.sleep (time)
 			self.aicontrol.stop (0.1)
-			
+
 			self.aicontrol.drive ([0, 0, vy, 0, 0, 0])
 			rospy.sleep (time)
 			self.aicontrol.stop (0.1)
@@ -66,9 +66,10 @@ class Bouy (object):
 		## trackback path ##
 		self.aicontrol.drive ([-1, 0, 0, 0, 0, 0])
 		rospy.sleep (5)
-		self.aicontrol.stop (0.1)
+		self.aicontrol.stop (2)
 		self.aicontrol.trackback (self.distance, time)
-		self.aicontrol.stop (0.1)
+		
+		self.distance = [] # clear array
 
 	def run (self):
 		while find_num () <= 0:
