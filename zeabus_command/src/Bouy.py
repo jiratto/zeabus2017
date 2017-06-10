@@ -32,9 +32,11 @@ class Bouy (object):
 
 		return self.data.num
 	
-	def three_ball (self):
+	def three_ball (self, color):
+		time = 0.5
+
 		while not rospy.is_shutdown ():
-			self.data = self.detect_bouy (String ('bouy'), String ('red'))
+			self.data = self.detect_bouy (String ('bouy'), String (color))
 			self.data = self.data.data
 			xImg = self.data.x[0]
 			yImg = self.data.y[0]
@@ -50,13 +52,23 @@ class Bouy (object):
 			self.distance.append (vy)
 
 			self.aicontrol.drive ([0, vx, 0, 0, 0, 0])
-			rospy.sleep (0.5)
+			rospy.sleep (time)
+			self.aicontrol.stop (0.1)
+			
 			self.aicontrol.drive ([0, 0, vy, 0, 0, 0])
-			rospy.sleep (0.5)
-			self.aicontrol.stop (0.2)
+			rospy.sleep (time)
+			self.aicontrol.stop (0.1)
 
 		self.aicontrol.drive ([1, 0, 0, 0, 0, 0])
 		rospy.sleep (5)
+		self.aicontrol.stop (0.1)
+
+		## trackback path ##
+		self.aicontrol.drive ([-1, 0, 0, 0, 0, 0])
+		rospy.sleep (5)
+		self.aicontrol.stop (0.1)
+		self.aicontrol.trackback (self.distance, time)
+		self.aicontrol.stop (0.1)
 
 	def run (self):
 		while find_num () <= 0:
@@ -68,6 +80,8 @@ class Bouy (object):
 		print ('Found %d balls', num)
 
 		if num == 3:
+			three_ball ('red')
+			three_ball ('green')
 
 		elif num == 2:
 
