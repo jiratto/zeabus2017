@@ -139,7 +139,7 @@ class AIControl ():
         self.wait_reach_fix_position ()
         print 'Drive y : %f' % y
 
-    def drive_zaxis (self, z):
+    def fix_zaxis (self, z):
         z_dis = Float64 (z)
         for i in xrange (3):
             self.zAxisNow.publish (z_dis)
