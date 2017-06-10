@@ -24,3 +24,25 @@ class Bouy (object):
         # bouy_srv = 'bouy'
         # rospy.wait_for_service (bouy_srv)
         # self.detect_bouy = rospy.ServiceProxy (bouy_srv, bouy_sim)
+
+	def find_num (self):
+		self.data = self.detect_bouy (String ('bouy'), String ('all'))
+		self.data = self.data.data
+
+		return self.data.num
+
+
+	def run (self):
+		while find_num () <= 0:
+			self.aicontrol.drive ([1, 0, 0, 0, 0, 0])
+			rospy.sleep (0.5)
+			self.aicontrol.stop (0.1)
+
+		num = find_num ()
+		print ('Found %d balls', num)
+
+		if num == 3:
+
+		elif num == 2:
+
+		elif num == 1:
