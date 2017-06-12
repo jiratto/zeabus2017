@@ -34,6 +34,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 #include <ros/ros.h>
+#include <string.h>
 #include <geometry_msgs/Twist.h>
 #include <sensor_msgs/Joy.h>
 #include "boost/thread/mutex.hpp"
@@ -63,7 +64,7 @@ private:
   double vy_scale_;
   double vz_scale_;
   double wz_scale_;
-
+  std::string node_name;
 
 
   ros::Timer timer_;
@@ -85,7 +86,7 @@ ZeabusTeleop::ZeabusTeleop()
   ph_.param("vy_scale", vy_scale_, 1.0);
   ph_.param("vz_scale", vz_scale_, 1.0);
   ph_.param("yaw_scale", wz_scale_, M_PI);
-
+  ph_.param<std::string>("node_name",node_name,"/zeabus/cmd_vel");
   deadman_pressed_ = false;
   zero_twist_published_ = false;
   vel_pub_ = ph_.advertise<geometry_msgs::Twist>("/cmd_vel", 1, true);
