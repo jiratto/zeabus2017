@@ -392,11 +392,11 @@ if __name__ == '__main__':
 
     res = set(0x00,2000000)   #2000000
     ser.write(res)
-    res = set(0x01,30000)
+    res = set(0x01,25000)
     ser.write(res)
-    res = set(0x02,0.6) #Font #add strength    40k = 1.0/3.0  ||| 25k = 1.0/4.0
+    res = set(0x02,0.25) #Font #add strength    40k = 1.0/3.0  ||| 25k = 1.0/4.0
     ser.write(res)
-    res = set(0x03,0.03)   #Pthres
+    res = set(0x03,0.02)   #Pthres
     ser.write(res)
     res = set(0x04,1500)
     ser.write(res)

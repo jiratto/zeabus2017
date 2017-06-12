@@ -4,7 +4,7 @@
 <launch>
 
     <!-- This node will take in measurements from odometry, IMU, stamped pose, and stamped twist messages. It tracks
-         the state of the robot, with the state vector being defined as X position, Y position, Z position,
+         the state of the re, with the state vector being defined as X position, Y position, Z position,
          roll, pitch, yaw, their respective velocites, and linear acceleration. Units for all measurements are assumed
          to conform to the SI standard as specified in REP-103. -->
     <node pkg="robot_localization" type="ukf_localization_node" name="ukf_localization" clear_params="true">
@@ -67,7 +67,7 @@
       <!--param name="pose0" value="amcl_pose"/-->
 	       
       <param name="twist0" value="/dvl/data"/>
-  
+
       <!--param name="twist1" value="/Joy_Odom"/-->
       <!--param name="twist0" value="/baro/data"/-->
       <!--param name="imu1" value="/imu/data"/-->
