@@ -7,7 +7,7 @@
 class PID_constant_helper{
     private:
         static std::string get_file_path(){
-            std::string path = ros::package::getPath("controller");
+            std::string path = ros::package::getPath("zeabus_controller");
             std::fstream target_file;
             path += "/const_dump.yaml";
             return path;

@@ -35,6 +35,7 @@ double err_angle = 0;
 double fix_rel_x_dist = 0;
 double bouyancy = -0.0;
 char axis[6][5] = {"x","y","z","r","p","y"};
+//old
 double cmdVelK[][3] = {{0.7,0.05,0},
 					{0.7,0.05,0},
 					{0.7,0,0},
@@ -49,6 +50,24 @@ double fixPointK[][3] = {{0.7,0.1,0.2},
 					{0.3,0.05,0.2},
 					{0.4,0.01,0.01},
 					}; // KP,KI,KD
+
+/*
+double cmdVelK[][3] = {{0.4,0.0,0.0},
+					{0.2,0.0,0.0},
+					{0.0,0.1,0},
+					{0.0,0,0.0},
+					{0.0,0,0.0},
+					{0.2,0,0.0},
+					}; //KP,KI,KD KP only cause order of acceleration
+double fixPointK[][3] = {{0.0,0.0,0.0},
+					{0.01,0.0,0.0},
+					{0.1,0,0},
+					{0.35,0.0,0.01},
+					{0.3,0.0,0.03},
+					{0.17,0.0,0.0},
+					}; // KP,KI,KD
+*/
+
 geometry_msgs::Pose fixPosition;
 nav_msgs::Odometry previousState;
 nav_msgs::Odometry currentState;
@@ -56,10 +75,13 @@ double cmd_vel[6]={0,0,0,0,0,0},position[7],vel[6];
 double prevPosition[6],prevVel[6];
 volatile bool is_switch_on = false;
 volatile bool isStateArrived = false;
+//bool isFixed[] = {false,false,true,true,true,true};
 bool isFixed[] = {false,false,true,true,true,true};
+//bool canFixed[] = {ttruerue,true,true,true,true,true};
 bool canFixed[] = {true,true,true,true,true,true};
 bool nearZeroBeforeFix[] = {false,false,false,false,false,false};
-// double fixedPosition[7] = {0,0,-1,0,0,0,1}; // x y z ? ? ? set for default fix position;
+//double fixedPosition[7] = {0,0,-1,0,0,0,1}; // x y z ? ? ? set for default fix position; //just open
+double fixedPosition[7] = {1,1,1,0,0,0,0}; // x y z ? ? ? set for default fix position; //just open
 double errorPosition[6] = {0,0,0,0,0,0};
 double errorVelocity[6] = {0,0,0,0,0,0};
 double out[6];
@@ -120,36 +142,37 @@ void init(){
 	fixPosition.orientation.z = 0;
 	fixPosition.orientation.w = 1;
 	std::cout << "INIT CONTROLLER" << std::endl;
-	PID_constant_helper::load_file("Controller"); // TODO if ros change this node name ?
+	PID_constant_helper::load_file("zeabus_controller"); // TODO if ros change this node name ?
 }
 
 int main(int argc,char **argv) {
 	ros::init(argc,argv, "Controller");
 	ros::NodeHandle nh;
 	ros::Subscriber sub_state = nh.subscribe("/auv/state", 1000, &stateListenerCallBack);
-	ros::Subscriber sub_cmd_vel = nh.subscribe("/cmd_vel", 1000, &cmd_velCallBack);
-	ros::Subscriber sub_cmd_fix_pos = nh.subscribe("/cmd_fix_position", 1000, &cmd_fix_positionCallBack);
-	ros::Subscriber sub_cmd_fix_orientation = nh.subscribe("/cmd_fix_orientation", 1000, &cmd_fix_orientationCallBack);
-	ros::Subscriber sub_controllerMode =  nh.subscribe("/controller/mode",1000,&modeCallback);
-	ros::Subscriber sub_fixAbsDepth = nh.subscribe("/fix/abs/depth", 1000, &fixAbsDepthCallBack);
-	ros::Subscriber sub_fixRelYaw = nh.subscribe("/fix/rel/yaw", 1000, &fixRelYawCallBack);
-	ros::Subscriber sub_fixAbsYaw = nh.subscribe("/fix/abs/yaw", 1000, &fixAbsYawCallBack);
-	ros::Subscriber sub_fixRelX = nh.subscribe("/fix/rel/x",1000, &fixRelXCallBack);
-	ros::Subscriber sub_switch = nh.subscribe("/switch/data",100, &switch_callback);
+	ros::Subscriber sub_cmd_vel = nh.subscribe("/zeabus/cmd_vel", 1000, &cmd_velCallBack);
+	ros::Subscriber sub_cmd_fix_pos = nh.subscribe("/cmd_fix_position", 1000, &cmd_fix_positionCallBack); //fix x,y,z=true
+	ros::Subscriber sub_cmd_fix_orientation = nh.subscribe("/cmd_fix_orientation", 1000, &cmd_fix_orientationCallBack); //fix row,pitch.yaw=true 
+	ros::Subscriber sub_controllerMode =  nh.subscribe("/zeabus_controller/mode",1000,&modeCallback);
+	ros::Subscriber sub_fixAbsDepth = nh.subscribe("/fix/abs/depth", 1000, &fixAbsDepthCallBack); //fix z=true
+	ros::Subscriber sub_fixRelYaw = nh.subscribe("/fix/rel/yaw", 1000, &fixRelYawCallBack); //fix yaw=true
+	ros::Subscriber sub_fixAbsYaw = nh.subscribe("/fix/abs/yaw", 1000, &fixAbsYawCallBack); //fix yaw=true work normal mode
+	ros::Subscriber sub_fixRelX = nh.subscribe("/fix/rel/x",1000, &fixRelXCallBack); //fix x,y=true
+	ros::Subscriber sub_switch = nh.subscribe("/switch/data",100, &switch_callback); //motor
 	ros::ServiceServer service = nh.advertiseService("/fix_rel_x_srv",fix_rel_x_srv_callback);
-	ros::Publisher pub = nh.advertise<geometry_msgs::Twist>("/zeabus/cmd_vel",1000);
-	ros::Publisher is_at_fix_position_pub = nh.advertise<std_msgs::Bool>("/controller/is_at_fix_position",1000);
-	ros::Publisher is_at_fix_orientation_pub = nh.advertise<std_msgs::Bool>("/controller/is_at_fix_orientation",1000);
-	//ros::Publisher fixedPositionPublisher = nh.advertise<geometry_msgs::Pose>("/controller/fixed_position",10);
+	ros::Publisher pub = nh.advertise<geometry_msgs::Twist>("/cmd_vel",1000);
+	ros::Publisher is_at_fix_position_pub = nh.advertise<std_msgs::Bool>("/zeabbus_controller/is_at_fix_position",1000);
+	ros::Publisher is_at_fix_orientation_pub = nh.advertise<std_msgs::Bool>("zeabus_controller/is_at_fix_orientation",1000);
+	ros::Publisher fixedPositionPublisher = nh.advertise<geometry_msgs::Pose>("/controller/fixed_position",10); //just open
 	dynamic_reconfigure::Server<zeabus_controller::PIDConstantConfig> server;
   	dynamic_reconfigure::Server<zeabus_controller::PIDConstantConfig>::CallbackType f;
 	init();
   	f = boost::bind(&PIDConstantCallBack, _1, _2);
   	server.setCallback(f);
-	ros::Rate rate(50);
+	ros::Rate rate(10);
 	while(nh.ok()) {
 		ros::spinOnce();
 		if(!isStateArrived || !is_switch_on){
+			if(!isStateArrived) ROS_INFO("No state");
 			ROS_INFO("No state arrived or motor switch is off wait 1 sec");
 			ros::Duration(1).sleep();
 			continue;
@@ -163,9 +186,9 @@ int main(int argc,char **argv) {
 		rate.sleep();
 		pub.publish(calculatePID());
 		is_at_fix_position_pub.publish(is_at_fix_position(0.03));
-		is_at_fix_orientation_pub.publish(is_at_fix_orientation(0.8));
-		//fixedPositionPublisher.publish(fixPosition);
-		ROS_INFO("%d",is_switch_on);
+		is_at_fix_orientation_pub.publish(is_at_fix_orientation(0)); //0.8
+		fixedPositionPublisher.publish(fixPosition); //just open
+		//ROS_INFO("%d",is_switch_on);
 		if(true){
 		 printf("Vel      %.2lf\t%.2lf\t%.2lf\t%.2lf\t%.2lf\t%.2lf\n",vel[0],vel[1],vel[2],vel[3],vel[4],vel[5]);
 		 printf("cmd Vel  %.2lf\t%.2lf\t%.2lf\t%.2lf\t%.2lf\t%.2lf\n",cmd_vel[0],cmd_vel[1],cmd_vel[2],cmd_vel[3],cmd_vel[4],cmd_vel[5]);
@@ -181,7 +204,7 @@ int main(int argc,char **argv) {
 		  																	,fixPosition.orientation.y
 		  																	,fixPosition.orientation.z
 		  																	,fixPosition.orientation.w);
-		 printf("%lf %lu\n",err_angle,fixPositionQueue.size());
+		 //printf("%lf %lu\n",err_angle,fixPositionQueue.size());
 		 printf("\n\n");
 		}
 		setK();
@@ -199,6 +222,14 @@ void stateListenerCallBack(const nav_msgs::Odometry msg){
 		tf::Quaternion fixY;
 		fixY.setRPY(0,0,Y);
 		tf::quaternionTFToMsg(fixY,fixPosition.orientation);
+		/*
+		tf::Quaternion fixP;
+		fixY.setRPY(0,P,0);
+		tf::quaternionTFToMsg(fixP,fixPosition.orientation);
+		tf::Quaternion fixR;
+		fixY.setRPY(R,0,0);
+		tf::quaternionTFToMsg(fixR,fixPosition.orientation);
+		*/
 		fixPosition.position.x = msg.pose.pose.position.x;
 		fixPosition.position.y = msg.pose.pose.position.y;
 		fixPosition.position.z = msg.pose.pose.position.z;
@@ -242,10 +273,21 @@ void cmd_fix_positionCallBack(const geometry_msgs::Point msg){
 	fixPosition.position = msg;
 }
 
+/*
+void cmd_fix_positionCallBack(const geometry_msgs::Point msg){
+	isFixed[0] = false;
+	isFixed[1] = false;
+	isFixed[2] = false;
+	fixPosition.position = msg;
+}
+*/
+//
+
 void cmd_fix_orientationCallBack(const geometry_msgs::Quaternion msg){
-	isFixed[3] = true;
-	isFixed[4] = true;
+	isFixed[3] = true; 
+	isFixed[4] = true; 
 	isFixed[5] = true;
+
 	fixPosition.orientation = msg;
 }
 
@@ -319,12 +361,21 @@ void changeFixedState(){
 		//		fixPosition.orientation = currentState.pose.pose.orientation;
 		//}
 	}else if(controllerMode == normalMode){
+		//printf("normal:%d%d%d%d%d%d -----------------------------------------------------------------------\n",isFixed[0],isFixed[1],isFixed[2],isFixed[3],isFixed[4],isFixed[5]);
 		if(!isFixed[0] || !isFixed[1]){
 			isFixed[0] = false;
 			isFixed[1] = false;
 			fixedPosition[0] = position[0];
 			fixedPosition[1] = position[1];
 		}
+		/*
+		if(isFixed[3] || isFixed[4]){
+			isFixed[3] = false;
+			isFixed[4] = false;
+			fixedPosition[3] = position[3];
+			fixedPosition[4] = position[4];
+		}
+		*/
 	}
 	if(!isFixed[3] || !isFixed[4] || !isFixed[5]){
 		fixedPosition[6] = position[6];

@@ -74,21 +74,21 @@ def adjust_exposure_time():
             MODE = statistics.mode(v_1d)
         except ValueError:
             MODE = 127
-        if MODE >= 230:
-            ev -= 1.5
+        if MODE >= 235:
+            ev -= 1
             set_param('exposure', ev)
-        elif MODE <= 25:
-            ev +=1.5
+        elif MODE <= 10:
+            ev += 1
             set_param('exposure', ev)
-        else:
+        
             # # 10% trimmed mean
             # for i in range (0,25):
             #     v_1d.remove(i)
             # for i in range (230,256):
             #     v_1d.remove(i)
             # MEAN = cv2.mean(v_1d)[0]
-
-        print("SD: {0} mode: {1} mean: {2} mean: {3}".format(SD, MODE,MEAN,MEAN1))
+        
+        print("SD: {0} mode: {1} mean: {2}".format(SD, MODE,MEAN))
         print("CV: {0}".format(CV))
         print("My Auto Exposure: {0}".format(ev))
 
@@ -102,9 +102,9 @@ def adjust_exposure_time():
 
 if __name__ == '__main__':
     rospy.init_node('adjust_exposure_time')
-    topic = 'camera/image_raw/compressed'
+    topic = 'leftcam_top/image_raw/compressed'
     # topic = rospy.get_param('', topic)
-    node = 'ueye_cam_nodelet/'
+    node = 'ueye_cam_nodelet_leftcam_top/'
 
     rospy.Subscriber(topic, CompressedImage, callback)
     client = dynamic_reconfigure.client.Client(node)
