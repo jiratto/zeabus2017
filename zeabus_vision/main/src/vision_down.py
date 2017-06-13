@@ -10,6 +10,7 @@ from operator import itemgetter
 from vision_lib import *
 import statistics
 
+
 frame = None
 rows = None
 cols = None
@@ -45,7 +46,9 @@ def cam_callback(msg):
     global frame, rows, cols, width, height
 
     arr = np.fromstring(msg.data, np.uint8)
+
     frame = cv2.resize(cv2.imdecode(arr, 1), (width, height))
+
     rows, cols, ch = frame.shape
 
 
@@ -59,6 +62,7 @@ def mission_callback(msg):
 
 
 def do_path(msg):
+
     global frame, rows, task, req, height
     images = None
     task = msg.task.data
@@ -116,11 +120,14 @@ def do_path(msg):
     cv2.imshow('th', th)
     cv2.imshow('res',res)
     cv2.imshow('result',result)
+
+   
     k = cv2.waitKey(1) & 0xff
     if k == ord('q'):
         rospy.signal_shutdown('')
-    # print m
-    # return m
+
+    return m
+
 
 if __name__ == "__main__":
     rospy.init_node('vision_down')
@@ -140,4 +147,5 @@ if __name__ == "__main__":
         # msg.req = String('red')
         # do_pipe(msg)
     rospy.Service('vision2', vision_srv_default(), mission_callback)
+
     rospy.spin()
