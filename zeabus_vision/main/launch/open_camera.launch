@@ -1,8 +1,6 @@
 <launch>
-  <include file="$(find zeabus_vision)/launch/leftcam_top.launch">
-  </include>
-  <include file="$(find zeabus_vision)/launch/rightcam_bottom.launch">
-  </include>
-  <include file="$(find zeabus_vision)/launch/leftcam_bottom.launch">
-  </include>
+  <include file="$(find zeabus_vision)/launch/open_camera/leftcam_top.launch"> </include>
+  <include file="$(find zeabus_vision)/launch/open_camera/rightcam_top.launch"> </include>
+  <include file="$(find zeabus_vision)/launch/open_camera/leftcam_bottom.launch"> </include>  
+  <include file="$(find zeabus_vision)/launch/open_camera/rightcam_bottom.launch"> </include>
 </launch>
