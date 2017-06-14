@@ -31,8 +31,8 @@ class thrust_mapper:
 	#self.joy_odom.twist.covariance[7] = 0.25
 	#self.joy_odom.twist.covariance[14] = 0.25
 
-	rospy.Subscriber("/zeabus/cmd_vel", Twist, self.joy_callback)
-    # rospy.Subscriber("/cmd_vel", Twist, self.joy_callback)
+	#rospy.Subscriber("/zeabus/cmd_vel", Twist, self.joy_callback)
+    	rospy.Subscriber("/zeabus/cmd_vel", Twist, self.joy_callback)
 	#rospy.Subscriber("/joy", Joy, self.checkJoy)
 
 	#self.odom_x = 0
@@ -57,25 +57,25 @@ class thrust_mapper:
 	# 				[-math.cos(math.radians(40)), math.sin(math.radians(40)), 0]])
 
 	#tul
-	#self.d = array([[0, 0, 1],
-	#				[0, 0, 1],
-	#				[0, 0, 1],
-	#				[0, 0, 1],
+	#self.d = array([[0, 0, 0],
+	#				[0, 0, 0],
+	#				[0, 0, 0],
+	#				[0, 0, 0],
 	#				[math.cos(math.radians(40)), math.sin(math.radians(40)), 0],
 	#				[math.cos(math.radians(40)), -math.sin(math.radians(40)), 0],
 	#				[-math.cos(math.radians(40)), -math.sin(math.radians(40)), 0],
 	#				[-math.cos(math.radians(40)), math.sin(math.radians(40)), 0]])	
 
-
+	#ek
 	self.d = array([[0, 0, 1],
-					[0, 0, 1],
-					[0, 0, 1],
-					[0, 0, 1],
-					[math.cos(math.radians(40)), math.sin(math.radians(40)), 0],
-					[-math.cos(math.radians(40)), math.sin(math.radians(40)), 0],
-					[math.cos(math.radians(40)), -math.sin(math.radians(40)), 0],
-					[-math.cos(math.radians(40)), -math.sin(math.radians(40)), 0]])	
-#perlican
+			[0, 0, -1],
+			[0, 0, 1],
+			[0, 0, 1],
+			[-math.cos(math.radians(40)), math.sin(math.radians(40)), 0],
+			[math.cos(math.radians(40)), math.sin(math.radians(40)), 0],
+			[-math.cos(math.radians(40)), -math.sin(math.radians(40)), 0],
+			[math.cos(math.radians(40)), -math.sin(math.radians(40)), 0]])	
+
 #perlican
 #     d = array([[0, -1, 0],
 #                [0, 0, 1],
@@ -106,24 +106,23 @@ class thrust_mapper:
 	#	   			[-0.23594, 0.20304, 0.05816],
 	# 	   			[ 0.23594, 0.20304, 0.05816]])
 
-	#tul
-	#self.r = array([[ 0.23594,-0.20304, 0.05816],
-        #               	 [-0.23594,-0.20304, 0.05816],  
-        #               	 [-0.23594, 0.20304, 0.05816],
-        #               	 [ 0.23594, 0.20304, 0.05816],
-	#		 [ 0.45728,-0.19104, 0.03993],
-	#	   	 [-0.45728,-0.19104, 0.03993],
-	#		 [-0.45728, 0.19104, 0.03993],
-	#		 [ 0.45728, 0.19104, 0.03993]])
-
-	self.r = array([[ 0.23594,-0.20304, 0.05816],
-                       	[-0.23594,-0.20304, 0.05816],
-			[ 0.23594, 0.20304, 0.05816],  
-                       	[-0.23594, 0.20304, 0.05816],
-			[ 0.45728,-0.19104, 0.03993],
-		   	[-0.45728,-0.19104, 0.03993],
-			[ 0.45728, 0.19104, 0.03993],
-			[-0.45728, 0.19104, 0.03993],])
+#	self.r = array([[ 0.23594,-0.20304, 0.05816],
+ #                      	 [-0.23594,-0.20304, 0.05816],
+  #                     	 [-0.23594, 0.20304, 0.05816],
+   #                    	 [ 0.23594, 0.20304, 0.05816],
+#			 [ 0.45728,-0.19104, 0.03993],
+#		   	 [-0.45728,-0.19104, 0.03993],
+#			 [-0.45728, 0.19104, 0.03993],
+#			 [ 0.45728, 0.19104, 0.03993]])
+	#ek
+	self.r = array([[ 0.225,  0.2,   0.03],
+                       	[ 0.225, -0.2,   0.03],
+			[-0.225,  0.2,   0.03],  
+                       	[-0.225, -0.2,   0.03],
+			[ 0.375,  0.26, -0.04],
+		   	[ 0.375, -0.26, -0.04],
+			[-0.375,  0.26, -0.04],
+			[-0.375, -0.26, -0.04]])
 
 
 #     r = array([[0.425, 0.140, -0.095+0.044],
@@ -193,10 +192,10 @@ class thrust_mapper:
 	pwm_command.pwm = [1500]*8
 
 	#compute thrust for each thruster based on joy stick command
-
-
-	F = array([message.linear.x*3, -message.linear.y*3, message.linear.z*5,
-		   message.angular.x*2.4, message.angular.y*2.4, message.angular.z*2.4])
+	
+	trusts_scale = [3,3,4.1,2.4,2.4,2.4]
+	F = array([message.linear.x, message.linear.y, message.linear.z,
+		   message.angular.x, message.angular.y, message.angular.z])
 	print '======= F ========'
 	print F
 	print F.T
@@ -207,8 +206,9 @@ class thrust_mapper:
 	cmd = lup.lookup_pwm_array(t)
 	print '=========== cmd ==========='
 	print cmd
-	tmp = [i-1500 for i in cmd]
-
+	
+	#tmp = [i-1500 for i in cmd]
+	
 	#tul
 	#pwm_command.pwm[0] += tmp[0]#500*t[0]; #thrust0		        4/		   \5
 	#pwm_command.pwm[1] -= tmp[1]#500*t[1]; #thrust1				/		    \
@@ -226,17 +226,18 @@ class thrust_mapper:
 	#pwm_command.pwm[3] += tmp[3]#500*t[3]; #thrust3				|			|
 	#pwm_command.pwm[4] -= tmp[4]#500*t[4]; #thrust4				|			|
 	#pwm_command.pwm[5] -= tmp[5]#500*t[5]; #thrust5			  2	|			| 3
-	#pwm_command.pwm[6] -= tmp[6]#500*t[6]; #thrust6 old +				 \		   /
-	#pwm_command.pwm[7] -= tmp[7]#500*t[7]; #thrust7	old -	
-	#video
-	pwm_command.pwm[0] += tmp[0]#500*t[0]; #thrust0		        4/		   \5
-	pwm_command.pwm[1] -= tmp[1]*0.8 #500*t[1]; #thrust1				/		    \
-	pwm_command.pwm[2] += tmp[2]#500*t[2]; #thrust2			  0	|			| 1
-	pwm_command.pwm[3] += tmp[3]*0.8 #500*t[3]; #thrust3				|			|
-	pwm_command.pwm[4] -= tmp[4]#500*t[4]; #thrust4				|			|
-	pwm_command.pwm[5] -= tmp[5]#500*t[5]; #thrust5			  2	|			| 3
-	pwm_command.pwm[6] -= tmp[6]#500*t[6]; #thrust6 old +				 \		   /
-	pwm_command.pwm[7] -= tmp[7]#500*t[7]; #thrust7	old -	
+	#pwm_command.pwm[6] -= tmp[6]#500*t[6]; #thrust6 				 \		   /
+	#pwm_command.pwm[7] -= tmp[7]#500*t[7]; #thrust7		
+
+	#ek+control
+	pwm_command.pwm[0] = cmd[0]#500*t[0]; #thrust0		       
+	pwm_command.pwm[1] = cmd[1]#500*t[1]; #thrust1
+	pwm_command.pwm[2] = cmd[2]#500*t[2]; #thrust2			 
+	pwm_command.pwm[3] = cmd[3]#500*t[3]; #thrust3			
+	pwm_command.pwm[4] = cmd[4]#500*t[4]; #thrust4			
+	pwm_command.pwm[5] = cmd[5]#500*t[5]; #thrust5			  
+	pwm_command.pwm[6] = cmd[6]#500*t[6]; #thrust6 			
+	pwm_command.pwm[7] = cmd[7]#500*t[7]; #thrust7		
 
 
 	print '\n============PWM before bound============='
@@ -249,14 +250,11 @@ class thrust_mapper:
 	
 	print '\n============PWM============='
 	print pwm_command
-	#pwm_command.pwm[0] = 1650
-	#pwm_command.pwm[1] = 1350
-	#pwm_command.pwm[2] = 1650
-	#pwm_command.pwm[3] = 1650
-	#pwm_command.header.stamp = rospy.Time.now()
+	pwm_command.header.stamp = rospy.Time.now()
 	self.pwm_publisher.publish(pwm_command)
 
 if __name__ == '__main__':
     x = thrust_mapper()
     #x.publishOdom()
     rospy.spin()
+

@@ -25,8 +25,6 @@ def _lookup_pwm(force):
         out_pwm = PWM_TABLE[idx - 1] + ((PWM_TABLE[idx] - PWM_TABLE[idx - 1]) *
                                         ((force - FORCE_LOOKUP[idx - 1])/
                                          (FORCE_LOOKUP[idx] - FORCE_LOOKUP[idx - 1])))
-    print '=========== out pwm ====================='
-    print out_pwm
     return out_pwm
 
 def lookup_pwm_array(forces):
