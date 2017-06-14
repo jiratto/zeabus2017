@@ -1,3 +1,4 @@
+
 /*
  * zeabus_joy.cpp
  *
@@ -33,12 +34,14 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+#include <string>
 #include <ros/ros.h>
 #include <geometry_msgs/Twist.h>
 #include <sensor_msgs/Joy.h>
 #include "boost/thread/mutex.hpp"
 #include "boost/thread/thread.hpp"
 #include "ros/console.h"
+
 class ZeabusTeleop
 {
 public:
@@ -49,7 +52,7 @@ private:
   ros::NodeHandle ph_, nh_;
 
   int roll_axis_, pitch_axis_,yaw_axis_, depth_axis_;
-  int deadman_button_;
+  int deadman_button_, mode_button_;
 
 
   ros::Publisher vel_pub_;
@@ -62,9 +65,10 @@ private:
   double vx_scale_;
   double vy_scale_;
   double vz_scale_;
-  double wz_scale_;
-
-
+  double ax_scale_;
+  double ay_scale_;
+  double az_scale_;
+  std::string topic_joy;
 
   ros::Timer timer_;
 };
@@ -74,7 +78,7 @@ ZeabusTeleop::ZeabusTeleop()
 {
 
   ph_.param("deadman_button", deadman_button_, 0);
-  //ROS_INFO("AAAAAAAAAAAAAAAAAAAAAAAAAA %d", deadman_button_);
+  ph_.param("mode_button", mode_button_, 1);
 
   ph_.param("roll_axis", roll_axis_, 0);
   ph_.param("roll_pitch", pitch_axis_, 1);
@@ -83,12 +87,17 @@ ZeabusTeleop::ZeabusTeleop()
 
   ph_.param("vx_scale", vx_scale_, 1.0);
   ph_.param("vy_scale", vy_scale_, 1.0);
-  ph_.param("vz_scale", vz_scale_, 1.0);
-  ph_.param("yaw_scale", wz_scale_, M_PI);
+  ph_.param("vz_scale", vz_scale_, 0.0);
+  ph_.param("ax_scale", ax_scale_, 0.0);
+  ph_.param("ay_scale", ay_scale_, 0.0);
+  ph_.param("az_scale", az_scale_, 0.2);
+  ph_.param<std::string>("topic_joy", topic_joy, "/zeabus/cmd_vel");
+
+
 
   deadman_pressed_ = false;
   zero_twist_published_ = false;
-  vel_pub_ = ph_.advertise<geometry_msgs::Twist>("/cmd_vel", 1, true);
+  vel_pub_ = ph_.advertise<geometry_msgs::Twist>(topic_joy, 1, true);
   joy_sub_ = nh_.subscribe<sensor_msgs::Joy>("/joy", 10, &ZeabusTeleop::joyCallback, this);
   timer_ = nh_.createTimer(ros::Duration(0.1), boost::bind(&ZeabusTeleop::publish, this));
 }
@@ -97,12 +106,24 @@ void ZeabusTeleop::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
   double r, p, y, depth;
 
   geometry_msgs::Twist vel;
-  vel.linear.x = joy->axes[pitch_axis_] * vx_scale_;
-  vel.linear.y = joy->axes[roll_axis_] * vy_scale_;
-  vel.linear.z = joy->axes[depth_axis_] * vz_scale_;
 
-  vel.angular.x = joy->buttons[deadman_button_];
-  vel.angular.z = joy->axes[yaw_axis_] * wz_scale_;
+  if(!joy->buttons[mode_button_])
+  {
+    vel.linear.x = joy->axes[pitch_axis_] * vx_scale_;
+    // vel.linear.y = joy->axes[roll_axis_] * vy_scale_;
+  }
+  else
+  {
+    vel.angular.x = joy->axes[roll_axis_] * ax_scale_;
+    // vel.angular.y = joy->axes[pitch_axis_] * ay_scale_;
+  }
+
+  vel.linear.z = joy->axes[depth_axis_] * vz_scale_;
+  if (joy->buttons[3]) vel.linear.z=1;
+  else if (joy->buttons[0]) vel.linear.z=-1;
+  else vel.linear.z=0;
+
+  vel.angular.z = joy->axes[yaw_axis_] * az_scale_;
 
   last_published_ = vel;
   deadman_pressed_ = joy->buttons[deadman_button_];
@@ -117,7 +138,7 @@ void ZeabusTeleop::publish()
   }
   else if (!deadman_pressed_ && !zero_twist_published_)
   {
-    vel_pub_.publish(*new geometry_msgs::Twist());
+    vel_pub_.publish(geometry_msgs::Twist());
     zero_twist_published_ = true;
   }
 }
@@ -127,4 +148,5 @@ int main(int argc, char** argv)
   ZeabusTeleop Zeabus_teleop;
   ros::spin();
 }
+
 

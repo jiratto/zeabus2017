@@ -70,7 +70,7 @@
   
       <!--param name="twist1" value="/Joy_Odom"/-->
       <param name="twist0" value="/baro/data"/>
-      <param name="imu0" value="/imu/data"/>      
+      <param name="imu0" value="/gx4_45_imu/data"/>      
       <!--param name="imu1" value="gx4_45_imu/data"/-->      
 
       <!--param name="twist0" value="altimeter/data"/-->	  
