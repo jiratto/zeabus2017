@@ -6,8 +6,8 @@ import rospy
 import math
 from sensor_msgs.msg import CompressedImage
 from vision_lib import *
-# from zeabus_vision_srv_msg.msg import vision_msg_default
-# from zeabus_vision_srv_msg.srv import vision_srv_default
+from zeabus_vision_srv_msg.msg import vision_msg_default
+from zeabus_vision_srv_msg.srv import vision_srv_default
 
 img = None
 
@@ -21,6 +21,8 @@ def find_path():
     cnt = None
     kernel1 = np.ones((9,9), np.uint8)
     kernel2 = np.ones((5,5), np.uint8)
+    res = vision_msg_default()
+
     while not rospy.is_shutdown():
         while img is None:
             print("img: None")
@@ -31,7 +33,7 @@ def find_path():
         cy = -999
         w = -999
         h = -999
-        angle = None
+        angle = -999
         box = None
         imStretching = stretching(im)
         im_for_draw = img.copy()
@@ -88,6 +90,24 @@ def find_path():
 
         print('w', w)
         print('h', h)
+
+        res.area = area
+        if area < 4000:
+            res.appear = False
+            res.area = -999
+            res.angle = -999
+            res.x = -999
+            res.y = -999
+            return res
+        else:
+            res.appear = True
+            res.area = area
+            res.angle = angle
+            res.x = (cx-400)/400
+            res.y = (300-cy)/300
+            return res
+
+
         cv2.circle(im_for_draw,(int(cx), int(cy)), 5, (0, 0, 255), -1)
         cv2.drawContours(im_for_draw,[box], -1,(0,0,255),1)
         cv2.drawContours(im, contours, -1, (0,255,0), 3)
@@ -111,8 +131,12 @@ def img_callback(msg):
     arr = np.fromstring(msg.data, np.uint8)
     img = cv2.imdecode(arr, 1)
 
+def mission_callback(msg):
+    return findPath()
+
 if __name__ == '__main__':
     rospy.init_node('findPath')
     topic = '/leftcam_bottom/image_raw/compressed'
     rospy.Subscriber(topic, CompressedImage, img_callback)
-    find_path()
+    rospy.Service('vision', vision_srv_default, mission_callback)
+    rospy.spin()
