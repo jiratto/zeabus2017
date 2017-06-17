@@ -6,11 +6,13 @@ import rospy
 import math
 from sensor_msgs.msg import CompressedImage
 from vision_lib import *
+# from zeabus_vision_srv_msg.msg import vision_msg_default
+# from zeabus_vision_srv_msg.srv import vision_srv_default
 
 img = None
 
-lower_red = np.array([ 88, 15, 230])
-upper_red = np.array([129, 182, 255])
+lower_red = np.array([ 0, 15, 73])
+upper_red = np.array([92, 172, 136])
 
 def find_path():
     global img
@@ -23,17 +25,18 @@ def find_path():
         while img is None:
             print("img: None")
         im = img.copy()
-        area = 0
-        max1 = 0
-        cx = 0
-        cy = 0
-        w = 0
-        h = 0
+        area = -999
+        max1 = -999
+        cx = -999
+        cy = -999
+        w = -999
+        h = -999
+        angle = None
         box = None
         imStretching = stretching(im)
         im_for_draw = img.copy()
         im_blur = cv2.GaussianBlur(im, (3,3), 0)
-        hsv = cv2.cvtColor(im_blur, cv2.COLOR_RGB2HSV)
+        hsv = cv2.cvtColor(im_blur, cv2.COLOR_BGR2HSV)
         # hsv2 = cv2.cvtColor(im_blur, cv2.COLOR_RGB2HSV)
         imgray = cv2.cvtColor(im_blur, cv2.COLOR_BGR2GRAY)
         im_red = cv2.inRange(hsv, lower_red, upper_red)
@@ -46,7 +49,7 @@ def find_path():
             M = cv2.moments(c)
             # x,y,w,h = cv2.boundingRect(c)
             # cv2.rectangle(img, (x,y), (x+w,y+h), (0,255,0) ,2)
-            rect = (x,y),(ww,hh),angle =cv2.minAreaRect(c)
+            rect = (x,y),(ww,hh),angle1 =cv2.minAreaRect(c)
             area = ww*hh
 
             if area < 5500:
@@ -75,6 +78,7 @@ def find_path():
                 # cnt = c
                 box = cv2.boxPoints(rect)
                 box = np.int0(box)
+                angle = 90-Oreintation(M)[0]*180/math.pi
                 cx = x
                 cy = y
                 w = ww
@@ -89,12 +93,13 @@ def find_path():
         cv2.drawContours(im, contours, -1, (0,255,0), 3)
         # cv2.imshow('grey', imgray)
         # cv2.imshow('thresh', thresh)
-        cv2.imshow('red', im_red)
-        cv2.imshow('dilation', dilation)
+        # cv2.imshow('red', im_red)
+        # cv2.imshow('dilation', dilation)
         # cv2.imshow('erode', erosion)
         # cv2.imshow('img_blur',im_blur)
         cv2.imshow('img',im_for_draw)
         cv2.imshow('img1',im)
+        # cv2.imshow('hsv', hsv)
         # cv2.imshow('hsv from bgr', hsv)
         # cv2.imshow('img stretching', imStretching)
         cv2.waitKey(30)
@@ -108,6 +113,6 @@ def img_callback(msg):
 
 if __name__ == '__main__':
     rospy.init_node('findPath')
-    topic = '/rightcam_bottom/image_raw/compressed'
+    topic = '/leftcam_bottom/image_raw/compressed'
     rospy.Subscriber(topic, CompressedImage, img_callback)
     find_path()
