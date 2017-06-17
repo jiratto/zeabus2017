@@ -145,7 +145,7 @@ def callback(msg):
         arr = np.fromstring(msg.data, np.uint8)
         img = cv2.imdecode(arr, 1)
         img = cv2.resize(img, (320, 256))
-        hsv = cv2.cvtColor(img, cv2.COLOR_RGB2HSV)
+        hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
 
 def draw_circle(event, x, y, flags, param):
@@ -266,7 +266,9 @@ def select_color():
 
 if __name__ == '__main__':
     rospy.init_node('color_range_down')
+    top = '/rightcam_top/image_raw/compressed'
+    bot = '/leftcam_bottom/image_raw/compressed'
     topic = rospy.get_param('color_range/topic_down',
-                            '/rightcam_bottom/image_raw/compressed')
+                            bot)
     rospy.Subscriber(topic, CompressedImage, callback)
     select_color()

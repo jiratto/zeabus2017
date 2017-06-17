@@ -1,15 +1,15 @@
  color_down:
-  upper_orange: '165,199,255'
+  upper_orange: '92,172,136'
 
-  lower_orange: '0,0,176'
+  lower_orange: '0,15,73'
 
   upper_white: '0,0,0'
 
   lower_white: '180,255,255'
 
-  upper_yellow: '0,0,0'
+  upper_yellow: '96,161,255'
 
-  lower_yellow: '180,255,255'
+  lower_yellow: '87,26,221'
 
   upper_red: '0,0,0'
 
