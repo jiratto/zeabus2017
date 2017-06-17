@@ -1,7 +1,11 @@
  color_down:
   upper_orange: '92,172,136'
 
+<<<<<<< HEAD
   lower_orange: '0,15,73'
+=======
+  lower_orange: '0,0,249'
+>>>>>>> 74a85bf6793d4d9f9220e769ced0e8f7f1ecf857
 
   upper_white: '0,0,0'
 

@@ -43,7 +43,7 @@ class window:
         self.y += self.size
         if self.y + self.size >= height:
             self.x += self.size
-            self.y = 0
+            self.y = 20
 
     def create_range(self, name):
         lower_param, upper_param = self.get_param(name)
@@ -83,7 +83,7 @@ class window:
             print('cannot redo')
 
     def reset_range(self, name):
-        self.lower[name].append([180, 255, 255])
+        self.lower[name].append([179, 255, 255])
         self.upper[name].append([0, 0, 0])
         set_trackbar(self.lower[name][-1], self.upper[name][-1])
         print('reset')
@@ -105,7 +105,7 @@ class window:
 
     def get_param(self, name):
         self.param_lower = rospy.get_param(
-            "color_range/color_down/lower_" + name, '180,255,255')
+            "color_range/color_down/lower_" + name, '179,255,255')
         self.param_upper = rospy.get_param(
             "color_range/color_down/upper_" + name, '0,0,0')
         self.param_lower = self.range_str2list(self.param_lower)
@@ -193,16 +193,16 @@ def select_color():
     window_name = ['mask', 'red', 'orange', 'white', 'yellow']
 
     cv2.namedWindow('image', flags=cv2.WINDOW_NORMAL)
-    cv2.moveWindow('image', 0, 0)
+    cv2.moveWindow('image', 20, 20)
     cv2.resizeWindow('image', (width / 3), height)
-    cv2.createTrackbar('Hmin', 'image', 0, 180, nothing)
+    cv2.createTrackbar('Hmin', 'image', 0, 179, nothing)
     cv2.createTrackbar('Smin', 'image', 0, 255, nothing)
     cv2.createTrackbar('Vmin', 'image', 0, 255, nothing)
-    cv2.createTrackbar('Hmax', 'image', 0, 180, nothing)
+    cv2.createTrackbar('Hmax', 'image', 0, 179, nothing)
     cv2.createTrackbar('Smax', 'image', 0, 255, nothing)
     cv2.createTrackbar('Vmax', 'image', 0, 255, nothing)
     cv2.createTrackbar('m <-> c', 'image', 0, 2, nothing)
-    set_trackbar([180, 255, 255], [0, 0, 0])
+    set_trackbar([179, 255, 255], [0, 0, 0])
     cv2.setTrackbarPos('m <-> c', 'image', 1)
     cv2.setMouseCallback('image', draw_circle)
 

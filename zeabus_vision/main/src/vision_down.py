@@ -8,6 +8,8 @@ from sensor_msgs.msg import CompressedImage
 import rospy
 from operator import itemgetter
 from vision_lib import *
+import statistics
+
 
 frame = None
 rows = None
@@ -18,6 +20,7 @@ height = 256
 channel = 1
 task = None
 req = None
+i = 0
 
 
 def not_found(m):
@@ -32,7 +35,7 @@ def getMask():
     mask = None
     hsv = process_img_down(frame)
     if task == 'path1':
-        lower, upper = getColor('orange','down')
+        lower, upper = getColor('orange', 'down')
         mask = cv2.inRange(hsv, lower, upper)
     else:
         print 'request is false'
@@ -43,8 +46,9 @@ def cam_callback(msg):
     global frame, rows, cols, width, height
 
     arr = np.fromstring(msg.data, np.uint8)
-    frame = cv2.imdecode(arr, 1)
-    frame = cv2.resize(frame, (width, height))
+
+    frame = cv2.resize(cv2.imdecode(arr, 1), (width, height))
+
     rows, cols, ch = frame.shape
 
 
@@ -58,68 +62,72 @@ def mission_callback(msg):
 
 
 def do_path(msg):
-    global frame, rows, task, req
 
+    global frame, rows, task, req, height
+    images = None
     task = msg.task.data
     req = msg.req.data
-
+    result = np.zeros((height, width))
+    lower = np.array([38,5,30],np.uint8)
+    upper = np.array([170,198,140],np.uint8)
+    
     while frame is None or rows != height:
+        print rows, height
         rospy.sleep(0.01)
-
-    m = vision_msg_default()
-    mask = getMask()
-    h, w = mask.shape
-
-    erode = cv2.erode(mask, np.array([[1] * 3] * 3))
-    dilate = cv2.dilate(erode, np.array([[1] * 3] * 3))
+    # cv2.imshow('stretcing',hsv_streching)
+    # cv2.imshow('hsv',hsv)
+    hsv = cv2.cvtColor(frame.copy(), cv2.COLOR_RGB2HSV)
+    mask = cv2.inRange(hsv, lower, upper)    
+    h, s, v = cv2.split(hsv)
+    MODE = 0
+    try:
+        MODE = statistics.mode(v.ravel())
+    except ValueError:
+        MODE = 127
+    if MODE > 240:
+        print 'adjust v'
+        v -= 40;
+    hsv_new = cv2.merge([h,s,v])
+    # m = vision_msg_default()
+    
+    hsv_stretching = stretching(hsv_new.copy())
+    rgb = cv2.cvtColor(hsv_new.copy(), cv2.COLOR_HSV2RGB)
+    gray = cv2.cvtColor(rgb.copy(), cv2.COLOR_RGB2GRAY)
+    # clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
+    # cl1 = clahe.apply(gray.copy())
+    blockSize = width / 3
+    if blockSize % 2 == 0:
+        blockSize -= 1
+    # print blockSize
+    th = cv2.adaptiveThreshold(
+        gray.copy(), 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, blockSize, 1)
+   
+    mask = ~mask
+    res = th & mask
     _, contours, hierarchy = cv2.findContours(
-        dilate.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
+        res.copy(), cv2.RETR_TREE , cv2.CHAIN_APPROX_NONE)
 
-    result = dilate.copy()
-    result = cv2.cvtColor(result, cv2.COLOR_GRAY2BGR)
-    sq_found = []
+    for cnt in contours:
+        area = cv2.contourArea(cnt)
+        if area > 200 and find_shape(cnt,4):
+            cv2.drawContours(result, [cnt], 0, (255,255,255), 1)
 
-    for c in contours:
-        M = cv2.moments(c)
-        rect = (x, y), (ww, hh), angle = cv2.minAreaRect(c)
-        area = ww * hh
+    cv2.imshow('gray',gray)
+    cv2.imshow('hsv', hsv)
+    cv2.imshow('hsv_new', hsv_new)
+    cv2.imshow('hsv_stretching', hsv_stretching)
+    cv2.imshow('rgb',rgb)
+    cv2.imshow('th', th)
+    cv2.imshow('res',res)
+    cv2.imshow('result',result)
 
-        if area <= 0 or ww <= 0:
-            continue
-        real_area = cv2.contourArea(c)
-        ratio_area = real_area / area
-        ratio_scale = hh / ww
-
-        box = cv2.boxPoints(rect)
-        box = np.int0(box)
-    #	print real_area, ratio_area, ratio_scale
-        err = 3
-        if (ratio_area > 0.6 and real_area >= 200 and (ratio_scale > 3 or ratio_scale < 0.33) and 
-        (y - hh / 2 > err + h and y + hh / 2 < h - err and x - ww / 2 > err and x + ww / 2 < w - err or real_area >= 200)):
-            sq_found.append(
-                [real_area, (x, y), 90 - Oreintation(M)[0] * 180 / math.pi])
-            cv2.drawContours(result, [box], 0, (0, 255, 0), 1, 8)
-
-    if len(sq_found) == 0:
-        not_found(m)
-    else:
-        sq_found = sorted(sq_found, key=itemgetter(0))
-        x, y = sq_found[-1][1]
-        cv2.circle(result, (int(x), int(y)), 5, (0, 0, 255), -1)
-
-        m.x = ((height / 2.0) - y) / (height / 2.0)
-        m.y = ((width / 2.0) - x) / (width / 2.0)
-        lx, ly = m.x, m.y
-        m.angle = sq_found[-1][2]
-        m.area = sq_found[-1][0] / (width * height)
-        m.appear = True
-
-    cv2.imshow('result', result)
+   
     k = cv2.waitKey(1) & 0xff
     if k == ord('q'):
         rospy.signal_shutdown('')
-    # print m
+
     return m
+
 
 if __name__ == "__main__":
     rospy.init_node('vision_down')
@@ -138,5 +146,6 @@ if __name__ == "__main__":
         # msg.task = String('pipe')
         # msg.req = String('red')
         # do_pipe(msg)
-    rospy.Service('vision2', vision_srv, mission_callback)
+    rospy.Service('vision2', vision_srv_default(), mission_callback)
+
     rospy.spin()
