@@ -29,7 +29,7 @@ class AIControl():
         rospy.Subscriber ('/controller/is_at_fix_position', Bool, self.posi)
         rospy.Subscriber ('/controller/is_at_fix_orientation', Bool, self.ck_turn)
         
-        self.command = rospy.Publisher('/cmd_vel', Twist, queue_size = 10)
+        self.command = rospy.Publisher('/zeabus/cmd_vel', Twist, queue_size = 10)
         self.turn_yaw_rel = rospy.Publisher('/fix/rel/yaw', Float64, queue_size = 10)
         self.turn_yaw_abs = rospy.Publisher('/fix/abs/yaw', Float64, queue_size = 10)
         self.depth = rospy.Publisher('/fix/abs/depth', Float64, queue_size = 10)
@@ -38,7 +38,7 @@ class AIControl():
         rospy.wait_for_service('fix_rel_x_srv')
         print 'service starts drive_x'
         self.drive_x_srv = rospy.ServiceProxy('fix_rel_x_srv', drive_x)
-        self.wait_for_subscriber()
+        # self.wait_for_subscriber()
 
     ##### start set environment #####
     def ck_turn(self, data):
