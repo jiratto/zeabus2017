@@ -18,6 +18,7 @@ class Bouy (object):
 		self.data = None
 		self.leftColor = None
 		self.state = 1
+		self.time = None
         self.command = rospy.Publisher ('/cmd_vel', Twist, queue_size=10)
         self.turn_yaw_rel = rospy.Publisher ('/fix/rel/yaw', Float64, queue_size=10)
         self.distance = []
@@ -32,11 +33,8 @@ class Bouy (object):
 
 		return self.data.num
 	
-	def three_ball (self, color):
-		time = 0.5
-
-		while not rospy.is_shutdown ():
-			self.data = self.detect_bouy (String ('bouy'), String (color))
+	def movement (self, color):
+		self.data = self.detect_bouy (String ('bouy'), String (color))
 			self.data = self.data.data
 			xImg = self.data.x[0]
 			yImg = self.data.y[0]
@@ -52,12 +50,18 @@ class Bouy (object):
 			self.distance.append (vy)
 
 			self.aicontrol.drive ([0, vx, 0, 0, 0, 0])
-			rospy.sleep (time)
+			rospy.sleep (self.time)
 			self.aicontrol.stop (0.1)
 
 			self.aicontrol.drive ([0, 0, vy, 0, 0, 0])
-			rospy.sleep (time)
+			rospy.sleep (self.time)
 			self.aicontrol.stop (0.1)
+
+	def three_ball (self, color):
+		self.time = 0.5
+
+		while not rospy.is_shutdown ():
+			self.movement (color)
 
 		self.aicontrol.drive ([1, 0, 0, 0, 0, 0])
 		rospy.sleep (5)
@@ -67,7 +71,7 @@ class Bouy (object):
 		self.aicontrol.drive ([-1, 0, 0, 0, 0, 0])
 		rospy.sleep (5)
 		self.aicontrol.stop (2)
-		self.aicontrol.trackback (self.distance, time)
+		self.aicontrol.trackback (self.distance, self.time)
 		
 		self.distance = [] # clear array
 
@@ -83,6 +87,8 @@ class Bouy (object):
 		if num == 3:
 			three_ball ('red')
 			three_ball ('green')
+			self.aicontrol.drive_xaxis (1)
+			rospy.sleep (5)
 
 		elif num == 2:
 

@@ -29,7 +29,7 @@ class AIControl ():
 						 Bool, self.check_turn)		# subscribe to check turn state
 
 		# publish twist x, y, z linear and angular to /cmd_vel
-		self.command = rospy.Publisher ('/cmd_vel', Twist, queue_size=10)
+		self.command = rospy.Publisher ('/zeabus/cmd_vel', Twist, queue_size=10)
 		self.zAxisNow = rospy.Publisher (
 			'/fix/abs/depth', Float64, queue_size=10)		# publish z to fix depth
 		self.fixPoint = rospy.Publisher (
@@ -110,9 +110,9 @@ class AIControl ():
 	def published (self, tw):
 		print 'linear x:%f y:%f z:%f' % (tw.linear.x, tw.linear.y, tw.linear.z)
 		print 'angular x:%f y:%f z:%f' % (tw.angular.x, tw.angular.y, tw.angular.z)
-
-		self.command.publish (tw)
-		rospy.sleep (0.05)
+		for i in xrange (3):
+			self.command.publish (tw)
+			rospy.sleep (0.05)
 
 	# get current position from /auv/state
 	def get_position (self):
@@ -172,7 +172,8 @@ class AIControl ():
 		rad = Float64 (rad)
 		self.turnYawRelative.publish (rad)
 		while not self.stop_turn ():
-			rospy.sleep (0.1)
+			rospy.sleep (2)
+		rospy.sleep (2)
 		print ('turn yaw relative: ', rad)
 
 	def turn_yaw_absolute (self, degree):
