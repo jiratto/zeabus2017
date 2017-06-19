@@ -114,7 +114,7 @@ int main(int argc, char **argv)
 	  int baudrate;
 	  double atm_pressure;
 	  double depth_offset;
-	  nh.param<double>("atm_pressure", atm_pressure, 14.7);
+	  nh.param<double>("atm_pressure", atm_pressure, 15.6);
 	  nh.param<double>("depth_offset", depth_offset, 0);
 	  uint16_t control_word[2];
 	  std::string frame_id;

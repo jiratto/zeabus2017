@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python
 
 import struct
@@ -216,13 +217,13 @@ class readdata:
             data.stop = False
 
         while True:
-            #print '0'
+            print '0'
             x = ser.read(1)
             #print '1'
-            #print x
+            print x
             if x=='\xff':
                 x = ser.read(1)
-                #print '2'
+                print '2'
                 count +=1
                 #print x
                 if x=='\xff':
@@ -394,7 +395,7 @@ if __name__ == '__main__':
     ser.write(res)
     res = set(0x01,35000)
     ser.write(res)
-    res = set(0x02,0.3) #Font #add strength    40k = 1.0/3.0  ||| 25k = 1.0/4.0
+    res = set(0x02,0.1) #Font #add strength    40k = 1.0/3.0  ||| 25k = 1.0/4.0
     ser.write(res)
     res = set(0x03,0.02)   #Pthres
     ser.write(res)

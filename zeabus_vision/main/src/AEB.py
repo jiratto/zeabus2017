@@ -12,7 +12,7 @@ img = None
 hsv = None
 client = None
 wait = False
-
+node = 'ueye_cam_nodelet_leftcam_top/'
 
 def callback(msg):
     global img, hsv
@@ -24,14 +24,15 @@ def callback(msg):
 
 
 def set_param(param, value):
-    global client
-    client = dynamic_reconfigure.client.Client('ueye_cam_nodelet')
+    global client, node
+    client = dynamic_reconfigure.client.Client(node)
     params = {str(param): value}
     config = client.update_configuration(params)
 
 
 def get_param(param):
-    return rospy.get_param('ueye_cam_nodelet/' + str(param), False)
+    global node
+    return rospy.get_param(node + str(param), False)
 
 
 def main():
@@ -46,10 +47,10 @@ def main():
     # exposure = [ev_auto - delta, ev_auto, ev_auto + delta]
     exposure = [ev_auto - delta, ev_auto + delta]
     for ev in exposure:
-        t = time.time()
+        # t = time.time()
         set_param('exposure', int(ev))
-        delta_t = time.time() - t
-        print("time: {0}".format(delta_t))
+        # delta_t = time.time() - t
+        # print("time: {0}".format(delta_t))
         time.sleep(1)
         name = 'image exposure :' + str(ev)
         images.append(img.copy())
@@ -86,6 +87,8 @@ def main():
 
 if __name__ == '__main__':
     rospy.init_node('AEB', anonymous=True)
-    topic = "/camera/image_raw/compressed"
+    topic = 'leftcam_top/image_raw/compressed'
+    # topic = rospy.get_param('', topic)
+    
     rospy.Subscriber(topic, CompressedImage, callback)
     main()

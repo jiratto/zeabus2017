@@ -1,16 +1,12 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(zeabus_bag2mp4)
-
-## Add support for C++11, supported in ROS Kinetic and newer
-add_definitions(-std=c++11)
+project(zeabus_command)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  rosbag
   roscpp
-  sensor_msgs
+  rospy
   std_msgs
 )
 
@@ -71,7 +67,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate added messages and services with any dependencies listed here
 # generate_messages(
 #   DEPENDENCIES
-#   sensor_msgs#   std_msgs
+#   std_msgs
 # )
 
 ################################################
@@ -105,8 +101,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES zeabus_bag2mp4
-#  CATKIN_DEPENDS rosbag roscpp sensor_msgs std_msgs
+#  LIBRARIES zeabus_command
+#  CATKIN_DEPENDS roscpp rospy std_msgs
 #  DEPENDS system_lib
 )
 
@@ -122,32 +118,24 @@ include_directories(
 )
 
 ## Declare a C++ library
-# add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/zeabus_bag2mp4.cpp
+# add_library(zeabus_command
+#   src/${PROJECT_NAME}/zeabus_command.cpp
 # )
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
-# add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# add_dependencies(zeabus_command ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
-## With catkin_make all packages are built within a single CMake context
-## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/zeabus_bag2mp4_node.cpp)
-
-## Rename C++ executable without prefix
-## The above recommended prefix causes long target names, the following renames the
-## target back to the shorter version for ease of user use
-## e.g. "rosrun someones_pkg node" instead of "rosrun someones_pkg someones_pkg_node"
-# set_target_properties(${PROJECT_NAME}_node PROPERTIES OUTPUT_NAME node PREFIX "")
+# add_executable(zeabus_command_node src/zeabus_command_node.cpp)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
-# add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# add_dependencies(zeabus_command_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(${PROJECT_NAME}_node
+# target_link_libraries(zeabus_command_node
 #   ${catkin_LIBRARIES}
 # )
 
@@ -166,7 +154,7 @@ include_directories(
 # )
 
 ## Mark executables and/or libraries for installation
-# install(TARGETS ${PROJECT_NAME} ${PROJECT_NAME}_node
+# install(TARGETS zeabus_command zeabus_command_node
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
@@ -191,55 +179,10 @@ include_directories(
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_zeabus_bag2mp4.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_zeabus_command.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
-
-include_directories(
-  ${Opencv_INCLUDE_DIRS}
-)
-add_executable(zeabus_bag2mp4
-  src/bag2mp4.cpp
-)
-target_link_libraries (zeabus_bag2mp4
-  ${OpenCV_LIBRARIES}
-  ${catkin_LIBRARIES}
-  opencv_stitching
-opencv_superres
-opencv_videostab
-#opencv_bgsegm
-#opencv_bioinspired
-#opencv_ccalib
-#opencv_line_descriptor
-#opencv_optflow
-#opencv_reg
-#opencv_saliency
-#opencv_rgbd
-opencv_viz
-#opencv_surface_matching
-#opencv_tracking
-#opencv_datasets
-#opencv_text
-#opencv_face
-#opencv_xfeatures2d
-opencv_shape
-opencv_video
-#opencv_ximgproc
-opencv_calib3d
-opencv_features2d
-opencv_flann
-#opencv_xobjdetect
-opencv_objdetect
-opencv_ml
-#opencv_xphoto
-opencv_highgui
-opencv_videoio
-opencv_imgcodecs
-opencv_photo
-opencv_imgproc
-opencv_core
-)

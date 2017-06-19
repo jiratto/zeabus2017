@@ -26,17 +26,17 @@ class PingerMission(object):
 
         #### BINN
         ## subscribe vision
-        srv_name = 'bin_srv'
-        rospy.wait_for_service(srv_name)
-        print 'service starts binn'
-        self.detect_binn = rospy.ServiceProxy(srv_name, Bin_Srv)
+        # srv_name = 'bin_srv'
+        # rospy.wait_for_service(srv_name)
+        # print 'service starts binn'
+        # self.detect_binn = rospy.ServiceProxy(srv_name, Bin_Srv)
 
         #### SETT
         ## subscribe vision
-        sett_srv = 'setcourse_srv'
-        rospy.wait_for_service(sett_srv)
-        print 'service starts top srv'
-        self.detect_sett = rospy.ServiceProxy(sett_srv, SetCourse_Srv)
+        # sett_srv = 'setcourse_srv'
+        # rospy.wait_for_service(sett_srv)
+        # print 'service starts top srv'
+        # self.detect_sett = rospy.ServiceProxy(sett_srv, SetCourse_Srv)
 
         self.got_data = False
 
@@ -114,7 +114,7 @@ class PingerMission(object):
                     print 'yung mai tung'
 
                 print self.hy
-                rospy.sleep (5)
+                rospy.sleep (10)
 
                 if self.hy.elv < 40:
                     dis = 0.5

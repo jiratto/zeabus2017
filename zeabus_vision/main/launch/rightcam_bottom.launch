@@ -8,7 +8,7 @@
         args="load ueye_cam/ueye_cam_nodelet $(arg nodelet_manager_name)">
     <param name="camera_name" type="str" value="$(arg camera_name)" /> <!-- == namespace for topics and services -->
     <param name="camera_topic" type="str" value="image_raw" />
-    <param name="camera_id" type="int" value="2" /> <!-- 0 = any camera; 1+: camera ID -->
+    <param name="camera_id" type="int" value="4" /> <!-- 0 = any camera; 1+: camera ID -->
     <param name="camera_intrinsics_file" type="string" value="" /> <!-- default: ~/.ros/camera_info/<camera_name>.yaml -->
     <param name="camera_parameters_file" type="string" value="" /> <!-- default: ~/.ros/camera_conf/<camera_name>.ini -->
 
