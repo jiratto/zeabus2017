@@ -17,6 +17,7 @@ freq_s = 0
 fre = 0
 k = 0
 status = False
+hydro_status = False
 p = 0
 sending = False
 check_elv = True
@@ -320,7 +321,7 @@ class readdata:
         c = xk[2]
         print "seq : %d" %seq
         print "Particle Filter Az: %.2f,Elv: %.2f,Ot: %.3f ,Freq : %.0f\n" % (self.az_t, self.elv_t,c,fre/1000)
-        #==============================
+        #============================== kuyyy
         if self.elv_t < 25 or check:
             if self.p < 2:
                 self.p+=1
@@ -392,9 +393,9 @@ if __name__ == '__main__':
 
     res = set(0x00,2000000)   #2000000
     ser.write(res)
-    res = set(0x01,25000)
+    res = set(0x01,30000)
     ser.write(res)
-    res = set(0x02,0.1) #Font #add strength    40k = 1.0/3.0  ||| 25k = 1.0/4.0
+    res = set(0x02,0.38) #Font #add strength    40k = 1.0/3.0  ||| 25k = 1.0/4.0
     ser.write(res)
     res = set(0x03,0.02)   #Pthres
     ser.write(res)
@@ -415,5 +416,10 @@ if __name__ == '__main__':
             print "==== Sending ===="
             pub.publish(d)
         else:
+            pf.reset(x_min,x_max)
+            check_elv = True
+            status = False
+            check = False
+            rd.p = 0 
             print "==== Fail ====="
 

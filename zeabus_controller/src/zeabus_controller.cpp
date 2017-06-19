@@ -238,14 +238,14 @@ void stateListenerCallBack(const nav_msgs::Odometry msg){
 		fixPosition.position.z = msg.pose.pose.position.z;
 		isStateArrived = true;
 	}
-	position[0] = msg.pose.pose.position.x;
+	position[0] = msg.pose.pose.position.x; // position = ตำแหน่ง
 	position[1] = msg.pose.pose.position.y;
 	position[2] = msg.pose.pose.position.z;
-	position[3] = msg.pose.pose.orientation.x;
+	position[3] = msg.pose.pose.orientation.x; // orientation = ทิศทางชี้หุ่น
 	position[4] = msg.pose.pose.orientation.y;
 	position[5] = msg.pose.pose.orientation.z;
 	position[6] = msg.pose.pose.orientation.w;
-	vel[0] = msg.twist.twist.linear.x;
+	vel[0] = msg.twist.twist.linear.x; //twist = ความเร็ว
 	vel[1] = msg.twist.twist.linear.y;
 	vel[2] = msg.twist.twist.linear.z;
 	vel[3] = msg.twist.twist.angular.x;

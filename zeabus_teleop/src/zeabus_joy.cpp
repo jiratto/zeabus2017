@@ -41,6 +41,7 @@
 #include "boost/thread/mutex.hpp"
 #include "boost/thread/thread.hpp"
 #include "ros/console.h"
+
 class ZeabusTeleop
 {
 public:
@@ -92,9 +93,11 @@ ZeabusTeleop::ZeabusTeleop()
   ph_.param("az_scale", az_scale_, 0.2);
   ph_.param<std::string>("topic_joy", topic_joy, "/zeabus/cmd_vel");
 
+
+
   deadman_pressed_ = false;
   zero_twist_published_ = false;
-  vel_pub_ = ph_.advertise<geometry_msgs::Twist>("topic_joy", 1, true);
+  vel_pub_ = ph_.advertise<geometry_msgs::Twist>(topic_joy, 1, true);
   joy_sub_ = nh_.subscribe<sensor_msgs::Joy>("/joy", 10, &ZeabusTeleop::joyCallback, this);
   timer_ = nh_.createTimer(ros::Duration(0.1), boost::bind(&ZeabusTeleop::publish, this));
 }
@@ -145,6 +148,5 @@ int main(int argc, char** argv)
   ZeabusTeleop Zeabus_teleop;
   ros::spin();
 }
-
 
 

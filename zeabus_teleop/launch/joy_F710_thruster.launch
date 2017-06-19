@@ -10,6 +10,10 @@
 	</node>
 	
 	<node pkg="zeabus_teleop" type="zeabus_joy" name="zeabus_joy">
+<<<<<<< HEAD
+=======
+	<!--<node pkg="zeabus_teleop" type="zeabus_joy" name="zeabus_joy">-->
+>>>>>>> 2518bdb1e3683be9b48876472865f20e209e9979
 		<param name="deadman_button" value="4" />
 		<param name="roll_axis" value="0"/>
 		<param name="roll_pitch" value="1"/>
