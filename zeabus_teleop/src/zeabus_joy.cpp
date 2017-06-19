@@ -34,13 +34,14 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-
+#include <string>
 #include <ros/ros.h>
 #include <geometry_msgs/Twist.h>
 #include <sensor_msgs/Joy.h>
 #include "boost/thread/mutex.hpp"
 #include "boost/thread/thread.hpp"
 #include "ros/console.h"
+
 class ZeabusTeleop
 {
 public:
@@ -67,6 +68,7 @@ private:
   double ax_scale_;
   double ay_scale_;
   double az_scale_;
+  std::string topic_joy;
 
   ros::Timer timer_;
 };
@@ -89,10 +91,13 @@ ZeabusTeleop::ZeabusTeleop()
   ph_.param("ax_scale", ax_scale_, 0.0);
   ph_.param("ay_scale", ay_scale_, 0.0);
   ph_.param("az_scale", az_scale_, 0.2);
+  ph_.param<std::string>("topic_joy", topic_joy, "/zeabus/cmd_vel");
+
+
 
   deadman_pressed_ = false;
   zero_twist_published_ = false;
-  vel_pub_ = ph_.advertise<geometry_msgs::Twist>("/cmd_vel", 1, true);
+  vel_pub_ = ph_.advertise<geometry_msgs::Twist>(topic_joy, 1, true);
   joy_sub_ = nh_.subscribe<sensor_msgs::Joy>("/joy", 10, &ZeabusTeleop::joyCallback, this);
   timer_ = nh_.createTimer(ros::Duration(0.1), boost::bind(&ZeabusTeleop::publish, this));
 }
@@ -105,12 +110,12 @@ void ZeabusTeleop::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
   if(!joy->buttons[mode_button_])
   {
     vel.linear.x = joy->axes[pitch_axis_] * vx_scale_;
-    // vel.linear.y = joy->axes[roll_axis_] * vy_scale_;
+    vel.linear.y = joy->axes[roll_axis_] * vy_scale_;
   }
   else
   {
     vel.angular.x = joy->axes[roll_axis_] * ax_scale_;
-    // vel.angular.y = joy->axes[pitch_axis_] * ay_scale_;
+    vel.angular.y = joy->axes[pitch_axis_] * ay_scale_;
   }
 
   vel.linear.z = joy->axes[depth_axis_] * vz_scale_;

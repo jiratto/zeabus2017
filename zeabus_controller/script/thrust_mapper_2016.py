@@ -195,7 +195,7 @@ class thrust_mapper:
 	
 	#trusts_scale = [3,3,4.1,2.4,2.4,2.4]
 	F = array([message.linear.x*3, message.linear.y*3, message.linear.z*4.1,
-		   message.angular.x*2.4, message.angular.y*2.4, message.angular.z*2.4])
+		   message.angular.x*2.4, message.angular.y*2.4, message.angular.z*1.8])
 	print '======= F ========'
 	print F
 	print F.T

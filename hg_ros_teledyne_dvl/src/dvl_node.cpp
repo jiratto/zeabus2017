@@ -8,6 +8,7 @@
 #include <ros/ros.h>
 #include <hg_ros_serial/serial.h>
 #include <geometry_msgs/TwistWithCovarianceStamped.h>
+#include <nav_msgs/Odometry.h>
 #include <diagnostic_updater/diagnostic_updater.h>
 #include <diagnostic_updater/publisher.h>
 #include <boost/thread.hpp>
@@ -24,6 +25,13 @@ float g_status_speed_of_sound = 0;
 int g_status_num_error = 0;
 int g_status_current_error = 0;
 bool g_status_velocity_ok = false;
+
+//// For Emergency //////////
+
+ros::Publisher g_pub_dvl_odom;
+float surface_depth;
+
+/////////////////////////////
 
 void checkDVLStatus(diagnostic_updater::DiagnosticStatusWrapper &stat)
 {
@@ -69,6 +77,8 @@ int main(int argc, char **argv)
   nh.param<int>("baudrate", baudrate, 115200);
 
   nh.param<std::string>("frame_id", frame_id,"dvl_link");
+  
+  nh.param<float>("surface_depth", surface_depth, 4.7);
 
 
   if(!serial.openPort(device, baudrate))
@@ -105,7 +115,7 @@ int main(int argc, char **argv)
 
   //Set Heading Alignment to 0 degrees
   int heading_alignment;
-  serial.writeString("EA-13500\n");
+  serial.writeString("EA+04500\n");
 
   //Set manual transducer depth in case depth sensor fails (dm)
   //serial.writeString("ED0\n");
@@ -154,6 +164,17 @@ int main(int argc, char **argv)
 
   ros::Publisher pub_twist = ros::NodeHandle().advertise<geometry_msgs::TwistWithCovarianceStamped>("dvl/data", 10);
   geometry_msgs::TwistWithCovarianceStamped dvl;
+
+  //////////////////////////  For Emergency ////////////////////////////////////////////////
+
+  g_pub_dvl_odom = ros::NodeHandle().advertise<nav_msgs::Odometry>("/dvl/odom", 10);
+  nav_msgs::Odometry odom;
+  float last_zdepth = 0;
+  odom.header.frame_id = "odom";
+  odom.child_frame_id = "base_link";
+
+
+  //////////////////////////////////////////////////////////////////////////////////////////
 
   double velocity_stdev;
   nh.param<double>("velocity_stdev", velocity_stdev , 0.018); //1.8 cm/s @ 3 m/s for Phased Array type
@@ -377,8 +398,8 @@ int main(int argc, char **argv)
 		} else {
 			g_status_velocity_ok = true;
 			ROS_INFO("DVL : GOOD DATA");
-			dvl.twist.twist.linear.x = vx * 0.001;
-			dvl.twist.twist.linear.y = -vy * 0.001;
+			dvl.twist.twist.linear.x = -vx * 0.001;
+			dvl.twist.twist.linear.y = vy * 0.001;
 			dvl.twist.twist.linear.z = vz * 0.001;
 		}
 
@@ -416,6 +437,34 @@ int main(int argc, char **argv)
          DDDD.DD = Range to bottom in meters
          TTT.TT = Time since last good-velocity estimate in seconds
          */
+
+//////////////////////////////  For Emergency ///////////////////////////////////////////
+        odom.header.stamp = ros::Time::now();
+		float ua, uv, uw, RtB, ta;
+		sscanf(line.c_str(), ":BD,%f,%f,%f,%f,%f", &ua, &uv, &uw, &RtB, &ta);
+		//ROS_INFO(":BD,%f,%f,%f,%f,%f", ua, uv, uw, RtB, ta);
+                float zdepth = -(surface_depth - RtB);
+	if(g_status_velocity_ok)
+        {
+		odom.pose.pose.position.z = zdepth;
+		last_zdepth = zdepth;
+        }
+        else
+        {
+             if (!publish_invalid_data) {
+				//ROS_WARN_THROTTLE(2.0, "Invalid BOTTOM-TRACK velocity data");
+				continue;
+			} 
+ 	     else {
+
+			}
+        }
+
+	if (g_pub_dvl_odom.getNumSubscribers() != 0)
+                     g_pub_dvl_odom.publish(odom);
+
+/////////////////////////////////////////////////////////////////////////////////////////
+		
         //printf("BD:\n");
       }
       else

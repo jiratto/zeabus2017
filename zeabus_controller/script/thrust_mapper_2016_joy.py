@@ -32,7 +32,7 @@ class thrust_mapper:
 	#self.joy_odom.twist.covariance[14] = 0.25
 
 	#rospy.Subscriber("/zeabus/cmd_vel", Twist, self.joy_callback)
-    	rospy.Subscriber("/zeabus/cmd_vel", Twist, self.joy_callback)
+    	rospy.Subscriber("/cmd_vel", Twist, self.joy_callback)
 	#rospy.Subscriber("/joy", Joy, self.checkJoy)
 
 	#self.odom_x = 0
@@ -193,9 +193,9 @@ class thrust_mapper:
 
 	#compute thrust for each thruster based on joy stick command
 	
-	trusts_scale = [3,3,4.1,2.4,2.4,2.4]
-	F = array([message.linear.x, message.linear.y, message.linear.z,
-		   message.angular.x, message.angular.y, message.angular.z])
+	#trusts_scale = [3,3,4.1,2.4,2.4,2.4]
+	F = array([message.linear.x*3, message.linear.y*3, message.linear.z*4.1,
+		   message.angular.x*2.4, message.angular.y*2.4, message.angular.z*2.4])
 	print '======= F ========'
 	print F
 	print F.T
@@ -230,23 +230,24 @@ class thrust_mapper:
 	#pwm_command.pwm[7] -= tmp[7]#500*t[7]; #thrust7		
 
 	#ek+control
-	pwm_command.pwm[0] = cmd[0]#500*t[0]; #thrust0		       
-	pwm_command.pwm[1] = cmd[1]#500*t[1]; #thrust1
-	pwm_command.pwm[2] = cmd[2]#500*t[2]; #thrust2			 
-	pwm_command.pwm[3] = cmd[3]#500*t[3]; #thrust3			
-	pwm_command.pwm[4] = cmd[4]#500*t[4]; #thrust4			
-	pwm_command.pwm[5] = cmd[5]#500*t[5]; #thrust5			  
-	pwm_command.pwm[6] = cmd[6]#500*t[6]; #thrust6 			
-	pwm_command.pwm[7] = cmd[7]#500*t[7]; #thrust7		
+	force = 1
+	pwm_command.pwm[0] = cmd[0]*force#500*t[0]; #thrust0		       
+	pwm_command.pwm[1] = cmd[1]*force#500*t[1]; #thrust1
+	pwm_command.pwm[2] = cmd[2]*force#500*t[2]; #thrust2			 
+	pwm_command.pwm[3] = cmd[3]*force#500*t[3]; #thrust3			
+	pwm_command.pwm[4] = cmd[4]*force#500*t[4]; #thrust4			
+	pwm_command.pwm[5] = cmd[5]*force#500*t[5]; #thrust5			  
+	pwm_command.pwm[6] = cmd[6]*force#500*t[6]; #thrust6 			
+	pwm_command.pwm[7] = cmd[7]*force#500*t[7]; #thrust7		
 
 
 	print '\n============PWM before bound============='
 	print pwm_command
 	for i in range(8) :
-		if pwm_command.pwm[i] > 1800 :	#at first 1800
-			pwm_command.pwm[i] = 1800
-		elif pwm_command.pwm[i] < 1200 :
-			pwm_command.pwm[i] = 1200  #at first 1200
+		if pwm_command.pwm[i] > 1700 :	#at first 1800
+			pwm_command.pwm[i] = 1700
+		elif pwm_command.pwm[i] < 1300 :
+			pwm_command.pwm[i] = 1300  #at first 1200
 	
 	print '\n============PWM============='
 	print pwm_command

@@ -32,5 +32,6 @@ def pub (tw):
 
 if __name__ == '__main__':
 	global command
+	rospy.init_node ('testAI')
 	command = rospy.Publisher ('/cmd_vel', Twist, queue_size = 10)
 	drive ([1, 0, 0, 0, 0, 0])

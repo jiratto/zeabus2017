@@ -9,51 +9,55 @@ import numpy as np
 import scipy.stats as stats
 from zeabus_hydrophone.srv import hydro_info
 from zeabus_hydrophone.msg import hydro_msg
+from std_msgs.msg import Bool
 import rospy
 #ser = serial.Serial('/dev/ttyUSB0', 115200)
 ser = serial.Serial('/dev/usb2serial/ftdi_AJ038YFU', 115200)
 freq_s = 0
 fre = 0
 k = 0
-
-
+status = False
+p = 0
+sending = False
+check_elv = True
+check = False
 def float_hex4(f):
-	return ''.join(('%2.2x'%ord(c)) for c in struct.pack('<f', f))
+    return ''.join(('%2.2x'%ord(c)) for c in struct.pack('<f', f))
 def uint_hex4(I):
-	return ''.join(('%2.2x'%ord(c)) for c in struct.pack('<I', I))
+    return ''.join(('%2.2x'%ord(c)) for c in struct.pack('<I', I))
 def set(mode,value):
-	res = []
-	res.append('\xff')
-	res.append('\xff')
-	#res.append(mode)
-	if mode==0x00 or mode==0x01 or mode==0x04:
-		print "uint32"
-		if mode==0x00:
-			res.append('\x00')
-		elif mode==0x01:
-			res.append('\x01')
-		elif mode==0x04:
-			res.append('\x04')
-		tmp = uint_hex4(value)
-		res.append(tmp[0:2].decode("hex"))
-		res.append(tmp[2:4].decode("hex"))
-		res.append(tmp[4:6].decode("hex"))
-		res.append(tmp[6:8].decode("hex"))
-	elif mode==0x02 or mode==0x03:
-		print "float"
-		if mode==0x02:
-			res.append('\x02')
-		elif mode==0x03:
-			res.append('\x03')
-		tmp = float_hex4(value)
-		res.append(tmp[0:2].decode("hex"))
-		res.append(tmp[2:4].decode("hex"))
-		res.append(tmp[4:6].decode("hex"))
-		res.append(tmp[6:8].decode("hex"))
-	res.append('\x00')
-	#print list(array.array('B', res).tostring())
-	print res
-	return ''.join(res)
+    res = []
+    res.append('\xff')
+    res.append('\xff')
+    #res.append(mode)
+    if mode==0x00 or mode==0x01 or mode==0x04:
+        print "uint32"
+        if mode==0x00:
+            res.append('\x00')
+        elif mode==0x01:
+            res.append('\x01')
+        elif mode==0x04:
+            res.append('\x04')
+        tmp = uint_hex4(value)
+        res.append(tmp[0:2].decode("hex"))
+        res.append(tmp[2:4].decode("hex"))
+        res.append(tmp[4:6].decode("hex"))
+        res.append(tmp[6:8].decode("hex"))
+    elif mode==0x02 or mode==0x03:
+        print "float"
+        if mode==0x02:
+            res.append('\x02')
+        elif mode==0x03:
+            res.append('\x03')
+        tmp = float_hex4(value)
+        res.append(tmp[0:2].decode("hex"))
+        res.append(tmp[2:4].decode("hex"))
+        res.append(tmp[4:6].decode("hex"))
+        res.append(tmp[6:8].decode("hex"))
+    res.append('\x00')
+    #print list(array.array('B', res).tostring())
+    print res
+    return ''.join(res)
 
 
 class particleFilter:
@@ -72,6 +76,19 @@ class particleFilter:
         self.observation_function = h
         self.sigma_r = simga_r
         self.nx = nx
+
+    def reset(self,x_min,x_max) :
+        nx = x_min.shape[0]  
+        N = self.N
+        d = np.random.rand(nx,N) #random 3 to N
+        rang_x = (x_max-x_min).reshape((nx,1)) 
+        rang_x = np.repeat(rang_x,N,1)
+        x_min = x_min.reshape((nx,1))
+        x_min = np.repeat(x_min,N,1)
+        state_x = d*rang_x+x_min
+        self.state_x = state_x
+        self.weight = (1./float(N))*np.ones((N,))
+
     def predict(self,v):
         state_x_km1 = self.state_x
         state_x_k = self.predict_function(state_x_km1,v)
@@ -146,8 +163,11 @@ def hx(x):
         nx,N = x.shape
     else:
         N = 1
-    """if fre == 0:
-        fre = 12000"""   #check error
+    if fre == 0:      #check error
+        print "recheck"
+        fre = 25000   #B
+
+
     fs = fre/1000.0
     lamb = 1500.0/fs   #26C
     phase = np.array([np.cos(az)*np.sin(el),np.sin(az)*np.sin(el),c])
@@ -171,17 +191,29 @@ class readdata:
     def __init__(self):
         self.az_t = 0
         self.elv_t = 0
+        ######
+        self.pre_azi = 0
+        self.pre_elv = 0
+        self.p = 0
+        ######
     def getData(self):
         global fre
         global pf
         global k
         global freq_s
+        #global p
+        #p = self.p
+        global sending
+        global check_elv
         print "Test"
+        global check
         data = hydro_msg()
         count = 0
         x=0
-
-        data.stop = False
+        sending = True
+        #check_elv = True
+        if check_elv :
+            data.stop = False
 
         while True:
             #print '0'
@@ -199,11 +231,12 @@ class readdata:
                     count = 0
                     break
             if count  == 2:
-                data.azi = self.az_t
-                data.elv = self.elv_t
-                data.stop = True
+                data.azi = self.pre_azi   ######self.az_t 
+                data.elv = self.pre_elv   ######self.elv_t
+                data.distance = -999    ####data.stop = True#######
                 count = 0
-		print "===== Pulse Error ======"
+                print fre
+                print "===== Pulse Error ======"
                 
         
         seq = struct.unpack("<H", ''.join(x[0:2]))[0]
@@ -233,32 +266,21 @@ class readdata:
         c3i = struct.unpack("<f", ''.join(x[87:91]))[0]
         resb = struct.unpack("<c", ''.join(x[91:92]))[0]
         csm = struct.unpack("<H", ''.join(x[92:94]))[0]
+        print "seq : %d" %seq
+        #========================================= 
 
-        if k < 10 :
-        	if k == 0 :
-        		freq_s = fre
-        		k+=1
-        	elif freq_s == fre :
-        		k +=1
-        	else :
-        		k = 0
-        		data.azi = self.pre_azi
-        		data.elv = self.pre_elv
-        		data.distance = -999
-			print "======ERROR======"
-        		return data		 
-
-        else :
-        	if fre != freq_s :
-        		data.azi = self.pre_azi
-        		data.elv = self.pre_elv
-        		data.distance = -999
-                print "=====ERROR====="
-        	else :
-        		fre = freq_s
-		
-
+        #============================================
+        
+        #----------------------------#
+        if po1 == -1 :
+            sending = False
+            #print("Fontt: %f , Powt: %f") %(fthres,pthres)
+            print "freq = %d" %po2
+            return 
+        print "freq = %d, po1 : %d" %(fre,po1)
         c_obv = []
+
+        #print "___________________________"
                         
         m1 = c0r+1j*c0i
         m2 = c1r+1j*c1i
@@ -266,10 +288,7 @@ class readdata:
         m4 = c3r+1j*c3i
         #print "Cs :", m1,m2,m3,m4
         print "c0r = %.6f, c0i = %.6f, c1r = %.6f, c1i = %.6f, c2r = %.6f, c2i = %.6f, c3r = %.6f, c3i = %.6f" % (c0r,c0i,c1r,c1i,c2r,c2i,c3r,c3i)
-        print (((po1+po2+po3+po4)/4)*1000)
-        #print po2
-        #print po3
-        #print po4
+        #print (((po1+po2+po3+po4)/4)*1000)
         #m_mx = max(max(np.abs(m1),np.abs(m2),max(np.abs(m3),np.abs(m4))))
         #if m_mx > 0:
         cp = np.array([c0r/np.abs(m1),c1r/np.abs(m2),c2r/np.abs(m3),c3r/np.abs(m4),c0i/np.abs(m1),c1i/np.abs(m2),c2i/np.abs(m3),c3i/np.abs(m4)])
@@ -280,12 +299,12 @@ class readdata:
         #print "Board"
         #print seq,azi,elv
         #print "C:", cp 
-		#print "Ele :%.2f" % (elv)
-		#th1 = np.arctan2(cp[4],cp[0])*180./np.pi
-		#th2 = np.arctan2(cp[5],cp[1])*180./np.pi
-		#th3 = np.arctan2(cp[6],cp[2])*180./np.pi
-		#th4 = np.arctan2(cp[7],cp[3])*180./np.pi
-		#print th1,th2,th3,th4
+        #print "Ele :%.2f" % (elv)
+        #th1 = np.arctan2(cp[4],cp[0])*180./np.pi
+        #th2 = np.arctan2(cp[5],cp[1])*180./np.pi
+        #th3 = np.arctan2(cp[6],cp[2])*180./np.pi
+        #th4 = np.arctan2(cp[7],cp[3])*180./np.pi
+        #print th1,th2,th3,th4
         #for cp in c_obv:
             #cp = hx(np.array(np.array([-pi*0.7,pi/4.,0])))+np.random.normal(0,np.sqrt(0.01),(8,))
         v = np.random.rand(3,N)*2.0-1.0
@@ -299,39 +318,59 @@ class readdata:
         self.az_t = xk[0]*180./pi
         self.elv_t = xk[1]*180./pi
         c = xk[2]
+        print "seq : %d" %seq
         print "Particle Filter Az: %.2f,Elv: %.2f,Ot: %.3f ,Freq : %.0f\n" % (self.az_t, self.elv_t,c,fre/1000)
-   
+        #==============================
+        if self.elv_t < 25 or check:
+            if self.p < 2:
+                self.p+=1
+            else:
+                check_elv = False
+                data.stop = True
+                check = True
+        else:
+            self.p = 0
+
+        print "P: %d " %(p), check_elv
+        #=============================
         self.pre_azi = self.az_t
         self.pre_elv = self.elv_t
 
         data.azi = self.az_t
         data.elv = self.elv_t
         data.freq = fre 
-        #if elv_t <= 20:
-        #    data.stop = True
 
         
         return data
+
 
 
 def greet():
     rospy.init_node('HYDROPHONE_2016')
     rospy.Publisher('hydro', hydro_msg, queue_size =  4)
     print "READY TO GET THE DATA"
-    res = set(0x00,2000000)
-    ser.write(res)
+    #res = set(0x00,2000000)
+    #ser.write(res)
     #res = set(0x01,28000)
     #ser.write(res)
-    res = set(0x02,0.3)
-    ser.write(res)
-    res = set(0x03,0.02)
-    ser.write(res)
-    res = set(0x04,1500)
-    ser.write(res)
-    rospy.spin()
-    	
+    #res = set(0x02,0.3)
+    #ser.write(res)
+    #res = set(0x03,0.02)
+    #ser.write(res)
+    #res = set(0x04,1500)
+    #ser.write(res)
+    #rospy.spin()
+
+def callback(msg):
+    global status
+    status = msg.data
+    print status
 if __name__ == '__main__':
     global pf
+    global status
+    global sending
+    global check_elv
+    #global p
     R = np.eye(8)*0.1
     pi = np.pi
     x_min = np.array([-pi,0,-pi])
@@ -340,21 +379,41 @@ if __name__ == '__main__':
     pf = particleFilter(N,x_min,x_max,fx2,hx,R)
     rd = readdata()
 
-    #r = rospy.Rate(10)
+
     rospy.init_node('HYDROPHONE_2016')
     pub = rospy.Publisher('hydro', hydro_msg, queue_size =  4)
+
+    # ========== subscriber ===================
+    rospy.Subscriber('/hydro_status',Bool,callback)
+    # ========================
+
+    
     print "READY TO GET THE DATA"
-    res = set(0x00,2000000)
+
+    res = set(0x00,2000000)   #2000000
     ser.write(res)
-    #res = set(0x01,28000)
-    #ser.write(res)
-    res = set(0x02,0.3)
+    res = set(0x01,25000)
     ser.write(res)
-    res = set(0x03,0.02)
+    res = set(0x02,0.3) #Font #add strength    40k = 1.0/3.0  ||| 25k = 1.0/4.0
+    ser.write(res)
+    res = set(0x03,0.02)   #Pthres
     ser.write(res)
     res = set(0x04,1500)
     ser.write(res)
     while not rospy.is_shutdown() :
+        #print status
+        if status == True:
+            print status
+            pf.reset(x_min,x_max)
+            check_elv = True
+            status = False
+            check = False
+            rd.p = 0 
+            print "--- RESET ---"
         d = rd.getData()
-        pub.publish(d)
-        #r.sleep()
+        if(sending):
+            print "==== Sending ===="
+            pub.publish(d)
+        else:
+            print "==== Fail ====="
+

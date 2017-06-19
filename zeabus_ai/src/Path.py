@@ -4,8 +4,8 @@ import rospy
 import math
 from geometry_msgs.msg import Twist
 from std_msgs.msg import Float64, Bool, String
-from zeabus_vision_srv_msg.msg import vision_msg_default
-from zeabus_vision_srv_msg.srv import vision_srv_default
+from test_sim_srv_msg.msg import vision_data
+from test_sim_srv_msg.srv import path_sim
 from AIControl import AIControl
 
 class Path (object):
@@ -17,12 +17,12 @@ class Path (object):
 
         self.aicontrol = AIControl ()
         self.data = None
-        self.command = rospy.Publisher ('/zeabus/cmd_vel', Twist, queue_size=10)
+        self.command = rospy.Publisher ('/cmd_vel', Twist, queue_size=10)
         self.turn_yaw_rel = rospy.Publisher ('/fix/rel/yaw', Float64, queue_size=10)
         
         path_srv = 'vision'
         rospy.wait_for_service (path_srv)
-        self.detect_path = rospy.ServiceProxy (path_srv, vision_srv_default)
+        self.detect_path = rospy.ServiceProxy (path_srv, path_sim)
 
     def stop (self):
         self.aicontrol.stop (0.1)
@@ -33,9 +33,9 @@ class Path (object):
         vx = 0
         vy = 0
         
-        # self.stop (1)
-        # self.aicontrol.drive ([1, 0, 0, 0, 0, 0])
-        # rospy.sleep (11)
+        self.stop ()
+        self.aicontrol.drive ([1, 0, 0, 0, 0, 0])
+        rospy.sleep (11)
         self.stop ()
 
         while not rospy.is_shutdown ():
@@ -97,5 +97,4 @@ class Path (object):
 if __name__ == '__main__':
     path = Path ()
     path.run ()
-    path.stop (5)
-    print 'end'
+    path.stop ()
