@@ -152,7 +152,8 @@ int main(int argc,char **argv) {
 	ros::init(argc,argv, "Controller");
 	ros::NodeHandle nh;
 	ros::Subscriber sub_state = nh.subscribe("/auv/state", 1000, &stateListenerCallBack);
-	ros::Subscriber sub_cmd_vel = nh.subscribe("/zeabus/cmd_vel", 1000, &cmd_velCallBack);
+	ros::Subscriber sub_cmd_vel = nh.subscribe("/zeabus/cmd_vel", 1, &cmd_velCallBack);
+	//ros::Subscriber sub_cmd_vel = nh.subscribe("/zeabus/cmd_vel", 1000, &cmd_velCallBack);
 	ros::Subscriber sub_cmd_fix_pos = nh.subscribe("/cmd_fix_position", 1000, &cmd_fix_positionCallBack); //fix x,y,z=true
 	ros::Subscriber sub_cmd_fix_orientation = nh.subscribe("/cmd_fix_orientation", 1000, &cmd_fix_orientationCallBack); //fix row,pitch.yaw=true 
 	ros::Subscriber sub_controllerMode =  nh.subscribe("/zeabus_controller/mode",1000,&modeCallback);

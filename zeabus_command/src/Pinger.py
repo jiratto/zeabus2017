@@ -38,8 +38,10 @@ class Pinger (object):
 		return self.gotData
 
 	def ping_check (self):
-		# self.aicontrol.fix_zaixis (ความลึกที่ฟังได้ชัด)
 		print 'listening pinger'
+
+		self.aicontrol.stop (1)
+		self.aicontrol.fix_zaxis (-1)
 
 		self.aicontrol.stop (5)
 		self.reset ()
@@ -54,39 +56,81 @@ class Pinger (object):
 		goal = False
 		count = 50
 
-		while goal != True and not rospy.is_shutdown () and not self.aicontrol.is_fail (count):
-			print 'listening pinger round: ', count
+		while goal != True and not rospy.is_shutdown ():
+			rospy.sleep (2)
+			print 'listening pinger'
 
-			status = self.aicontrol.get_pose ()
-			my_yaw = status[5]
+			print self.hydroData
 
+			self.aicontrol.stop (1)
 			if self.hydroData.distance != -999:
-				if self.aicontrol.stop_turn ():
-					realDegree = self.convert (self.hydroData.azi)
-					print 'yaw pinger: ', realDegree
-
-					if -10 < realDegree < 10:
-						self.aicontrol.drive_xaxis (dis)
-						print 'drive'
-						dis -= 0.5
-						if dis <= 0:
-							dis = 0.5
-						rospy.sleep (2)
-					else:
-						self.aicontrol.turn_yaw_relative (realDegree)
-						print 'turn'
+				realDegree = self.convert (self.hydroData.azi)
+				print 'Real degree ngai la tor ', realDegree 
+				if -10 < realDegree and realDegree < 10:
+					self.aicontrol.drive_xaxis (driveXdistance)
+					print 'drive'
+					driveXdistance -= 0.5
+					if driveXdistance <= 0:
+						driveXdistance = 0.5
+					rospy.sleep (5)
 				else:
-					print 'still turn yaw'
+					turnnaja = self.aicontrol.adjust (realDegree, -5, -10, 5, 10)
+					print turnnaja
+					self.aicontrol.turn_yaw_relative (turnnaja)
+					print 'turn'
+					rospy.sleep (5)
 
-				print self.hydroData
-				rospy.sleep (5)
+			if self.hydroData.elv < 40:
+				driveXdistance = 0.5
 
-				if self.hydroData.elv < 40:
-					dis = 0.5
-				if self.hydroData.stop:
-					print self.hydroData.elv
-					goal = True
+			if self.hydroData.stop:
+				goal = True
+				self.aicontrol.fix_zaxis (0)
+				print "FUCKING FINISH !!"
 
-			count -= 1
+		return goal
 
-	return goal
+		# while goal != True and not rospy.is_shutdown () and not self.aicontrol.is_fail (count):
+		# 	print 'listening pinger round: ', count
+
+		# 	self.aicontrol.stop (1)
+
+		# 	status = self.aicontrol.get_position ()
+		# 	my_yaw = status[5]
+
+		# 	if self.hydroData.distance != -999:
+		# 		if self.aicontrol.stop_turn ():
+		# 			realDegree = self.convert (self.hydroData.azi)
+		# 			print 'yaw pinger: ', realDegree
+
+		# 			if -10 < realDegree and realDegree < 10:
+		# 				self.aicontrol.drive_xaxis (driveXdistance)
+		# 				print 'drive'
+		# 				driveXdistance -= 0.5
+		# 				if driveXdistance <= 0:
+		# 					driveXdistance = 0.5
+		# 				rospy.sleep (5)
+		# 			else:
+		# 				self.aicontrol.turn_yaw_relative (realDegree)
+		# 				rospy.sleep (10)
+		# 				print 'turn'
+		# 		else:
+		# 			print 'still turn yaw'
+
+		# 		print self.hydroData
+		# 		rospy.sleep (10)
+
+		# 		if self.hydroData.elv < 40:
+		# 			driveXdistance = 0.5
+		# 		if self.hydroData.stop:
+		# 			print self.hydroData.elv
+		# 			goal = True
+		# 			self.aicontrol.drive_zaxis (0)
+		# 			print "FUCKING FINISH !!"
+
+		# 	count -= 1
+		# return goal
+
+if __name__ == '__main__':
+	pinger = Pinger ()
+	pinger.ping_check ()

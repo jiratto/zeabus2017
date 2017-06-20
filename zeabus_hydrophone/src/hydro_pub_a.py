@@ -309,7 +309,7 @@ class readdata:
         #for cp in c_obv:
             #cp = hx(np.array(np.array([-pi*0.7,pi/4.,0])))+np.random.normal(0,np.sqrt(0.01),(8,))
         v = np.random.rand(3,N)*2.0-1.0
-        v[0] = v[0]*pi/4.0 #16.0   #trace max speed 
+        v[0] = v[0]*pi/5.0 #16.0   #trace max speed 
         v[1] = v[1]*pi/9.4 #23-1507 
         v[2] = v[2]*pi/3.0
         pf.predict(v)
@@ -395,7 +395,7 @@ if __name__ == '__main__':
     ser.write(res)
     res = set(0x01,30000)
     ser.write(res)
-    res = set(0x02,0.38) #Font #add strength    40k = 1.0/3.0  ||| 25k = 1.0/4.0
+    res = set(0x02,0.3) #Font #add strength    40k = 1.0/3.0  ||| 25k = 1.0/4.0
     ser.write(res)
     res = set(0x03,0.02)   #Pthres
     ser.write(res)
