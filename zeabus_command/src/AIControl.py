@@ -304,5 +304,11 @@ class AIControl ():
 		return True
 	###### End other function ######
 
+	def average (self, data):
+		summary = 0
+		for i in data:
+			summary += i
+		return summary / len(data)
+
 if __name__ == '__main__':
 	aicontrol = AIControl ()
