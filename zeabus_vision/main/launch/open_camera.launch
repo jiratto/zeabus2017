@@ -7,4 +7,5 @@
   </include>
   <include file="$(find zeabus_vision)/launch/leftcam_bottom.launch">
   </include>
+  <node name="node_ae" pkg="zeabus_vision" type="AE.py" output="screen"/>
 </launch>
