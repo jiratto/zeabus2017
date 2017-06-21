@@ -74,7 +74,7 @@ class Pinger (object):
 						driveXdistance = 0.5
 					rospy.sleep (5)
 				else:
-					turnnaja = self.aicontrol.adjust (realDegree, -5, -10, 5, 10)
+					turnnaja = self.aicontrol.adjust (realDegree, -10, -5, 5, 10)
 					print turnnaja
 					self.aicontrol.turn_yaw_relative (turnnaja)
 					print 'turn'
