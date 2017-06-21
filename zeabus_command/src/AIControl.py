@@ -204,7 +204,7 @@ class AIControl ():
 	def roll (self, time):
 		q = Queue.Queue ()
 		rotate_45 = [0.3826834, 0, 0, 0.9238795]
-		cmd_vel_publisher = rospy.Publisher ('/cmd_vel', Twist, queue_size=10)
+		cmd_vel_publisher = rospy.Publisher ('/zeabus/cmd_vel', Twist, queue_size=10)
 		fix_orientation_publisher = rospy.Publisher (
 			'/cmd_fix_orientation', Quaternion, queue_size=10)
 

@@ -39,7 +39,7 @@ if __name__ == '__main__':
 	# print aicontrol.get_position ()
 
 	aicontrol.stop (1)
-	aicontrol.fix_zaxis (-2)
+	aicontrol.fix_zaxis (-0.2)
 	rospy.sleep (5)
 	print 'drive z la na eiei'
 
@@ -61,5 +61,8 @@ if __name__ == '__main__':
 	# rospy.sleep (5)
 	# aicontrol.turn_yaw_absolute (-40)
 	# rospy.sleep (5)
+
+	# aicontrol.roll (2)
+	# rospy.sleep (10)
 
 	# aicontrol.stop (5)
