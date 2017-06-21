@@ -18,84 +18,92 @@ class Path (object):
         self.aicontrol = AIControl ()
         self.data = None
         self.command = rospy.Publisher ('/zeabus/cmd_vel', Twist, queue_size=10)
-        self.turn_yaw_rel = rospy.Publisher ('/fix/rel/yaw', Float64, queue_size=10)
+        self.turn_yaw_rel = rospy.Publisher ('/fix/rel/yaw', Float64, queue_size=10)    
         
         path_srv = 'vision'
         rospy.wait_for_service (path_srv)
         self.detect_path = rospy.ServiceProxy (path_srv, vision_srv_default)
 
     def stop (self):
-        self.aicontrol.stop (0.1)
+        self.aicontrol.stop (2)
 
     def run (self):
         path = 'path'
         color = 'red'
         vx = 0
         vy = 0
-        
-        # self.stop (1)
+        check = 0
+        self.stop ()
         # self.aicontrol.drive ([1, 0, 0, 0, 0, 0])
         # rospy.sleep (11)
-        self.stop ()
+        # self.stop (2)
 
         while not rospy.is_shutdown ():
-            try:
-                px = 0
-                py = 0
-                area = 0
-                angle = 0
+            print "IN LOOP"
 
-                for i in range (10):
-                    self.data = self.detect_path (String (path), String (color))
-                    self.data = self.data.data
-                    px = px + self.data.x
-                    py = py + self.data.y
-                    area = area + self.data.area
-                    angle = angle + self.data.angle
-                    rospy.sleep (0.01)
+            px = 0
+            py = 0
+            area = 0
+            angle = 0
+            count = 0
 
-                px = px / 10
-                py = py / 10
-                area =area / 10
-                angle = angle / 10
-
-                print ('---------------')
-                print ('x: ', px)
-                print ('y: ', py)
-                print ('area: ', area)
-                print ('angle: ', angle)
-
-                if not self.data.isFound:
-                    print 'NOT FOUND PATH'
-
-                    self.aicontrol.drive ([0.5, 0, 0, 0, 0, 0])
-                    rospy.sleep (1)
-
-                else:
-                    print 'FOUND PATH'
-
-                    if self.aicontrol.is_center ([px, py], -0.07, 0.07, -0.3, 0.3):
-                        self.stop ()
-                        self.aicontrol.turn_yaw_relative (angle)
-                        rospy.sleep (0.5)
-
-                        print 'FOUND PATH COMPLETE'
-                        break
-                    else:
-                        vx = self.aicontrol.adjust (px, -0.6, -0.3, 0.3, 0.6)
-                        vy = self.aicontrol.adjust (py, -0.6, -0.3, 0.3, 0.6)
-
-                        self.aicontrol.drive ([-vx, -vy, 0, 0, 0, 0])
-                    rospy.sleep (0.1)
-                    
-                self.aicontrol.stop(0.1)
-
-            except rospy.ServiceException as exc:
-                print ("Service did not process request: " + str (exc))
+            if check == 3:
+                print 'FIND PATH COMPLETE'
                 break
 
+            for i in range (10):
+                print "IN AVG"
+                self.data = self.detect_path (String (path), String (color))
+                print "GET DATA"
+                self.data = self.data.data
+                if not px == -999:
+                      px = px + self.data.x
+                      py = py + self.data.y
+                      area = area + self.data.area
+                      angle = angle + self.data.angle
+                      count = count + 1
+                      rospy.sleep (0.01)
+
+            if not count == 0:
+                px = px / count
+                py = py / count
+                area = area / count
+                angle = angle / count
+            else:
+                px = -999
+                py = -999
+                area = -999
+                angle = -999
+ 
+            print ('---------------')
+            print ('x: ', px)
+            print ('y: ', py)
+            print ('area: ', area)
+            print ('angle: ', angle)
+
+            if not self.data.appear:
+                print 'NOT FOUND PATH'
+
+                self.aicontrol.drive ([0.5, 0, 0, 0, 0, 0])
+            else:
+                print 'FOUND PATH'
+
+                if self.aicontrol.is_center ([px, py], -0.15, 0.15, -0.1, 0.1):
+                    self.stop ()
+                    self.aicontrol.turn_yaw_relative (angle)
+                    check += 1
+                else:
+                    vx = self.aicontrol.adjust (px, -0.5, -0.2, 0.2, 0.5)
+                    vy = self.aicontrol.adjust (py, -0.5, -0.2, 0.2, 0.5)
+
+                self.aicontrol.drive ([vx, vy, 0, 0, 0, 0])
+            rospy.sleep (4)
+            self.stop ()
+
+            
 if __name__ == '__main__':
     path = Path ()
+    print "EIEI"
     path.run ()
-    path.stop (5)
+    path.stop ()
     print 'end'
