@@ -10,6 +10,8 @@ from std_msgs.msg import String, Bool
 class Pinger (object):
 	def __init__ (self):
 		print 'Pinger init'
+		rospy.init_node ('pinger_node')
+
 		self.aicontrol = AIControl ()
 		self.hydroData = hydro_msg ()
 		self.check = Bool
@@ -57,7 +59,7 @@ class Pinger (object):
 		count = 50
 
 		while goal != True and not rospy.is_shutdown ():
-			rospy.sleep (2)
+			self.aicontrol.stop (2)
 			print 'listening pinger'
 
 			print self.hydroData

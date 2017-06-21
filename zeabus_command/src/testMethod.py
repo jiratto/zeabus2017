@@ -27,7 +27,8 @@ if __name__ == '__main__':
 	# while True:
 	# 	aicontrol.stop (1)
 
-	# aicontrol.drive_xaxis (5)
+	# aicontrol.drive_xaxis (-0.7)
+	# rospy.sleep (10)
 	# aicontrol.drive_xaxis (-5)
 	# rospy.sleep (10)
 
@@ -37,24 +38,24 @@ if __name__ == '__main__':
 
 	# print aicontrol.get_position ()
 
-	# aicontrol.stop (1)
-	# aicontrol.fix_zaxis (-1.0)
-	# rospy.sleep (5)
-	# print 'drive z la na eiei'
+	aicontrol.stop (1)
+	aicontrol.fix_zaxis (-2)
+	rospy.sleep (5)
+	print 'drive z la na eiei'
 
 	# aicontrol.go_to_xyz (10, 10, -5)
 	# rospy.sleep (1)
 	# print 'Go to XYZ complete'
 
-	# aicontrol.drive ([-1, -1, 1, 0, 0, 0])
+	# aicontrol.drive ([1, 1, 0, 0, 0, 0])
 	# rospy.sleep (2)
 	# aicontrol.stop (0.5)
 
-	aicontrol.stop (2)
-	aicontrol.turn_yaw_relative (45)
-	rospy.sleep (2)
-	aicontrol.turn_yaw_relative (-15)
-	rospy.sleep (2)
+	# aicontrol.stop (2)
+	# aicontrol.turn_yaw_relative (45)
+	# rospy.sleep (2)
+	# aicontrol.turn_yaw_relative (-45)
+	# rospy.sleep (2)
 
 	# aicontrol.turn_yaw_absolute (70)
 	# rospy.sleep (5)

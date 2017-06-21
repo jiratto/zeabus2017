@@ -72,6 +72,50 @@ class Bouy (object):
 		self.aicontrol.trackback (self.distance, self.time)
 		self.distance = []
 
+	def one_ball (self):
+		red_data = self.detect_bouy (String ('bouy'), String ('red'))
+		red_data = red_data.data
+
+		yellow_data = self.detect_bouy (String ('bouy'), String ('yellow'))
+		yellow_data = yellow_data.data
+
+		green_data = self.detect_bouy (String ('bouy'), String ('green'))
+		green_data = green_data.data
+
+		if red_data.found[0]:
+			while not yellow_data.found[0] and not red_data.found[0]:
+				red_data = self.detect_bouy (String ('bouy'), String ('red'))
+				red_data = red_data.data
+
+				yellow_data = self.detect_bouy (String ('bouy'), String ('yellow'))
+				yellow_data = yellow_data.data
+
+				##### SLIDE TO FIND YELLOW
+			self.two_ball ()
+		elif green_data.found[0]:
+			while not yellow_data.found[0] and not green_data.found[0]:
+				green_data = self.detect_bouy (String ('bouy'), String ('green'))
+				green_data = green_data.data
+
+				yellow_data = self.detect_bouy (String ('bouy'), String ('yellow'))
+				yellow_data = yellow_data.data
+
+				##### SLIDE TO FIND YELLOW
+			self.two_ball ()
+		elif yellow_data.found[0]:
+			while not yellow_data.found[0] and not green_data.found[0] and not red_data.found[0]:
+				green_data = self.detect_bouy (String ('bouy'), String ('green'))
+				green_data = green_data.data
+
+				yellow_data = self.detect_bouy (String ('bouy'), String ('yellow'))
+				yellow_data = yellow_data.data
+
+				red_data = self.detect_bouy (String ('bouy'), String ('red'))
+				red_data = red_data.data
+
+				##### BACKWARD TO SEE THREE BALL
+			self.three_ball ()
+
 	def two_ball (self):
 		red_data = self.detect_bouy (String ('bouy'), String ('red'))
 		red_data = red_data.data
@@ -117,7 +161,7 @@ class Bouy (object):
 				if check:
 					break
 
-		else if not red_data.found[0] and yellow_data.found[0] and green_data.found[0]:
+		elif not red_data.found[0] and yellow_data.found[0] and green_data.found[0]:
 			check = False
 			while not rospy.is_shutdown ():
 				check = self.movement ('yellow')
@@ -182,3 +226,8 @@ class Bouy (object):
 			two_ball ()
 
 		elif num == 1:
+			one_ball ()
+
+if __name__ == '__main__':
+	bouy = Bouy ()
+	Bouy.run ()

@@ -41,13 +41,13 @@ class Path (object):
         while not rospy.is_shutdown ():
             print "IN LOOP"
 
-            px = 0
-            py = 0
-            area = 0
-            angle = 0
+            px = []
+            py = []
+            area = []
+            angle = []
             count = 0
 
-            if check == 3:
+            if check == 2:
                 print 'FIND PATH COMPLETE'
                 break
 
@@ -57,29 +57,29 @@ class Path (object):
                 print "GET DATA"
                 self.data = self.data.data
                 if not px == -999:
-                      px = px + self.data.x
-                      py = py + self.data.y
-                      area = area + self.data.area
-                      angle = angle + self.data.angle
+                      px.append (self.data.x)
+                      py.append (self.data.y)
+                      area.append (self.data.area)
+                      angle.append (self.data.angle)
                       count = count + 1
                       rospy.sleep (0.01)
 
-            if not count == 0:
-                px = px / count
-                py = py / count
-                area = area / count
-                angle = angle / count
-            else:
+            if count == 0:
                 px = -999
                 py = -999
                 area = -999
                 angle = -999
  
+            avrPx = self.aicontrol.average (px)
+            avrPy = self.aicontrol.average (py)
+            avrArea = self.aicontrol.average (area)
+            avrAngle = self.aicontrol.average (angle)
+
             print ('---------------')
-            print ('x: ', px)
-            print ('y: ', py)
-            print ('area: ', area)
-            print ('angle: ', angle)
+            print ('x: ', avrPx)
+            print ('y: ', avrPy)
+            print ('area: ', avrArea)
+            print ('angle: ', avrAngle)
 
             if not self.data.appear:
                 print 'NOT FOUND PATH'
@@ -88,13 +88,13 @@ class Path (object):
             else:
                 print 'FOUND PATH'
 
-                if self.aicontrol.is_center ([px, py], -0.15, 0.15, -0.1, 0.1):
+                if self.aicontrol.is_center ([avrPx, avrPy], -0.2, 0.2, -0.1, 0.1):
                     self.stop ()
-                    self.aicontrol.turn_yaw_relative (angle)
+                    self.aicontrol.turn_yaw_relative (avrAngle)
                     check += 1
                 else:
-                    vx = self.aicontrol.adjust (px, -0.5, -0.2, 0.2, 0.5)
-                    vy = self.aicontrol.adjust (py, -0.5, -0.2, 0.2, 0.5)
+                    vx = self.aicontrol.adjust (avrPx, -0.5, -0.1, 0.1, 0.5)
+                    vy = self.aicontrol.adjust (avrPy, -0.5, -0.1, 0.1, 0.5)
 
                 self.aicontrol.drive ([vx, vy, 0, 0, 0, 0])
             rospy.sleep (4)
