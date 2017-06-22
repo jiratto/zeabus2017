@@ -32,7 +32,6 @@ def navigate():
         im_yellow2 = cv2.inRange(hsv, lw2, up2)
         im_yellow += im_yellow2
         delete = cv2.inRange(hsv, lw3, up3)
-        print(delete)
         im_yellow -= delete
         dilation = cv2.dilate(im_yellow, kernel_1, iterations =  1)
         closing = cv2.morphologyEx(dilation, cv2.MORPH_CLOSE, kernel_2)

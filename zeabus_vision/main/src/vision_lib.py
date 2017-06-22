@@ -33,10 +33,8 @@ def getColor(color, camera):
     else:
         for c in color_list_top:
             if color == c:
-                lower = np.array(rospy.get_param(
-                    '/color_range/color_top/lower_' + c), np.uint8)
-                upper = np.array(rospy.get_param(
-                    '/color_range/color_top/upper_' + c), np.uint8)
+                lower = rospy.get_param('/color_range/color_top/lower_' + c)
+                upper = rospy.get_param('/color_range/color_top/upper_' + c)
     lower = range_str2list(lower)
     upper = range_str2list(upper)
     return lower, upper
