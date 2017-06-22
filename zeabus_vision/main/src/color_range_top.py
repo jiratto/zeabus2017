@@ -143,8 +143,7 @@ def callback(msg):
     global img, wait, hsv
     if wait == False:
         arr = np.fromstring(msg.data, np.uint8)
-        img = cv2.imdecode(arr, 1)
-        img = cv2.resize(img, (320, 256))
+        img = cv2.resize(cv2.imdecode(arr, 1), (640, 512))
         hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
 
