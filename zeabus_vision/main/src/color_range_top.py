@@ -105,9 +105,9 @@ class window:
 
     def get_param(self, name):
         self.param_lower = rospy.get_param(
-            "color_range/color_down/lower_" + name, '179,255,255')
+            "color_range/color_top/lower_" + name, '179,255,255')
         self.param_upper = rospy.get_param(
-            "color_range/color_down/upper_" + name, '0,0,0')
+            "color_range/color_top/upper_" + name, '0,0,0')
         self.param_lower = self.range_str2list(self.param_lower)
         self.param_upper = self.range_str2list(self.param_upper)
         return self.param_lower, self.param_upper
@@ -118,11 +118,11 @@ class window:
                 continue
 
             rospy.set_param(
-                '/color_range/color_down/lower_' + name, self.range_list2str(self.lower[name][-1]))
+                '/color_range/color_top/lower_' + name, self.range_list2str(self.lower[name][-1]))
             rospy.set_param(
-                '/color_range/color_down/upper_' + name, self.range_list2str(self.upper[name][-1]))
+                '/color_range/color_top/upper_' + name, self.range_list2str(self.upper[name][-1]))
 
-        f = open(self.path + "/params/color_down.yaml", "w")
+        f = open(self.path + "/params/color_top.yaml", "w")
         x = self.genyaml()
         f.write(x)
         f.close()

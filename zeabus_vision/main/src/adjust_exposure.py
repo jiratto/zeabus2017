@@ -15,13 +15,6 @@ node = None
 client = None
 
 
-def callback(msg):
-    global img, hsv
-    arr = np.fromstring(msg.data, np.uint8)
-    img = cv2.imdecode(arr, 1)
-    hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-
-
 def set_param(param, value):
     global client
     params = {str(param): value}
@@ -66,7 +59,7 @@ def adjust_exposure_time():
         # MEAN = statistics.mean(v_1d)
         MEAN = cv2.mean(v_1d)[0]
         m = [90, 160]
-        _,SD = cv2.meanStdDev(v_1d,MEAN)
+        _, SD = cv2.meanStdDev(v_1d, MEAN)
         SD = SD[0]
         CV = SD / MEAN
         ev = get_param('exposure')
@@ -77,18 +70,31 @@ def adjust_exposure_time():
         if MODE >= 235:
             ev -= 1
             set_param('exposure', ev)
+<<<<<<< HEAD:zeabus_vision/main/src/AE_mean_sd_v.py
         elif MODE <= 10:
             ev += 1
             set_param('exposure', ev)
         
+=======
+        elif MODE <= 25:
+            ev += 1.5
+            set_param('exposure', ev)
+        # else:
+>>>>>>> 3f08dfc71b0579607f67bca1d93b3423a556b7a2:zeabus_vision/main/src/adjust_exposure.py
             # # 10% trimmed mean
             # for i in range (0,25):
             #     v_1d.remove(i)
             # for i in range (230,256):
             #     v_1d.remove(i)
             # MEAN = cv2.mean(v_1d)[0]
+<<<<<<< HEAD:zeabus_vision/main/src/AE_mean_sd_v.py
         
         print("SD: {0} mode: {1} mean: {2}".format(SD, MODE,MEAN))
+=======
+
+        print("SD: {0} mode: {1} mean: {2} mean: {3}".format(
+            SD, MODE, MEAN, MEAN1))
+>>>>>>> 3f08dfc71b0579607f67bca1d93b3423a556b7a2:zeabus_vision/main/src/adjust_exposure.py
         print("CV: {0}".format(CV))
         print("My Auto Exposure: {0}".format(ev))
 
@@ -104,9 +110,13 @@ if __name__ == '__main__':
     rospy.init_node('adjust_exposure_time')
     topic = 'leftcam_top/image_raw/compressed'
     # topic = rospy.get_param('', topic)
+<<<<<<< HEAD:zeabus_vision/main/src/AE_mean_sd_v.py
     node = 'ueye_cam_nodelet_leftcam_top/'
 
     rospy.Subscriber(topic, CompressedImage, callback)
+=======
+    node = 'ueye_cam_nodelet/'
+>>>>>>> 3f08dfc71b0579607f67bca1d93b3423a556b7a2:zeabus_vision/main/src/adjust_exposure.py
     client = dynamic_reconfigure.client.Client(node)
     set_param('auto_exposure', False)
     set_param('auto_frame_rate', True)

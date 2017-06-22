@@ -4,9 +4,21 @@ import numpy as np
 import math
 import rospy
 
+
 def range_str2list(str):
     str = str.split(',')
-    return [int(str[0]), int(str[1]), int(str[2])]
+    return np.array([int(str[0]), int(str[1]), int(str[2])], np.uint8)
+
+
+def delete_color(color):
+    if color == 'green':
+        lower = np.array([38, 0, 0], np.uint8)
+        upper = np.array([75, 255, 255], np.uint8)
+    elif color == 'blue':
+        lower = np.array([38, 0, 0], np.uint8)
+        upper = np.array([75, 255, 255], np.uint8)
+    res = cv2.inRange(hsv, lower, upper)    
+    return res
 
 
 def getColor(color, camera):
@@ -16,20 +28,40 @@ def getColor(color, camera):
     if camera == 'down':
         for c in color_list_down:
             if color == c:
-                lower = np.array(rospy.get_param(
-                    '/color_range/color_down/lower_' + c), np.uint8)
-                upper = np.array(rospy.get_param(
-                    '/color_range/color_down/upper_' + c), np.uint8)
+                lower = rospy.get_param('/color_range/color_down/lower_' + c)
+                upper = rospy.get_param('/color_range/color_down/upper_' + c)
     else:
         for c in color_list_top:
             if color == c:
-                lower = np.array(rospy.get_param(
-                    '/color_range/color_top/lower_' + c), np.uint8)
-                upper = np.array(rospy.get_param(
-                    '/color_range/color_top/upper_' + c), np.uint8)
-    lower = range_str2list(param_lower)
-    upper = range_str2list(param_upper)
+                lower = rospy.get_param('/color_range/color_top/lower_' + c)
+                upper = rospy.get_param('/color_range/color_top/upper_' + c)
+    lower = range_str2list(lower)
+    upper = range_str2list(upper)
     return lower, upper
+
+
+def find_shape(cnt, req):
+    peri = cv2.arcLength(cnt, True)
+    approx = cv2.approxPolyDP(cnt, 0.04 * peri, True)
+    if len(approx) == 3 and req == 'tri':
+        return True
+    elif len(approx) == 4 and req == 'rect':
+        return True
+    elif len(approx) >= 25 and req == 'cir':
+        return True
+    elif len(approx) == req:
+        return True
+        return False
+
+
+def cut_contours(cnt, w, h):
+    err = 5
+    M = cv2.moments(cnt)
+    cx = int(M['m10'] / M['m00'])
+    cy = int(M['m01'] / M['m00'])
+    if cx <= err or cy <= err or cx >= w - err or cy >= h - err:
+        return True
+    return False
 
 
 def equalization(frame):
@@ -61,6 +93,30 @@ def clahe(img):
     return result_hsv
 
 
+def stretching_hsv(hsv):
+    h, s, v = cv2.split(hsv)
+
+    if s.min() > 0:
+        s *= int(round((s - s.min()) / (s.max() - s.min())))
+    if v.min() > 0:
+        v *= int(round((v - v.min()) / (v.max() - v.min())))
+    hsv = cv2.merge((h, s, v))
+    return hsv
+
+
+def stretching_bgr(bgr):
+    b, g, r = cv2.split(bgr)
+    b -= b.min()
+    b *= int(round(255.0 / (b.max() - b.min())))
+    g -= g.min()
+    g *= int(round(255.0 / (g.max() - g.min())))
+    r -= r.min()
+    r *= int(round(255.0 / (g.max() - g.min())))
+
+    img = cv2.merge((b, g, r))
+    return img
+
+
 def stretching(img):
 
     b, g, r = cv2.split(img)
@@ -68,8 +124,8 @@ def stretching(img):
     b *= int(round(255.0 / (b.max() - b.min())))
     g -= g.min()
     g *= int(round(255.0 / (g.max() - g.min())))
-    # r -= r.min()
-    # r *= 255 /( r.max() - r.min())
+    r -= r.min()
+    r *= int(round(255.0 / (g.max() - g.min())))
 
     img = cv2.merge((b, g, r))
     img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
@@ -188,16 +244,6 @@ def rebalance(image):
     # h, s, v = cv2.split(result_hsv)
     # print h.max(),s.max(),v.max()
     return result_hsv
-
-# def cut_contours(hh,ww,c):
-# 	if cv2.contourArea(c):
-# 		print '11'
-# 		x,y,w,h = cv2.boundingRect(c)
-# 		print x, x+w, y, y+h
-# 		if x <= 1 or x+w >= ww :
-# 			return False
-# 		return True
-# 	return False
 
 
 def process_img_down(img):
