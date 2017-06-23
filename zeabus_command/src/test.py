@@ -25,3 +25,5 @@ if __name__ == '__main__':
 		print i
 		pub.publish (tw)
 		rospy.sleep (0.1)
+	
+	print "HELLO"
