@@ -16,15 +16,15 @@ if __name__ == '__main__':
 	# print 'Finish pinger: ', status
 
 	rospy.sleep (5)
-	
-	path = Path ()
-	path.run ()
+
+	# path = Path ()
+	# path.run ()
 
 	aicontrol = AIControl ()
-	aicontrol.stop (2)
-	aicontrol.drive_xaxis (4)
+	# aicontrol.stop (2)
+	# aicontrol.drive_xaxis (4)
 	
 	print 'Start barrel roll'
 	aicontrol.roll (2)
-	aicontrol.stop (20)
+	aicontrol.stop (5)
 	print 'Finish command'
