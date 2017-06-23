@@ -26,12 +26,12 @@ int g_status_num_error = 0;
 int g_status_current_error = 0;
 bool g_status_velocity_ok = false;
 
-//// For Emergency //////////
+/*//// For Emergency //////////
 
 ros::Publisher g_pub_dvl_odom;
 float surface_depth;
 
-/////////////////////////////
+/////////////////////////////*/
 
 void checkDVLStatus(diagnostic_updater::DiagnosticStatusWrapper &stat)
 {
@@ -165,7 +165,7 @@ int main(int argc, char **argv)
   ros::Publisher pub_twist = ros::NodeHandle().advertise<geometry_msgs::TwistWithCovarianceStamped>("dvl/data", 10);
   geometry_msgs::TwistWithCovarianceStamped dvl;
 
-  //////////////////////////  For Emergency ////////////////////////////////////////////////
+  /*//////////////////////////  For Emergency ////////////////////////////////////////////////
 
   g_pub_dvl_odom = ros::NodeHandle().advertise<nav_msgs::Odometry>("/dvl/odom", 10);
   nav_msgs::Odometry odom;
@@ -174,7 +174,7 @@ int main(int argc, char **argv)
   odom.child_frame_id = "base_link";
 
 
-  //////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////*/
 
   double velocity_stdev;
   nh.param<double>("velocity_stdev", velocity_stdev , 0.018); //1.8 cm/s @ 3 m/s for Phased Array type
@@ -438,7 +438,7 @@ int main(int argc, char **argv)
          TTT.TT = Time since last good-velocity estimate in seconds
          */
 
-//////////////////////////////  For Emergency ///////////////////////////////////////////
+/*//////////////////////////////  For Emergency ///////////////////////////////////////////
         odom.header.stamp = ros::Time::now();
 		float ua, uv, uw, RtB, ta;
 		sscanf(line.c_str(), ":BD,%f,%f,%f,%f,%f", &ua, &uv, &uw, &RtB, &ta);
@@ -463,7 +463,7 @@ int main(int argc, char **argv)
 	if (g_pub_dvl_odom.getNumSubscribers() != 0)
                      g_pub_dvl_odom.publish(odom);
 
-/////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////*/
 		
         //printf("BD:\n");
       }
