@@ -67,14 +67,24 @@ class thrust_mapper:
 	#				[-math.cos(math.radians(40)), math.sin(math.radians(40)), 0]])	
 
 	#ek
-	self.d = array([[0, 0, 1],
-			[0, 0, -1],
+	#self.d = array([[0, 0, 1],
+	#		[0, 0, -1],
+	#		[0, 0, 1],
+	#		[0, 0, 1],
+	#		[-math.cos(math.radians(40)), math.sin(math.radians(40)), 0],
+	#		[math.cos(math.radians(40)), math.sin(math.radians(40)), 0],
+	#		[-math.cos(math.radians(40)), -math.sin(math.radians(40)), 0],
+	#		[math.cos(math.radians(40)), -math.sin(math.radians(40)), 0]])	
+	# V2
+	self.d = array([[0, 0, -1],
+			[0, 0, 1],
 			[0, 0, 1],
 			[0, 0, 1],
 			[-math.cos(math.radians(40)), math.sin(math.radians(40)), 0],
 			[math.cos(math.radians(40)), math.sin(math.radians(40)), 0],
-			[-math.cos(math.radians(40)), -math.sin(math.radians(40)), 0],
-			[math.cos(math.radians(40)), -math.sin(math.radians(40)), 0]])	
+			[math.cos(math.radians(40)), math.sin(math.radians(40)), 0],
+			[-math.cos(math.radians(40)), math.sin(math.radians(40)), 0]])		
+
 
 #perlican
 #     d = array([[0, -1, 0],
@@ -114,7 +124,7 @@ class thrust_mapper:
 #		   	 [-0.45728,-0.19104, 0.03993],
 #			 [-0.45728, 0.19104, 0.03993],
 #			 [ 0.45728, 0.19104, 0.03993]])
-	#ek
+	#ek 
 	self.r = array([[ 0.225,  0.2,   0.03],
                        	[ 0.225, -0.2,   0.03],
 			[-0.225,  0.2,   0.03],  
@@ -195,7 +205,7 @@ class thrust_mapper:
 	
 	#trusts_scale = [3,3,4.1,2.4,2.4,2.4]
 	F = array([message.linear.x*3, message.linear.y*3, message.linear.z*4.1,
-		   message.angular.x*2.4, message.angular.y*2.4, message.angular.z*1.6])
+		   message.angular.x*2.4, message.angular.y*2.4, message.angular.z*1.65])
 	print '======= F ========'
 	print F
 	print F.T
@@ -244,10 +254,10 @@ class thrust_mapper:
 	print '\n============PWM before bound============='
 	print pwm_command
 	for i in range(8) :
-		if pwm_command.pwm[i] > 1700 :	#at first 1800
+		if pwm_command.pwm[i] > 1700 :	#at first 1800 #1700
 			pwm_command.pwm[i] = 1700
 		elif pwm_command.pwm[i] < 1300 :
-			pwm_command.pwm[i] = 1300  #at first 1200
+			pwm_command.pwm[i] = 1300  #at first 1200 #1300
 	
 	print '\n============PWM============='
 	print pwm_command
