@@ -269,6 +269,6 @@ if __name__ == '__main__':
     top = '/leftcam_top/image_raw/compressed'
     bot = '/leftcam_bottom/image_raw/compressed'
     topic = rospy.get_param('color_range/topic_down',
-                            top)
+                            down)
     rospy.Subscriber(topic, CompressedImage, callback)
     select_color()

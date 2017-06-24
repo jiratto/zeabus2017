@@ -33,6 +33,8 @@ float surface_depth;
 
 /////////////////////////////*/
 
+float surface_depth;
+
 void checkDVLStatus(diagnostic_updater::DiagnosticStatusWrapper &stat)
 {
   boost::lock_guard<boost::mutex> guard(g_mutex);

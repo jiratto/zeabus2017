@@ -43,33 +43,21 @@ find_package(catkin REQUIRED COMPONENTS
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-<<<<<<< HEAD
- add_message_files(
-   FILES
-#   Message1.msg
-#   Message2.msg
-vision_msg_default.msg
- )
 
-## Generate services in the 'srv' folder
- add_service_files(
-   FILES
-#   Service1.srv
-#   Service2.srv
-   vision_srv_default.srv
- )
-=======
+
+
 add_message_files(
   FILES
   vision_msg_default.msg
+  vision_msg_navigate.msg
 )
 
 ## Generate services in the 'srv' folder
 add_service_files(
   FILES
   vision_srv_default.srv
+  vision_srv_navigate.srv
 )
->>>>>>> 3f08dfc71b0579607f67bca1d93b3423a556b7a2
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -79,22 +67,12 @@ add_service_files(
 # )
 
 ## Generate added messages and services with any dependencies listed here
-<<<<<<< HEAD
- generate_messages(
-   DEPENDENCIES
-	zeabus_vision_srv_msg
-   std_msgs 
-)
-
-################################################
-=======
 generate_messages(
   DEPENDENCIES
   std_msgs
   zeabus_vision_srv_msg
 )
 ###############################################
->>>>>>> 3f08dfc71b0579607f67bca1d93b3423a556b7a2
 ## Declare ROS dynamic reconfigure parameters ##
 ################################################
 
@@ -210,3 +188,4 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+
