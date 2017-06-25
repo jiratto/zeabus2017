@@ -27,7 +27,7 @@ class Navigate (object):
 		req = 'Yeah'
 
 		check = 0
-		self.aicontrol.fix_zaxis (-3.3)
+		self.aicontrol.fix_zaxis (-3.1)
 
 		while not rospy.is_shutdown ():
 			self.aicontrol.stop (1)
@@ -56,6 +56,11 @@ class Navigate (object):
 					zero += 1
 				rospy.sleep (0.1)
 
+			if mul > 0:
+				mul = 1
+			elif mul <= 0:
+				mul = -1
+
 			if two > one >= zero:
 				print 'TWO LEGS'
 				if self.aicontrol.is_center ([cx[2]/two, 0], -0.15, 0.15, -0.1, 0.1):
@@ -63,22 +68,23 @@ class Navigate (object):
 					self.aicontrol.drive_xaxis (1/area[2] * 2)
 				else:
 					print 'Drive to center'
-					vx = self.aicontrol.adjust (cx[2]/two * 10, -0.6, -0.2, 0.2, 0.6)
-					vy = self.aicontrol.adjust (cy[2]/two, -0.6, -0.2, 0.2, 0.6)
-					self.aicontrol.drive ([0, -vx, 0, 0, 0, 0])
+					vy = self.aicontrol.adjust (cx[2]/two, -0.6, -0.2, 0.2, 0.6)
+					self.aicontrol.drive ([0, -vy, 0, 0, 0, 0])
 				rospy.sleep (3)
 			elif one > two >= zero:
 				print 'ONE LEG'
-				self.aicontrol.drive_yaxis (0.4 * mul/5)
-				rospy.sleep (3)
+				self.aicontrol.drive_yaxis (0.2 * mul)
+				rospy.sleep (2)
 			elif zero > one >= two:
 				print 'ZERO'
-				self.aicontrol.fix_zaxis (-2.5)
 				self.aicontrol.drive_xaxis (1)
 				rospy.sleep (1)
 				check += 1
 				if check >= 3:
-					self.aicontrol.roll (2)
+					self.aicontrol.fix_zaxis (-2.5)
+					self.aicontrol.drive_xaxis (1)
+					rospy.sleep (18)
+					# self.aicontrol.roll (2)
 					print 'MISSION COMPLETE'
 					break
 		
