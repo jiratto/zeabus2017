@@ -18,10 +18,10 @@
 	<arg name="flip_lr" value="True" />
 	<!-- =================== LEFT CAMERA =================== -->
 	<arg name="nodelet_manager_name_left" value="left" />
-	<arg name="camera_name" value="/bottom/left" />
+	<arg name="camera_name_left" value="/bottom/left" />
 	<node pkg="nodelet" type="nodelet" name="$(arg nodelet_manager_name_left)" args="manager" output="screen" />
 	<node pkg="nodelet" type="nodelet" name="ueye_cam_nodelet_$(arg nodelet_manager_name_left)" args="load ueye_cam/ueye_cam_nodelet $(arg nodelet_manager_name_left)">
-		<param name="camera_name" type="str" value="$(arg camera_name)" />
+		<param name="camera_name" type="str" value="$(arg camera_name_left)" />
 		<param name="camera_topic" type="str" value="image_raw" />
 		<param name="camera_id" type="int" value="3" />
 		<param name="ext_trigger_mode" type="bool" value="$(arg ext_trigger_mode)" />
@@ -66,4 +66,5 @@
 		<param name="pixel_clock" type="int" value="$(arg pixel_clock)" />
 		<param name="flip_lr" type="bool" value="$(arg flip_lr)" />
 	</node>
+<!--	<node pkg="zeabus_vision" name="AE_bottom" type="AE_bottom.py" output="screen" /> -->
 </launch>
