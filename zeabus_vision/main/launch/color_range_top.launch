@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+	<rosparam ns="color_range" command="load" file="$(find zeabus_vision)/params/color_top.yaml"></rosparam>
+	<node pkg="zeabus_vision" name="color_range" type="color_range_main.py" output="screen">
+		<param name="cameraTopic" type='str' value='/top/center/image_rect_color/compressed'/>
+		<param name="cameraPos" type='str' value='top'/>
+	</node>
+</launch>
