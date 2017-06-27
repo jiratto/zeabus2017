@@ -6,7 +6,6 @@ import numpy as np
 from scipy.ndimage import filters
 import rospy
 from sensor_msgs.msg import CompressedImage
-# from adjust_exposure import *
 
 
 class ImagePreprocessing:
@@ -51,10 +50,10 @@ class ImagePreprocessing:
     def pre_processing(self):
         while self.imageL is None or self.imageR is None:
             print('Image None1')
-            rospy.sleep(0.01)
 
         msg = CompressedImage()
         msg.format = "jpeg"
+
         # images = []
         while not rospy.is_shutdown():
             print('while process')

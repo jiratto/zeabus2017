@@ -10,11 +10,13 @@
 	</node>
 	
 	<node pkg="zeabus_teleop" type="zeabus_joy" name="zeabus_joy">
+	<!--<node pkg="zeabus_teleop" type="zeabus_joy" name="zeabus_joy">-->
 		<param name="deadman_button" value="4" />
 		<param name="roll_axis" value="0"/>
 		<param name="roll_pitch" value="1"/>
 		<param name="roll_yaw" value="3"/>
 		<param name="depth_axis" value="4"/>
+		<param name="topic_joy" value="/cmd_vel"/>
 	</node>
 	
 </launch>

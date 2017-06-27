@@ -394,7 +394,7 @@ if __name__ == '__main__':
     ser.write(res)
     res = set(0x01,40000)
     ser.write(res)
-    res = set(0x02,0.4) #Font #add strength    40k = 1.0/3.0  ||| 25k = 1.0/4.0
+    res = set(0x02,0.33) #Font #add strength    40k = 1.0/3.0  ||| 25k = 1.0/4.0
     ser.write(res)
     res = set(0x03,0.01)   #Pthres
     ser.write(res)
@@ -415,5 +415,10 @@ if __name__ == '__main__':
             print "==== Sending ===="
             pub.publish(d)
         else:
+            pf.reset(x_min,x_max)
+            check_elv = True
+            status = False
+            check = False
+            rd.p = 0 
             print "==== Fail ====="
 

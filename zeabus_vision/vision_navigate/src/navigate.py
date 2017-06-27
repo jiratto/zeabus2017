@@ -4,6 +4,7 @@ import numpy as np
 import rospkg
 import rospy
 import math
+<<<<<<< HEAD
 import sys
 sys.path.append ('/home/zeabus/catkin_ws/src/src_code/zeabus_vision/main/src/')
 from vision_lib import *
@@ -35,10 +36,26 @@ def close(pic, ker):
 
 def tophat(pic, ker):
     return cv2.morphologyEx(pic, cv2.MORPH_TOPHAT, ker)
+=======
+from sensor_msgs.msg import CompressedImage
+
+img = None
+
+lower_yellow = np.array([ 87, 26, 221])
+upper_yellow = np.array([ 96, 161, 255])
+
+lw2 = np.array([ 66, 32, 177])
+up2 = np.array([ 92, 134, 255])
+
+lw3 = np.array([ 13, 15, 67])
+up3 = np.array([ 97, 97, 214])
+
+>>>>>>> 747e5ee4962dc2678b25aedcd864ce4422d17d44
 
 def navigate():
     global img
     im = None
+<<<<<<< HEAD
     res = vision_msg_navigate()
     while not rospy.is_shutdown():
         while img is None:
@@ -116,10 +133,36 @@ def navigate():
             if area_w < hh:
                 area_w = hh
             if area < 3500:
+=======
+    kernel_1 = np.ones((9,9), np.uint8)
+    kernel_2 = np.ones((17,17), np.uint8)
+    while not rospy.is_shutdown():
+        while img is None:
+            print("img : None")
+        im = img.copy()
+        hsv = cv2.cvtColor(img.copy(), cv2.COLOR_BGR2HSV)
+        im_yellow = cv2.inRange(hsv, lower_yellow, upper_yellow)
+        im_yellow2 = cv2.inRange(hsv, lw2, up2)
+        im_yellow += im_yellow2
+        delete = cv2.inRange(hsv, lw3, up3)
+        im_yellow -= delete
+        dilation = cv2.dilate(im_yellow, kernel_1, iterations =  1)
+        closing = cv2.morphologyEx(dilation, cv2.MORPH_CLOSE, kernel_2)
+        _, contours, hierarchy = cv2.findContours(dilation.copy(), 
+                                            cv2.RETR_TREE, 
+                                            cv2.CHAIN_APPROX_SIMPLE)
+        max = 0
+        for c in contours:
+            M = cv2.moments(c)
+            rect = (x,y), (ww,hh), angle = cv2.minAreaRect(c)
+            area = ww*hh
+            if area < 17000 or area > 150000:
+>>>>>>> 747e5ee4962dc2678b25aedcd864ce4422d17d44
                 continue
             print(area)
             if max<area :
                 max = area
+<<<<<<< HEAD
             x_bot = x
             cx = x_bot
             box = cv2.boxPoints(rect)
@@ -160,22 +203,50 @@ def navigate():
         # cv2.imshow('im_draw', im_draw)
         # cv2.imshow('plate', plate)
         # cv2.waitKey(30)
+=======
+            # epsilon = 0.1*cv2.arcLength(c, t)
+            # approx = cv2.approxPolyDP(c, epsilon,t)
+            
+            box = cv2.boxPoints(rect)
+            box = np.int0(box)
+            print('draw')
+            cv2.drawContours(img, [box], -1, (0, 0, 255,), 2) 
+            cv2.drawContours(img, c, -1, (0 , 255, 0), 2)
+            cv2.circle(img ,(int(x), int(y)), 5, (0, 0, 255), -1)
+        
+        print('max: ', max)
+        cv2.imshow('yellow?',im_yellow)
+        cv2.imshow('img', img)
+        cv2.imshow('closing', closing)
+        # cv2.imshow('dilate', dilation)
+        cv2.waitKey(30)
+>>>>>>> 747e5ee4962dc2678b25aedcd864ce4422d17d44
 
 
 def img_callback(msg):
     global img
 
     arr = np.fromstring( msg.data, np.uint8)
+<<<<<<< HEAD
     img = cv2.resize(cv2.imdecode(arr, 1), (640, 512))
 
 def mission_callback(msg):
     return navigate()
+=======
+    img = cv2.imdecode(arr, 1)
+>>>>>>> 747e5ee4962dc2678b25aedcd864ce4422d17d44
 
 if __name__ == '__main__':
     rospy.init_node('Navigate')
     bot = '/rightcam_bottom/image_raw/compressed'
+<<<<<<< HEAD
     top = '/top/center/image_rect_color/compressed'
     rospy.Subscriber(top, CompressedImage, img_callback)
     rospy.Service('vision_navigate', vision_srv_navigate(), mission_callback)
     rospy.spin()
     # navigate()
+=======
+    top = '/rightcam_top/image_raw/compressed'
+    rospy.Subscriber(top, CompressedImage, img_callback)
+    navigate()
+>>>>>>> 747e5ee4962dc2678b25aedcd864ce4422d17d44

@@ -266,6 +266,8 @@ def select_color():
     cv2.destroyAllWindows()
 
 if __name__ == '__main__':
+<< << << < HEAD:
+    zeabus_vision / main / src / color_range_main.py
     rospy.init_node('color_range_main')
     cameraPos = rospy.get_param('color_range/cameraPos', 'down')
     print(cameraPos)
@@ -274,3 +276,13 @@ if __name__ == '__main__':
     print(cameraTopic)
     rospy.Subscriber(cameraTopic, CompressedImage, callback)
     select_color()
+== == == =
+    rospy.init_node('color_range_down')
+    top = '/leftcam_top/image_raw/compressed'
+    bot = '/leftcam_bottom/image_raw/compressed'
+    topic = rospy.get_param('color_range/topic_down',
+                            down)
+    rospy.Subscriber(topic, CompressedImage, callback)
+    select_color()
+>>>>>> > 747e5ee4962dc2678b25aedcd864ce4422d17d44:
+    zeabus_vision / main / src / color_range_down_new.py

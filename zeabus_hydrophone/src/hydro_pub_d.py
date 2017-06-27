@@ -216,13 +216,13 @@ class readdata:
             data.stop = False
 
         while True:
-            #print '0'
+           # print '0'
             x = ser.read(1)
             #print '1'
-            #print x
+           # print x
             if x=='\xff':
                 x = ser.read(1)
-                #print '2'
+               # print '2'
                 count +=1
                 #print x
                 if x=='\xff':
@@ -308,7 +308,7 @@ class readdata:
         #for cp in c_obv:
             #cp = hx(np.array(np.array([-pi*0.7,pi/4.,0])))+np.random.normal(0,np.sqrt(0.01),(8,))
         v = np.random.rand(3,N)*2.0-1.0
-        v[0] = v[0]*pi/7.0 #16.0   #trace max speed 
+        v[0] = v[0]*pi/12.0 #16.0   #trace max speed 
         v[1] = v[1]*pi/9.4 #23-1507 
         v[2] = v[2]*pi/3.0
         pf.predict(v)
@@ -415,5 +415,10 @@ if __name__ == '__main__':
             print "==== Sending ===="
             pub.publish(d)
         else:
+            pf.reset(x_min,x_max)
+            check_elv = True
+            status = False
+            check = False
+            rd.p = 0 
             print "==== Fail ====="
 

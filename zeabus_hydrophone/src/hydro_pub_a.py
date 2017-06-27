@@ -17,10 +17,11 @@ freq_s = 0
 fre = 0
 k = 0
 status = False
+hydro_status = False
 p = 0
 sending = False
 check_elv = True
-check = False
+check = False 
 def float_hex4(f):
     return ''.join(('%2.2x'%ord(c)) for c in struct.pack('<f', f))
 def uint_hex4(I):
@@ -308,7 +309,7 @@ class readdata:
         #for cp in c_obv:
             #cp = hx(np.array(np.array([-pi*0.7,pi/4.,0])))+np.random.normal(0,np.sqrt(0.01),(8,))
         v = np.random.rand(3,N)*2.0-1.0
-        v[0] = v[0]*pi/7.0 #16.0   #trace max speed 
+        v[0] = v[0]*pi/5.0 #16.0   #trace max speed 
         v[1] = v[1]*pi/9.4 #23-1507 
         v[2] = v[2]*pi/3.0
         pf.predict(v)
@@ -320,7 +321,7 @@ class readdata:
         c = xk[2]
         print "seq : %d" %seq
         print "Particle Filter Az: %.2f,Elv: %.2f,Ot: %.3f ,Freq : %.0f\n" % (self.az_t, self.elv_t,c,fre/1000)
-        #==============================
+        #============================== kuyyy
         if self.elv_t < 25 or check:
             if self.p < 2:
                 self.p+=1
@@ -394,9 +395,9 @@ if __name__ == '__main__':
     ser.write(res)
     res = set(0x01,30000)
     ser.write(res)
-    res = set(0x02,0.6) #Font #add strength    40k = 1.0/3.0  ||| 25k = 1.0/4.0
+    res = set(0x02,0.9) #Font #add strength    40k = 1.0/3.0  ||| 25k = 1.0/4.0
     ser.write(res)
-    res = set(0x03,0.03)   #Pthres
+    res = set(0x03,0.02)   #Ptres
     ser.write(res)
     res = set(0x04,1500)
     ser.write(res)
@@ -415,5 +416,10 @@ if __name__ == '__main__':
             print "==== Sending ===="
             pub.publish(d)
         else:
+            pf.reset(x_min,x_max)
+            check_elv = True
+            status = False
+            check = False
+            rd.p = 0 
             print "==== Fail ====="
 

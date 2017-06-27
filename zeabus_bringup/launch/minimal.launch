@@ -87,6 +87,13 @@
 		<param name="frame_id" value="dvl_link"/>
 		<param name="velocity_stdev" value="0.018"/>
 		<param name="publish_invalid_data" value="true"/>
+
+        <!-- ===================  For Emergency =============== -->
+        
+                <param name="surface_depth" value="4.5"/>
+
+       <!-- ================================================== -->
+
     </node>
 
     <!--node name="zeabus_hydrophone" pkg="zeabus_hydrophone" type="hydro_server_2.py" output="screen">

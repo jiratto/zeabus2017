@@ -321,7 +321,7 @@ class readdata:
         print "seq : %d" %seq
         print "Particle Filter Az: %.2f,Elv: %.2f,Ot: %.3f ,Freq : %.0f\n" % (self.az_t, self.elv_t,c,fre/1000)
         #==============================
-        if self.elv_t < 25 or check:
+        if self.elv_t < 10 or check:
             if self.p < 2:
                 self.p+=1
             else:
@@ -394,7 +394,7 @@ if __name__ == '__main__':
     ser.write(res)
     res = set(0x01,25000)
     ser.write(res)
-    res = set(0x02,0.3) #Font #add strength    40k = 1.0/3.0  ||| 25k = 1.0/4.0
+    res = set(0x02,0.25) #Font #add strength    40k = 1.0/3.0  ||| 25k = 1.0/4.0
     ser.write(res)
     res = set(0x03,0.02)   #Pthres
     ser.write(res)
@@ -415,5 +415,10 @@ if __name__ == '__main__':
             print "==== Sending ===="
             pub.publish(d)
         else:
+            #pf.reset(x_min,x_max)
+            #check_elv = True
+            #status = False
+            #check = False
+            #rd.p = 0 
             print "==== Fail ====="
 

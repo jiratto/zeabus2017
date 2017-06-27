@@ -34,7 +34,7 @@
 	  </node>
 	   <node name="io_and_pressure" pkg="modbus_ascii_ros" type="io_and_pressure"   output="screen">
 	     <param name="io_device" value="/dev/usb2serial/ftdi_FT03OMNT_01" />
-		 <param name="atm_pressure" value="18.33"/>
+		 <param name="atm_pressure" value="18.516"/>
 		 <param name="depth_offset" value="0"/>
 		<!--param name="frame_id" value="baro_link"/-->	
 	  </node>
