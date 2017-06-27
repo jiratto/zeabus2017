@@ -13,7 +13,7 @@ class Navigate (object):
 	def __init__ (self):
 		print "Start Mission Navigate"
 
-		rospy.init_node ('navigate_node')
+		# rospy.init_node ('navigate_node')
 
 		self.aicontrol = AIControl ()
 		self.data = None
@@ -29,11 +29,11 @@ class Navigate (object):
 		## check zero 3 times before role ##
 		check = 0
 
-		countOneLeg = 0
+		isFail = 50
 
-		self.aicontrol.fix_zaxis (-3.6)
+		self.aicontrol.fix_zaxis (-3.3)
 		self.aicontrol.drive_xaxis (1)
-		rospy.sleep (4)
+		rospy.sleep (5)
 
 		while not rospy.is_shutdown ():
 			self.aicontrol.stop (1)
@@ -84,30 +84,40 @@ class Navigate (object):
 
 				if two > one >= zero:
 					print 'TWO LEGS'
-					if self.aicontrol.is_center ([cx[2]/two, 0], -0.2, 0.1, -0.1, 0.1):
+					if self.aicontrol.is_center ([cx[2]/two, 0], -0.1, 0.1, -0.1, 0.1):
 						print 'Center !!'
 						self.aicontrol.drive_xaxis (1/area[2] * 2)
-						rospy.sleep (5)
+						rospy.sleep (8)
 					else:
 						print 'Drive to center'
-						vy = self.aicontrol.adjust (cx[2]/two, -0.6, -0.2, 0.2, 0.6)
+						vy = self.aicontrol.adjust (cx[2]/two, -0.6, -0.4, 0.4, 0.6)
 						self.aicontrol.drive ([0, -vy, 0, 0, 0, 0])
 						rospy.sleep (3)
 				elif one > two >= zero:
 					print 'ONE LEG'
+
+					if self.aicontrol.is_fail (isFail):
+						self.aicontrol.fix_zaxis (-2.8)
+						self.aicontrol.stop (1)
+						cam = 'bot'
+						# self.aicontrol.drive_xaxis (1)
+						# rospy.sleep (18)
+						# self.aicontrol.roll (2)
+						print 'SWAP TO BOTTOM CAMERA'
 					if mul >= 0:
-						vy = 0.3
+						vy = 0.4
 					else:
-						vy = -0.15
+						vy = -0.4
 					self.aicontrol.drive_yaxis (vy)
 					rospy.sleep (2)
+					isFail -= 1
 				elif zero > one >= two:
 					print 'ZERO'
 					self.aicontrol.drive_xaxis (1)
 					rospy.sleep (1)
 					check += 1
 					if check >= 3:
-						self.aicontrol.fix_zaxis (-2.5)
+						self.aicontrol.fix_zaxis (-2.8)
 						self.aicontrol.stop (1)
 						cam = 'bot'
 						# self.aicontrol.drive_xaxis (1)
@@ -121,18 +131,22 @@ class Navigate (object):
 					print ('angle: ', angleAvr)
 					self.aicontrol.turn_yaw_relative (angleAvr)
 					rospy.sleep (2)
+					self.aicontrol.drive_xaxis (-1)
+					rospy.sleep (5)
+					self.aicontrol.drive_yaxis (1)
+					rospy.sleep (2)
 					# self.aicontrol.roll (2)
 					self.aicontrol.drive_xaxis (1)
-					rospy.sleep (8)
+					rospy.sleep (10)
 					self.aicontrol.fix_zaxis (-0.2)
 					break
 				else:
 					print 'NOT FOUND'
 					self.aicontrol.drive_xaxis (1)
-					rospy.sleep (2)
+					rospy.sleep (3)
 		
 		self.aicontrol.stop (1)
 
-if __name__ == '__main__':
-	navigate = Navigate ()
-	navigate.run ()
+# if __name__ == '__main__':
+# 	navigate = Navigate ()
+# 	navigate.run ()
