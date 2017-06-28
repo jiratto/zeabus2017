@@ -283,3 +283,17 @@ def adjust_gamma(image, gamma=1):
                       255 for i in np.arange(0, 256)]).astype("uint8")
 
     return cv2.LUT(image, table)
+
+
+def get_kernal(shape='rect', ksize=(5, 5)):
+    if shape == 'rect':
+        return cv2.getStructuringElement(cv2.MORPH_RECT, ksize)
+    elif shape == 'ellipse':
+        return cv2.getStructuringElement(cv2.MORPH_ELLIPSE, ksize)
+    elif shape == 'plus':
+        return cv2.getStructuringElement(cv2.MORPH_CROSS, ksize)
+    else:
+        return None
+
+# if __name__ == '__main__':
+#     print get_kernal()
