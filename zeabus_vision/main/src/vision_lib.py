@@ -12,6 +12,8 @@ def range_str2list(str):
 
 def delete_color(hsv, color, camera):
     lower, upper = getColor(color, camera)
+    print lower
+    print upper
     if not lower is None:
         res = cv2.inRange(hsv, lower, upper)
     else:
@@ -26,16 +28,14 @@ def getColor(color, camera):
     upper = None
     color_list_down = ['orange', 'white', 'yellow', 'red']
     color_list_top = ['orange', 'white', 'yellow', 'red']
-    if camera == 'down':
-        for c in color_list_down:
-            if color == c:
-                lower = rospy.get_param('/color_range/color_down/lower_' + c)
-                upper = rospy.get_param('/color_range/color_down/upper_' + c)
-    else:
-        for c in color_list_top:
-            if color == c:
-                lower = rospy.get_param('/color_range/color_top/lower_' + c)
-                upper = rospy.get_param('/color_range/color_top/upper_' + c)
+
+    for c in color_list_down:
+        if color == c:
+            lower = rospy.get_param(
+                '/color_range/color_' + camera + '/lower_' + c)
+            upper = rospy.get_param(
+                '/color_range/color_' + camera + '/upper_' + c)
+
     if not lower is None:
         lower = range_str2list(lower)
         upper = range_str2list(upper)
@@ -56,10 +56,16 @@ def find_shape(cnt, req):
         return False
 
 
-def cut_contours(cnt, w, h, range):
-    M = cv2.moments(cnt)
-    cx = int(M['m10'] / M['m00'])
-    cy = int(M['m01'] / M['m00'])
+def cut_contours(M, w, h, range):
+    cx = None
+    cy = None
+    try:
+        cx = int(M['m10'] / M['m00'])
+        cy = int(M['m01'] / M['m00'])
+    except:
+        print 'err'
+    if cx is None:
+        return False
     if cx <= range or cy <= range or cx >= w - range or cy >= h - range:
         return True
     return False
@@ -73,10 +79,8 @@ def equalization(frame):
     equ_v = cv2.equalizeHist(v)
 
     equ = cv2.merge((h, equ_s, equ_v))
-
     # h, s, v = cv2.split(result_hsv)
-    print h.max(), s.max(), v.max()
-
+    # print h.max(), s.max(), v.max()
     return equ
 
 
