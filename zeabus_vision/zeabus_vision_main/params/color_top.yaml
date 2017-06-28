@@ -7,11 +7,18 @@
 
   lower_white: '180,255,255'
 
-  upper_yellow: '102,239,199'
+  upper_yellow: '99,255,255'
 
-  lower_yellow: '63,98,107'
+  lower_yellow: '71,220,141'
 
   upper_red: '0,0,0'
 
   lower_red: '180,255,255'
 
+  upper_black: '0,0,0'
+
+  lower_black: '180,255,255'
+
+  upper_violet: '0,0,0'
+
+  lower_violet: '180,255,255'

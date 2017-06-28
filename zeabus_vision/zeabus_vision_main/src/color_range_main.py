@@ -191,7 +191,8 @@ def compare_range(l, u, l1, u1):
 
 def select_color():
     global pixel, img, wait, hsv, click, is_mask, width, height
-    window_name = ['mask', 'red', 'orange', 'white', 'yellow']
+    window_name = ['mask', 'red', 'orange',
+                   'white', 'yellow', 'black', 'violet']
 
     cv2.namedWindow('image', flags=cv2.WINDOW_NORMAL)
     cv2.moveWindow('image', 20, 20)
