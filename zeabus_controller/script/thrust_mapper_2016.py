@@ -254,10 +254,10 @@ class thrust_mapper:
 	print '\n============PWM before bound============='
 	print pwm_command
 	for i in range(8) :
-		if pwm_command.pwm[i] > 1800 :	#at first 1800 #1700
-			pwm_command.pwm[i] = 1800
-		elif pwm_command.pwm[i] < 1200 :
-			pwm_command.pwm[i] = 1200  #at first 1200 #1300
+		if pwm_command.pwm[i] > 1750 :	#at first 1800 
+			pwm_command.pwm[i] = 1750
+		elif pwm_command.pwm[i] < 1250 :
+			pwm_command.pwm[i] = 1250  #at first 1200 
 	
 	print '\n============PWM============='
 	print pwm_command
