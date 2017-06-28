@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<launch>
-	<node pkg="zeabus_vision" name="auto_exposure" type="adjust_exposure_main.py" output="screen">
-		<param name="cameraTopic" type='str' value='/top/center/image_rect_color/compressed'/>
-		<param name="cameraManager" type='str' value='ueye_cam_nodelet_top_center/'/>
-	</node>
-</launch>
