@@ -58,7 +58,7 @@ def find_shape(cnt, req):
         return False
 
 
-def cut_contours(M, w, h, range):
+def cut_contours(M, w, h, range_w, range_h):
     cx = None
     cy = None
     try:
@@ -68,7 +68,7 @@ def cut_contours(M, w, h, range):
         print 'err'
     if cx is None:
         return False
-    if cx <= range or cy <= range or cx >= w - range or cy >= h - range:
+    if cx <= range_w or cy <= range_h or cx >= w - range_w or cy >= h - range_h:
         return True
     return False
 
