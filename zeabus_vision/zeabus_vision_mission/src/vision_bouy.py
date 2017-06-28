@@ -4,11 +4,14 @@ Copyright @ EmOne (Thailand) Co.Ltd. 2017
 Author: Anol Paisal <info@emone.co.th>
 Date: 2017/05/15
 """
+import sys
 import cv2
 import numpy as np
 import rospy
 from sensor_msgs.msg import CompressedImage
 import math
+sys.path.append('/home/zeabus/catkin_ws/src/src_code/zeabus_vision/main/src/')
+from vision_lib import *
 from std_msgs.msg import String
 from zeabus_vision_srv_msg.msg import vision_msg_bouy
 from zeabus_vision_srv_msg.srv import vision_srv_bouy
@@ -53,7 +56,7 @@ def threshold_callback(params):
     global img_gray, thresh, gamma, img_gamma, color
     thresh = params
     img_gray = cv2.GaussianBlur(img_gray, (7, 7), 0)
-    cv2.imshow('blur', img_gray)
+    # cv2.imshow('blur', img_gray)
 
     ret, thresh_out = cv2.threshold(
         img_gray, thresh, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
@@ -78,7 +81,7 @@ def threshold_callback(params):
 
     sure_fg = np.uint8(sure_fg)
     unknown = cv2.subtract(sure_bg, sure_fg)
-    cv2.imshow('unknown', unknown)
+    # cv2.imshow('unknown', unknown)
 
     im2, contours, hierarchy = cv2.findContours(
         unknown, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
@@ -92,8 +95,8 @@ def threshold_callback(params):
         x, y, w, h = cv2.boundingRect(contours[i])
         cv2.rectangle(drawing, (x, y), (x + w, y + h), (0, 0, 255), 1)
         cv2.drawContours(drawing, contours, i, (0, 255, 0), 1)
-        cv2.imshow('Contour', drawing)
-
+        # cv2.imshow('Contour', drawing)
+        publish_result(drawing, 'bgr', '/contour')
     for i in range(len(contours)):
         box = cv2.boxPoints(minRect[i])
         box = np.int0(box)
@@ -104,12 +107,12 @@ def threshold_callback(params):
             img_rgb_roi = cv2.cvtColor(img_roi, cv2.COLOR_HSV2BGR)
 
             img_roi = cv2.cvtColor(img_roi, cv2.COLOR_BGR2GRAY)
-            cv2.imshow('ROI', img_roi)
+            # cv2.imshow('ROI', img_roi)
             clahe = cv2.createCLAHE(clipLimit=1.0, tileGridSize=(3, 3))
             cl1 = clahe.apply(img_roi)
             res = np.hstack((img_roi, cl1))
-            cv2.imshow('equ', res)
-
+            # cv2.imshow('equ', res)
+            # publish_result
             circles = cv2.HoughCircles(
                 img_roi, cv2.HOUGH_GRADIENT, 1.3, 100, param1=80, param2=20, minRadius=0, maxRadius=0)
             if circles != None:
@@ -120,8 +123,8 @@ def threshold_callback(params):
 
                     cv2.circle(
                         hsv_drawing, (int(box[1][0] + i[0]), int(box[1][1] + i[1])), 2, (0, 0, 255), 3)
-                    cv2.imshow('circle', hsv_drawing)
-
+                    # cv2.imshow('circle', hsv_drawing)
+                    publish_result(hsv_drawing, 'bgr', '/circle')
                     w = img_rgb_roi[0, 0]
 #                    print w
                     b, g, r = cv2.split(img_rgb_roi)
@@ -210,22 +213,23 @@ def find_bouy():
     mask = cv2.bitwise_or(mask1_inv,  mask2_inv)
     #cv2.imshow('mask', mask)
     img_gray = cv2.bitwise_and(img_gray, img_gray, mask=mask)
-    cv2.imshow('Gray', img_gray)
-
+    # cv2.imshow('Gray', img_gray)
+    publish_result(img_gray, 'gray', '/gray')
     # if old_frame == None:
     #     old_frame = img_gamma.copy()
     #     pass
     # else:
-    r, c = 1, 1
+    res = threshold_callback(thresh)
+
     x = 0
     y = 0
     radius = 0
     color_res = 'c'
+    r, c = img_gray.shape
     if res != None:
-        r, c = img_gray.shape
-        res = threshold_callback(thresh)
         x = res[0]
         y = res[1]
+        print str(x) + " " + str(y)
         color_res = res[6]
         radius = res[2]
         prob = {'y': res[3], 'g': res[4], 'r': res[5]}
@@ -241,9 +245,11 @@ def find_bouy():
     # rate.sleep()
 
     # cv2.destroyAllWindows()
-    m.cx = [(x - c / 2) / c / 2]
-    m.cy = [(y - r / 2) / r / 2]
-    m.area = [radius]
+    offset_c = c / 2.0
+    offset_r = r / 2.0
+    m.cx = [(x - offset_c) / offset_c]
+    m.cy = [-(y - offset_r) / offset_r]
+    m.area = [(radius * radius * math.pi) / (r * c)]
     m.prob = [0]
     m.num = 1
     if color == color_res:
