@@ -271,3 +271,15 @@ def publish_result(img, type, topicName):
     elif type == 'bgr':
         msg = bridge.cv2_to_imgmsg(img, "bgr8")
     pub.publish(msg)
+
+
+def adjust_gamma(image, gamma=1):
+    if gamma == 0:
+        g = 1.0
+    else:
+        g = gamma / 10.0
+    invGamma = 1.0 / g
+    table = np.array([((i / 255.0) ** invGamma) *
+                      255 for i in np.arange(0, 256)]).astype("uint8")
+
+    return cv2.LUT(image, table)
