@@ -308,8 +308,8 @@ class readdata:
         #for cp in c_obv:
             #cp = hx(np.array(np.array([-pi*0.7,pi/4.,0])))+np.random.normal(0,np.sqrt(0.01),(8,))
         v = np.random.rand(3,N)*2.0-1.0
-        v[0] = v[0]*pi/12.0 #16.0   #trace max speed 
-        v[1] = v[1]*pi/9.4 #23-1507 
+        v[0] = v[0]*pi/8.0 #16.0   #trace max speed 
+        v[1] = v[1]*pi/7.0 #23-1507 
         v[2] = v[2]*pi/3.0
         pf.predict(v)
         pf.update_weight(cp)
@@ -321,7 +321,7 @@ class readdata:
         print "seq : %d" %seq
         print "Particle Filter Az: %.2f,Elv: %.2f,Ot: %.3f ,Freq : %.0f\n" % (self.az_t, self.elv_t,c,fre/1000)
         #==============================
-        if self.elv_t < 25 or check:
+        if self.elv_t < 30 or check:
             if self.p < 2:
                 self.p+=1
             else:
