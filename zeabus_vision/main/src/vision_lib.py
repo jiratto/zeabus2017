@@ -10,19 +10,20 @@ def range_str2list(str):
     return np.array([int(str[0]), int(str[1]), int(str[2])], np.uint8)
 
 
-def delete_color(color):
-    if color == 'green':
-        lower = np.array([38, 0, 0], np.uint8)
-        upper = np.array([75, 255, 255], np.uint8)
-    elif color == 'blue':
-        lower = np.array([38, 0, 0], np.uint8)
-        upper = np.array([75, 255, 255], np.uint8)
-    res = cv2.inRange(hsv, lower, upper)    
+def delete_color(hsv, color, camera):
+    lower, upper = getColor(color, camera)
+    if not lower is None:
+        res = cv2.inRange(hsv, lower, upper)
+    else:
+        h, s, v = cv2.split(hsv)
+        ret, res = cv2.threshold(v, 127, 255, cv2.THRESH_BINARY)
     return res
 
 
 def getColor(color, camera):
     # Navigate
+    lower = None
+    upper = None
     color_list_down = ['orange', 'white', 'yellow', 'red']
     color_list_top = ['orange', 'white', 'yellow', 'red']
     if camera == 'down':
@@ -35,8 +36,9 @@ def getColor(color, camera):
             if color == c:
                 lower = rospy.get_param('/color_range/color_top/lower_' + c)
                 upper = rospy.get_param('/color_range/color_top/upper_' + c)
-    lower = range_str2list(lower)
-    upper = range_str2list(upper)
+    if not lower is None:
+        lower = range_str2list(lower)
+        upper = range_str2list(upper)
     return lower, upper
 
 
@@ -47,19 +49,18 @@ def find_shape(cnt, req):
         return True
     elif len(approx) == 4 and req == 'rect':
         return True
-    elif len(approx) >= 25 and req == 'cir':
+    elif len(approx) >= 10 and req == 'cir':
         return True
     elif len(approx) == req:
         return True
         return False
 
 
-def cut_contours(cnt, w, h):
-    err = 5
+def cut_contours(cnt, w, h, range):
     M = cv2.moments(cnt)
     cx = int(M['m10'] / M['m00'])
     cy = int(M['m01'] / M['m00'])
-    if cx <= err or cy <= err or cx >= w - err or cy >= h - err:
+    if cx <= range or cy <= range or cx >= w - range or cy >= h - range:
         return True
     return False
 
@@ -143,51 +144,24 @@ def stretching(img):
     return img
 
 
-def cut_frame_top(img):
-    h, w = img.shape
-
-    for i in range(0, h / 4):
-        for j in range(0, w):
-            if (img[i, j] == 255):
-                img[i, j] = 0
-    return img
-
-
-def cut_frame_down(img):
-    h, w = img.shape
-
-    for i in range(h * 3 / 4, h):
-        for j in range(0, w):
-            if (img[i, j] == 255):
-                img[i, j] = 0
-    return img
+def cut_frame_top(imgBinary):
+    # cut 1/4 of top of frame
+    rows, cols = imgBinary.shape
+    maskTop = np.zeros((int(rows / 4), cols))
+    maskBottom = np.ones((int(3 * rows / 4), cols))
+    res = np.concatenate((maskTop, maskBottom), axis=0)
+    res = cv2.bitwise_and(res, res, mask=imgBinary)
+    return res
 
 
-def mask_longerline(img):
-    h, w = img.shape
-    d = dmax = row = 0
-
-    for i in range(h / 4, h):
-        d = 0
-        for j in range(0, w):
-            if(img[i, j] == 255):
-                d += 1
-        if(d > dmax):
-            row = i
-
-    result = np.zeros((h, w), dtype=np.uint8)
-    start = row - 50
-    last = row + 50
-    if last > h:
-        last = h
-    if start < 0:
-        start = 0
-    for i in range(start, last):
-        for j in range(0, w):
-            if img[i, j] == 255:
-                result[i, j] = 255
-
-    return result
+def cut_frame_bottom(imgBinary):
+    # cut 1/4 of bottom of frame
+    rows, cols = imgBinary.shape
+    maskTop = np.ones((int(3 * rows / 4), cols))
+    maskBottom = np.zeros((int(rows / 4), cols))
+    res = np.concatenate((maskTop, maskBottom), axis=0)
+    res = cv2.bitwise_and(res, res, mask=imgBinary)
+    return res
 
 
 def Oreintation(moment):
