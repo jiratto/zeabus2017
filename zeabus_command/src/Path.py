@@ -13,12 +13,13 @@ class Path (object):
     def __init__ (self):
         print "Start Mission Path"
 
-        rospy.init_node ('path_node')
+        # rospy.init_node ('path_node')
 
         self.aicontrol = AIControl ()
         self.data = None
         self.command = rospy.Publisher ('/zeabus/cmd_vel', Twist, queue_size=10)
         self.turn_yaw_rel = rospy.Publisher ('/fix/rel/yaw', Float64, queue_size=10)    
+        self.isFail = 30
         
         path_srv = 'vision'
         rospy.wait_for_service (path_srv)
@@ -33,12 +34,15 @@ class Path (object):
         vx = 0
         vy = 0
         check = 0
-        self.stop ()
-        # self.aicontrol.drive ([1, 0, 0, 0, 0, 0])
-        # rospy.sleep (11)
+        self.aicontrol.fix_zaxis (-2)
+        rospy.sleep (3)
+        self.aicontrol.drive_xaxis (1)
+        rospy.sleep (11)
         # self.stop (2)
 
-        while not rospy.is_shutdown ():
+        while not rospy.is_shutdown () and not self.aicontrol.is_fail (self.isFail):
+            self.stop ()
+
             print "IN LOOP"
 
             px = []
@@ -48,7 +52,6 @@ class Path (object):
             count = 0
 
             if check == 2:
-                print 'FIND PATH COMPLETE'
                 break
 
             for i in range (10):
@@ -85,6 +88,7 @@ class Path (object):
                 print 'NOT FOUND PATH'
 
                 self.aicontrol.drive ([0.5, 0, 0, 0, 0, 0])
+                self.isFail -= 1
             else:
                 print 'FOUND PATH'
 
@@ -98,12 +102,19 @@ class Path (object):
 
                 self.aicontrol.drive ([vx, vy, 0, 0, 0, 0])
             rospy.sleep (4)
-            self.stop ()
+
+        print (self.check_path ())
+
+    def check_path (self):
+        if self.aicontrol.is_fail (self.isFail):
+            return 'FIND PATH FAILED'
+        else:
+            return 'FIND PATH COMPLETE'
 
             
-if __name__ == '__main__':
-    path = Path ()
-    print "EIEI"
-    path.run ()
-    path.stop ()
-    print 'end'
+# if __name__ == '__main__':
+#     path = Path ()
+#     print "EIEI"
+#     path.run ()
+#     path.stop ()
+#     print 'end'

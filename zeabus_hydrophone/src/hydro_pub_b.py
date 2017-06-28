@@ -296,8 +296,8 @@ class readdata:
         
         #c_obv.append(temp2)
             
-        #print "Board"
-        #print seq,azi,elv
+        print "Board"
+        print seq,azi,elv
         #print "C:", cp 
         #print "Ele :%.2f" % (elv)
         #th1 = np.arctan2(cp[4],cp[0])*180./np.pi
@@ -394,7 +394,7 @@ if __name__ == '__main__':
     ser.write(res)
     res = set(0x01,40000)
     ser.write(res)
-    res = set(0x02,0.33) #Font #add strength    40k = 1.0/3.0  ||| 25k = 1.0/4.0
+    res = set(0x02,0.3) #Font #add strength    40k = 1.0/3.0  ||| 25k = 1.0/4.0
     ser.write(res)
     res = set(0x03,0.01)   #Pthres
     ser.write(res)

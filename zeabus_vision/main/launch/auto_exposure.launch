@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+<launch>
+	<include file="$(find zeabus_vision)/launch/auto_exposure_top.launch"></include>
+	<include file="$(find zeabus_vision)/launch/auto_exposure_bottom.launch"></include>
+=======
 <?xml version="1.0"?>
 <launch>
 	<node pkg="zeabus_vision" name="auto_exposure_top" type="adjust_exposure_top.py" output="screen">
@@ -8,4 +13,5 @@
 		<param name="cameraTopic" type='str' value='/bottom/left/image_raw/compressed'/>
 		<param name="cameraManager" type='str' value='ueye_cam_nodelet_bottom_left/'/>
 	</node>
+>>>>>>> e4c989a32864ba9bcad85eecfbe77728ac9d5bcd
 </launch>
