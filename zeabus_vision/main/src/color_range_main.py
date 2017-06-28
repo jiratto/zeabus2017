@@ -268,7 +268,14 @@ def select_color():
 if __name__ == '__main__':
     rospy.init_node('color_range_main')
     cameraPos = rospy.get_param('color_range/cameraPos', 'down')
+<<<<<<< HEAD:zeabus_vision/main/src/color_range_main.py
     cameraTopic = rospy.get_param('color_range/cameraTopic',
                                   '/rightcam_bottom/image_raw/compressed')
+=======
+    print('camera: ' + str(cameraPos))
+    cameraTopic = rospy.get_param('color_range/cameraTopic',
+                                  '/rightcam_bottom/image_raw/compressed')
+    print('topic: ' + str(cameraTopic))
+>>>>>>> e4c989a32864ba9bcad85eecfbe77728ac9d5bcd:zeabus_vision/main/src/color_range_main.py
     rospy.Subscriber(cameraTopic, CompressedImage, callback)
     select_color()

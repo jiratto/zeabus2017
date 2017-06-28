@@ -13,7 +13,7 @@ class Navigate (object):
 	def __init__ (self):
 		print "Start Mission Navigate"
 
-		# rospy.init_node ('navigate_node')
+		rospy.init_node ('navigate_node')
 
 		self.aicontrol = AIControl ()
 		self.data = None
@@ -34,6 +34,8 @@ class Navigate (object):
 		self.aicontrol.fix_zaxis (-3.3)
 		self.aicontrol.drive_xaxis (1)
 		rospy.sleep (5)
+
+		self.aicontrol.fix_zaxis (-3)
 
 		while not rospy.is_shutdown ():
 			self.aicontrol.stop (1)
