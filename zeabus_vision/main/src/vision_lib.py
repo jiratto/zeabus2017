@@ -3,6 +3,8 @@ import cv2
 import numpy as np
 import math
 import rospy
+from sensor_msgs.msg import CompressedImage, Image
+from cv_bridge import CvBridge, CvBridgeError
 
 
 def range_str2list(str):
@@ -79,14 +81,11 @@ def equalization(frame):
     equ_v = cv2.equalizeHist(v)
 
     equ = cv2.merge((h, equ_s, equ_v))
-    # h, s, v = cv2.split(result_hsv)
-    # print h.max(), s.max(), v.max()
+
     return equ
 
 
 def clahe(img):
-    # ____________________________ #
-
     img = cv2.cvtColor(img, cv2.COLOR_BGR2Lab)
     L, a, b = cv2.split(img)
     clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
@@ -263,7 +262,12 @@ def shrinking_hsv(img):
     return result
 
 
-def mean_staturation(hsv):
-    h, s, v = cv2.split(hsv)
-    mean = cv2.mean(v)
-    print('mean: {0}'.format(mean))
+def publish_result(img, type, topicName):
+    bridge = CvBridge()
+    pub = rospy.Publisher(
+        topicName, Image, queue_size=10)
+    if type == 'gray':
+        msg = bridge.cv2_to_imgmsg(img, "mono8")
+    elif type == 'bgr':
+        msg = bridge.cv2_to_imgmsg(img, "bgr8")
+    pub.publish(msg)
