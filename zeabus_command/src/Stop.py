@@ -5,7 +5,8 @@ import math
 from AIControl import AIControl
 
 if __name__ == '__main__':
-    aiControl = AIControl ()
+    aicontrol = AIControl ()
     rospy.init_node ('stop_node')
-    aiControl.stop (1)
+    aicontrol.stop (1)
     rospy.sleep (1)
+    aicontrol.fix_zaxis (-1)

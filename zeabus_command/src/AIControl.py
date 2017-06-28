@@ -195,9 +195,14 @@ class AIControl ():
 		for i in xrange (len(data)):
 			if i % 2 == 0:
 				self.drive_yaxis (-data[i])
+				rospy.sleep (time)
 			else:
-				self.drive_zaxis (-data[i])
-			rospy.sleep (time)
+				if data[i] < 0:
+					self.drive_zaxis (-data[i]/10)
+					rospy.sleep (time)
+				else:
+					self.drive_zaxis (1)
+					rospy.sleep (0.05)
 		self.stop (5)
 
 	# barrel roll movement

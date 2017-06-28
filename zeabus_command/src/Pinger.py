@@ -59,7 +59,7 @@ class Pinger (object):
 		count = 50
 
 		while goal != True and not rospy.is_shutdown ():
-			self.aicontrol.stop (2)
+			self.aicontrol.stop (1)
 			print 'listening pinger'
 
 			print self.hydroData
@@ -73,8 +73,8 @@ class Pinger (object):
 					print 'drive'
 					driveXdistance -= 0.5
 					if driveXdistance <= 0:
-						driveXdistance = 0.5
-					rospy.sleep (5)
+						driveXdistance = 1
+					rospy.sleep (3)
 				else:
 					turnnaja = self.aicontrol.adjust (realDegree, -10, -5, 5, 10)
 					print turnnaja
@@ -82,8 +82,8 @@ class Pinger (object):
 					print 'turn'
 					rospy.sleep (5)
 
-			if self.hydroData.elv < 40:
-				driveXdistance = 0.5
+			if self.hydroData.elv < 30:
+				driveXdistance = 1
 
 			if self.hydroData.stop:
 				goal = True
