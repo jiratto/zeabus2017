@@ -81,7 +81,7 @@ class thrust_mapper:
 			[0, 0, 1],
 			[0, 0, 1],
 			[-math.cos(math.radians(40)), math.sin(math.radians(40)), 0],
-			[math.cos(math.radians(40)), math.sin(math.radians(40)), 0],
+			[-math.cos(math.radians(40)), -math.sin(math.radians(40)), 0],
 			[math.cos(math.radians(40)), math.sin(math.radians(40)), 0],
 			[-math.cos(math.radians(40)), math.sin(math.radians(40)), 0]])		
 
@@ -254,10 +254,10 @@ class thrust_mapper:
 	print '\n============PWM before bound============='
 	print pwm_command
 	for i in range(8) :
-		if pwm_command.pwm[i] > 1700 :	#at first 1800 #1700
-			pwm_command.pwm[i] = 1700
-		elif pwm_command.pwm[i] < 1300 :
-			pwm_command.pwm[i] = 1300  #at first 1200 #1300
+		if pwm_command.pwm[i] > 1800 :	#at first 1800 #1700
+			pwm_command.pwm[i] = 1800
+		elif pwm_command.pwm[i] < 1200 :
+			pwm_command.pwm[i] = 1200  #at first 1200 #1300
 	
 	print '\n============PWM============='
 	print pwm_command
