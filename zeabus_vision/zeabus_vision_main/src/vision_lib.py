@@ -58,7 +58,7 @@ def find_shape(cnt, req):
         return False
 
 
-def cut_contours(M, w, h, range):
+def cut_contours(M, w, h, range_w, range_h):
     cx = None
     cy = None
     try:
@@ -68,7 +68,7 @@ def cut_contours(M, w, h, range):
         print 'err'
     if cx is None:
         return False
-    if cx <= range or cy <= range or cx >= w - range or cy >= h - range:
+    if cx <= range_w or cy <= range_h or cx >= w - range_w or cy >= h - range_h:
         return True
     return False
 
@@ -271,3 +271,29 @@ def publish_result(img, type, topicName):
     elif type == 'bgr':
         msg = bridge.cv2_to_imgmsg(img, "bgr8")
     pub.publish(msg)
+
+
+def adjust_gamma(image, gamma=1):
+    if gamma == 0:
+        g = 1.0
+    else:
+        g = gamma / 10.0
+    invGamma = 1.0 / g
+    table = np.array([((i / 255.0) ** invGamma) *
+                      255 for i in np.arange(0, 256)]).astype("uint8")
+
+    return cv2.LUT(image, table)
+
+
+def get_kernal(shape='rect', ksize=(5, 5)):
+    if shape == 'rect':
+        return cv2.getStructuringElement(cv2.MORPH_RECT, ksize)
+    elif shape == 'ellipse':
+        return cv2.getStructuringElement(cv2.MORPH_ELLIPSE, ksize)
+    elif shape == 'plus':
+        return cv2.getStructuringElement(cv2.MORPH_CROSS, ksize)
+    else:
+        return None
+
+# if __name__ == '__main__':
+#     print get_kernal()

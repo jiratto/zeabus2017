@@ -5,16 +5,17 @@ import rospkg
 import rospy
 import math
 from sensor_msgs.msg import CompressedImage
+import sys
+sys.path.append ('/home/zeabus/catkin_ws/src/src_code/zeabus_vision/main/src/')
 from vision_lib import *
 from zeabus_vision_srv_msg.msg import vision_msg_default
 from zeabus_vision_srv_msg.srv import vision_srv_default
 
 img = None
-# width = 1280
-# height = 1024
+width = None
+height = None
 
-lower_red = np.array([ 10, 47, 27])
-upper_red = np.array([ 23, 255, 255])
+lower_red, upper_red = getColor('orange', 'down')
 
 def find_path():
     global img, width, height
@@ -33,7 +34,7 @@ def find_path():
         # continue
     print("2")
     im = img.copy()
-    height, width,_ = im.shape
+    # height, width,_ = im.shape
     # print('width', width)
     # print('height', height)
     offsetW = width/2
@@ -124,9 +125,10 @@ def find_path():
     return res
     
 def img_callback(msg):
-    global img
+    global img, width, height
     arr = np.fromstring(msg.data, np.uint8)
     img = cv2.resize(cv2.imdecode(arr, 1), (640, 512))
+    height, width,_ = img.shape
  
 
 
@@ -136,8 +138,9 @@ def mission_callback(msg):
 
 if __name__ == '__main__':
     rospy.init_node('findPath1')
-    topic = '/leftcam_bottom/image_raw/compressed'
-    rospy.Subscriber(topic, CompressedImage, img_callback)
+    topic = '/bottom/left/image_raw/compressed'
+    bot = '/bottom/left/image_raw/compressed'
+    rospy.Subscriber(bot, CompressedImage, img_callback)
     # find_path()
     # while not rospy.is_shutdown():
     #     res = vision_srv_default()
