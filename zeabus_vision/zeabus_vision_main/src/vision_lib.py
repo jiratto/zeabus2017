@@ -88,7 +88,7 @@ def equalization(frame):
 def clahe(img):
     img = cv2.cvtColor(img, cv2.COLOR_BGR2Lab)
     L, a, b = cv2.split(img)
-    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
+    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(20, 20))
     L = clahe.apply(L)
 
     result = cv2.merge((L, a, b))
@@ -272,7 +272,6 @@ def publish_result(img, type, topicName):
         msg = bridge.cv2_to_imgmsg(img, "bgr8")
     pub.publish(msg)
 
-
 def adjust_gamma(image, gamma=1):
     if gamma == 0:
         g = 1.0
@@ -294,6 +293,15 @@ def get_kernal(shape='rect', ksize=(5, 5)):
         return cv2.getStructuringElement(cv2.MORPH_CROSS, ksize)
     else:
         return None
+
+def erode(imgBin, ker):
+    return cv2.erode(imgBin, ker, iterations = 1)
+
+def dilate(imgBin, ker):
+    return cv2.dilate(imgBin, ker, iterations =  1)
+
+def close(imgBin, ker):
+    return cv2.morphologyEx(imgBin, cv2.MORPH_CLOSE, ker)
 
 # if __name__ == '__main__':
 #     print get_kernal()
