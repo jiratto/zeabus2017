@@ -16,15 +16,17 @@
 	<arg name="frame_rate" value="10.0"/>
 	<arg name="pixel_clock" value="60"/>
 	<arg name="flip_lr" value="False" />
-	<!-- =================== LEFT CAMERA =================== -->
 	<arg name="nodelet_manager_name_left" value="left" />
 	<arg name="camera_name_left" value="/stereo/left" />
+	<arg name="nodelet_manager_name_right" value="right" />
+	<arg name="camera_name_right" value="/stereo/right" />
+	<!-- =================== LEFT CAMERA =================== -->
 	<node pkg="nodelet" type="nodelet" name="$(arg nodelet_manager_name_left)" args="manager" output="screen" />
 	<node pkg="nodelet" type="nodelet" name="ueye_cam_nodelet_$(arg nodelet_manager_name_left)" args="load ueye_cam/ueye_cam_nodelet $(arg nodelet_manager_name_left)">
 		<param name="camera_name" type="str" value="$(arg camera_name_left)" />
 		<param name="camera_topic" type="str" value="image_raw" />
 		<param name="camera_id" type="int" value="1" />
-		<param name="camera_intrinsics_file" type="string" value="/home/zeabus/catkin_ws/src/src_code/zeabus_vision/main/params/left.yaml"/>
+		<param name="camera_intrinsics_file" type="string" value="/home/zeabus/catkin_ws/src/src_code/zeabus_vision/zeabus_vision_main/params/stereo_left.yaml"/>
 		<!--<param name="camera_parameters_file" type="string" value="/home/zeabus/catkin_ws/src/src_code/zeabus_vision/ueye_cam/params/left.ini" />-->
 		<param name="ext_trigger_mode" type="bool" value="$(arg ext_trigger_mode)" />
 		<param name="color_mode" type="str" value="$(arg color_mode)" />
@@ -44,14 +46,12 @@
 		<param name="flip_lr" type="bool" value="$(arg flip_lr)" />
 	</node>
 	<!-- =================== RIGHT CAMERA =================== -->
-	<arg name="nodelet_manager_name_right" value="right" />
-	<arg name="camera_name_right" value="/stereo/right" />
 	<node pkg="nodelet" type="nodelet" name="$(arg nodelet_manager_name_right)" args="manager" output="screen" />
 	<node pkg="nodelet" type="nodelet" name="ueye_cam_nodelet_$(arg nodelet_manager_name_right)" args="load ueye_cam/ueye_cam_nodelet $(arg nodelet_manager_name_right)">
 		<param name="camera_name" type="str" value="$(arg camera_name_right)" />
 		<param name="camera_topic" type="str" value="image_raw" />
 		<param name="camera_id" type="int" value="2" />
-		<param name="camera_intrinsics_file" type="string" value="/home/zeabus/catkin_ws/src/src_code/zeabus_vision/main/params/right.yaml" />
+		<param name="camera_intrinsics_file" type="string" value="/home/zeabus/catkin_ws/src/src_code/zeabus_vision/zeabus_vision_main/params/stereo_right.yaml" />
 		<!--<param name="camera_parameters_file" type="string" value="/home/zeabus/catkin_ws/src/src_code/zeabus_vision/ueye_cam/params/right.ini" />-->
 		<param name="ext_trigger_mode" type="bool" value="$(arg ext_trigger_mode)" />
 		<param name="color_mode" type="str" value="$(arg color_mode)" />
@@ -70,6 +70,6 @@
 		<param name="pixel_clock" type="int" value="$(arg pixel_clock)" />
 		<param name="flip_lr" type="bool" value="$(arg flip_lr)" />
 	</node>
-	<node pkg="image_proc" name="image_proc" type="image_proc" output="screen" ns="$(arg camera_name_right)"/>
 	<node pkg="image_proc" name="image_proc" type="image_proc" output="screen" ns="$(arg camera_name_left)"/>
+	<node pkg="image_proc" name="image_proc" type="image_proc" output="screen" ns="$(arg camera_name_right)"/>
 </launch>

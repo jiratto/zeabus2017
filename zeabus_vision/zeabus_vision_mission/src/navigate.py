@@ -151,9 +151,9 @@ def navigate_top():
             box = cv2.boxPoints(rect)
             box = np.int0(box)
             print('draw')
-            cv2.drawContours(im_draw, [box], -1, (0, 0, 255,), 2) 
-            cv2.drawContours(im_draw, c, -1, (0 , 255, 0), 2)
-            cv2.circle(im_draw ,(int(x), int(y)), 5, (0, 0, 255), -1)
+            cv2.drawContours(im_draw, [box], -1, (0, 255, 255,), 2) 
+            # cv2.drawContours(im_draw, c, -1, (0 , 255, 0), 2)
+            cv2.circle(im_draw ,(int(x_lr), int(y)), 5, (0, 255, 255), -1)
             verticalX = (x - offsetW)/offsetW
             verticalY = (offsetH - y)/offsetH
         if count_h != 0:
@@ -186,24 +186,37 @@ def navigate_top():
             x_bot = x
             cx += x_bot
             count_bot += 1
-                
+            yy = y 
             box = cv2.boxPoints(rect)
             box = np.int0(box)
             # print('draw')
             cv2.drawContours(im_draw, [box], -1, (0, 0, 255,), 2) 
-            cv2.drawContours(im_draw, c, -1, (0 , 255, 0), 2)
-            cv2.circle(im_draw ,(int(x_bot), int(y)), 5, (0, 0, 255), -1)
+            # cv2.drawContours(im_draw, c, -1, (0 , 255, 0), 2)
+            cv2.circle(im_draw ,(int(x_bot), int(yy)), 5, (0, 0, 255), -1)
 
         if count_bot != 0:
             cx /= count_bot
 
+        where = 'Dont know'
+
         if count_h == 1:
-            if x_bot > x_lr:
+            if cx > x_lr:
+                where = 'left'
+                left = 1
+                right = 0
+            else:
+                where = 'right'
+                right = 1
+                left = 0
+
+        if count_bot == 0 and count_h == 1:
+            if x_lr < width/2:
                 left = 1
                 right = 0
             else:
                 right = 1
                 left = 0
+
         
         lpr = left + right
         if lpr == 1:
@@ -220,13 +233,13 @@ def navigate_top():
             cv2.circle(im_draw ,(int(cx), int(cy)), 5, (0, 0, 255), -1)
         cx = (cx-offsetW)/offsetW
         cy = (offsetH-cy)/offsetH
-        print('cx',cx)
-        print('cy',cy)
-        print('direction',direction)
-        print('ratio_area',ratio_area)
-        print('left+right',left+right)
-        cv2.imshow('im_draw', im_draw)
-        cv2.waitkey(1)
+        publish_result(im_draw,'bgr', 'debug' )
+        publish_result(im_lr, 'gray', 'lr')
+        publish_result(im_bot, 'gray', 'bot')
+        print('direction', direction)
+        print('where', where)
+        print('cx', cx)
+        print('cy', cy)
         res.cx = cx
         res.cy = cy
         res.direction = direction
@@ -274,6 +287,7 @@ def navigate_bot():
             angle -= 180
         print('appear', appear)
         print('angle', angle)
+        publish_result(im_yellow, 'gray', 'debug')
         res.cx = -999
         res.cy = -999
         res.direction = -999
@@ -308,7 +322,7 @@ if __name__ == '__main__':
     bot = '/bottom/left/image_raw/compressed'
     top = '/top/center/image_rect_color/compressed'
     bag = '/rightcam_top/image_raw/compressed'
-    rospy.Subscriber(bag, CompressedImage, img_callback)
+    rospy.Subscriber(top, CompressedImage, img_callback)
     rospy.Subscriber(bot, CompressedImage, img_bot_callback)
     rospy.Service('vision_navigate', vision_srv_navigate(), mission_callback)
     rospy.spin()
