@@ -274,15 +274,11 @@ def publish_result(img, type, topicName):
         msg = bridge.cv2_to_imgmsg(img, "bgr8")
     pub.publish(msg)
 
-<<<<<<< HEAD
-def adjust_gamma(image, gamma=1):
-=======
 
 def adjust_gamma(imgBGR=None, gamma=1):
     if imgBGR is None:
         print('given value to imgBGR argument\n' +
               'adjust_gamma_by_value(imgBGR, gamma)')
->>>>>>> d24f9bedf47ac43a7367bb8b868f4e0a30dd352d
     if gamma == 0:
         g = 1.0
     else:
@@ -334,19 +330,18 @@ def get_kernal(shape='rect', ksize=(5, 5)):
     else:
         return None
 
-<<<<<<< HEAD
+
 def erode(imgBin, ker):
-    return cv2.erode(imgBin, ker, iterations = 1)
+    return cv2.erode(imgBin, ker, iterations=1)
+
 
 def dilate(imgBin, ker):
-    return cv2.dilate(imgBin, ker, iterations =  1)
+    return cv2.dilate(imgBin, ker, iterations=1)
+
 
 def close(imgBin, ker):
     return cv2.morphologyEx(imgBin, cv2.MORPH_CLOSE, ker)
 
-# if __name__ == '__main__':
-#     print get_kernal()
-=======
 
 def callback(ros_data):
     global image
@@ -389,4 +384,3 @@ if __name__ == '__main__':
             break
         rospy.sleep(0.1)
     cv2.destroyAllWindows()
->>>>>>> d24f9bedf47ac43a7367bb8b868f4e0a30dd352d
