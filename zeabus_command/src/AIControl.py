@@ -29,7 +29,7 @@ class AIControl ():
 						 Bool, self.check_turn)		# subscribe to check turn state
 
 		# publish twist x, y, z linear and angular to /cmd_vel
-		self.command = rospy.Publisher ('/zeabus/cmd_vel', Twist, queue_size=10)
+		self.command = rospy.Publisher ('/cmd_vel', Twist, queue_size=10)
 		self.zAxisNow = rospy.Publisher (
 			'/fix/abs/depth', Float64, queue_size=10)		# publish z to fix depth
 		self.fixPoint = rospy.Publisher (
@@ -160,6 +160,9 @@ class AIControl ():
 		x_dest = start_x + (dis * math.cos (yaw))
 		y_dest = start_y + (dis * math.sin (yaw))
 		print ('x start at: ', start_x)
+		print ('y start at: ', start_y)
+		print ('x dest at: ', x_dest)
+		print ('y dest at: ', y_dest)
 
 		if dis > 0:
 			vx = 0.6
@@ -184,10 +187,15 @@ class AIControl ():
 			diff_total = math.sqrt (math.pow (diff_x, 2) + math.pow (diff_y, 2))
 
 			if diff_total <= abs (dis):
+				vx = (dis / diff_total) / 10
 				self.drive_xaxis (vx)
 				rospy.sleep (0.5)
+				print ('present dist: ', diff_total)
+
 			else:
 				self.stop (2)
+				print self.get_position ()
+				break
 		print ('Drive complete')
 
 	def fix_zaxis (self, z):
