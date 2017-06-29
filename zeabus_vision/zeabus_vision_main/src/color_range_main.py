@@ -4,7 +4,7 @@ import numpy as np
 import rospkg
 import rospy
 from sensor_msgs.msg import CompressedImage
-from vision_lib import *
+
 
 pixel = {}
 pixel['x'], pixel['y'] = -1, -1

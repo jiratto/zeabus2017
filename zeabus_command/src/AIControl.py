@@ -128,21 +128,67 @@ class AIControl ():
 			waitedTime += check_interval
 			rospy.sleep (check_interval)
 
-	# forward or backward
+	# forward (+) or backward (-)
 	def drive_xaxis (self, x):
 		# self.driveXYService (x, 0)
 		# self.wait_reach_fix_position ()
 		# print 'Drive x : %f' % x
 		self.drive ([x, 0, 0, 0, 0, 0])
 
+	# slide left (+) or right (-)
 	def drive_yaxis (self, y):
 		# self.driveXYService (0, y)
 		# self.wait_reach_fix_position ()
 		# print 'Drive y : %f' % y
 		self.drive ([0, y, 0, 0, 0, 0])
 
+	# up (+) or down (-)
 	def drive_zaxis (self, z):
 		self.drive ([0, 0, z, 0, 0, 0])
+
+	def drive_x_rel (self, dis):
+		li = self.get_position ()
+		x = li[0]
+		y = li[1]
+		yaw = li[5]
+
+		while x is None and y is None:
+			rospy.sleep (0.01)
+
+		start_x = x
+		start_y = y
+		x_dest = start_x + (dis * math.cos (yaw))
+		y_dest = start_y + (dis * math.sin (yaw))
+		print ('x start at: ', start_x)
+
+		if dis > 0:
+			vx = 0.6
+		elif dis < 0:
+			vx = -0.6
+		else:
+			return
+
+		self.drive_xaxis (vx)
+		rospy.sleep (0.5)
+
+		while not rospy.is_shutdown ():
+			li = self.get_position ()
+			x = li[0]
+			y = li[1]
+
+			while x is None:
+				rospy.sleep (0.01)
+
+			diff_x = abs (x - start_x)
+			diff_y = abs (y - start_y)
+			diff_total = math.sqrt (math.pow (diff_x, 2) + math.pow (diff_y, 2))
+
+			if diff_total <= abs (dis):
+				self.drive_xaxis (vx)
+				rospy.sleep (0.5)
+			else:
+				self.stop (2)
+		print ('Drive complete')
 
 	def fix_zaxis (self, z):
 		z_dis = Float64 (z)
