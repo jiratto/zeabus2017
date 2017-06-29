@@ -36,9 +36,13 @@ def find_bin():
         image = img.copy()
         imageForDraw = img.copy()
         image = adjust_gamma(image)
-        hsv = cv2.cvtColor(image.copy(), cv2.COLOR_BGR2HSV)
+        hsv = clahe(image)
+        h, s, v = cv2.split(hsv)
+        v -= 15
+        hsv = cv2.merge((h,s,v))
         orangeImage = cv2.inRange(hsv, lowerOrange, upperOrange)
-        
+
+        cv2.imshow('hsv', hsv)
         cv2.imshow('image', image)
         cv2.imshow('orangeImage', orangeImage)
         cv2.waitKey(30)
