@@ -146,7 +146,10 @@ def callback(msg):
         arr = np.fromstring(msg.data, np.uint8)
         img = cv2.imdecode(arr, 1)
         img = cv2.resize(img, (320, 256))
-        hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+        # hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+        hsv = equalization(img)
+        # hsv = clahe(fuck)
+        # hsv = equalization(img)
 
 
 def draw_circle(event, x, y, flags, param):
