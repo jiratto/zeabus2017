@@ -16,9 +16,9 @@ if __name__ == '__main__':
 	# aicontrol.drive_xaxis (1)
 	# rospy.sleep (10)
 
-	print 'Backward'
-	aicontrol.drive_xaxis (-1)
-	rospy.sleep (40)
+	# print 'Backward'
+	# aicontrol.drive_xaxis (-1)
+	# rospy.sleep (40)
 
 	# print 'Slide left'
 	# aicontrol.drive_yaxis (1)
@@ -80,5 +80,7 @@ if __name__ == '__main__':
 	# rospy.sleep (2)
 	# data = [2, -1]
 	# aicontrol.trackback (data, 1)
+
+	aicontrol.drive_x_rel (1)
 
 	aicontrol.stop (1)
