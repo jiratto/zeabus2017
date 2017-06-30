@@ -144,6 +144,58 @@ class AIControl ():
 	def drive_zaxis (self, z):
 		self.drive ([0, 0, z, 0, 0, 0])
 
+	def drive_x_rel (self, dis):
+		li = self.get_position ()
+		x = li[0]
+		y = li[1]
+		yaw = li[5]
+
+		while x is None and y is None:
+			rospy.sleep (0.01)
+
+		start_x = x
+		start_y = y
+		x_dest = start_x + (dis * math.cos (yaw))
+		y_dest = start_y + (dis * math.sin (yaw))
+		print ('x start at: ', start_x)
+		print ('y start at: ', start_y)
+		print ('x dest at: ', x_dest)
+		print ('y dest at: ', y_dest)
+
+		if dis > 0:
+			vx = 0.6
+		elif dis < 0:
+			vx = -0.6
+		else:
+			return
+
+		self.drive_xaxis (vx)
+		rospy.sleep (0.5)
+
+		while not rospy.is_shutdown ():
+			li = self.get_position ()
+			x = li[0]
+			y = li[1]
+
+			while x is None:
+				rospy.sleep (0.01)
+
+			diff_x = abs (x - start_x)
+			diff_y = abs (y - start_y)
+			diff_total = math.sqrt (math.pow (diff_x, 2) + math.pow (diff_y, 2))
+
+			if diff_total <= abs (dis):
+				vx = (dis / diff_total) / 10
+				self.drive_xaxis (vx)
+				rospy.sleep (0.5)
+				print ('present dist: ', diff_total)
+
+			else:
+				self.stop (2)
+				print self.get_position ()
+				break
+		print ('Drive complete')
+
 	def fix_zaxis (self, z):
 		z_dis = Float64 (z)
 		for i in xrange (3):

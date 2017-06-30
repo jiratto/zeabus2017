@@ -6,6 +6,7 @@ import numpy as np
 from scipy.ndimage import filters
 import rospy
 from sensor_msgs.msg import CompressedImage
+from vision_lib import *
 
 
 class ImagePreprocessing:
@@ -60,8 +61,10 @@ class ImagePreprocessing:
             if self.imageL is None or self.imageR is None:
                 print('Image None2')
                 continue
-
-            images = [self.imageL, self.imageR]
+            # imgL = adjust_gamma(self.imageL, 1)
+            # imgR = adjust_gamma(self.imageL, 9)
+            # images = [imgL, imgR]
+            images = [self.imageR, self.imageL]
             merge_mertens = cv2.createMergeMertens()
             res_mertens = merge_mertens.process(images)
             cv2.imshow('mertens', res_mertens)

@@ -6,6 +6,8 @@ import rospy
 from sensor_msgs.msg import CompressedImage, Image
 from cv_bridge import CvBridge, CvBridgeError
 
+image = None
+
 
 def range_str2list(str):
     str = str.split(',')
@@ -58,7 +60,7 @@ def find_shape(cnt, req):
         return False
 
 
-def cut_contours(M, w, h, range):
+def cut_contours(M, w, h, range_w, range_h):
     cx = None
     cy = None
     try:
@@ -68,27 +70,27 @@ def cut_contours(M, w, h, range):
         print 'err'
     if cx is None:
         return False
-    if cx <= range or cy <= range or cx >= w - range or cy >= h - range:
+    if cx <= range_w or cy <= range_h or cx >= w - range_w or cy >= h - range_h:
         return True
     return False
 
 
-def equalization(frame):
-    img = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+def equalization(imgBGR):
+    img = cv2.cvtColor(imgBGR, cv2.COLOR_BGR2HSV)
     h, s, v = cv2.split(img)
 
     equ_s = cv2.equalizeHist(s)
     equ_v = cv2.equalizeHist(v)
 
-    equ = cv2.merge((h, equ_s, equ_v))
+    equHSV = cv2.merge((h, equ_s, equ_v))
 
-    return equ
+    return equHSV
 
 
 def clahe(img):
     img = cv2.cvtColor(img, cv2.COLOR_BGR2Lab)
     L, a, b = cv2.split(img)
-    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
+    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(20, 20))
     L = clahe.apply(L)
 
     result = cv2.merge((L, a, b))
@@ -223,9 +225,9 @@ def rebalance(image):
     return result_hsv
 
 
-def process_img_down(img):
-    bgr = stretching(img.copy())
-    hsv = clahe(bgr.copy())
+def process_img_down(imgBGR):
+    # bgr = stretching(imgBGR.copy())
+    hsv = clahe(imgBGR.copy())
     bgr = cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR)
     median = cv2.medianBlur(bgr.copy(), 7)
     hsv = cv2.cvtColor(median, cv2.COLOR_BGR2HSV)
@@ -271,3 +273,114 @@ def publish_result(img, type, topicName):
     elif type == 'bgr':
         msg = bridge.cv2_to_imgmsg(img, "bgr8")
     pub.publish(msg)
+
+
+def adjust_gamma(imgBGR=None, gamma=1):
+    if imgBGR is None:
+        print('given value to imgBGR argument\n' +
+              'adjust_gamma_by_value(imgBGR, gamma)')
+    if gamma == 0:
+        g = 1.0
+    else:
+        g = gamma / 10.0
+    invGamma = 1.0 / g
+    table = np.array([((i / 255.0) ** invGamma) *
+                      255 for i in np.arange(0, 256)]).astype("uint8")
+
+    return cv2.LUT(imgBGR, table)
+
+
+def adjust_gamma_by_v(imgBGR=None):
+    if imgBGR is None:
+        print('given value to imgBGR argument\n' +
+              'adjust_gamma_by_value(imgBGR, gamma)')
+        return
+    hsv = cv2.cvtColor(imgBGR, cv2.COLOR_BGR2HSV)
+    h, s, v = cv2.split(hsv)
+    # gamma v
+    # 10     128
+    vMean = cv2.mean(v)[0]
+    print vMean
+    gamma = vMean / 13
+    print 'gamma : ' + str(gamma)
+    # gamma = 0
+    if gamma == 0:
+        g = 1.0
+    else:
+        g = gamma / 10.0
+    invGamma = 1.0 / g
+    print 'g : ' + str(g)
+    table = []
+    for i in np.arange(0, 256):
+        table.append(((i / 255.0) ** invGamma) * 255)
+    table = np.array(table).astype('uint8')
+    # print table
+    res = cv2.LUT(imgBGR, table)
+    # print res
+    return res
+
+
+def get_kernal(shape='rect', ksize=(5, 5)):
+    if shape == 'rect':
+        return cv2.getStructuringElement(cv2.MORPH_RECT, ksize)
+    elif shape == 'ellipse':
+        return cv2.getStructuringElement(cv2.MORPH_ELLIPSE, ksize)
+    elif shape == 'plus':
+        return cv2.getStructuringElement(cv2.MORPH_CROSS, ksize)
+    else:
+        return None
+
+
+def erode(imgBin, ker):
+    return cv2.erode(imgBin, ker, iterations=1)
+
+
+def dilate(imgBin, ker):
+    return cv2.dilate(imgBin, ker, iterations=1)
+
+
+def close(imgBin, ker):
+    return cv2.morphologyEx(imgBin, cv2.MORPH_CLOSE, ker)
+
+
+def callback(ros_data):
+    global image
+    width = 640
+    height = 512
+    # np_arr = np.fromstring(ros_data.data, np.uint8)
+    bridge = CvBridge()
+    image = cv2.resize(bridge.imgmsg_to_cv2(ros_data, "bgr8"), (width, height))
+
+
+def callback1(ros_data):
+    global image
+    width = 640
+    height = 512
+    np_arr = np.fromstring(ros_data.data, np.uint8)
+    # bridge = CvBridge()
+    image = cv2.resize(cv2.imdecode(
+        np_arr, 1), (width, height))
+
+if __name__ == '__main__':
+    rospy.init_node('vision_lib', anonymous=True)
+    # sub = rospy.Subscriber('/top/center/image_rect_color', Image,
+    #                        callback, queue_size=10)
+    # sub = rospy.Subscriber('/leftcam_bottom/image_raw/compressed', CompressedImage,
+    #                        callback1, queue_size=10)
+    sub = rospy.Subscriber('/top/center/image_rect_color/compressed', CompressedImage,
+                           callback1, queue_size=10)
+    # sub = rospy.Subscriber('/bottom/left/image_raw/compressed', CompressedImage,
+    #                        callback1, queue_size=10)
+    while not rospy.is_shutdown():
+        if image is None:
+            continue
+        # hsv = equalization(image.copy())
+        # im = cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR)
+        res = adjust_gamma_by_v(image.copy())
+        cv2.imshow('res', res)
+        cv2.imshow('image', image.copy())
+        k = cv2.waitKey(1) & 0xff
+        if k == ord('q'):
+            break
+        rospy.sleep(0.1)
+    cv2.destroyAllWindows()

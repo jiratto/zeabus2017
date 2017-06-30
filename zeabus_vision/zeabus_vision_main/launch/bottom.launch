@@ -23,7 +23,7 @@
 	<node pkg="nodelet" type="nodelet" name="ueye_cam_nodelet_$(arg nodelet_manager_name_left)" args="load ueye_cam/ueye_cam_nodelet $(arg nodelet_manager_name_left)">
 		<param name="camera_name" type="str" value="$(arg camera_name_left)" />
 		<param name="camera_topic" type="str" value="image_raw" />
-		<param name="camera_id" type="int" value="3" />
+		<param name="camera_id" type="int" value="1" />
 		<param name="ext_trigger_mode" type="bool" value="$(arg ext_trigger_mode)" />
 		<param name="color_mode" type="str" value="$(arg color_mode)" />
 		<param name="image_width" type="int" value="$(arg image_width)" />
