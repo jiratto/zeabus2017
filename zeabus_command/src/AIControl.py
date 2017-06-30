@@ -29,7 +29,7 @@ class AIControl ():
 						 Bool, self.check_turn)		# subscribe to check turn state
 
 		# publish twist x, y, z linear and angular to /cmd_vel
-		self.command = rospy.Publisher ('/zeabus/cmd_vel', Twist, queue_size=10)
+		self.command = rospy.Publisher ('/cmd_vel', Twist, queue_size=10)
 		self.zAxisNow = rospy.Publisher (
 			'/fix/abs/depth', Float64, queue_size=10)		# publish z to fix depth
 		self.fixPoint = rospy.Publisher (
@@ -128,19 +128,21 @@ class AIControl ():
 			waitedTime += check_interval
 			rospy.sleep (check_interval)
 
-	# forward or backward
+	# forward (+) or backward (-)
 	def drive_xaxis (self, x):
 		# self.driveXYService (x, 0)
 		# self.wait_reach_fix_position ()
 		# print 'Drive x : %f' % x
 		self.drive ([x, 0, 0, 0, 0, 0])
 
+	# slide left (+) or right (-)
 	def drive_yaxis (self, y):
 		# self.driveXYService (0, y)
 		# self.wait_reach_fix_position ()
 		# print 'Drive y : %f' % y
 		self.drive ([0, y, 0, 0, 0, 0])
 
+	# up (+) or down (-)
 	def drive_zaxis (self, z):
 		self.drive ([0, 0, z, 0, 0, 0])
 

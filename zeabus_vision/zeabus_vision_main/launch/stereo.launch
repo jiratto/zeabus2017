@@ -70,7 +70,12 @@
 		<param name="pixel_clock" type="int" value="$(arg pixel_clock)" />
 		<param name="flip_lr" type="bool" value="$(arg flip_lr)" />
 	</node>
+<<<<<<< HEAD:zeabus_vision/zeabus_vision_main/launch/stereo.launch
 	<!--<node pkg="image_proc" name="image_proc" type="image_proc" output="screen" ns="$(arg camera_name_left)"/><node pkg="image_proc" name="image_proc" type="image_proc" output="screen" ns="$(arg camera_name_right)"/>
 	-->
 	<!--<node name="depth_image_proc" pkg="depth_image_proc" type="point_cloud_xyzrgb" />-->
+=======
+	<node pkg="image_proc" name="image_proc" type="image_proc" output="screen" ns="$(arg camera_name_left)"/>
+	<node pkg="image_proc" name="image_proc" type="image_proc" output="screen" ns="$(arg camera_name_right)"/>
+>>>>>>> bd55591b68580b349afad1141eda1399efbbdd74:zeabus_vision/zeabus_vision_main/launch/stereo.launch
 </launch>

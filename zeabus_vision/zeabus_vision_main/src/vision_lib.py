@@ -300,16 +300,26 @@ def adjust_gamma_by_v(imgBGR=None):
     # gamma v
     # 10     128
     vMean = cv2.mean(v)[0]
+<<<<<<< HEAD:zeabus_vision/zeabus_vision_main/src/vision_lib.py
     print vMean
     gamma = vMean / 13
     print 'gamma : ' + str(gamma)
+=======
+    # print vMean
+    gamma = vMean / 155
+    # print 'gamma : ' + str(gamma)
+>>>>>>> bd55591b68580b349afad1141eda1399efbbdd74:zeabus_vision/zeabus_vision_main/src/vision_lib.py
     # gamma = 0
     if gamma == 0:
         g = 1.0
     else:
         g = gamma / 10.0
     invGamma = 1.0 / g
+<<<<<<< HEAD:zeabus_vision/zeabus_vision_main/src/vision_lib.py
     print 'g : ' + str(g)
+=======
+    # print 'g : ' + str(g)
+>>>>>>> bd55591b68580b349afad1141eda1399efbbdd74:zeabus_vision/zeabus_vision_main/src/vision_lib.py
     table = []
     for i in np.arange(0, 256):
         table.append(((i / 255.0) ** invGamma) * 255)

@@ -55,9 +55,9 @@ if __name__ == '__main__':
 	# aicontrol.turn_yaw_relative (-90)
 	# rospy.sleep (3)
 
-	# print 'Turn yaw absolute 0'
-	# aicontrol.turn_yaw_absolute (0)
-	# rospy.sleep (1)	
+	print 'Turn yaw absolute 0'
+	aicontrol.turn_yaw_absolute (0)
+	rospy.sleep (1)	
 
 	# print 'FINISH STOP 5 sec'
 	# aicontrol.stop (5)
@@ -83,4 +83,8 @@ if __name__ == '__main__':
 
 	aicontrol.drive_x_rel (1)
 
+<<<<<<< HEAD
 	aicontrol.stop (1)
+=======
+	aicontrol.stop (1)
+>>>>>>> bd55591b68580b349afad1141eda1399efbbdd74
