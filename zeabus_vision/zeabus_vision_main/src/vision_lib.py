@@ -300,16 +300,16 @@ def adjust_gamma_by_v(imgBGR=None):
     # gamma v
     # 10     128
     vMean = cv2.mean(v)[0]
-    print vMean
-    gamma = vMean / 13
-    print 'gamma : ' + str(gamma)
+    # print vMean
+    gamma = vMean / 155
+    # print 'gamma : ' + str(gamma)
     # gamma = 0
     if gamma == 0:
         g = 1.0
     else:
         g = gamma / 10.0
     invGamma = 1.0 / g
-    print 'g : ' + str(g)
+    # print 'g : ' + str(g)
     table = []
     for i in np.arange(0, 256):
         table.append(((i / 255.0) ** invGamma) * 255)
