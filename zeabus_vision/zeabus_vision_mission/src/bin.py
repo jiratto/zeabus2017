@@ -25,16 +25,25 @@ def adjust_gamma(image, gamma=1.0):
 def canny(image, threshold1, threshold2):
     return cv2.Canny(image, threshold1, threshold2)
 
+<<<<<<< HEAD
 def find_bin():
+=======
+def find_bin(msg):
+>>>>>>> bd55591b68580b349afad1141eda1399efbbdd74
     global img
 
     lowerOrange, upperOrange = getColor('orange', 'down')
     lowerWhite, upperWhite = getColor('white', 'down')
+<<<<<<< HEAD
 
+=======
+    res = vision_msg_navigate()
+>>>>>>> bd55591b68580b349afad1141eda1399efbbdd74
     while not rospy.is_shutdown():
         while img is None:
             print('None')
         image = img.copy()
+<<<<<<< HEAD
         edges = cv2.Canny(image, 100, 200)
         imageForDraw = img.copy()
         hsv = equalization(image)
@@ -88,6 +97,86 @@ def find_bin():
         cv2.imshow('thresh', thresh)
         cv2.waitKey(30)
 
+=======
+        
+        imageForDraw = img.copy()
+        gamma = adjust_gamma_by_v(image)
+        eq = equalization(gamma)
+        eq = cv2.cvtColor(eq, cv2.COLOR_HSV2BGR)
+        gray = cv2.cvtColor(eq, cv2.COLOR_BGR2GRAY)
+        ret,thresh = cv2.threshold(gray,190,255,cv2.THRESH_BINARY)
+        dilateImage = dilate(thresh, get_kernal('cross', (31,31)))
+
+        eqOrange = equalization(img.copy())
+        # eqOrange = cv2.cvtColor(eqOrange, cv2.COLOR_HSV2BGR)
+        eqOrange = cv2.inRange(eqOrange, lowerOrange, upperOrange)
+        # eqOrange = cv2.cvtColor(eq, cv2.COLOR_HSV2BGR)
+        
+        orangeImage = close(eqOrange, get_kernal('rect',(15,15)))
+
+        _, orangeContours, _ = cv2.findContours(orangeImage.copy(), 
+                                            cv2.RETR_TREE, 
+                                            cv2.CHAIN_APPROX_SIMPLE)
+        _, whiteContours, _ = cv2.findContours(dilateImage.copy(), 
+                                            cv2.RETR_TREE, 
+                                            cv2.CHAIN_APPROX_SIMPLE)
+        xOrange = 0
+        yOrange = 0
+        xBinCover = 0
+        xBinNonCover = 0
+        yBinCover = 0
+        yBinNonCover = 0
+        for c in orangeContours:
+            rect = (x,y),(ww,hh),angle =cv2.minAreaRect(c)
+            area = ww*hh
+            if area < 500:
+                continue
+            xOrange = x
+            yOrange = y
+            xBinCover = x
+            yBinCover = y
+            box = cv2.boxPoints(rect)
+            box = np.int0(box)
+            cv2.drawContours(imageForDraw,[box], -1,(0,0,255),3)
+
+
+        for c in whiteContours:
+            rect = (x,y),(ww,hh),angle =cv2.minAreaRect(c)
+            area = ww*hh
+            if area < 5000:
+                continue
+            # print('area',area)
+            diff = abs(x - xOrange)
+            box = cv2.boxPoints(rect)
+            box = np.int0(box)
+            cv2.drawContours(imageForDraw,[box], -1,(0,255,0),3)
+            if diff < 20:
+                xBinCover = x
+                yBinCover = y
+            else:
+                xBinNonCover = x
+                yBinNonCover = y
+        print('xCov: ', xBinCover, 'yCov: ', yBinCover)
+        print('xNonCov: ', xBinNonCover, 'yNonCov: ', yBinNonCover)
+
+        if msg == NonCov:
+            res.x = xBinNonCover
+            res.y = yBinNonCover
+        else:
+            res.x = xBinCover
+            res.y = yBinCover
+        publish_result(imageForDraw, 'bgr', debug)
+
+        return res
+        # cv2.imshow('eqOrange', orangeImage)
+        # cv2.imshow('eq', eq)
+        # cv2.imshow('dilateImage', dilateImage)
+        # cv2.imshow('imageForDraw', imageForDraw)
+        # cv2.waitKey(30)
+
+def mission_callback(msg):
+    return find_bin(msg.req.data)
+>>>>>>> bd55591b68580b349afad1141eda1399efbbdd74
 
 
 def img_callback(msg):
@@ -104,4 +193,10 @@ if __name__ == '__main__':
     topic = '/bottom/left/image_raw/compressed'
     bot = '/bottom/left/image_raw/compressed'
     rospy.Subscriber(bag, CompressedImage, img_callback)
+<<<<<<< HEAD
     find_bin()
+=======
+    rospy.Service('vision_bin', vision_srv_default(), mission_callback)
+    rospy.spin()
+    # find_bin()
+>>>>>>> bd55591b68580b349afad1141eda1399efbbdd74

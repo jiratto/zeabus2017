@@ -83,4 +83,8 @@ if __name__ == '__main__':
 
 	aicontrol.drive_x_rel (1)
 
+<<<<<<< HEAD
 	aicontrol.stop (1)
+=======
+	aicontrol.stop (1)
+>>>>>>> bd55591b68580b349afad1141eda1399efbbdd74
