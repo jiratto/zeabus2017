@@ -5,7 +5,7 @@ import math
 import rospy
 from sensor_msgs.msg import CompressedImage, Image
 from cv_bridge import CvBridge, CvBridgeError
-
+import statistics
 image = None
 
 
@@ -57,7 +57,7 @@ def find_shape(cnt, req):
         return True
     elif len(approx) == req:
         return True
-        return False
+    return False
 
 
 def cut_contours(M, w, h, range_w, range_h):
@@ -69,7 +69,7 @@ def cut_contours(M, w, h, range_w, range_h):
     except:
         print 'err'
     if cx is None:
-        return False
+        return True
     if cx <= range_w or cy <= range_h or cx >= w - range_w or cy >= h - range_h:
         return True
     return False
@@ -186,6 +186,16 @@ def nothing(variable):
     pass
 
 
+def get_mode(v):
+    v = v.ravel()
+    try:
+        MODE = statistics.mode(v)
+    except ValueError:
+        MODE = 127
+
+    return MODE
+
+
 def rebalance(image):
     h, w, ch = image.shape
     m = cv2.mean(image)
@@ -279,11 +289,8 @@ def adjust_gamma(imgBGR=None, gamma=1):
     if imgBGR is None:
         print('given value to imgBGR argument\n' +
               'adjust_gamma_by_value(imgBGR, gamma)')
-    if gamma == 0:
-        g = 1.0
-    else:
-        g = gamma / 10.0
-    invGamma = 1.0 / g
+
+    invGamma = 1.0 / gamma
     table = np.array([((i / 255.0) ** invGamma) *
                       255 for i in np.arange(0, 256)]).astype("uint8")
 
@@ -297,36 +304,26 @@ def adjust_gamma_by_v(imgBGR=None):
         return
     hsv = cv2.cvtColor(imgBGR, cv2.COLOR_BGR2HSV)
     h, s, v = cv2.split(hsv)
-    # gamma v
-    # 10     128
+
     vMean = cv2.mean(v)[0]
-<<<<<<< HEAD:zeabus_vision/zeabus_vision_main/src/vision_lib.py
-    print vMean
+
     gamma = vMean / 13
-    print 'gamma : ' + str(gamma)
-=======
+
     # print vMean
     gamma = vMean / 155
     # print 'gamma : ' + str(gamma)
->>>>>>> bd55591b68580b349afad1141eda1399efbbdd74:zeabus_vision/zeabus_vision_main/src/vision_lib.py
-    # gamma = 0
+
     if gamma == 0:
         g = 1.0
     else:
         g = gamma / 10.0
     invGamma = 1.0 / g
-<<<<<<< HEAD:zeabus_vision/zeabus_vision_main/src/vision_lib.py
-    print 'g : ' + str(g)
-=======
     # print 'g : ' + str(g)
->>>>>>> bd55591b68580b349afad1141eda1399efbbdd74:zeabus_vision/zeabus_vision_main/src/vision_lib.py
     table = []
     for i in np.arange(0, 256):
         table.append(((i / 255.0) ** invGamma) * 255)
     table = np.array(table).astype('uint8')
-    # print table
     res = cv2.LUT(imgBGR, table)
-    # print res
     return res
 
 
@@ -353,21 +350,19 @@ def close(imgBin, ker):
     return cv2.morphologyEx(imgBin, cv2.MORPH_CLOSE, ker)
 
 
-def callback(ros_data):
+def callback_raw(ros_data):
     global image
     width = 640
     height = 512
-    # np_arr = np.fromstring(ros_data.data, np.uint8)
     bridge = CvBridge()
     image = cv2.resize(bridge.imgmsg_to_cv2(ros_data, "bgr8"), (width, height))
 
 
-def callback1(ros_data):
+def callback_compressed(ros_data):
     global image
     width = 640
     height = 512
     np_arr = np.fromstring(ros_data.data, np.uint8)
-    # bridge = CvBridge()
     image = cv2.resize(cv2.imdecode(
         np_arr, 1), (width, height))
 
@@ -377,17 +372,13 @@ if __name__ == '__main__':
     #                        callback, queue_size=10)
     # sub = rospy.Subscriber('/leftcam_bottom/image_raw/compressed', CompressedImage,
     #                        callback1, queue_size=10)
-    sub = rospy.Subscriber('/top/center/image_rect_color/compressed', CompressedImage,
-                           callback1, queue_size=10)
-    # sub = rospy.Subscriber('/bottom/left/image_raw/compressed', CompressedImage,
+    # sub = rospy.Subscriber('/top/center/image_rect_color/compressed', CompressedImage,
     #                        callback1, queue_size=10)
+    sub = rospy.Subscriber('/bottom/left/image_raw/compressed', CompressedImage,
+                           callback_compressed, queue_size=10)
     while not rospy.is_shutdown():
         if image is None:
             continue
-        # hsv = equalization(image.copy())
-        # im = cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR)
-        res = adjust_gamma_by_v(image.copy())
-        cv2.imshow('res', res)
         cv2.imshow('image', image.copy())
         k = cv2.waitKey(1) & 0xff
         if k == ord('q'):
