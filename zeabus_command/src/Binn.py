@@ -20,8 +20,10 @@ class Binn (object):
 		self.aicontrol = AIControl ()
 		self.hardware = Hardware ()
 
+		print 'Wait bin'
 		rospy.wait_for_service ('vision_bin')
 		self.detect_bin = rospy.ServiceProxy ('vision_bin', vision_srv_default)
+		print 'Get vision complete'
 
 		self.isFail = 30
 
@@ -35,6 +37,7 @@ class Binn (object):
 			count = 0
 			found = True
 
+			print self.isFail
 			for i in xrange (10):
 				print 'Collect data to avg'
 				self.data = self.detect_bin (String ('bin'), String ('nocover'))
@@ -55,7 +58,10 @@ class Binn (object):
 			x = self.aicontrol.average (ax)
 			y = self.aicontrol.average (ay)
 			area = self.aicontrol.average (aarea)
-			angle = self.aicontrol.average (aangle)	
+			if self.aicontrol.average (aangle) < 0:
+				angle = min(aangle)
+			else:
+				angle = max(aangle)
 
 			if found:
 				print 'Found Binn'		
@@ -63,27 +69,33 @@ class Binn (object):
 				if self.aicontrol.is_center ([x, y], -0.2, 0.2, -0.1, 0.1):
 					print 'CENTER'
 					self.aicontrol.stop (1)
+					
+					print angle
 					self.aicontrol.turn_yaw_relative (angle)
+					rospy.sleep (2)
 					self.aicontrol.fix_zaxis (depth.BINN_FIRE)
 
-					print 'FIRE RIGHT'
+					# print 'FIRE RIGHT'
+					# self.aicontrol.drive_yaxis (0.5)
+					# rospy.sleep (1)
+					# self.aicontrol.stop (2)
+					# self.hardware.command (String ('drop_right'), String ('fire'))
+					# self.aicontrol.stop (1)
+					
+					print 'FIRE LEFT'
 					self.aicontrol.drive_yaxis (0.5)
 					rospy.sleep (1)
 					self.aicontrol.stop (2)
-					self.hardware.command (String ('drop_right'), String ('fire'))
+					self.hardware.command (String ('drop_left'), String ('fire'))
 					self.aicontrol.stop (1)
-					
-					# print 'FIRE LEFT'
-					# self.aicontrol.drive_yaxis (0.5)
-					# rospy.sleep (2)
-					# self.aicontrol.stop (2)
-					# self.hardware.command (String ('drop_left'), String ('fire'))
 					break
 				else:
 					x = self.aicontrol.adjust (x, -0.5, -0.1, 0.1, 0.5)
 					y = self.aicontrol.adjust (y, -0.5, -0.1, 0.1, 0.5)
 					self.aicontrol.drive ([x, y, 0, 0, 0, 0])
 					rospy.sleep (self.aicontrol.adjust (area, 0.1, 0.1, 0.1, 0.5))
+					self.aicontrol.turn_yaw_relative (angle)
+					rospy.sleep (2)
 			else:
 				self.aicontrol.drive_xaxis (0.5)
 				rospy.sleep (1)

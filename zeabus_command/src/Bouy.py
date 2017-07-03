@@ -91,7 +91,7 @@ class Bouy (object):
 
 			print areaImg
 			## check ratio area before hit_and_back ##
-			while areaImg < 0.045 and not rospy.is_shutdown ():
+			while areaImg < 0.005 and not rospy.is_shutdown ():
 				print 'GO STRAIGHT'
 
 				area = []
@@ -104,7 +104,7 @@ class Bouy (object):
 						count += 1
 					rospy.sleep (0.1)
 
-				if count != 0:
+				if count != 0 and len (area) != 0:
 					areaImg = self.aicontrol.average (area)
 				else:
 					print 'NOT FOUND'
@@ -137,9 +137,9 @@ class Bouy (object):
 
 			self.aicontrol.stop (1)
 
-			print 'TRACKBACK'
-			self.aicontrol.trackback (self.distance, self.time)
-			self.distance = []
+			# print 'TRACKBACK'
+			# self.aicontrol.trackback (self.distance, self.time)
+			# self.distance = []
 			
 			return True
 		else:
@@ -341,19 +341,48 @@ class Bouy (object):
 
 	def get_data (self, color):
 		while not rospy.is_shutdown ():
-			self.data = self.detect_bouy (String ('bouy'), String (color))
-			self.data = self.data.data
-			xImg = self.data.cx[0]
-			yImg = self.data.cy[0]
-			prob = self.data.prob[0]
-			areaImg = self.data.area[0]
-			appear = self.data.appear
+			count = 0
+			x = []
+			y = []
+			p = []
+			area = []
+
+			xAvr = 0
+			yAvr = 0
+			areaAvr = 0
+
+			for i in xrange (10):
+				self.data = self.detect_bouy (String ('bouy'), String (color))
+				self.data = self.data.data
+				if self.data.appear:
+					x.append (self.data.cx[0])
+					y.append (self.data.cy[0])
+					p.append (self.data.prob[0])
+					area.append (self.data.area[0])
+					count += 1
+				rospy.sleep (0.1)
+
+			if count != 0:
+				xImg = self.aicontrol.average (x)
+				yImg = self.aicontrol.average (y)
+				prob = self.aicontrol.average (p)
+				areaImg = self.aicontrol.average (area)
+			else:
+				print 'NOT FOUND'
+
+				self.aicontrol.drive_xaxis (1)
+				rospy.sleep (2)
+
+				return False
+			# self.time = self.data.area[0]
+
+			count = 0
 
 			print ('xImg: ', xImg)
 			print ('yImg: ', yImg)
 			print ('prob: ', prob)
 			print ('area: ', areaImg)
-			print ('appear: ', appear)
+			print ('appear: yes')
 			print ('-----------------')
 			rospy.sleep (1)
 
@@ -368,5 +397,5 @@ if __name__ == '__main__':
 	# Bouy.run ()
 	# bouy.find_num ()
 	# bouy.movement ('y')
-	# bouy.get_data ('y')
-	bouy.test_move ('y')
+	bouy.get_data ('y')
+	# bouy.test_move ('y')

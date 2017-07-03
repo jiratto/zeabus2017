@@ -7,6 +7,7 @@ from std_msgs.msg import Float64, Bool, String
 from zeabus_vision_srv_msg.msg import vision_msg_default
 from zeabus_vision_srv_msg.srv import vision_srv_default
 from AIControl import AIControl
+import Depth as depth
 
 class Path (object):
 
@@ -34,10 +35,10 @@ class Path (object):
         vx = 0
         vy = 0
         check = 0
-        self.aicontrol.fix_zaxis (-2)
+        self.aicontrol.fix_zaxis (depth.PATH_DETECTING)
         rospy.sleep (3)
-        self.aicontrol.drive_xaxis (1)
-        rospy.sleep (11)
+        # self.aicontrol.drive_xaxis (1)
+        # rospy.sleep (11)
         # self.stop (2)
 
         while not rospy.is_shutdown () and not self.aicontrol.is_fail (self.isFail):

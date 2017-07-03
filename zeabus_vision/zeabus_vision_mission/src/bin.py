@@ -25,25 +25,17 @@ def adjust_gamma(image, gamma=1.0):
 def canny(image, threshold1, threshold2):
     return cv2.Canny(image, threshold1, threshold2)
 
-<<<<<<< HEAD
 def find_bin():
-=======
 def find_bin(msg):
->>>>>>> bd55591b68580b349afad1141eda1399efbbdd74
     global img
 
     lowerOrange, upperOrange = getColor('orange', 'down')
     lowerWhite, upperWhite = getColor('white', 'down')
-<<<<<<< HEAD
-
-=======
     res = vision_msg_navigate()
->>>>>>> bd55591b68580b349afad1141eda1399efbbdd74
     while not rospy.is_shutdown():
         while img is None:
             print('None')
         image = img.copy()
-<<<<<<< HEAD
         edges = cv2.Canny(image, 100, 200)
         imageForDraw = img.copy()
         hsv = equalization(image)
@@ -97,8 +89,6 @@ def find_bin(msg):
         cv2.imshow('thresh', thresh)
         cv2.waitKey(30)
 
-=======
-        
         imageForDraw = img.copy()
         gamma = adjust_gamma_by_v(image)
         eq = equalization(gamma)
@@ -176,8 +166,6 @@ def find_bin(msg):
 
 def mission_callback(msg):
     return find_bin(msg.req.data)
->>>>>>> bd55591b68580b349afad1141eda1399efbbdd74
-
 
 def img_callback(msg):
     global img, width, height
@@ -193,10 +181,7 @@ if __name__ == '__main__':
     topic = '/bottom/left/image_raw/compressed'
     bot = '/bottom/left/image_raw/compressed'
     rospy.Subscriber(bag, CompressedImage, img_callback)
-<<<<<<< HEAD
     find_bin()
-=======
     rospy.Service('vision_bin', vision_srv_default(), mission_callback)
     rospy.spin()
     # find_bin()
->>>>>>> bd55591b68580b349afad1141eda1399efbbdd74

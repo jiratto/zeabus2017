@@ -116,6 +116,7 @@ void cmd_fix_positionCallBack(const geometry_msgs::Point msg);
 void cmd_fix_orientationCallBack(const geometry_msgs::Quaternion msg);
 void modeCallback(const std_msgs::Int16 msg);
 void fixAbsDepthCallBack(const std_msgs::Float64 msg);
+void fixAbsXCallBack(const std_msgs::Float64 msg);
 void fixAbsYawCallBack(const std_msgs::Float64 msg);
 void fixRelYawCallBack(const std_msgs::Float64 msg);
 void fixRelXCallBack(const std_msgs::Float64 msg);
@@ -158,6 +159,7 @@ int main(int argc,char **argv) {
 	ros::Subscriber sub_cmd_fix_orientation = nh.subscribe("/cmd_fix_orientation", 1000, &cmd_fix_orientationCallBack); //fix row,pitch.yaw=true 
 	ros::Subscriber sub_controllerMode =  nh.subscribe("/zeabus_controller/mode",1000,&modeCallback);
 	ros::Subscriber sub_fixAbsDepth = nh.subscribe("/fix/abs/depth", 1000, &fixAbsDepthCallBack); //fix z=true
+	ros::Subscriber sub_fixAbsX = nh.subscribe("/fix/abs/x", 1000, &fixAbsXCallBack); //fix x=true
 	ros::Subscriber sub_fixRelYaw = nh.subscribe("/fix/rel/yaw", 1000, &fixRelYawCallBack); //fix yaw=true
 	ros::Subscriber sub_fixAbsYaw = nh.subscribe("/fix/abs/yaw", 1000, &fixAbsYawCallBack); //fix yaw=true work normal mode
 	ros::Subscriber sub_fixRelX = nh.subscribe("/fix/rel/x",1000, &fixRelXCallBack); //fix x,y=true
@@ -166,6 +168,8 @@ int main(int argc,char **argv) {
 	ros::Publisher pub = nh.advertise<geometry_msgs::Twist>("/cmd_vel",1000);
 	ros::Publisher is_at_fix_position_pub = nh.advertise<std_msgs::Bool>("/zeabbus_controller/is_at_fix_position",1000);
 	ros::Publisher is_at_fix_orientation_pub = nh.advertise<std_msgs::Bool>("zeabus_controller/is_at_fix_orientation",1000);
+	//just ros
+	//write::Publisher is_at_fix_distance_pub = nh.advertise<std_msgs::Bool>("/zeabus_controller/is_at_fix_distance",1000);
 	//ros::Publisher fixedPositionPublisher = nh.advertise<geometry_msgs::Pose>("/controller/fixed_position",10); //just open
 	dynamic_reconfigure::Server<zeabus_controller::PIDConstantConfig> server;
   	dynamic_reconfigure::Server<zeabus_controller::PIDConstantConfig>::CallbackType f;
@@ -191,6 +195,7 @@ int main(int argc,char **argv) {
 		pub.publish(calculatePID());
 		is_at_fix_position_pub.publish(is_at_fix_position(0.03));
 		is_at_fix_orientation_pub.publish(is_at_fix_orientation(0.8)); //0.8
+		//is_at_fix_distance_pub.pblish();
 		//fixedPositionPublisher.publish(fixPosition); //just open
 		//ROS_INFO("%d",is_switch_on);
 		if(true){
