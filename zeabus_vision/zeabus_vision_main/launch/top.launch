@@ -25,7 +25,7 @@
 		<param name="camera_name" type="str" value="$(arg camera_name_center)" />
 		<param name="camera_topic" type="str" value="image_raw" />
 		<param name="camera_id" type="int" value="$(arg camera_id_center)" />
-		<param name="camera_intrinsics_file" type="string" value=" /home/zeabus/catkin_ws/src/src_code/zeabus_vision/main/params/top.yaml"/>
+		<param name="camera_intrinsics_file" type="string" value=" /home/zeabus/catkin_ws/src/src_code/zeabus_vision/zeabus_vision_main/params/top.yaml"/>
 		<param name="ext_trigger_mode" type="bool" value="$(arg ext_trigger_mode)" />
 		<param name="color_mode" type="str" value="$(arg color_mode)" />
 		<param name="image_width" type="int" value="$(arg image_width)" />
