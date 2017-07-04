@@ -1,21 +1,21 @@
 <launch>
 	<!-- =================== SET Argument =================== -->
-	<arg name="camera_id_center" value="5"/>
+	<arg name="camera_id_center" value="5" />
 	<arg name="ext_trigger_mode" value="False" />
 	<arg name="color_mode" value="bgr8" />
-	<arg name="image_width" value="1600" />
-	<arg name="image_height" value="1000" />
+	<arg name="image_width" value="1152" />
+	<arg name="image_height" value="870" />
 	<arg name="auto_gain" value="False"/>
 	<arg name="master_gain" value="0" />
-	<arg name="red_gain" value="30" />
+	<arg name="red_gain" value="65" />
 	<arg name="green_gain" value="0" />
-	<arg name="blue_gain" value="50" />
+	<arg name="blue_gain" value="25" />
 	<arg name="auto_exposure" value="False"/>
-	<arg name="exposure" value="20"/>
+	<arg name="exposure" value="1"/>
 	<arg name="auto_white_balance" value="False"/>
 	<arg name="auto_frame_rate" value="False"/>
 	<arg name="frame_rate" value="15.0"/>
-	<arg name="pixel_clock" value="40"/>
+	<arg name="pixel_clock" value="30"/>
 	<arg name="flip_lr" value="False" />
 	<!-- =================== CENTER CAMERA =================== -->
 	<arg name="nodelet_manager_name_center" value="top_center" />
@@ -43,5 +43,5 @@
 		<param name="pixel_clock" type="int" value="$(arg pixel_clock)" />
 		<param name="flip_lr" type="bool" value="$(arg flip_lr)" />
 	</node>
-	<node pkg="image_proc" name="image_proc" type="image_proc" output="screen" ns="$(arg camera_name_center)"></node>
+	<node pkg="image_proc" name="image_proc" type="image_proc" output="screen" ns="$(arg camera_name_center)"/>
 </launch>
