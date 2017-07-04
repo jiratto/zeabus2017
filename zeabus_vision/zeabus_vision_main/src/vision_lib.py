@@ -103,9 +103,9 @@ def stretching_hsv(hsv):
     h, s, v = cv2.split(hsv)
 
     if s.min() > 0:
-        s *= int(round((s - s.min()) / (s.max() - s.min())))
+        s *= int(round(255.0 / (s.max() - s.min())))
     if v.min() > 0:
-        v *= int(round((v - v.min()) / (v.max() - v.min())))
+        v *= int(round(255.0 / (v.max() - v.min())))
     hsv = cv2.merge((h, s, v))
     return hsv
 

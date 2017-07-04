@@ -19,7 +19,9 @@ class Bouy (object):
 		self.data = None
 		self.leftColor = None
 		self.state = 1
-		self.time = 3
+		self.time = 0.5
+		self.startPos = None ## First point that you see three balls
+		self.destPos = None ## Position that you hit ball
 		self.command = rospy.Publisher ('/zeabus/cmd_vel', Twist, queue_size=10)
 		self.turn_yaw_rel = rospy.Publisher ('/fix/rel/yaw', Float64, queue_size=10)
 		self.distance = []
@@ -76,8 +78,6 @@ class Bouy (object):
 			return False
 		# self.time = self.data.area[0]
 
-		count = 0
-
 		print ('xImg: ', xImg)
 		print ('yImg: ', yImg)
 		print ('prob: ', prob)
@@ -92,19 +92,23 @@ class Bouy (object):
 			print areaImg
 			## check ratio area before hit_and_back ##
 			while areaImg < 0.005 and not rospy.is_shutdown ():
-				print 'GO STRAIGHT'
+				print 'IN LOOP'
 
+				x = []
 				area = []
+				count = 0
 
 				for i in xrange (10):
 					self.data = self.detect_bouy (String ('bouy'), String (color))
 					self.data = self.data.data
 					if self.data.appear:
+						x.append (self.data.cx[0])
 						area.append (self.data.area[0])
 						count += 1
 					rospy.sleep (0.1)
 
-				if count != 0 and len (area) != 0:
+				if count != 0:
+					xImg = self.aicontrol.average (x)
 					areaImg = self.aicontrol.average (area)
 				else:
 					print 'NOT FOUND'
@@ -112,52 +116,58 @@ class Bouy (object):
 					self.aicontrol.drive_xaxis (1)
 					rospy.sleep (2)
 					continue
-
+				
+				print ('xImg: ', xImg)
 				print ('area: ', areaImg)
 
-				if areaImg <= 0:
-					vx = 1
+				if -0.05 <= xImg <= 0.05:
+					print 'Y-AXIS CENTER'
+
+					if areaImg <= 0:
+						vx = 1
+					else:
+						vx = 1 / areaImg
+					vx = self.aicontrol.adjust (vx, -0.8, -0.3, 0.3, 0.8)
+					self.aicontrol.drive_xaxis (vx)
+					rospy.sleep (self.time)
 				else:
-					vx = 1 / areaImg
-				vx = self.aicontrol.adjust (vx, -0.8, -0.3, 0.3, 0.8)
-				tempDist.insert (0, vx)
-
-				self.aicontrol.drive_xaxis (vx)
-				rospy.sleep (self.time)
+					print 'ADJUST Y-AXIS'
+					vy = self.aicontrol.adjust (xImg, -0.6, -0.3, 0.3, 0.6)
+					self.aicontrol.drive_xaxis (vx)
+					rospy.sleep (self.time)
 				self.aicontrol.stop (1)
-
+				
 			print 'HIT AND BACK'
 
 			self.hit_and_back ()
 
 			## trackback backward ##
-			for i in xrange (len (tempDist)):
-				self.aicontrol.drive_xaxis (-data[i])
-				rospy.sleep (self.time)
+			# for i in xrange (len (tempDist)):
+			# 	self.aicontrol.drive_xaxis (-data[i])
+			# 	rospy.sleep (self.time)
 
-			self.aicontrol.stop (1)
+			# self.aicontrol.stop (1)
 
 			# print 'TRACKBACK'
 			# self.aicontrol.trackback (self.distance, self.time)
 			# self.distance = []
+			self.destPos = self.aicontrol.get_position ()
 			
 			return True
 		else:
 			print 'NOT CENTER'
 
-			pos = self.aicontrol.get_position ()
-
 			if -0.05 <= pos[2] <= 0.05:
 				print 'FIX Z'
 
-				vy = self.aicontrol.adjust (xImg, -0.7, -0.5, 0.5, 0.7)
+				vy = self.aicontrol.adjust (xImg, -0.6, -0.3, 0.3, 0.6)
 				self.distance.append (vy)
 				self.aicontrol.drive_yaxis (vy)
 				rospy.sleep (self.time)
 				self.aicontrol.stop (0.5)
 			else:
 				print 'MOVE YZ'
-				vy = self.aicontrol.adjust (xImg, -0.7, -0.5, 0.5, 0.7)
+				vy = self.aicontrol.adjust (xImg, -0.6, -0.3, 0.3, 0.6)
 				vz = self.aicontrol.adjust (yImg, -1, -0.95, 0.005, 0.01)
 				
 				# self.distance.append (vy)
@@ -175,11 +185,13 @@ class Bouy (object):
 
 	def hit_and_back (self):
 		self.aicontrol.drive_xaxis (1)
-		rospy.sleep (5)
+		rospy.sleep (8)
 		self.aicontrol.stop (1)
 		
+		print 'HIT BALL!'
+
 		self.aicontrol.drive_xaxis (-1)
-		rospy.sleep (5)
+		rospy.sleep (8)
 		self.aicontrol.stop (1)
 
 		# self.aicontrol.trackback (self.distance, self.time)
@@ -318,6 +330,29 @@ class Bouy (object):
 
 		# self.hit_and_back ()
 
+	def comeback (self):
+		start_x = self.startPos[0]
+		start_y = self.startPos[1]
+		start_z = self.startPos[2]
+		dest_x = self.destPos[0]
+		dest_y = self.destPos[1]
+		dest_z = self.destPos[2]
+
+		## comeback X
+		print 'COMEBACK X'
+		diff_x = -(dest_x - start_x)
+		self.aicontrol.drive_x_rel (diff_x)
+
+		## comeback Y
+		print 'COMEBACK Y'
+		diff_y = -(dest_y - start_y)
+		self.aicontrol.drive_y_rel (diff_y)
+
+		## comeback Z
+		print 'COMEBACK Z'
+		self.aicontrol.fix_zaxis (start_z)
+		
+
 	def run (self):
 		while self.find_num () <= 0:
 			self.aicontrol.drive ([1, 0, 0, 0, 0, 0])
@@ -387,9 +422,12 @@ class Bouy (object):
 			rospy.sleep (1)
 
 	def test_move (self, color):
+		self.startPos = self.aicontrol.get_position ()
 		while not self.movement (color) and not rospy.is_shutdown ():
 			print 'not pass'
-		print 'success'
+		print 'pass'
+		self.comeback ()
+		print 'COMPLETE'
 		self.aicontrol.stop (1)
 
 if __name__ == '__main__':

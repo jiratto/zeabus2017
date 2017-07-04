@@ -13,6 +13,6 @@ if __name__ == '__main__':
 
     call = rospy.ServiceProxy(serviceName, vision_srv_navigate)
     while not rospy.is_shutdown():
-        res = call(String('Navigate'), String('top'))
+        res = call(String('Navigate'), String('bot'))
         print res
         rospy.sleep(0.1)

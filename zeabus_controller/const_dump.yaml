@@ -3,7 +3,7 @@ KPPy: 1.7
 KPPz: 2
 KPProll: 1.5
 KPPpitch: 1
-KPPyaw: 2
+KPPyaw: 1.5
 KIPx: 0.038
 KIPy: 0.0045
 KIPz: 0.071
@@ -24,13 +24,13 @@ KPVpitch: 0
 KPVyaw: 0.6
 KIVx: 0.001
 KIVy: 0
-KIVz: 0.008
+KIVz: 0
 KIVroll: 0
 KIVpitch: 0
 KIVyaw: 0.0008
 KDVx: 0.8
 KDVy: 0
-KDVz: 0.7
+KDVz: 0.6
 KDVroll: 2
 KDVpitch: 0
 KDVyaw: 0.004
