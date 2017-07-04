@@ -1,6 +1,6 @@
-<!-- Launch in the camera namespace containing "image_raw" and "camera_info" -->
 <launch>
 	<!-- =================== SET Argument =================== -->
+	<arg name="camera_id_center" value="5"/>
 	<arg name="ext_trigger_mode" value="False" />
 	<arg name="color_mode" value="bgr8" />
 	<arg name="image_width" value="1600" />
@@ -24,9 +24,8 @@
 	<node pkg="nodelet" type="nodelet" name="ueye_cam_nodelet_$(arg nodelet_manager_name_center)" args="load ueye_cam/ueye_cam_nodelet $(arg nodelet_manager_name_center)">
 		<param name="camera_name" type="str" value="$(arg camera_name_center)" />
 		<param name="camera_topic" type="str" value="image_raw" />
-		<param name="camera_id" type="int" value="5" />
+		<param name="camera_id" type="int" value="$(arg camera_id_center)" />
 		<param name="camera_intrinsics_file" type="string" value=" /home/zeabus/catkin_ws/src/src_code/zeabus_vision/main/params/top.yaml"/>
-		<!--<param name="camera_parameters_file" type="string" value="/home/zeabus/catkin_ws/src/src_code/zeabus_vision/ueye_cam/params/top.ini"/>-->
 		<param name="ext_trigger_mode" type="bool" value="$(arg ext_trigger_mode)" />
 		<param name="color_mode" type="str" value="$(arg color_mode)" />
 		<param name="image_width" type="int" value="$(arg image_width)" />
@@ -44,6 +43,5 @@
 		<param name="pixel_clock" type="int" value="$(arg pixel_clock)" />
 		<param name="flip_lr" type="bool" value="$(arg flip_lr)" />
 	</node>
-	<node pkg="image_proc" name="image_proc" type="image_proc" output="screen" ns="$(arg camera_name_center)">
-	</node>
+	<node pkg="image_proc" name="image_proc" type="image_proc" output="screen" ns="$(arg camera_name_center)"></node>
 </launch>
