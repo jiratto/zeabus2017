@@ -12,7 +12,7 @@
 	<arg name="green_gain" value="0" />
 	<arg name="blue_gain" value="30" />
 	<arg name="auto_exposure" value="False"/>
-	<arg name="exposure" value="20"/>
+	<arg name="exposure" value="10"/>
 	<arg name="auto_white_balance" value="False"/>
 	<arg name="auto_frame_rate" value="False"/>
 	<arg name="frame_rate" value="15.0"/>
