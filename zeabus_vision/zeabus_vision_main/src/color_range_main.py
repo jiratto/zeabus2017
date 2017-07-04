@@ -4,7 +4,7 @@ import numpy as np
 import rospkg
 import rospy
 from sensor_msgs.msg import CompressedImage
-
+from vision_lib import *
 
 pixel = {}
 pixel['x'], pixel['y'] = -1, -1
@@ -117,7 +117,6 @@ class window:
         for name in self.lower:
             if(name == 'mask'):
                 continue
-
             rospy.set_param(
                 '/color_range/color_' + cameraPos + '/lower_' + name, self.range_list2str(self.lower[name][-1]))
             rospy.set_param(
@@ -127,6 +126,7 @@ class window:
         x = self.genyaml()
         f.write(x)
         f.close()
+        
         print 'save'
 
     def genyaml(self):
@@ -147,9 +147,14 @@ def callback(msg):
         img = cv2.imdecode(arr, 1)
         img = cv2.resize(img, (320, 256))
         # hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-        hsv = equalization(img)
+
+        # gamma = adjust_gamma_by_v(img)
+        # gamma = cv2.cvtColor(gamma, cv2.COLOR_BGR2HSV)
+        # hsv = equalization(gamma)
+        
         # hsv = clahe(fuck)
-        # hsv = equalization(img)
+        hsv = equalization(img)
+
 
 
 def draw_circle(event, x, y, flags, param):

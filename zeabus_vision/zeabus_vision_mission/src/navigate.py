@@ -5,7 +5,7 @@ import rospkg
 import rospy
 import math
 import sys
-sys.path.append ('/home/zeabus/catkin_ws/src/src_code/zeabus_vision/main/src/')
+sys.path.append ('/home/zeabus/catkin_ws/src/src_code/zeabus_vision/zeabus_vision_main/src/')
 from vision_lib import *
 from sensor_msgs.msg import CompressedImage
 from zeabus_vision_srv_msg.msg import vision_msg_navigate
@@ -43,7 +43,7 @@ def tophat(imgBin, ker):
 
 def isVertical(x):
     global width
-    temp = 40
+    temp = 25
     return (x<temp) or (x>width-temp)
 
 def isHorizon(y):
@@ -70,12 +70,29 @@ def navigate_top():
         offsetH = height/2
         im = img.copy()
         im_draw = img.copy()
+
         hsv = cv2.cvtColor(img.copy(), cv2.COLOR_BGR2HSV)
+
+        # gamma = adjust_gamma_by_v(img.copy())
+        # gamma = cv2.cvtColor(gamma, cv2.COLOR_BGR2HSV)
+        # hsv = cv2.cvtColor(gamma, cv2.COLOR_BGR2HSV)
+        hsv = equalization(im)
+        # bgr = cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR)
+        # stretchBGR = stretching_bgr(im)
+
+        # stretchHSV = clahe(im)
+        # stretchHSV = cv2.cvtColor(stretchHSV, cv2.COLOR_HSV2BGR)
+
+        # stretchHSV = cv2.cvtColor(im, cv2.COLOR_BGR2HSV)
+        # stretchHSV = stretching_hsv(stretchHSV)
+        # stretchHSV = cv2.cvtColor(stretchHSV, cv2.COLOR_HSV2BGR)
+        # stretchHSV = clahe(stretchHSV)
+
         print('lower_yellow', lower_yellow)
         print('upper_yellow', upper_yellow)
         im_yellow = cv2.inRange(hsv, lower_yellow, upper_yellow)
         
-        im_delnoise = erode(im_yellow, cross_ker(3,3))
+        im_delnoise = erode(im_yellow, rect_ker(3,3))
         im_delnoise = dilate(im_delnoise, cross_ker(3,3))
         im_delnoise2 = erode(im_yellow, cross_ker(5,1))
         im_lr = dilate(im_delnoise, rect_ker(15,1))
@@ -236,6 +253,9 @@ def navigate_top():
         publish_result(im_draw,'bgr', 'debug' )
         publish_result(im_lr, 'gray', 'lr')
         publish_result(im_bot, 'gray', 'bot')
+        # publish_result(bgr, 'bgr', 'bgr')
+        # publish_result(stretchBGR, 'bgr', 'bgr')
+        # publish_result(stretchHSV, 'bgr', 'hsv')
         print('direction', direction)
         print('where', where)
         print('cx', cx)
@@ -258,16 +278,21 @@ def navigate_bot():
         angle = -999
         appear = False
         im_bot = img_bot.copy()
+        imForDraw = img_bot.copy()
         lower_yellow, upper_yellow = getColor('yellow', 'down')
-        hsv = cv2.cvtColor(im_bot.copy(), cv2.COLOR_BGR2HSV)
+
+        # hsv = cv2.cvtColor(im_bot.copy(), cv2.COLOR_BGR2HSV)
+        hsv = equalization(im_bot.copy())
+
         im_yellow = cv2.inRange(hsv, lower_yellow, upper_yellow)
+        im_yellow = erode(im_yellow, rect_ker(5,5))
         im_yellow = close(im_yellow, rect_ker(5,5))
 
         _, contours, hierarchy = cv2.findContours(im_yellow.copy(), 
                                             cv2.RETR_TREE, 
                                             cv2.CHAIN_APPROX_SIMPLE)
         max_area = 0
-
+        # boxNoCover = image.copy().fill(0)
         for c in contours:
             M = cv2.moments(c)
             rect = (x,y),(ww,hh),angle1 =cv2.minAreaRect(c)
@@ -278,16 +303,19 @@ def navigate_bot():
             if max_area<area:
                 max_area = area
                 angle = Oreintation(M)[0]*180/math.pi 
-
+                box = cv2.boxPoints(rect)
+                box = np.int0(box)
+            
         if max_area > 0:
             appear = True
+            cv2.drawContours(imForDraw, [box], -1, (0, 0, 255,), 2)
         # else:
         #     appear = False
         if angle > 90:
             angle -= 180
         print('appear', appear)
         print('angle', angle)
-        publish_result(im_yellow, 'gray', 'debug')
+        publish_result(imForDraw, 'bgr', 'debug')
         res.cx = -999
         res.cy = -999
         res.direction = -999

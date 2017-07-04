@@ -8,14 +8,14 @@ import sys
 sys.path.append ('/home/zeabus/catkin_ws/src/src_code/zeabus_vision/zeabus_vision_main/src/')
 from vision_lib import *
 from sensor_msgs.msg import CompressedImage
-from zeabus_vision_srv_msg.msg import vision_msg_default
-from zeabus_vision_srv_msg.srv import vision_srv_default
+# from zeabus_vision_srv_msg.msg import vision_msg_default
+# from zeabus_vision_srv_msg.srv import vision_srv_default
 
 img = None
 height = None
 width = None
 
-def adjust_gamma(image, gamma=1.0):
+def adjust_gamma2(image, gamma=1.0):
     invGamma = 1.0/gamma
     table = np.array([((i / 255.0) ** invGamma) * 255
     for i in np.arange(0, 256)]).astype("uint8")
@@ -25,33 +25,50 @@ def adjust_gamma(image, gamma=1.0):
 def canny(image, threshold1, threshold2):
     return cv2.Canny(image, threshold1, threshold2)
 
-def find_bin(msg):
+def find_bin():
     global img, width, height
-    req = msg.req.data
-    print('req', req)
     lowerOrange, upperOrange = getColor('orange', 'down')
     lowerWhite, upperWhite = getColor('white', 'down')
-    res = vision_msg_default()
 
     while not rospy.is_shutdown():
         while img is None:
             print('None')
 
+        print('lowerWhite', lowerWhite)
+        print('upperWhite', upperWhite)
         offsetW = width/2
         offsetH = height/2
 
         image = img.copy()
         imageForDraw = img.copy()
-        
+
+        edge = cv2.cvtColor(img.copy(), cv2.COLOR_BGR2GRAY)
+        edge = cv2.Canny(edge, 100, 150)
+
+        gamma2 = img.copy()
+        gamma2 = adjust_gamma(gamma2, 4)
+        # gamma2 = cv2.GaussianBlur(gamma2, (15,15), 0)
+        # gamma2 = equalization(gamma2)
+        # gamma2 = cv2.cvtColor(gamma2, cv2.COLOR_HSV2BGR)
+        blur = cv2.bilateralFilter(gamma2,9,75,75)
+
+        grayScaleImage = cv2.cvtColor(img.copy(), cv2.COLOR_BGR2GRAY)/255
+        print('grayScaleImage', grayScaleImage)
         # hsv = cv2.cvtColor(image.copy(), cv2.COLOR_BGR2HSV)
         hsv = equalization(image.copy())
-        whiteImage = cv2.inRange(hsv, lowerWhite, upperWhite)
+        whiteImage = cv2.inRange(gamma2, lowerWhite, upperWhite)
         whiteImage = close(whiteImage, get_kernal())
         # whiteImage = close(whiteImage, get_kernal())
         
         gamma = adjust_gamma_by_v(image)
-        eq = equalization(gamma)
+        eq = equalization(img.copy())
         eq = cv2.cvtColor(eq, cv2.COLOR_HSV2BGR)
+        median = cv2.medianBlur(eq.copy(),49)
+        median = cv2.cvtColor(median, cv2.COLOR_BGR2GRAY)
+        # median = cv2.cvtColor(median, cv2.COLOR_BGR2HSV)
+        # thresh3 = eq
+        thresh3 = cv2.cvtColor(eq.copy(), cv2.COLOR_BGR2GRAY)
+        _,thresh3 = cv2.threshold(median,190,255,cv2.THRESH_BINARY_INV)
         gray = cv2.cvtColor(eq, cv2.COLOR_BGR2GRAY)
         ret,thresh = cv2.threshold(gray,235,255,cv2.THRESH_BINARY)
         dilateImage = dilate(thresh, get_kernal('cross', (31,31)))
@@ -77,7 +94,6 @@ def find_bin(msg):
         yBinNonCover = -999
         angle = -999
         countBin = 0
-        boxNoCover = image.copy().fill(0)
         for c in orangeContours:
             rect = (x,y),(ww,hh),_ =cv2.minAreaRect(c)
             area = ww*hh
@@ -94,12 +110,17 @@ def find_bin(msg):
         binAppear = False
         noCover = False
         maxNoCover = 0
+        testArea = 0
+        boxNoCover = image.copy().fill(0)
+        # _,grayScaleImage = cv2.threshold(grayScaleImage,127,255,cv2.THRESH_BINARY)
         for c in whiteContours:
             M = cv2.moments(c)
-            rect = (x,y),(ww,hh),_ =cv2.minAreaRect(c)
+            rect = (x,y),(ww,hh), debugArea =cv2.minAreaRect(c)
             area = ww*hh
             if area < 7000:
                 continue
+            cv2.drawContours(imageForDraw, [c], -1,(255,255,0), 1)
+            cv2.drawContours(grayScaleImage, [c], -1, (255, 255, 255), 3)
             # print('area',area)
             countBin += 1
             diff = abs(x - xOrange)
@@ -113,6 +134,7 @@ def find_bin(msg):
             else:
                 if maxNoCover < area:
                     maxNoCover = area
+                    testArea = 90-debugArea
                     xBinNonCover = x
                     yBinNonCover = y
                     boxNoCover = box
@@ -121,39 +143,27 @@ def find_bin(msg):
         cv2.drawContours(imageForDraw,[boxNoCover], -1,(0,255,0),3)
         print('xCov: ', xBinCover, 'yCov: ', yBinCover)
         print('xNonCov: ', xBinNonCover, 'yNonCov: ', yBinNonCover)
+        print('testAngle',testArea)
         print('angle', angle)
-        if req == 'nocover': # **Note** swap x and y for AI 
-            cv2.circle(imageForDraw ,(int(xBinNonCover), int(yBinNonCover)), 5, (0, 255, 255), -1)
-            res.y = -(xBinNonCover-offsetW)/offsetW
-            res.x = (offsetH-yBinNonCover)/offsetH
-            res.angle = angle
-            res.appear = noCover
-        elif req == 'bin':
-            cv2.circle(imageForDraw ,(int(xBinCover), int(yBinCover)), 5, (0, 255, 255), -1)
-            res.y = -(xBinCover-offsetW)/offsetW
-            res.x = (offsetH-yBinCover)/offsetH
-            res.angle = angle
-            res.appear = binAppear
-        else:
-            print('error no req')
-        print('res.x: ', res.x)
-        print('res.y', res.y)
-        # if countBin == 0:
-        #     res.appear = False
-        # else:
-        #     res.appear = True
-        publish_result(imageForDraw, 'bgr', 'debug')
-        publish_result(gray, 'gray', 'debug_gray')
-        publish_result(thresh, 'gray', 'debug_thresh')
-        publish_result(eq, 'bgr', 'debug_eq')
 
+        grayScaleImage = close(grayScaleImage, get_kernal('rect', (21,21)))
 
-        return res
-        # cv2.imshow('eqOrange', orangeImage)
-        # cv2.imshow('eq', eq)
-        # cv2.imshow('dilateImage', dilateImage)
+        cv2.imshow('median', median)
+        cv2.imshow('thresh3', thresh3)
+        # cv2.imshow('grayScaleImage', grayScaleImage)
+        # cv2.imshow('canny edge', edge)
+        # cv2.imshow('0gamma2', gamma2)
+        # cv2.imshow('median', median)
+        # cv2.imshow('blur', blur)
+        # cv2.imshow('whiteImage', whiteImage)
         # cv2.imshow('imageForDraw', imageForDraw)
-        # cv2.waitKey(30)
+        # cv2.imshow('thresh', thresh)
+        # cv2.imshow('gamma', gamma)
+        # cv2.imshow('eq', eq)
+        # cv2.imshow('gray', gray)
+        cv2.waitKey(30)
+        
+        
 
 def mission_callback(msg):
     print(msg.req.data)
@@ -169,11 +179,11 @@ def img_callback(msg):
     
 
 if __name__ == '__main__':
-    rospy.init_node('findBin')
+    rospy.init_node('debug')
     bag = '/leftcam_bottom/image_raw/compressed'
     topic = '/bottom/left/image_raw/compressed'
     bot = '/bottom/left/image_raw/compressed'
     rospy.Subscriber(bot, CompressedImage, img_callback)
-    rospy.Service('vision_bin', vision_srv_default(), mission_callback)
-    rospy.spin()
-    # find_bin()
+    # rospy.Service('vision_bin', vision_srv_default(), mission_callback)
+    # rospy.spin()
+    find_bin()

@@ -1,7 +1,7 @@
 <launch>
 	<rosparam ns="color_range" command="load" file="$(find zeabus_vision)/params/color_down.yaml"></rosparam>
 	<node pkg="zeabus_vision" name="color_range" type="color_range_main.py" output="screen">
-		<param name="cameraTopic" type="str" value='/leftcam_bottom/image_raw/compressed'/>
+		<param name="cameraTopic" type="str" value='/bottom/left/image_raw/compressed'/>
 		<param name="cameraPos" type="str" value="down"/>
 	</node>
 </launch>

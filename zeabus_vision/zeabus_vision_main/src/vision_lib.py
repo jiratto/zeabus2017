@@ -103,9 +103,9 @@ def stretching_hsv(hsv):
     h, s, v = cv2.split(hsv)
 
     if s.min() > 0:
-        s *= int(round((s - s.min()) / (s.max() - s.min())))
+        s *= int(255.0 / (s.max() - s.min()))
     if v.min() > 0:
-        v *= int(round((v - v.min()) / (v.max() - v.min())))
+        v *= int(255.0 / (v.max() - v.min()))
     hsv = cv2.merge((h, s, v))
     return hsv
 
@@ -279,11 +279,7 @@ def adjust_gamma(imgBGR=None, gamma=1):
     if imgBGR is None:
         print('given value to imgBGR argument\n' +
               'adjust_gamma_by_value(imgBGR, gamma)')
-    if gamma == 0:
-        g = 1.0
-    else:
-        g = gamma / 10.0
-    invGamma = 1.0 / g
+    invGamma = 1.0 / gamma
     table = np.array([((i / 255.0) ** invGamma) *
                       255 for i in np.arange(0, 256)]).astype("uint8")
 
@@ -301,7 +297,7 @@ def adjust_gamma_by_v(imgBGR=None):
     # 10     128
     vMean = cv2.mean(v)[0]
     # print vMean
-    gamma = vMean / 155
+    gamma = vMean / 20
     # print 'gamma : ' + str(gamma)
     # gamma = 0
     if gamma == 0:
