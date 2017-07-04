@@ -59,6 +59,7 @@ void loop(){
     delete [] cstr;
   }
   triggerRate = constrain(triggerRate,1,30);
+  Serial.print("frame rate:");
   Serial.println(triggerRate);
   Serial.flush();
 
