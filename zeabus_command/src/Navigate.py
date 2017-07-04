@@ -7,6 +7,7 @@ from std_msgs.msg import Float64, Bool, String
 from zeabus_vision_srv_msg.msg import vision_msg_navigate
 from zeabus_vision_srv_msg.srv import vision_srv_navigate
 from AIControl import AIControl
+import Depth as depth
 
 class Navigate (object):
 
@@ -26,16 +27,14 @@ class Navigate (object):
 		task = 'navigate'
 		cam = 'top'
 
-		## check zero 3 times before role ##
+		## check zero 3 times before roll ##
 		check = 0
 
-		isFail = 50
+		isFail = 34
 
-		self.aicontrol.fix_zaxis (-3.3)
+		self.aicontrol.fix_zaxis (depth.NAVIGATE_DETECTING)
 		self.aicontrol.drive_xaxis (1)
 		rospy.sleep (5)
-
-		self.aicontrol.fix_zaxis (-3)
 
 		while not rospy.is_shutdown ():
 			self.aicontrol.stop (1)
@@ -77,19 +76,19 @@ class Navigate (object):
 					else:
 						notFound += 1
 
+			print ('cx[2]: ', cx[2])
+			print ('cy[2]: ', cy[2])
+			print ('area[2]: ', area[2])
+			print ('cx[1]: ', cx[1])
+			print ('cy[1]: ', cy[1])
 
 			if cam == 'top':
-				if mul > 0:
-					mul = 1
-				elif mul <= 0:
-					mul = -1
-
 				if two > one >= zero:
 					print 'TWO LEGS'
 					if self.aicontrol.is_center ([cx[2]/two, 0], -0.1, 0.1, -0.1, 0.1):
 						print 'Center !!'
 						self.aicontrol.drive_xaxis (1/area[2] * 2)
-						rospy.sleep (8)
+						rospy.sleep (5)
 					else:
 						print 'Drive to center'
 						vy = self.aicontrol.adjust (cx[2]/two, -0.6, -0.4, 0.4, 0.6)
@@ -97,21 +96,28 @@ class Navigate (object):
 						rospy.sleep (3)
 				elif one > two >= zero:
 					print 'ONE LEG'
+					print ('isFail: ', isFail)
 
 					if self.aicontrol.is_fail (isFail):
-						self.aicontrol.fix_zaxis (-2.8)
+						self.aicontrol.fix_zaxis (depth.NAVIGATE_ROLL)
 						self.aicontrol.stop (1)
 						cam = 'bot'
 						# self.aicontrol.drive_xaxis (1)
 						# rospy.sleep (18)
 						# self.aicontrol.roll (2)
 						print 'SWAP TO BOTTOM CAMERA'
-					if mul >= 0:
+					if mul > 0:
 						vy = 0.4
-					else:
+					elif mul < 0:
 						vy = -0.4
+					else:
+						continue
 					self.aicontrol.drive_yaxis (vy)
 					rospy.sleep (2)
+					# if isFail % 7 == 0:
+					# 	self.aicontrol.drive_xaxis (1)
+					# 	rospy.sleep (2)
+
 					isFail -= 1
 				elif zero > one >= two:
 					print 'ZERO'
@@ -119,7 +125,7 @@ class Navigate (object):
 					rospy.sleep (1)
 					check += 1
 					if check >= 3:
-						self.aicontrol.fix_zaxis (-2.8)
+						self.aicontrol.fix_zaxis (depth.NAVIGATE_ROLL)
 						self.aicontrol.stop (1)
 						cam = 'bot'
 						# self.aicontrol.drive_xaxis (1)
@@ -130,25 +136,29 @@ class Navigate (object):
 				if found > notFound:
 					print 'FOUND'
 					angleAvr = self.aicontrol.average (angle)
-					print ('angle: ', angleAvr)
-					self.aicontrol.turn_yaw_relative (angleAvr)
-					rospy.sleep (2)
-					self.aicontrol.drive_xaxis (-1)
-					rospy.sleep (5)
-					self.aicontrol.drive_yaxis (1)
-					rospy.sleep (2)
-					# self.aicontrol.roll (2)
+					# print ('angle: ', angleAvr)
+					# self.aicontrol.turn_yaw_relative (angleAvr)
+					# rospy.sleep (2)
+
+					print 'FOUND AND BACK'
+					self.aicontrol.drive_xaxis (-0.7)
+					rospy.sleep (3)
+					# self.aicontrol.drive_yaxis (1)
+					# rospy.sleep (2)
 					self.aicontrol.drive_xaxis (1)
-					rospy.sleep (10)
+					rospy.sleep (2)
+					self.aicontrol.roll (2)
+					# self.aicontrol.drive_xaxis (0.8)
+					# rospy.sleep (10)
 					self.aicontrol.fix_zaxis (-0.2)
 					break
 				else:
 					print 'NOT FOUND'
-					self.aicontrol.drive_xaxis (1)
+					self.aicontrol.drive_xaxis (0.8)
 					rospy.sleep (3)
 		
 		self.aicontrol.stop (1)
 
-# if __name__ == '__main__':
-# 	navigate = Navigate ()
-# 	navigate.run ()
+if __name__ == '__main__':
+	navigate = Navigate ()
+	navigate.run ()
