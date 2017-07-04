@@ -188,7 +188,7 @@ class AIControl ():
 
 			if diff_total <= abs (dis):
 				vx = (dis / diff_total) / 10
-				self.drive_xaxis (vx)
+				self.drive_xaxis (vx * 4)
 				rospy.sleep (0.5)
 				print ('present dist: ', diff_total)
 
@@ -197,6 +197,7 @@ class AIControl ():
 				print ('finish x: ', self.get_position ()[0])
 				print ('finish y: ', self.get_position ()[1])
 				break
+			self.stop (0.5)
 		print ('Drive X_Rel complete')
 
 	def drive_y_rel (self, dis):
