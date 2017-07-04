@@ -7,12 +7,13 @@ from std_msgs.msg import String
 if __name__ == '__main__':
     rospy.init_node('call_service')
     serviceName = 'vision_navigate'
+    binsrv = 'vision_bin'
     print('wait service')
-    rospy.wait_for_service(serviceName)
+    rospy.wait_for_service(binsrv)
     print('service start')
 
-    call = rospy.ServiceProxy(serviceName, vision_srv_navigate)
+    call = rospy.ServiceProxy(binsrv, vision_srv_default)
     while not rospy.is_shutdown():
-        res = call(String('Navigate'), String('bot'))
+        res = call(String('Navigate'), String('bin'))
         print res
         rospy.sleep(0.1)

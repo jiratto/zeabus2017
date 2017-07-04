@@ -25,7 +25,6 @@ def adjust_gamma(image, gamma=1.0):
 def canny(image, threshold1, threshold2):
     return cv2.Canny(image, threshold1, threshold2)
 
-def find_bin():
 def find_bin(msg):
     global img, width, height
     req = msg.req.data
@@ -42,63 +41,15 @@ def find_bin(msg):
         offsetH = height/2
 
         image = img.copy()
-        edges = cv2.Canny(image, 100, 200)
-        imageForDraw = img.copy()
-        hsv = equalization(image)
-        hsv = cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR)
-        # median = cv2.medianBlur(hsv,5)
-        gray = cv2.cvtColor(hsv, cv2.COLOR_BGR2GRAY)
-        ret,thresh = cv2.threshold(gray,180,255,cv2.THRESH_BINARY)
-        # orangeImage = cv2.inRange(hsv, lowerOrange, upperOrange)
-        # whiteImage = cv2.inRange(hsv, lowerWhite, upperWhite)
         
-        # orangeImage = close(orangeImage, get_kernal('rect',(7,7)))
-
-        # _, orangeContours, _ = cv2.findContours(orangeImage.copy(), 
-        #                                     cv2.RETR_TREE, 
-        #                                     cv2.CHAIN_APPROX_SIMPLE)
-        # _, whiteContours, _ = cv2.findContours(whiteImage.copy(), 
-        #                                     cv2.RETR_TREE, 
-        #                                     cv2.CHAIN_APPROX_SIMPLE)
-        # xOrange = 0
-        # yOrange = 0
-        # for c in orangeContours:
-        #     rect = (x,y),(ww,hh),angle =cv2.minAreaRect(c)
-        #     area = ww*hh
-        #     xOrange = x
-        #     yOrange = y
-        #     box = cv2.boxPoints(rect)
-        #     box = np.int0(box)
-        #     cv2.drawContours(imageForDraw,[box], -1,(0,0,255),1)
-
-        # xBinCover = 0
-        # xBinNonCover = 0
-        # yBinCover = 0
-        # yBinNonCover = 0
-
-        # for c in whiteContours:
-        #     rect = (x,y),(ww,hh),angle =cv2.minAreaRect(c)
-        #     area = ww*hh
-        #     diff = abs(x - xOrange)
-        #     box = cv2.boxPoints(rect)
-        #     box = np.int0(box)
-        #     cv2.drawContours(imageForDraw,[box], -1,(0,255,0),1)
-        #     if diff < 20:
-        #         xBinCover = x
-        #         yBinCover = y
-        #     else:
-        #         xBinNonCover = x
-        #         yBinNonCover = y
-        cv2.imshow('gray', gray)
-        # cv2.imshow('hsv', hsv)
-        cv2.imshow('image', image)
-        cv2.imshow('thresh', thresh)
-        cv2.waitKey(30)
 
         imageForDraw = img.copy()
         
         # hsv = cv2.cvtColor(image.copy(), cv2.COLOR_BGR2HSV)
-        hsv = equalization(image.copy())
+        cla = clahe(image)
+        cla = cv2.cvtColor(cla, cv2.COLOR_HSV2BGR)
+        hsv = equalization(cla)
+        # hsv = equalization(image.copy())
         whiteImage = cv2.inRange(hsv, lowerWhite, upperWhite)
         whiteImage = close(whiteImage, get_kernal())
         # whiteImage = close(whiteImage, get_kernal())
@@ -120,8 +71,8 @@ def find_bin(msg):
         _, orangeContours, _ = cv2.findContours(orangeImage.copy(), 
                                             cv2.RETR_TREE, 
                                             cv2.CHAIN_APPROX_SIMPLE)
-        _, whiteContours, _ = cv2.findContours(whiteImage.copy(), 
-                                            cv2.RETR_TREE, 
+        _, whiteContours, hierarchy = cv2.findContours(whiteImage.copy(), 
+                                            cv2.RETR_EXTERNAL, 
                                             cv2.CHAIN_APPROX_SIMPLE)
         xOrange = -999
         yOrange = -999
@@ -132,6 +83,7 @@ def find_bin(msg):
         angle = -999
         countBin = 0
         boxNoCover = image.copy().fill(0)
+        boxCover = image.copy().fill(0)
         for c in orangeContours:
             rect = (x,y),(ww,hh),_ =cv2.minAreaRect(c)
             area = ww*hh
@@ -164,6 +116,7 @@ def find_bin(msg):
                 yBinCover = y
                 angle = 90-Oreintation(M)[0]*180/math.pi
                 binAppear = True
+                boxCover = box
             else:
                 if maxNoCover < area:
                     maxNoCover = area
@@ -173,6 +126,7 @@ def find_bin(msg):
                     angle = 90-Oreintation(M)[0]*180/math.pi
                     noCover = True
         cv2.drawContours(imageForDraw,[boxNoCover], -1,(0,255,0),3)
+        cv2.drawContours(imageForDraw, [boxCover], -1, (255,255,0),3)
         print('xCov: ', xBinCover, 'yCov: ', yBinCover)
         print('xNonCov: ', xBinNonCover, 'yNonCov: ', yBinNonCover)
         print('angle', angle)
@@ -200,6 +154,7 @@ def find_bin(msg):
         publish_result(gray, 'gray', 'debug_gray')
         publish_result(thresh, 'gray', 'debug_thresh')
         publish_result(eq, 'bgr', 'debug_eq')
+        publish_result(whiteImage, 'gray', 'white')
 
 
         return res
@@ -227,8 +182,8 @@ if __name__ == '__main__':
     topic = '/bottom/left/image_raw/compressed'
     bot = '/bottom/left/image_raw/compressed'
     rospy.Subscriber(bot, CompressedImage, img_callback)
-    rospy.Subscriber(bag, CompressedImage, img_callback)
-    find_bin()
+    # rospy.Subscriber(bag, CompressedImage, img_callback)
+    # find_bin()
     rospy.Service('vision_bin', vision_srv_default(), mission_callback)
     rospy.spin()
     # find_bin()

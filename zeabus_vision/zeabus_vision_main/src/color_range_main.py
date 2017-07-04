@@ -152,8 +152,9 @@ def callback(msg):
         # gamma = cv2.cvtColor(gamma, cv2.COLOR_BGR2HSV)
         # hsv = equalization(gamma)
         
-        # hsv = clahe(fuck)
-        hsv = equalization(img)
+        cla = clahe(img)
+        cla = cv2.cvtColor(cla, cv2.COLOR_HSV2BGR)
+        hsv = equalization(cla)
 
 
 
