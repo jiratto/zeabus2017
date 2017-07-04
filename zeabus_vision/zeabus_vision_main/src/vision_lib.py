@@ -405,5 +405,5 @@ if __name__ == '__main__':
         k = cv2.waitKey(1) & 0xff
         if k == ord('q'):
             break
-
+        rospy.sleep(0.1)
     cv2.destroyAllWindows()

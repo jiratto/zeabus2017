@@ -6,7 +6,7 @@ import rospy
 import math
 from sensor_msgs.msg import CompressedImage
 import sys
-sys.path.append ('/home/zeabus/catkin_ws/src/src_code/zeabus_vision/main/src/')
+sys.path.append ('/home/zeabus/catkin_ws/src/src_code/zeabus_vision/zeabus_vision_main/src/')
 from vision_lib import *
 from zeabus_vision_srv_msg.msg import vision_msg_default
 from zeabus_vision_srv_msg.srv import vision_srv_default
@@ -19,7 +19,7 @@ lower_red, upper_red = getColor('orange', 'down')
 
 def find_path():
     global img, width, height
-    print("1")
+    # print("1")
     t = True
     f = False
     cnt = None
@@ -32,7 +32,7 @@ def find_path():
         print("img: None")
         rospy.sleep(0.01)
         # continue
-    print("2")
+    # print("2")
     im = img.copy()
     # height, width,_ = im.shape
     # print('width', width)
@@ -51,7 +51,13 @@ def find_path():
     im_for_draw = img.copy()
     im_for_draw = np.zeros((height, width))
     im_blur = cv2.GaussianBlur(im, (3,3), 0)
+
     hsv = cv2.cvtColor(im_blur, cv2.COLOR_BGR2HSV)
+
+    # gamma = adjust_gamma_by_v(im_blur)
+    # gamma = cv2.cvtColor(gamma, cv2.COLOR_BGR2HSV)
+    # hsv = equalization(gamma)
+
     imgray = cv2.cvtColor(im_blur, cv2.COLOR_BGR2GRAY)
     im_red = cv2.inRange(hsv, lower_red, upper_red)
     dilation = cv2.dilate(im_red, kernel1, iterations =  1)
@@ -90,10 +96,11 @@ def find_path():
             h = hh
         # cv2.drawContours(im_for_draw,[box], -1,(0,0,255),1)
         cv2.drawContours(im, [approx], 0, (0, 0, 255), 2)
-    print('3')
+    # print('3')
     cv2.circle(im_for_draw,(int(cx), int(cy)), 5, (0, 0, 255), -1)
     cv2.drawContours(im_for_draw,[box], -1,(0,0,255),1)
     cv2.drawContours(im, contours, -1, (0,255,0), 3)
+    publish_result(im_for_draw, 'bgr', 'debug_path')
     xx = (cx-offsetW)/offsetW
     yy = (offsetH-cy)/offsetH
     res.x = yy
@@ -115,7 +122,7 @@ def find_path():
     print('max',max1)
     print('angle', angle)
     # cv2.imshow('img',img)
-    print("4")
+    # print("4")
     # cv2.waitKey(0)
     # cv2.destroyAllWindow()
     # k = cv2.waitKey(1) & 0xff

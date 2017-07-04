@@ -29,7 +29,7 @@ class AIControl ():
 						 Bool, self.check_turn)		# subscribe to check turn state
 
 		# publish twist x, y, z linear and angular to /cmd_vel
-		self.command = rospy.Publisher ('/cmd_vel', Twist, queue_size=10)
+		self.command = rospy.Publisher ('/zeabus/cmd_vel', Twist, queue_size=10)
 		self.zAxisNow = rospy.Publisher (
 			'/fix/abs/depth', Float64, queue_size=10)		# publish z to fix depth
 		self.fixPoint = rospy.Publisher (
@@ -179,7 +179,7 @@ class AIControl ():
 			x = li[0]
 			y = li[1]
 
-			while x is None:
+			while x is None and y is None:
 				rospy.sleep (0.01)
 
 			diff_x = abs (x - start_x)
@@ -188,13 +188,68 @@ class AIControl ():
 
 			if diff_total <= abs (dis):
 				vx = (dis / diff_total) / 10
-				self.drive_xaxis (vx)
+				self.drive_xaxis (vx * 4)
 				rospy.sleep (0.5)
 				print ('present dist: ', diff_total)
 
 			else:
 				self.stop (2)
-				print self.get_position ()
+				print ('finish x: ', self.get_position ()[0])
+				print ('finish y: ', self.get_position ()[1])
+				break
+			self.stop (0.5)
+		print ('Drive X_Rel complete')
+
+	def drive_y_rel (self, dis):
+		li = self.get_position ()
+		x = li[0]
+		y = li[1]
+		yaw = li[5]
+
+		while x is None and y is None:
+			rospy.sleep (0.01)
+
+		start_x = x
+		start_y = y
+		x_dest = start_x + (dis * math.cos (yaw + 90))
+		y_dest = start_y + (dis * math.sin (yaw + 90))
+		print ('x start at: ', start_x)
+		print ('y start at: ', start_y)
+		print ('x dest at: ', x_dest)
+		print ('y dest at: ', y_dest)
+
+		if dis > 0:
+			vy = 0.6
+		elif dis < 0:
+			vy = -0.6
+		else:
+			return
+
+		self.drive_yaxis (vy)
+		rospy.sleep (0.5)
+
+		while not rospy.is_shutdown ():
+			li = self.get_position ()
+			x = li[0]
+			y = li[1]
+
+			while x is None and y is None:
+				rospy.sleep (0.01)
+
+			diff_x = abs (x - start_x)
+			diff_y = abs (y - start_y)
+			diff_total = math.sqrt (math.pow (diff_x, 2) + math.pow (diff_y, 2))
+
+			if diff_total <= abs (dis):
+				vy = (dis / diff_total) / 10
+				self.drive_yaxis (vy)
+				rospy.sleep (0.5)
+				print ('present dist: ', diff_total)
+
+			else:
+				self.stop (2)
+				print ('finish x: ', self.get_position ()[0])
+				print ('finish y: ', self.get_position ()[1])
 				break
 		print ('Drive complete')
 
@@ -205,9 +260,9 @@ class AIControl ():
 			rospy.sleep (0.2)
 		self.wait_reach_fix_position (timeout_threshold=10)
 		self.stop (1)
-		for i in xrange (3):
-			self.zAxisNow.publish (z_dis)
-			rospy.sleep (0.2)
+		# for i in xrange (3):
+		# 	self.zAxisNow.publish (z_dis)
+		# 	rospy.sleep (0.2)
 		print 'drive z complete'
 
 	def go_to_xyz (self, x, y, z):

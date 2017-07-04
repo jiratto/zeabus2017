@@ -135,7 +135,7 @@
    <joint name="gx4_45_imu_joint" type="fixed">
       <parent link="base_link"/>
       <child link="gx4_45_imu_link"/>        
-      <origin xyz="0 0 0" rpy="-1.5761 0.0183 3.141593"/>
+      <origin xyz="-0.2 -0.05 0" rpy="-1.5761 0.0183 3.141593"/>
    </joint>    
    <link name="gx4_45_imu_link">
       <inertial>

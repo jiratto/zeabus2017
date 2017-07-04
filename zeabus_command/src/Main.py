@@ -4,7 +4,7 @@ import rospy
 import math
 from Pinger import Pinger
 from Path import Path
-from Navigate import Navigate
+from Navigate2 import Navigate
 from AIControl import AIControl
 
 if __name__ == '__main__':

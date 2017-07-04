@@ -29,17 +29,17 @@ if __name__ == '__main__':
 	# rospy.sleep (5)	
 
 	# print 'Fix Z to 3'
-	# aicontrol.fix_zaxis (-3)
+	# aicontrol.fix_zaxis (-2.5)
 
 	# print 'Fix Z to 0'
 	# aicontrol.fix_zaxis (-0.2)
 
-	# print 'Fix Z to 1'
-	# aicontrol.fix_zaxis (-1)	
-
-	# print 'Turn yaw relative 45'
-	# aicontrol.turn_yaw_relative (45)
-	# rospy.sleep (1)
+	# print 'Fix Z to -0.5'
+	# aicontrol.fix_zaxis (-0.5)	
+	aicontrol.stop (1)
+	print 'Turn yaw relative 45'
+	aicontrol.turn_yaw_relative (44)
+	rospy.sleep (3)
 
 	# print 'Go to XYZ'
 	# aicontrol.go_to_xyz (4, 2.06, 1.54)
@@ -55,9 +55,9 @@ if __name__ == '__main__':
 	# aicontrol.turn_yaw_relative (-90)
 	# rospy.sleep (3)
 
-	print 'Turn yaw absolute 0'
-	aicontrol.turn_yaw_absolute (0)
-	rospy.sleep (1)	
+	# print 'Turn yaw absolute 0'
+	# aicontrol.turn_yaw_absolute (0)
+	# rospy.sleep (1)	
 
 	# print 'FINISH STOP 5 sec'
 	# aicontrol.stop (5)
@@ -81,10 +81,9 @@ if __name__ == '__main__':
 	# data = [2, -1]
 	# aicontrol.trackback (data, 1)
 
-	aicontrol.drive_x_rel (1)
+	# start_x = aicontrol.get_position ()[0]
+	# aicontrol.drive_x_rel (2)
+	# dest_x = aicontrol.get_position ()[0]
+	# aicontrol.drive_x_rel (-2)
 
-<<<<<<< HEAD
 	aicontrol.stop (1)
-=======
-	aicontrol.stop (1)
->>>>>>> bd55591b68580b349afad1141eda1399efbbdd74
