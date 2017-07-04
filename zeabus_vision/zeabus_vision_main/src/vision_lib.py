@@ -5,6 +5,7 @@ import math
 import rospy
 from sensor_msgs.msg import CompressedImage, Image
 from cv_bridge import CvBridge, CvBridgeError
+from matplotlib import pyplot as plt
 import statistics
 image = None
 
@@ -75,49 +76,57 @@ def cut_contours(M, w, h, range_w, range_h):
     return False
 
 
-def equalization(imgBGR):
-    img = cv2.cvtColor(imgBGR, cv2.COLOR_BGR2HSV)
-    h, s, v = cv2.split(img)
+def equalization_bgr(imgBGR):
+    b, g, r = cv2.split(imgBGR)
+    b = cv2.equalizeHist(b)
+    g = cv2.equalizeHist(g)
+    r = cv2.equalizeHist(r)
+    equBGR = cv2.merge((b, g, r))
+    return equBGR
 
-    equ_s = cv2.equalizeHist(s)
-    equ_v = cv2.equalizeHist(v)
 
-    equHSV = cv2.merge((h, equ_s, equ_v))
-
+def equalization_hsv(imgHSV):
+    h, s, v = cv2.split(imgHSV)
+    v = cv2.equalizeHist(v)
+    equHSV = cv2.merge((h, s, v))
     return equHSV
 
 
-def clahe(img):
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2Lab)
-    L, a, b = cv2.split(img)
-    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(20, 20))
-    L = clahe.apply(L)
+def equalization_gray(imgGRAY):
+    equGRAY = cv2.equalizeHist(imgGRAY)
 
-    result = cv2.merge((L, a, b))
-    result_bgr = cv2.cvtColor(result, cv2.COLOR_Lab2BGR)
-    result_hsv = cv2.cvtColor(result_bgr, cv2.COLOR_BGR2HSV)
-    return result_hsv
+    return equGRAY
+
+
+def clahe(imgBGR):
+    lab = cv2.cvtColor(imgBGR, cv2.COLOR_BGR2Lab)
+    l, a, b = cv2.split(lab)
+    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(4, 4))
+    l = clahe.apply(l)
+    lab = cv2.merge((l, a, b))
+    resBGR = cv2.cvtColor(lab, cv2.COLOR_Lab2BGR)
+    return resBGR
 
 
 def stretching_hsv(hsv):
     h, s, v = cv2.split(hsv)
 
     if s.min() > 0:
-        s *= int(round((s - s.min()) / (s.max() - s.min())))
+        s *= int(round(255.0 / (s.max() - s.min())))
     if v.min() > 0:
-        v *= int(round((v - v.min()) / (v.max() - v.min())))
+        v *= int(round(255.0 / (v.max() - v.min())))
     hsv = cv2.merge((h, s, v))
     return hsv
 
 
 def stretching_bgr(bgr):
     b, g, r = cv2.split(bgr)
-    b -= b.min()
-    b *= int(round(255.0 / (b.max() - b.min())))
+    # b -= b.min()
+    # b *= int(round(255.0 / (b.max() - b.min())))
     g -= g.min()
     g *= int(round(255.0 / (g.max() - g.min())))
     r -= r.min()
-    r *= int(round(255.0 / (g.max() - g.min())))
+    r *= int(round(255.0 / (r.max() - r.min())))
 
     img = cv2.merge((b, g, r))
     return img
@@ -275,6 +284,8 @@ def shrinking_hsv(img):
 
 
 def publish_result(img, type, topicName):
+    if img == None:
+        return
     bridge = CvBridge()
     pub = rospy.Publisher(
         topicName, Image, queue_size=10)
@@ -373,15 +384,26 @@ if __name__ == '__main__':
     # sub = rospy.Subscriber('/leftcam_bottom/image_raw/compressed', CompressedImage,
     #                        callback1, queue_size=10)
     # sub = rospy.Subscriber('/top/center/image_rect_color/compressed', CompressedImage,
-    #                        callback1, queue_size=10)
+    #                        callback1, queue_size=10)HSVHSV
     sub = rospy.Subscriber('/bottom/left/image_raw/compressed', CompressedImage,
                            callback_compressed, queue_size=10)
+    plt.ion()
     while not rospy.is_shutdown():
         if image is None:
             continue
-        cv2.imshow('image', image.copy())
+
+        claheimg = clahe(image)
+        equBGR = equalization_bgr(claheimg)
+        hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+        equHSV = equalization_hsv(hsv)
+        # cv2.imshow('image', claheimg)
+        cv2.imshow('equBGR', equBGR)
+        cv2.imshow('hsv', hsv)
+        cv2.imshow('equHSV', equHSV)
+        h, s, v = cv2.split(hsv)
+
         k = cv2.waitKey(1) & 0xff
         if k == ord('q'):
             break
-        rospy.sleep(0.1)
+
     cv2.destroyAllWindows()
