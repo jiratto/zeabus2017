@@ -26,6 +26,9 @@ wait = False
 thresh = 184
 gamma = 30
 color = None
+width = 480
+height = 300
+reqColor = None
 
 
 def on_gamma_callback(param):
@@ -54,7 +57,7 @@ def on_threshold_callback(param):
 
 
 def threshold_callback(params):
-    global img_gray, thresh, gamma, img_gamma
+    global img_gray, thresh, gamma, img_gamma, width, height
     thresh = params
     img_gray = cv2.GaussianBlur(img_gray, (7, 7), 0)
     # cv2.imshow('blur', img_gray)
@@ -93,7 +96,7 @@ def threshold_callback(params):
     drawing = hsv.copy()
     #drawing =  np.zeros(unknown.shape, np.uint8)
 #    drawing = np.zeros(dist.size, np.uint8)
-    print(len(contours))
+    # print(len(contours))
 #    for i in range(len(contours)):
 #	hull.append(cv2.convexHull(contours[i]))
     ret = []
@@ -125,8 +128,11 @@ def threshold_callback(params):
 
             # cv2.imshow('equ', res)
 #
+            # circles = cv2.HoughCircles(
+            # img_roi, cv2.HOUGH_GRADIENT, 1.3, 100, param1=80, param2=20,
+            # minRadius=0, maxRadius=0)
             circles = cv2.HoughCircles(
-                img_roi, cv2.HOUGH_GRADIENT, 1.3, 100, param1=80, param2=20, minRadius=0, maxRadius=0)
+                img_roi, cv2.HOUGH_GRADIENT, 2, 100, param1=80, param2=20, minRadius=0, maxRadius=50)
             if circles != None:
                 for i in circles[0, :]:
 
@@ -176,44 +182,48 @@ def threshold_callback(params):
                     total = (
                         b_cdf.max() - b_histr[0]) + (g_cdf.max() - g_histr[0]) + (r_cdf.max() - r_histr[0])
                     if total == 0:
-                        Pb = 1.0
+                        Py = 1.0
                         Pg = 1.0
                         Pr = 1.0
                     else:
-                        Pb = (float(b_cdf.max() - b_histr[0]) / float(total))
+                        Py = (float(b_cdf.max() - b_histr[0]) / float(total))
                         Pg = (float(g_cdf.max() - g_histr[0]) / float(total))
                         Pr = (float(r_cdf.max() - r_histr[0]) / float(total))
 
                     if abs(Pg - Pr) < 0.2:
                         color = 'y'
-                    elif Pg > Pb and Pg > Pr:
+                    elif Pg > Py and Pg > Pr:
                         color = 'g'
-                    elif Pr > Pb and Pr > Pg:
+                    elif Pr > Py and Pr > Pg:
                         color = 'r'
 
-                    ret.append({"width": img_gray.shape[1], "height": img_gray.shape[0], "origin_x": int(box[1][0] + i[0]),
-                                "origin_y": int(box[1][1] + i[1]), "radius": int(i[2]), "prob_blue": Pb, "prob_green": Pg, "prob_red": Pr,  "color": color})
-
+                    # ret.append({"width": img_gray.shape[1], "height": img_gray.shape[0], "origin_x": int(box[1][0] + i[0]),
+                        # "origin_y": int(box[1][1] + i[1]), "radius": int(i[2]), "prob_blue": Py, "prob_green": Pg, "prob_red": Pr,  "color": color})
+                    # color, prob(r,y,g), r, x, y
+                    ret.append([color, Pr, Py, Pg, int(i[2]), int(
+                        box[1][0] + i[0]), int(box[1][1] + i[1])])
     print("Count all: {}".format(len(ret)))
     rospy.loginfo(ret)
     return ret
 
 
 def callback(msg):
-    global img, img_gray, hsv, gamma,  img_resize
+    global img, img_gray, hsv, gamma, width, height
     arr = np.fromstring(msg.data, np.uint8)
-    img = cv2.imdecode(arr, 1)
+    img = cv2.resize(cv2.imdecode(
+        arr, 1), (width, height))
 
 
 def mission_callback(msg):
-    global task, req
+    global task, req, reqColor
     task = msg.task.data
     req = msg.req.data
+    reqColor = req
     return find_bouy()
 
 
 def find_bouy():
-    global client, img, img_gray, thresh, img_gamma,  hsv,  img_resize,  color
+    global client, img, img_gray, thresh, img_gamma,  hsv,  img_resize,  reqColor
     res = None
     # cv2.namedWindow('Source', flags=cv2.WINDOW_NORMAL)
     # cv2.createTrackbar('Threshold: ', 'Source', thresh,
@@ -223,9 +233,7 @@ def find_bouy():
     while img is None:
         print 'img none'
         rospy.sleep(0.1)  # rospy.sleep(0.01)
-
-    img_resize = cv2.resize(img, (img.shape[1] / 4, img.shape[0] / 4))
-    img_gamma = adjust_gamma(img_resize, gamma)
+    img_gamma = adjust_gamma(img, gamma)
     hsv = cv2.cvtColor(img_gamma, cv2.COLOR_BGR2HSV)
     img_gray = cv2.cvtColor(img_gamma, cv2.COLOR_BGR2GRAY)
     # cv2.imshow('Source', img_gamma)
@@ -241,52 +249,95 @@ def find_bouy():
     #cv2.imshow('mask', mask)
     img_gray = cv2.bitwise_and(img_gray, img_gray, mask=mask)
     # cv2.imshow('Gray', img_gray)
-    publish_result(img_gray, 'gray', '/gray')
+
     # if old_frame == None:
     #     old_frame = img_gamma.copy()
     #     pass
     # else:
-    res = threshold_callback(thresh)
+    offset_c = width / 2.0
+    offset_r = height / 2.0
+    result = threshold_callback(thresh)
+    result_dict = {'r': [], 'g': [], 'y': [], 'a': []}
+    if len(result) > 0:
+        for res in result:
+            # color, prob(r,y,g), r, x, y
+            [color, Pr, Py, Pg, r, x, y] = res
+            resmsg = [color, r, math.pi * r * r, x, y]
+            # if r
+            if len(result_dict[color]) <= 0:
+                result_dict[color].append(resmsg)
+            else:
+                if result_dict[color][0][1] < resmsg[1]:
+                    result_dict[color].pop()
+                    result_dict[color].append(resmsg)
+            cv2.circle(img_gray, (int(x), int(y)), 3, (0, 255, 255), -1)
 
-    x = 0
-    y = 0
-    radius = 0
-    color_res = 'c'
-    r, c = img_gray.shape
-    res = None
-    if res != None:
-        x = res[0]
-        y = res[1]
-        print str(x) + " " + str(y)
-        color_res = res[6]
-        radius = res[2]
-        prob = {'y': res[3], 'g': res[4], 'r': res[5]}
-        buoy = "window_x={7},window_y={8},origin_x={0},origin_y={1},radius={2},prob_blue={3},prob_green={4},prob_red={5},color={6}".format(
-            x, y, radius, res[3], res[4], res[5], res[6], c, r)
-        rospy.loginfo(buoy)
-        # pub.publish(buoy)
-    # old_frame = img_gamma.copy()
+    else:
+        m.cx = [0]
+        m.cy = [0]
+        m.area = [0]
+        m.prob = [0]
+        m.num = 0
+        m.appear = False
+        return m
+# /////////////////////////////////////////////////////////////////////////////////////////////////
+    if len(result_dict[reqColor]) <= 0 and not reqColor == 'a':
+        m.cx = [0]
+        m.cy = [0]
+        m.area = [0]
+        m.prob = [0]
+        m.num = 0
+        m.appear = False
+        return m
+    elif reqColor == 'a':
+        m.num = 0
+        if len(result_dict['r']) > 0:
+            color, r, area, x, y = result_dict['r'][0]
+            m.cx.append(x)
+            m.cy.append(y)
+            m.area.append(area)
+            m.prob.append(0)
+            m.num += 1
+        if len(result_dict['y']) > 0:
+            color, r, area, x, y = result_dict['y'][0]
+            m.cx.append(x)
+            m.cy.append(y)
+            m.area.append(area)
+            m.prob.append(0)
+            m.num += 1
+        if len(result_dict['g']) > 0:
+            color, r, area, x, y = result_dict['g'][0]
+            m.cx.append(x)
+            m.cy.append(y)
+            m.area.append(area)
+            m.prob.append(0)
+            m.num += 1
+        if m.num > 0:
+            m.appear = True
+        else:
+            m.appear = False
+        return m
+    else:
+        m.num = 0
+        if len(result_dict[reqColor]) > 0:
+            color, r, area, x, y = result_dict[reqColor][0]
+            m.cx.append(x)
+            m.cy.append(y)
+            m.area.append(area)
+            m.prob.append(0)
+            m.num += 1
+        if m.num > 0:
+            m.appear = True
+        else:
+            m.appear = False
+        return m
+    publish_result(img_gray, 'gray', '/gray')
     key = cv2.waitKey(1) & 0xff
 
     # if key == ord('q'):
     #     break
     # rate.sleep()
 
-    # cv2.destroyAllWindows()
-    offset_c = c / 2.0
-    offset_r = r / 2.0
-    m.cx = [(x - offset_c) / offset_c]
-    m.cy = [-(y - offset_r) / offset_r]
-    m.area = [(radius * radius * math.pi) / (r * c)]
-    m.prob = [0]
-    m.num = 1
-    if color == color_res:
-        m.appear = True
-        m.prob = [prob[str(color)]]
-    else:
-        m.appear = False
-    print m
-    return m
 
 if __name__ == '__main__':
     rospy.init_node('buoy', anonymous=True)
