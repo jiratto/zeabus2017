@@ -1,7 +1,7 @@
 <launch>
 	<!-- =================== SET Argument =================== -->
 	<arg name="camera_id_left" value="1" />
-	<arg name="camera_id_right" value="4" />
+	<arg name="camera_id_right" value="2" />
 	<arg name="ext_trigger_mode" value="False" />
 	<arg name="color_mode" value="bgr8" />
 	<arg name="image_width" value="1280" />
@@ -68,4 +68,5 @@
 		<param name="pixel_clock" type="int" value="$(arg pixel_clock)" />
 		<param name="flip_lr" type="bool" value="$(arg flip_lr)" />
 	</node>
+	<node pkg="zeabus_vision" name="auto_exposure_bottom" type="adjust_exposure_bottom.py" output="screen"/>
 </launch>
