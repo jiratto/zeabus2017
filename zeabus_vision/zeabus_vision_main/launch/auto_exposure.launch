@@ -1,4 +1,0 @@
-<launch>
-	<include file="$(find zeabus_vision)/launch/auto_exposure_top.launch"></include>
-	<include file="$(find zeabus_vision)/launch/auto_exposure_bottom.launch"></include>
-</launch>
