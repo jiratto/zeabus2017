@@ -278,6 +278,7 @@ def find_bouy():
         m.area = [0]
         m.prob = [0]
         m.num = 0
+        m.color = [0]
         m.appear = False
         return m
 # /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -287,6 +288,7 @@ def find_bouy():
         m.area = [0]
         m.prob = [0]
         m.num = 0
+        m.color.append(0)
         m.appear = False
         return m
     elif reqColor == 'a':
@@ -298,6 +300,7 @@ def find_bouy():
             m.area.append(area)
             m.prob.append(0)
             m.num += 1
+            m.color.append(1)
         if len(result_dict['y']) > 0:
             color, r, area, x, y = result_dict['y'][0]
             m.cx.append(x)
@@ -305,6 +308,7 @@ def find_bouy():
             m.area.append(area)
             m.prob.append(0)
             m.num += 1
+            m.color.append(2)
         if len(result_dict['g']) > 0:
             color, r, area, x, y = result_dict['g'][0]
             m.cx.append(x)
@@ -312,6 +316,7 @@ def find_bouy():
             m.area.append(area)
             m.prob.append(0)
             m.num += 1
+            m.color.append(3)
         if m.num > 0:
             m.appear = True
         else:
@@ -326,9 +331,16 @@ def find_bouy():
             m.area.append(area)
             m.prob.append(0)
             m.num += 1
+            m.color.append(0)
         if m.num > 0:
             m.appear = True
         else:
+            m.cx = [0]
+            m.cy = [0]
+            m.area = [0]
+            m.prob = [0]
+            m.num = 0
+            m.color.append(0)
             m.appear = False
         return m
     publish_result(img_gray, 'gray', '/gray')
