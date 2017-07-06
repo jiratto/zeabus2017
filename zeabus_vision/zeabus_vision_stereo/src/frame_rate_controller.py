@@ -15,18 +15,21 @@ def get_param(param):
 
 def init_serial(port, baud_rate):
     global ser
-    ser = serial.Serial('/dev/ttyACM0', 115200)
+    ser = serial.Serial(port, baud_rate)
     if not ser:
         ser.open()
+    print('init serial')
 
 
 def set_frame_rate(frameRate):
-    global node, client, ser
-    print('set_frame_rate')
-    print(frameRate)
-    ser.write('set ' + str(frameRate) + ''.encode('utf-8'))
-    params = {str('frame_rate'): frameRate}
-    config = client.update_configuration(params)
+    global ser
+    print('wait for set frame rate to arduino')
+    for i in xrange(10):
+        ser.write('set ' + str(frameRate) + '\n'.encode('utf-8'))
+        rospy.sleep(0.25)
+        print('.')
+    print('set_frame_rate: ') + str((frameRate))
+    # rospy.sleep(1)
 
 
 def nothing(variable):
@@ -35,40 +38,50 @@ def nothing(variable):
 
 def main():
     global node, client, ser
-    node = '/ueye_cam_nodelet_leftcam_top'
-    name = 'frame_rate'
-    frameRate = int(get_param('frame_rate'))
-    port = '/dev/ttyACM0'
+    windowName = 'frame_rate_controller'
+    trackbarName = 'framerate: '
+    frameRate = 15
+    port = '/dev/ttyUSB0'
     baud_rate = 115200
-    client = dynamic_reconfigure.client.Client(node)
-    print('init client')
-
-    cv2.namedWindow(name, flags=cv2.WINDOW_NORMAL)
-    cv2.moveWindow(name, 20, 20)
-    cv2.resizeWindow(name, 600, 20)
-    cv2.createTrackbar('value', name, 1, 30, nothing)
-    cv2.setTrackbarPos('value', name, frameRate)
-
     init_serial(port, baud_rate)
-    print('init serial')
+
     while not rospy.is_shutdown():
-        value = int(cv2.getTrackbarPos('value', name))
-        if value != frameRate:
-            cv2.setTrackbarPos('value', name, value)
+        line = ser.readline()
+        if not type(line) == type("string"):
+            line = str(line)
+        if line.find("frame") > -1:
+            frameRate = line.split(":")[1]
+            try:
+                frameRate = int(frameRate)
+                break
+            except:
+                print ('try to get frame rate from arduino')
+
+    print('=========== Get frame rate from arduino ===========')
+    cv2.namedWindow(windowName, flags=cv2.WINDOW_NORMAL)
+    cv2.moveWindow(windowName, 20, 20)
+    cv2.resizeWindow(windowName, 600, 30)
+    cv2.createTrackbar(trackbarName, windowName, 1, 30, nothing)
+    cv2.setTrackbarPos(trackbarName, windowName, frameRate)
+
+    while not rospy.is_shutdown():
+        value = int(cv2.getTrackbarPos(trackbarName, windowName))
+        if value == 0:
+            frameRate = 1
+            cv2.setTrackbarPos(trackbarName, windowName, frameRate)
+            set_frame_rate(frameRate)
+        elif value != frameRate:
+            cv2.setTrackbarPos(trackbarName, windowName, value)
             frameRate = value
             set_frame_rate(frameRate)
 
-        if value == 0:
-            frameRate = 1
-            cv2.setTrackbarPos('value', name, frameRate)
-            set_frame_rate(frameRate)
+        print('Current frame rate: ') + str(frameRate)
 
-        print('set frame rate')
-        print(frameRate)
         key = cv2.waitKey(1) & 0xff
         if key == ord('q'):
             break
         rospy.sleep(0.1)
+    cv2.destroyAllWindows()
 
 if __name__ == '__main__':
     rospy.init_node('frame_rate_controller')

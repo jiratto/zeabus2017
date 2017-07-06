@@ -6,6 +6,7 @@ from zeabus_vision_srv_msg.srv import *
 from std_msgs.msg import String
 if __name__ == '__main__':
     rospy.init_node('call_service')
+    # serviceName = 'vision_bouy'
     serviceName = 'vision_navigate'
     binsrv = 'vision_bin'
     print('wait service')
@@ -13,7 +14,8 @@ if __name__ == '__main__':
     print('service start')
 
     call = rospy.ServiceProxy(binsrv, vision_srv_default)
+    # call = rospy.ServiceProxy(serviceName, vision_srv_bouy)
     while not rospy.is_shutdown():
-        res = call(String('Navigate'), String('bin'))
+        res = call(String('Navigate'), String('nocover'))
         print res
         rospy.sleep(0.1)
