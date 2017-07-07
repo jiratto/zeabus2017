@@ -51,6 +51,7 @@ add_message_files(
   vision_msg_default.msg
   vision_msg_navigate.msg
   vision_msg_bouy.msg
+  vision_msg_squid.msg
 )
 
 ## Generate services in the 'srv' folder
@@ -59,6 +60,7 @@ add_service_files(
   vision_srv_default.srv
   vision_srv_navigate.srv
   vision_srv_bouy.srv
+  vision_srv_squid.srv
 )
 
 ## Generate actions in the 'action' folder
