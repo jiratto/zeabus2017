@@ -285,8 +285,9 @@ def shrinking_hsv(img):
 
 
 def publish_result(img, type, topicName):
-    if img == None:
-        return
+    if img is None:
+        img = np.zeros((200, 200))
+        type = "gray"
     bridge = CvBridge()
     pub = rospy.Publisher(
         topicName, Image, queue_size=10)
@@ -397,11 +398,13 @@ if __name__ == '__main__':
             continue
 
         claheimg = clahe(image)
-        equBGR = equalization_bgr(claheimg)
-        hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+        # equBGR = equalization_bgr(image)
+        hsv = cv2.cvtColor(claheimg, cv2.COLOR_BGR2HSV)
         equHSV = equalization_hsv(hsv)
-        # cv2.imshow('image', claheimg)
-        cv2.imshow('equBGR', equBGR)
+        bgr = cv2.cvtColor(equHSV, cv2.COLOR_HSV2BGR)
+
+        cv2.imshow('image', bgr)
+        # cv2.imshow('equBGR', equBGR)
         cv2.imshow('hsv', hsv)
         cv2.imshow('equHSV', equHSV)
         h, s, v = cv2.split(hsv)

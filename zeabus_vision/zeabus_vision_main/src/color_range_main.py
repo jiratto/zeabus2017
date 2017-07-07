@@ -198,6 +198,12 @@ def select_color():
     window_name = ['mask', 'red', 'orange',
                    'white', 'yellow', 'black', 'violet']
 
+    cv2.namedWindow('image_bgr', flags=cv2.WINDOW_NORMAL)
+    cv2.moveWindow('image_bgr', 400, 400)
+    cv2.resizeWindow('image_bgr', (width / 3), (height / 3))
+    cv2.createTrackbar('gamma', 'image_bgr', 0, 100, nothing)
+    cv2.setTrackbarPos('gamma', 'image_bgr', 1)
+
     cv2.namedWindow('image', flags=cv2.WINDOW_NORMAL)
     cv2.moveWindow('image', 20, 20)
     cv2.resizeWindow('image', (width / 3), height)
@@ -284,4 +290,3 @@ if __name__ == '__main__':
     print('topic: ' + str(cameraTopic))
     rospy.Subscriber(cameraTopic, CompressedImage, callback)
     select_color()
- 
