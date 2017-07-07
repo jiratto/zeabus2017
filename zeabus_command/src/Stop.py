@@ -9,4 +9,4 @@ if __name__ == '__main__':
     rospy.init_node ('stop_node')
     aicontrol.stop (1)
     rospy.sleep (1)
-    aicontrol.fix_zaxis (-1)
+    # aicontrol.fix_zaxis (-1)

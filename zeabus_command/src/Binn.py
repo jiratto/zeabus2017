@@ -29,6 +29,8 @@ class Binn (object):
 
 	def nocover (self):
 		self.aicontrol.fix_zaxis (depth.BINN_DETECTING)
+		prep = 0
+		
 		while not rospy.is_shutdown () and not self.aicontrol.is_fail (self.isFail):
 			ax = []
 			ay = []
@@ -70,35 +72,36 @@ class Binn (object):
 					print 'CENTER'
 					self.aicontrol.stop (1)
 					self.aicontrol.turn_yaw_relative (angle)
-					self.aicontrol.fix_zaxis (depth.BINN_FIRE)
-					rospy.sleep (5)
-					self.aicontrol.stop (5)
+					self.aicontrol.stop (2)
+					prep += 1
+					if prep == 3:
+						self.aicontrol.fix_zaxis (depth.BINN_FIRE)
+						rospy.sleep (5)
+						# self.aicontrol.drive_xaxis (-1)
+						# rospy.sleep (0.5)
 
-					# self.aicontrol.drive_xaxis (-1)
-					# rospy.sleep (0.5)
+						# print 'FIRE LEFT'
+						# self.aicontrol.stop (2)
+						# for i in xrange (3):
+						# 	self.hardware.command ('drop_left', 'drop')
+						# 	rospy.sleep (1)
+						# self.aicontrol.stop (1)
 
-					# print 'FIRE LEFT'
-					# self.aicontrol.stop (2)
-					# for i in xrange (3):
-					# 	self.hardware.command ('drop_left', 'drop')
-					# 	rospy.sleep (1)
-					# self.aicontrol.stop (1)
+						# print 'FIRE RIGHT'
+						# self.aicontrol.drive_yaxis (1)
+						# rospy.sleep (0.5)
+						# self.aicontrol.stop (2)
+						# for i in xrange (3):
+						# 	self.hardware.command ('drop_right', 'drop')
+						# 	rospy.sleep (1)
+						# self.aicontrol.stop (1)
 
-					# print 'FIRE RIGHT'
-					# self.aicontrol.drive_yaxis (1)
-					# rospy.sleep (0.5)
-					# self.aicontrol.stop (2)
-					# for i in xrange (3):
-					# 	self.hardware.command ('drop_right', 'drop')
-					# 	rospy.sleep (1)
-					# self.aicontrol.stop (1)
-
-					# rospy.sleep (3)
-					# self.hardware.command ('drop_left', 'close')
-					# rospy.sleep (3)
-					# self.hardware.command ('drop_right', 'close')
-					self.aicontrol.stop (1)
-					break
+						# rospy.sleep (3)
+						# self.hardware.command ('drop_left', 'close')
+						# rospy.sleep (3)
+						# self.hardware.command ('drop_right', 'close')
+						self.aicontrol.stop (1)
+						break
 				else:
 					x = self.aicontrol.adjust (x, -0.5, -0.1, 0.1, 0.5)
 					y = self.aicontrol.adjust (y, -0.5, -0.1, 0.1, 0.5)

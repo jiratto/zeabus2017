@@ -23,7 +23,7 @@ class Navigate (object):
 		self.countStateOne = 30
 		self.countStateTwo = 20
 		self.countStateThree = 20
-		self.oneLeg = 0 # check one leg loop case
+		self.checkSlide = 0 # check one leg loop case
 		self.task = 'navigate'
 		self.state = 0 # state go to navigate
 		self.data = None
@@ -94,16 +94,34 @@ class Navigate (object):
 				zero += 1
 			rospy.sleep (0.1)
 		
+		if self.checkSlide >= 8:
+				self.aicontrol.drive_xaxis (1)
+				rospy.sleep (3)
+				self.checkSlide = 0
+				return
+			elif self.checkSlide >= 6:
+				vy = self.aicontrol.adjust (vy, -0.2, -0.1, 0.1, 0.2)
+			elif self.checkSlide >= 4:
+				vy = self.aicontrol.adjust (vy, -0.3, -0.2, 0.2, 0.3)
+			else:
+				if mul > 0:
+					vy = 0.4
+				elif mul < 0:
+					vy = -0.4
+				else:
+					return
+
 		if two > one >= zero:
 			print 'TWO LEGS'
 
-			self.oneLeg = 0
 			avrCx = cx[2] / two
 
 			if self.aicontrol.is_center ([avrCx, 0], -0.1, 0.1, -0.1, 0.1):
 				print 'Center !!'
-				# vx = (1 / area[2]) * 3
-				self.aicontrol.drive_xaxis (1)
+
+				self.checkSlide = 0
+				vx = (1 / area[2]) * 3
+				self.aicontrol.drive_xaxis (vx)
 				rospy.sleep (8)
 			else:
 				print 'Drive to center'
@@ -116,33 +134,16 @@ class Navigate (object):
 			if self.aicontrol.is_fail (self.countStateOne):
 				print 'STATE 1 FAIL'
 				self.state = -1
-				
-			if mul > 0:
-				vy = 0.4
-			elif mul < 0:
-				vy = -0.4
-			else:
-				return
-
-			if self.oneLeg >= 8:
-				self.aicontrol.drive_xaxis (1)
-				rospy.sleep (3)
-				self.oneLeg = 0
-				return
-			elif self.oneLeg >= 6:
-				vy = self.aicontrol.adjust (vy, -0.2, -0.1, 0.1, 0.2)
-			elif self.oneLeg >= 4:
-				vy = self.aicontrol.adjust (vy, -0.3, -0.2, 0.2, 0.3)
 
 			self.aicontrol.drive_yaxis (vy)
 			rospy.sleep (2)
 			self.countStateOne -= 1
-			self.oneLeg += 1
+			self.checkSlide += 1
 
 		elif zero > one >= two:
 			print 'ZERO'
 
-			self.oneLeg = 0
+			self.checkSlide = 0
 
 			self.aicontrol.drive_xaxis (1)
 			rospy.sleep (1)
@@ -208,7 +209,7 @@ class Navigate (object):
 				self.aicontrol.stop (2)
 				countTurn -= 1
 
-			self.pos = self.aicontrol.get_position ()[0]
+			self.pos = self.aicontrol.get_position ()
 			self.aicontrol.stop (0.5)
 			self.aicontrol.drive_xaxis (-1)
 			rospy.sleep (5)
@@ -256,6 +257,13 @@ class Navigate (object):
 			elif self.data.numVertical == 0:
 				zero += 1
 			rospy.sleep (0.1)
+
+		if mul > 0:
+				vy = 1
+			elif mul < 0:
+				vy = -1
+			else:
+				return
 		
 		if two > one >= zero:
 			print 'TWO LEGS'
@@ -288,12 +296,6 @@ class Navigate (object):
 		elif one > two >= zero:
 			print 'ONE LEG'
 
-			if mul > 0:
-				vy = 1
-			elif mul < 0:
-				vy = -1
-			else:
-				return
 			self.aicontrol.drive_yaxis (vy)
 			rospy.sleep (4)
 			self.countStateThree -= 1
@@ -316,9 +318,13 @@ class Navigate (object):
 				# self.aicontrol.drive_xaxis (1)
 				# rospy.sleep (3)
 				x = self.aicontrol.get_position ()[0]
+				y = self.aicontrol.get_position ()[1]
 				print ('x: ', x)
-				print ('dest_x: ', self.pos)
-				self.aicontrol.drive_x_rel (self.pos - x)
+				print ('dest_x: ', self.pos[0])
+				self.aicontrol.drive_x_rel (self.pos[0] - x)
+				print ('y: ', y)
+				print ('dest_y: ', self.pos[1])
+				self.aicontrol.drive_y_rel (self.pos[1] - y)
 				if x >= self.pos:
 					print 'ROLL'
 					# self.aicontrol.roll (2)
