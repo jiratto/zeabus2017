@@ -24,7 +24,7 @@ hsv = None
 old_frame = None
 wait = False
 thresh = 184
-gamma = 40
+gamma = 30
 color = None
 width = 480
 height = 300
@@ -98,7 +98,7 @@ def threshold_callback(params):
 #    drawing = np.zeros(dist.size, np.uint8)
     # print(len(contours))
 #    for i in range(len(contours)):
-#   hull.append(cv2.convexHull(contours[i]))
+#	hull.append(cv2.convexHull(contours[i]))
     ret = []
     for i in range(len(contours)):
         minRect.append(cv2.minAreaRect(contours[i]))
@@ -133,7 +133,7 @@ def threshold_callback(params):
             # minRadius=0, maxRadius=0)
             circles = cv2.HoughCircles(
                 img_roi, cv2.HOUGH_GRADIENT, 2, 100, param1=80, param2=20, minRadius=0, maxRadius=50)
-            if not circles is None:
+            if circles != None:
                 for i in circles[0, :]:
 
                     cv2.circle(hsv_drawing, (int(
@@ -196,8 +196,7 @@ def threshold_callback(params):
                         color = 'g'
                     elif Pr > Py and Pr > Pg:
                         color = 'r'
-                    else:
-                        continue
+
                     # ret.append({"width": img_gray.shape[1], "height": img_gray.shape[0], "origin_x": int(box[1][0] + i[0]),
                         # "origin_y": int(box[1][1] + i[1]), "radius": int(i[2]), "prob_blue": Py, "prob_green": Pg, "prob_red": Pr,  "color": color})
                     # color, prob(r,y,g), r, x, y
@@ -255,13 +254,6 @@ def find_bouy():
     #     old_frame = img_gamma.copy()
     #     pass
     # else:
-    m.cx = []
-    m.cy = []
-    m.area = []
-    m.prob = []
-    m.num = 0
-    m.color = []
-    m.appear = False
     offset_c = width / 2.0
     offset_r = height / 2.0
     result = threshold_callback(thresh)
@@ -269,15 +261,15 @@ def find_bouy():
     if len(result) > 0:
         for res in result:
             # color, prob(r,y,g), r, x, y
-            [colors, Pr, Py, Pg, r, x, y] = res
-            resmsg = [colors, r, math.pi * r * r, x, y]
+            [color, Pr, Py, Pg, r, x, y] = res
+            resmsg = [color, r, math.pi * r * r, x, y]
             # if r
-            if len(result_dict[colors]) <= 0:
-                result_dict[colors].append(resmsg)
+            if len(result_dict[color]) <= 0:
+                result_dict[color].append(resmsg)
             else:
-                if result_dict[colors][0][1] < resmsg[1]:
-                    result_dict[colors].pop()
-                    result_dict[colors].append(resmsg)
+                if result_dict[color][0][1] < resmsg[1]:
+                    result_dict[color].pop()
+                    result_dict[color].append(resmsg)
             cv2.circle(img_gray, (int(x), int(y)), 3, (0, 255, 255), -1)
 
     else:
@@ -364,6 +356,6 @@ if __name__ == '__main__':
     topic = "/top/center/image_rect_color/compressed"
     rospy.Subscriber(topic, CompressedImage, callback)
     rospy.Service('vision_bouy', vision_srv_bouy, mission_callback)
-    rospy.spin()
-    # while not rospy.is_shutdown():
-    #     find_bouy()
+    #rospy.spin()
+    while not rospy.is_shutdown():
+        find_bouy()

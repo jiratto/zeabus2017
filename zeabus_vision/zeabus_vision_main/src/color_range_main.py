@@ -13,8 +13,8 @@ is_mask = False
 img = None
 hsv = None
 wait = False
-width = 1366
-height = 768
+width = 640
+height = 384
 cameraPos = 'down'
 
 
@@ -126,7 +126,7 @@ class window:
         x = self.genyaml()
         f.write(x)
         f.close()
-        
+
         print 'save'
 
     def genyaml(self):
@@ -141,20 +141,19 @@ class window:
 
 
 def callback(msg):
-    global img, wait, hsv
+    global img, wait, hsv, width, height
     if wait == False:
         arr = np.fromstring(msg.data, np.uint8)
         img = cv2.imdecode(arr, 1)
-        img = cv2.resize(img, (320, 256))
-        # hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+        img = cv2.resize(img, (width, height))
+        hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
         # gamma = adjust_gamma_by_v(img)
         # gamma = cv2.cvtColor(gamma, cv2.COLOR_BGR2HSV)
         # hsv = equalization(gamma)
-        
-        # hsv = clahe(fuck)
-        hsv = equalization(img)
 
+        # hsv = clahe(fuck)
+        # hsv = equalization(img)
 
 
 def draw_circle(event, x, y, flags, param):
@@ -212,8 +211,11 @@ def select_color():
     cv2.createTrackbar('Smax', 'image', 0, 255, nothing)
     cv2.createTrackbar('Vmax', 'image', 0, 255, nothing)
     cv2.createTrackbar('m <-> c', 'image', 0, 2, nothing)
+    cv2.createTrackbar('shoot_x', 'image', 0, width, nothing)
+    cv2.createTrackbar('shoot_y', 'image', 0, height, nothing)
     set_trackbar([179, 255, 255], [0, 0, 0])
-    cv2.setTrackbarPos('m <-> c', 'image', 1)
+    cv2.setTrackbarPos('shoot_x', 'image', int(width / 2))
+    cv2.setTrackbarPos('shoot_y', 'image', int(height / 2))
     cv2.setMouseCallback('image', draw_circle)
 
     w = window()
@@ -267,8 +269,10 @@ def select_color():
             w.save()
         elif key == ord('q'):
             break
-
+        x = cv2.getTrackbarPos('shoot_x', 'image')
+        y = cv2.getTrackbarPos('shoot_y', 'image')
         w.show_image(window_name)
+        cv2.circle(hsv, (int(x), int(y)), 5, (100, 255, 255), -1)
         cv2.imshow('image', hsv)
         click = False
         status = False

@@ -3,22 +3,25 @@ import cv2
 import rospy
 import numpy as np
 from scipy import stats
-from sensor_msgs.msg import CompressedImage
+from sensor_msgs.msg import CompressedImage, PointCloud
+from std_msgs.msg import Float32
 import math
 import dynamic_reconfigure.client
 import time
 import statistics
+
 from matplotlib import pyplot as plt
+from vision_lib import *
 img = None
 hsv = None
 node = None
 client = None
+width = 480
+height = 320
 
 
 def callback(msg):
-    global img, hsv
-    width = 160
-    height = 128
+    global img, hsv, width, height
     arr = np.fromstring(msg.data, np.uint8)
     img = cv2.resize(cv2.imdecode(arr, 1), (width, height))
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
@@ -35,11 +38,10 @@ def get_param(param):
     return rospy.get_param(str(node) + str(param), False)
 
 
-def get_cv():
-    global hsv
-    h, s, v = cv2.split(hsv)
-    mean = cv2.mean(v)
-    sd = cv2.meanStdDev(v, mean)
+def get_cv(v):
+    mean = cv2.mean(v)[0]
+    sd = cv2.meanStdDev(v, mean)[0]
+    # print mean, sd
     return sd / mean
 
 
@@ -68,59 +70,62 @@ def trimmed(v, trimmedValue):
 
 
 def adjust_exposure_time():
-    global hsv, img
+    global hsv, img, width, height
 
+    # cv2.namedWindow('image', flags=cv2.WINDOW_NORMAL)
+    # cv2.moveWindow('image', 20, 20)
+    # cv2.resizeWindow('image', width, height)
+    # cv2.createTrackbar('v', 'image', 0, 255, nothing)
     while not rospy.is_shutdown():
-        while img is None:
+        if hsv is None:
             rospy.sleep(0.01)
-            key = cv2.waitKey(1) & 0xff
-            if key == ord('q'):
-                break
+            print 'image is none'
+            continue
 
-        key = cv2.waitKey(1) & 0xff
-        # print('======= AE Bottom =======')
         h, s, v = cv2.split(hsv)
         vOneD = v.ravel()
-        mean = cv2.mean(vOneD)[0]
+        # sOneD = s.ravel()
+        vMean = cv2.mean(vOneD)[0]
+        # sMean = cv2.mean(sOneD)[0]
+        vMode = get_mode(vOneD)
+        # sMode = get_mode(sOneD)
+        vCV = get_cv(v)
+        # sCV = get_cv(s)
+        _, vSD = cv2.meanStdDev(vOneD, vMean)
+        vSD = vSD[0]
+        # _, sSD = cv2.meanStdDev(sOneD, sMean)
+        # sSD = sSD[0]
 
-        MODE = get_mode(vOneD)
-        _, SD = cv2.meanStdDev(vOneD, mean)
-        SD = SD[0]
-        CV = SD / mean
         ev = get_param('exposure')
-        # ev = max(ev, 0.3)
 
-        # MODE = get_mode(vOneD)
-        if SD < 70:
-            if MODE >= 240:
-                ev -= 0.05
-                set_param('exposure', ev)
-            elif MODE <= 60:
-                ev += 0.05
-                set_param('exposure', ev)
+        if vMode >= 235:
+            ev -= 0.1
+        elif 50 <= vMode <= 100:
+            ev += 0.05
+        elif vMode <= 45:
+            ev += 0.1
+        max(0.5, ev)
+        set_param('exposure', ev)
+        # print("SD: {0} mode: {1} mean: {2}".format(vSD, vMode, vMean))
+        # print("SD: {0} mode: {1} mean: {2}".format(sSD, sMode, sMean))
+        # print("My Auto Exposure: {0}".format(ev))
 
-        print("SD: {0} mode: {1} mean: {2}".format(SD, MODE, mean))
-        print("CV: {0} AE: {1}".format(CV, ev))
-
-        # print('========================')
-        cv2.imshow('v', v)
+        # cv2.imshow('image', img)
+        key = cv2.waitKey(1) & 0xff
         if key == ord('q'):
             break
-        # plt.plot(CV, 'r', MODE, 'g', mean, 'y', SD)
-        # plt.show()
-        rospy.sleep(0.25)
+
+        rospy.sleep(0.1)
+
 if __name__ == '__main__':
     rospy.init_node('adjust_exposure_time_top')
-    topic = rospy.get_param('auto_exposure/cameraTopic',
-                            '/top/center/image_rect_color/compressed')
-    node = rospy.get_param('auto_exposure/cameraManager',
-                           'ueye_cam_nodelet_top_center/')
-
+    topic = '/top/center/image_rect_color/compressed'
+    node = 'ueye_cam_nodelet_top_center/'
     rospy.Subscriber(topic, CompressedImage, callback)
     client = dynamic_reconfigure.client.Client(node)
     set_param('auto_exposure', False)
     set_param('auto_frame_rate', True)
-    ev = 1
+    ev = 0.7
     print("Exposure Start: {0}".format(ev))
     set_param('exposure', ev)
     time.sleep(2)
