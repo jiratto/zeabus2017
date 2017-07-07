@@ -124,12 +124,12 @@ class Navigate (object):
 			else:
 				return
 
-			if self.oneLeg >= 10:
+			if self.oneLeg >= 8:
 				self.aicontrol.drive_xaxis (1)
 				rospy.sleep (3)
 				self.oneLeg = 0
 				return
-			elif self.oneLeg >= 8:
+			elif self.oneLeg >= 6:
 				vy = self.aicontrol.adjust (vy, -0.2, -0.1, 0.1, 0.2)
 			elif self.oneLeg >= 4:
 				vy = self.aicontrol.adjust (vy, -0.3, -0.2, 0.2, 0.3)
@@ -184,9 +184,14 @@ class Navigate (object):
 					self.data = self.detectNav (String (self.task), String ('bot'))
 					self.data = self.data.data
 					
-					if -180 < self.data.angle < 180:
+					if -180 <= self.data.angle <= 180:
 						angle.append (self.data.angle)
-				self.angleBot = self.aicontrol.average (angle)
+				if len (angle) != 0:
+					self.angleBot = self.aicontrol.average (angle)
+				else:
+					self.aicontrol.drive_xaxis (1)
+					rospy.sleep (0.5)
+					continue
 
 				# self.aicontrol.drive_xaxis (-0.8)
 				# rospy.sleep (3)
@@ -205,16 +210,16 @@ class Navigate (object):
 
 			self.pos = self.aicontrol.get_position ()[0]
 			self.aicontrol.stop (0.5)
-			self.aicontrol.drive_xaxis (-0.8)
-			rospy.sleep (3)
+			self.aicontrol.drive_xaxis (-1)
+			rospy.sleep (5)
 			self.aicontrol.fix_zaxis (depth.NAVIGATE_DETECTING)
 
 			print ('State 3 : back and roll')
 			self.state = 3
 		else:
 			print 'NOT FOUND'
-			self.aicontrol.drive_xaxis (0.8)
-			rospy.sleep (3)
+			self.aicontrol.drive_xaxis (1)
+			rospy.sleep (4)
 
 			self.countStateTwo -= 1
 
@@ -290,7 +295,7 @@ class Navigate (object):
 			else:
 				return
 			self.aicontrol.drive_yaxis (vy)
-			rospy.sleep (3)
+			rospy.sleep (4)
 			self.countStateThree -= 1
 
 			# self.aicontrol.drive_xaxis (-0.8)
@@ -308,17 +313,18 @@ class Navigate (object):
 				print 'FORWARD TO ROLL'
 
 				self.aicontrol.fix_zaxis (depth.NAVIGATE_ROLL)
-				self.aicontrol.drive_xaxis (1)
-				rospy.sleep (3)
+				# self.aicontrol.drive_xaxis (1)
+				# rospy.sleep (3)
 				x = self.aicontrol.get_position ()[0]
 				print ('x: ', x)
 				print ('dest_x: ', self.pos)
+				self.aicontrol.drive_x_rel (self.pos - x)
 				if x >= self.pos:
 					print 'ROLL'
 					# self.aicontrol.roll (2)
 					# self.aicontrol.stop (1)
-					self.aicontrol.drive_xaxis (1)
-					rospy.sleep (8)
+					self.aicontrol.drive_xaxis (0.7)
+					rospy.sleep (10)
 					print 'State 4 : Navigate complete'
 					self.state = 4
 			# self.aicontrol.drive_xaxis (-0.8)
@@ -355,6 +361,6 @@ class Navigate (object):
 
 if __name__ == '__main__':
 	navigate = Navigate ()
-	# navigate.run ()
-	navigate.bot ()
+	navigate.run ()
+	# navigate.bot ()
 

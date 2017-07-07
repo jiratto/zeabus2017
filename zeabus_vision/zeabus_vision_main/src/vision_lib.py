@@ -87,6 +87,7 @@ def equalization_bgr(imgBGR):
 
 def equalization_hsv(imgHSV):
     h, s, v = cv2.split(imgHSV)
+    s = cv2.equalizeHist(s)
     v = cv2.equalizeHist(v)
     equHSV = cv2.merge((h, s, v))
     return equHSV
@@ -360,6 +361,9 @@ def dilate(imgBin, ker):
 
 def close(imgBin, ker):
     return cv2.morphologyEx(imgBin, cv2.MORPH_CLOSE, ker)
+
+def open_morph(imgBin, ker):
+    return cv2.morphologyEx(imgBin, cv2.MORPH_OPEN, ker)
 
 
 def callback_raw(ros_data):

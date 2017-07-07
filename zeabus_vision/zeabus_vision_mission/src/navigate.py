@@ -43,8 +43,8 @@ def tophat(imgBin, ker):
 
 def isVertical(x):
     global width
-    temp = 25
-    return (x<temp) or (x>width-temp)
+    temp = 35
+    return (x<temp)
 
 def isHorizon(y):
     global height
@@ -70,13 +70,16 @@ def navigate_top():
         offsetH = height/2
         im = img.copy()
         im_draw = img.copy()
+        offsetX = 45
 
         hsv = cv2.cvtColor(img.copy(), cv2.COLOR_BGR2HSV)
 
         # gamma = adjust_gamma_by_v(img.copy())
         # gamma = cv2.cvtColor(gamma, cv2.COLOR_BGR2HSV)
         # hsv = cv2.cvtColor(gamma, cv2.COLOR_BGR2HSV)
-        hsv = equalization(im)
+        cla = clahe(im)
+        hsv1 = cv2.cvtColor(cla, cv2.COLOR_BGR2HSV)
+        hsv = equalization_hsv(hsv1)
         # bgr = cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR)
         # stretchBGR = stretching_bgr(im)
 
@@ -213,6 +216,8 @@ def navigate_top():
 
         if count_bot != 0:
             cx /= count_bot
+            cx -= offsetX
+
 
         where = 'Dont know'
 
@@ -280,9 +285,12 @@ def navigate_bot():
         im_bot = img_bot.copy()
         imForDraw = img_bot.copy()
         lower_yellow, upper_yellow = getColor('yellow', 'down')
+        
 
         # hsv = cv2.cvtColor(im_bot.copy(), cv2.COLOR_BGR2HSV)
-        hsv = equalization(im_bot.copy())
+        cla = clahe(im_bot)
+        hsv1 = cv2.cvtColor(cla, cv2.COLOR_BGR2HSV)
+        hsv = equalization_hsv(hsv1)
 
         im_yellow = cv2.inRange(hsv, lower_yellow, upper_yellow)
         im_yellow = erode(im_yellow, rect_ker(5,5))

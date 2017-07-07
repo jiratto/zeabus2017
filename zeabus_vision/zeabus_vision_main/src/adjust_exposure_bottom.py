@@ -32,7 +32,7 @@ def set_param(param, value):
     global client, client1
     params = {str(param): value}
     config = client.update_configuration(params)
-    config1 = client1.update_configuration(params)
+    #config1 = client1.update_configuration(params)
 
 
 def get_param(param):
@@ -131,7 +131,7 @@ if __name__ == '__main__':
     node1 = 'ueye_cam_nodelet_bottom_right/'
     rospy.Subscriber(topic, CompressedImage, callback)
     client = dynamic_reconfigure.client.Client(node)
-    client1 = dynamic_reconfigure.client.Client(node1)
+    #client1 = dynamic_reconfigure.client.Client(node1)
     set_param('auto_exposure', False)
     set_param('auto_frame_rate', True)
     ev = 0.7
