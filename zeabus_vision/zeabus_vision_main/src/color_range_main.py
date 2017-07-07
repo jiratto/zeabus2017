@@ -146,14 +146,11 @@ def callback(msg):
         arr = np.fromstring(msg.data, np.uint8)
         img = cv2.imdecode(arr, 1)
         img = cv2.resize(img, (width, height))
-        hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
-        # gamma = adjust_gamma_by_v(img)
-        # gamma = cv2.cvtColor(gamma, cv2.COLOR_BGR2HSV)
-        # hsv = equalization(gamma)
-
-        # hsv = clahe(fuck)
-        # hsv = equalization(img)
+        # blur = cv2.bilateralFilter(img, 9, 75, 75)
+        cla = clahe(img)
+        hsv1 = cv2.cvtColor(cla, cv2.COLOR_BGR2HSV)
+        hsv = equalization_hsv(hsv1)
 
 
 def draw_circle(event, x, y, flags, param):
@@ -287,3 +284,4 @@ if __name__ == '__main__':
     print('topic: ' + str(cameraTopic))
     rospy.Subscriber(cameraTopic, CompressedImage, callback)
     select_color()
+ 
