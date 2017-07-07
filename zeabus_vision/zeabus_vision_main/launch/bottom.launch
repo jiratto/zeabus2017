@@ -8,9 +8,9 @@
 	<arg name="image_height" value="768" />
 	<arg name="auto_gain" value="False"/>
 	<arg name="master_gain" value="0" />
-	<arg name="red_gain" value="60" />
+	<arg name="red_gain" value="100" />
 	<arg name="green_gain" value="0" />
-	<arg name="blue_gain" value="30" />
+	<arg name="blue_gain" value="20" />
 	<arg name="auto_exposure" value="False"/>
 	<arg name="exposure" value="10"/>
 	<arg name="auto_white_balance" value="False"/>

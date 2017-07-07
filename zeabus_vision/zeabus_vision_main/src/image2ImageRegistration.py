@@ -140,6 +140,7 @@ if __name__ == "__main__":
     lena_org_gray = cv2.cvtColor(lena_org, cv2.COLOR_BGR2GRAY)
     lena_move_gray = cv2.cvtColor(lena_move, cv2.COLOR_BGR2GRAY)
     y, x = np.mgrid[:180, :360]
+    # ///////////////////////////////////////////////////////////////////////////////
     x_m, y_m = findAdjustRemapPanPoints(lena_org_gray, lena_move, x, y)
     x_m = x_m.astype('float32')
     y_m = y_m.astype('float32')

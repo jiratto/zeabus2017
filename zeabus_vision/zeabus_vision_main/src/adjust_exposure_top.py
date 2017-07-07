@@ -100,6 +100,8 @@ def adjust_exposure_time():
 
         if vMode >= 235:
             ev -= 0.1
+        elif 50 <= vMode <= 100:
+            ev += 0.05
         elif vMode <= 45:
             ev += 0.1
         max(0.5, ev)
