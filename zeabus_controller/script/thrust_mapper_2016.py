@@ -76,7 +76,7 @@ class thrust_mapper:
 	#		[-math.cos(math.radians(40)), -math.sin(math.radians(40)), 0],
 	#		[math.cos(math.radians(40)), -math.sin(math.radians(40)), 0]])	
 	# V2
-	self.d = array([[0, 0, 1],
+	self.d = array([[0, 0, -1],
 			[0, 0, 1],
 			[0, 0, 1],
 			[0, 0, 1],

@@ -282,16 +282,6 @@ void cmd_fix_positionCallBack(const geometry_msgs::Point msg){
 	fixPosition.position = msg;
 }
 
-/*
-void cmd_fix_positionCallBack(const geometry_msgs::Point msg){
-	isFixed[0] = false;
-	isFixed[1] = false;
-	isFixed[2] = false;
-	fixPosition.position = msg;
-}
-*/
-//
-
 void cmd_fix_orientationCallBack(const geometry_msgs::Quaternion msg){
 	isFixed[3] = true; 
 	isFixed[4] = true; 
