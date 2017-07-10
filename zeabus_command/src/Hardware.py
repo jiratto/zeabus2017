@@ -38,11 +38,11 @@ if __name__ == '__main__':
     # hw.command ('two', 'fire')
     # hw.command ('two', 'close')
 
-    hw.command ('drop_left', 'fire')
+    # hw.command ('drop_left', 'fire')
     # hw.command ('drop_left', 'close')
 
     # hw.command ('fire_right', 'fire')
-    # hw.command ('fire_right', 'close')
+    hw.command ('fire_right', 'close')
 
     # hw.command ('five', 'fire')
     # hw.command ('five', 'close')

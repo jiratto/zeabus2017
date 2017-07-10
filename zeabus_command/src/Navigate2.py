@@ -94,23 +94,24 @@ class Navigate (object):
 				zero += 1
 			rospy.sleep (0.1)
 		
-		if self.checkSlide >= 8:
-				self.aicontrol.drive_xaxis (1)
-				rospy.sleep (3)
-				self.checkSlide = 0
-				return
-			elif self.checkSlide >= 6:
-				vy = self.aicontrol.adjust (vy, -0.2, -0.1, 0.1, 0.2)
-			elif self.checkSlide >= 4:
-				vy = self.aicontrol.adjust (vy, -0.3, -0.2, 0.2, 0.3)
-			else:
-				if mul > 0:
-					vy = 0.4
-				elif mul < 0:
-					vy = -0.4
-				else:
-					return
+		if mul > 0:
+			vy = 0.4
+		elif mul < 0:
+			vy = -0.4
+		else:
+			vy = 0
 
+
+		if self.checkSlide >= 8:
+			self.aicontrol.drive_xaxis (1)
+			rospy.sleep (3)
+			self.checkSlide = 0
+			return
+		elif self.checkSlide >= 6:
+			vy = self.aicontrol.adjust (vy, -0.2, -0.1, 0.1, 0.2)
+		elif self.checkSlide >= 4:
+			vy = self.aicontrol.adjust (vy, -0.3, -0.2, 0.2, 0.3)
+		
 		if two > one >= zero:
 			print 'TWO LEGS'
 
@@ -190,7 +191,7 @@ class Navigate (object):
 				if len (angle) != 0:
 					self.angleBot = self.aicontrol.average (angle)
 				else:
-					self.aicontrol.drive_xaxis (1)
+					self.aicontrol.drive_xaxis (0.6)
 					rospy.sleep (0.5)
 					continue
 
@@ -200,19 +201,21 @@ class Navigate (object):
 				# self.aicontrol.stop (0.5)
 				# self.aicontrol.drive_xaxis (-0.8)
 				# rospy.sleep (3)
-				if -2 <= self.angleBot <= 2:
-					break
 
 				print ('Turn angle: ', self.angleBot)
 				self.aicontrol.turn_yaw_relative (self.angleBot)
 				rospy.sleep (2)
 				self.aicontrol.stop (2)
+
+				if -2 <= self.angleBot <= 2:
+					break
+
 				countTurn -= 1
 
-			self.pos = self.aicontrol.get_position ()
+			# self.pos = self.aicontrol.get_position ()
 			self.aicontrol.stop (0.5)
 			self.aicontrol.drive_xaxis (-1)
-			rospy.sleep (5)
+			rospy.sleep (8)
 			self.aicontrol.fix_zaxis (depth.NAVIGATE_DETECTING)
 
 			print ('State 3 : back and roll')
@@ -259,11 +262,12 @@ class Navigate (object):
 			rospy.sleep (0.1)
 
 		if mul > 0:
-				vy = 1
-			elif mul < 0:
-				vy = -1
-			else:
-				return
+			vy = 1
+		elif mul < 0:
+			vy = -1
+		else:
+			vy = 0
+
 		
 		if two > one >= zero:
 			print 'TWO LEGS'
@@ -296,7 +300,7 @@ class Navigate (object):
 		elif one > two >= zero:
 			print 'ONE LEG'
 
-			self.aicontrol.drive_yaxis (vy)
+			self.aicontrol.drive_yaxis (0.6 * vy)
 			rospy.sleep (4)
 			self.countStateThree -= 1
 
@@ -309,7 +313,7 @@ class Navigate (object):
 
 			if self.checkStateThree < 3:
 				self.aicontrol.drive_xaxis (1)
-				rospy.sleep (2)
+				rospy.sleep (0.5)
 				self.checkStateThree += 1
 			else:
 				print 'FORWARD TO ROLL'
@@ -317,22 +321,22 @@ class Navigate (object):
 				self.aicontrol.fix_zaxis (depth.NAVIGATE_ROLL)
 				# self.aicontrol.drive_xaxis (1)
 				# rospy.sleep (3)
-				x = self.aicontrol.get_position ()[0]
-				y = self.aicontrol.get_position ()[1]
-				print ('x: ', x)
-				print ('dest_x: ', self.pos[0])
-				self.aicontrol.drive_x_rel (self.pos[0] - x)
-				print ('y: ', y)
-				print ('dest_y: ', self.pos[1])
-				self.aicontrol.drive_y_rel (self.pos[1] - y)
-				if x >= self.pos:
-					print 'ROLL'
-					# self.aicontrol.roll (2)
-					# self.aicontrol.stop (1)
-					self.aicontrol.drive_xaxis (0.7)
-					rospy.sleep (10)
-					print 'State 4 : Navigate complete'
-					self.state = 4
+				# x = self.aicontrol.get_position ()[0]
+				# y = self.aicontrol.get_position ()[1]
+				# print ('x: ', x)
+				# print ('dest_x: ', self.pos[0])
+				# self.aicontrol.drive_x_rel (self.pos[0] - x)
+				# print ('y: ', y)
+				# print ('dest_y: ', self.pos[1])
+				# self.aicontrol.drive_y_rel (self.pos[1] - y)
+				# if x >= self.pos:
+				print 'ROLL'
+				# self.aicontrol.roll (2)
+				# self.aicontrol.stop (1)
+				self.aicontrol.drive_xaxis (0.7)
+				rospy.sleep (10)
+				print 'State 4 : Navigate complete'
+				self.state = 4
 			# self.aicontrol.drive_xaxis (-0.8)
 			# rospy.sleep (2)
 			# self.countStateThree -= 1
@@ -343,8 +347,8 @@ class Navigate (object):
 
 		self.aicontrol.fix_zaxis (depth.NAVIGATE_DETECTING)
 		# self.aicontrol.drive_x_rel (5)
-		self.aicontrol.drive_xaxis (1)
-		rospy.sleep (10)
+		# self.aicontrol.drive_xaxis (1)
+		# rospy.sleep (10)
 
 		while not rospy.is_shutdown ():
 			if self.state == 0:

@@ -24,6 +24,10 @@ if __name__ == '__main__':
 	# aicontrol.drive_yaxis (1)
 	# rospy.sleep (5)
 
+	print 'Top'
+	aicontrol.drive_zaxis (1)
+	rospy.sleep (2)
+
 	# print 'Slide right'
 	# aicontrol.drive_yaxis (-1)
 	# rospy.sleep (5)	
@@ -88,6 +92,6 @@ if __name__ == '__main__':
 	# dest_x = aicontrol.get_position ()[0]
 	# aicontrol.drive_x_rel (-2)
 
-	aicontrol.go_to_xyz (0, 0, -3.32)
+	# aicontrol.go_to_xyz (0, 0, -3.32)
 
 	aicontrol.stop (1)
