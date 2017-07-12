@@ -41,16 +41,16 @@ def find_squid(req):
 
     font = cv2.FONT_HERSHEY_SIMPLEX
 
-    kernelFrame = get_kernal('plus', (3, 3))
-    kernelRow = get_kernal('rect', (5, 3))
-    kernelCol = get_kernal('rect', (3, 5))
+    kernelFrame = get_kernal('plus', (5, 5))
+    kernelRow = get_kernal('rect', (3, 1))
+    kernelCol = get_kernal('rect', (1, 3))
 
     m = vision_msg_default()
     m.appear = False
     m.angle = 0
     m.x = 0
     m.y = 0
-
+    minArea = 500
     resWhite = np.zeros((height, width))
 
     while img is None:
@@ -60,112 +60,78 @@ def find_squid(req):
     resHSV = cv2.cvtColor(resPreprocess.copy(), cv2.COLOR_BGR2HSV)
     resImg = resPreprocess.copy()
 
-    result = []
+    resultFourCir = []
+    resultTwoCir = []
 
-    # resY = cv2.inRange(resHSV, lowerY, upperY)
-    maskY = cv2.inRange(resHSV, lowerY, upperY)
-    # resDilateRow = dilate(resY, kernelRow)
-    # resDilateCol = dilate(resY, kernelCol)
-    # resDilate = resDilateRow + resDilateCol
-    # resErode = erode(resDilate, kernelFrame)
-    # maskY = erode(resErode, kernelFrame)
-    # maskY = dilate(resY, kernelFrame)
-
-    # resW = cv2.inRange(resHSV, lowerW, upperW)
-    # resDilateRow = dilate(resW, kernelRow)
-    # resDilateCol = dilate(resW, kernelCol)
-    # resDilate = resDilateRow + resDilateCol
-    # resErode = erode(resDilate, kernelFrame)
-    # maskW = erode(resDilate, kernelFrame)
     maskW = cv2.inRange(resHSV, lowerW, upperW)
     maskR = cv2.inRange(resHSV, lowerR, upperR)
 
-    mask1 = cv2.subtract(maskY, maskW)
+    maskYPre = cv2.inRange(resHSV, lowerY, upperY)
+    maskY = dilate(maskYPre, kernelFrame)
+    maskYBlur = cv2.medianBlur(maskYPre, 3)
+
+    mask1 = cv2.subtract(maskYBlur, maskW)
     mask = cv2.subtract(mask1, maskR)
-    # _, contours, _ = cv2.findContours(
-    #     mask.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    maskInv = np.invert(mask)
 
-    # for c in contours:
-    #     M = cv2.moments(c)
-    #     area = cv2.contourArea(c)
-    #     if area < 100:
-    #         continue
-    #     if cut_contours(M, width, height, 25, 25):
-    #         continue
-    #     const = 0.04
-    #     peri = const * cv2.arcLength(c, True)
-    #     approx = cv2.approxPolyDP(c, const * peri, True)
+    _, contours, _ = cv2.findContours(
+        maskInv.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    statusFilter = False
 
-    #     approxLen = len(approx)
-    #     if approxLen >= 8:
-    #         rect = cv2.minAreaRect(c)
-    #         (x, y), (w, h), angle = rect
-    #         areaRect = int(w * h)
-    #         ratioScale = w * 1.0 / h
-    #         if areaRect >= 700 and 0.85 <= ratioScale <= 1.15:
-    #             areaScale = (areaRect * 1.0) / (width * height)
-    #             cv2.rectangle(resImg, (int(x - w / 2), int(y - h / 2)),
-    #                           (int(x + w / 2), int(y + h / 2)), (0, 255, 0), 2)
-    #             cv2.putText(resImg, str(areaScale) + ' ' + str(approxLen), (int(x - w / 2), int(y - h / 2)), font, 0.5,
-    #                         (0, 255, 255), 1, cv2.LINE_AA)
-    #             cv2.circle(resImg, ((int(x)),
-    #                                 int(y)), 4, (255, 255, 0), -1)
-    #             result.append([x, y, areaScale])
-    # circles = cv2.HoughCircles(mask.copy(), cv2.HOUGH_GRADIENT, dp=1,
-    # minDist=60, param1=50, param2=20, minRadius=10, maxRadius=100)
-    circles = cv2.HoughCircles(mask.copy(), cv2.HOUGH_GRADIENT, dp=1,
-                               minDist=60, param1=40, param2=30, minRadius=10, maxRadius=150)
-    if not circles is None:
-        print circles[0]
-        circles = sorted(circles[0], key=lambda l: l[2])
-        for circle in circles:
-            print circle
-            [x, y, r] = circle
-            if r > 100:
+    for c in contours:
+        area = cv2.contourArea(c)
+        # cv2.drawContours(resImg, [c], -1, (222, 2, 222), 3)
+        if area < minArea:
+            continue
+        (x, y), r = cv2.minEnclosingCircle(c)
+        areaCir = (math.pi * (r**2))
+        if area / areaCir <= 0.7:
+            continue
+        if statusFilter and (x - x_before)**2 + (y - y_before)**2 <= 10**2:
+            continue
+        cv2.circle(resImg, (int(x), int(y)), int(r), (255, 255, 0), 3)
+        cv2.circle(resImg, (int(x), int(y)), 2, (0, 255, 0), -1)
+        cv2.putText(resImg, 'Area: %.2f %d' %
+                    (((areaCir / (width * height))), (areaCir)),
+                    (int(x), int(y)), font, 0.5, (0, 255, 255), 1, cv2.LINE_AA)
+        resultFourCir.append([x, y, areaCir / (width * height)])
+        x_before = x
+        y_before = y
+        statusFilter = True
+
+    if len(resultFourCir) > 0:
+        resultFourCir = sorted(resultFourCir, key=lambda l: l[1], reverse=True)
+        cutterX = (resultFourCir[0][0] + resultFourCir[-1][0]) / 2.0
+        for res in resultFourCir:
+            x = res[0]
+            # < x_before and abs(y - y_before) <= 20:
+            if x >= cutterX + 20:  # statusFilter and
                 continue
-            area = (math.pi * (r**2)) / (width * height * 1.0)
-            cv2.circle(resImg, (x, y), r, (255, 255, 0), 3)
-            cv2.circle(resImg, (x, y), 2, (0, 255, 0), -1)
-            cv2.putText(resImg, 'R: ' + str(r) + 'Area: ' + str(area), (x, y), font, 0.25,
-                        (0, 255, 255), 1, cv2.LINE_AA)
-            result.append([x, y, area])
-    # if not circles1 is None:
-    #     print circles1[0]
-    #     circles1 = sorted(circles1[0], key=lambda l: l[2])
-    #     for circle in circles1:
-    #         print circle
-    #         [x, y, r] = circle
-    #         if r > 100:
-    #             continue
-    #         area = (math.pi * (r**2)) / (width * height * 1.0)
-    #         cv2.circle(resImg, (x, y), r, (0, 255, 0), 5)
-    #         cv2.circle(resImg, (x, y), 2, (0, 255, 0), -1)
-    #         cv2.putText(resImg, str(r), (x, y), font, 0.5,
-    #                     (0, 255, 0), 1, cv2.LINE_AA)
-            # result.append([x, y, area])
-    if len(result) > 0:
-        result = sorted(result, key=lambda l: l[2], reverse=True)
+            resultTwoCir.append(res)
+
+    if len(resultTwoCir) > 0:
+        resultTwoCir = sorted(resultTwoCir, key=lambda l: l[2], reverse=True)
         m.appear = True
         if req == 'a':
             x = 0
             ct = 0
-            for res in result:
-                x += res[0]
+            for res in resultTwoCir:
+                x += resultTwoCir[0]
                 ct += 1
             m.x = int(x / (ct * 1.0))
             m.y = int(height / 2.0)
         elif req == 's':
-            m.x = result[-1][0]
-            m.y = result[-1][1]
-            m.area = result[-1][2]
+            m.x = resultTwoCir[-1][0]
+            m.y = resultTwoCir[-1][1]
+            m.area = resultTwoCir[-1][2]
         elif req == 'b':
-            m.x = result[0][0]
-            m.y = result[0][1]
-            m.area = result[0][2]
+            m.x = resultTwoCir[0][0]
+            m.y = resultTwoCir[0][1]
+            m.area = resultTwoCir[0][2]
         offsetW = width / 2.0
         offsetH = height / 2.0
 
-        cv2.circle(resImg, ((int(m.x)), int(m.y)), 5, (255, 255, 255), -1)
+        cv2.circle(resImg, ((int(m.x)), int(m.y)), 6, (255, 255, 255), -1)
 
         m.x = -((m.x - offsetW) / offsetW)
         m.y = (offsetH - m.y) / offsetH
@@ -176,6 +142,7 @@ def find_squid(req):
     print m
 
     publish_result(mask, 'gray', '/result_squid_range')
+    publish_result(maskInv, 'gray', '/result_squid_range_inv')
     publish_result(resImg, 'bgr', '/result_squid')
     return m
 
@@ -183,6 +150,5 @@ if __name__ == '__main__':
     rospy.init_node('vision_squid', anonymous=True)
     topic = "/top/center/image_rect_color/compressed"
     rospy.Subscriber(topic, CompressedImage, img_callback)
-    # find_squid()
     rospy.Service('vision_squid', vision_srv_default(), mission_callback)
     rospy.spin()
