@@ -16,17 +16,17 @@ if __name__ == '__main__':
 	# aicontrol.drive_xaxis (1)
 	# rospy.sleep (10)
 
-	# print 'Backward'
-	# aicontrol.drive_xaxis (-1)
-	# rospy.sleep (40)
+	print 'Backward'
+	aicontrol.drive_xaxis (-1)
+	rospy.sleep (20)
 
 	# print 'Slide left'
 	# aicontrol.drive_yaxis (1)
 	# rospy.sleep (5)
 
-	print 'Top'
-	aicontrol.drive_zaxis (1)
-	rospy.sleep (2)
+	# print 'Top'
+	# aicontrol.drive_zaxis (1)
+	# rospy.sleep (2)
 
 	# print 'Slide right'
 	# aicontrol.drive_yaxis (-1)

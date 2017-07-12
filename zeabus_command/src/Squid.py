@@ -25,7 +25,9 @@ class Squid (object):
 
 		print 'Prepare to do task Squid'
 
-	def run (self):
+	def find_circle (self, rad, dep, size):
+		self.aicontrol.fix_zaxis (dep)
+		used = False
 		while not rospy.is_shutdown () and not self.aicontrol.is_fail (self.isFail):
 			print 'Loop of detecting'
 			ax = []
@@ -36,7 +38,7 @@ class Squid (object):
 
 			print 'Collect avg'
 			for i in xrange (10):
-				self.data = self.detect_sq (String ('squid'), String ('s'))
+				self.data = self.detect_sq (String ('squid'), String (size))
 				self.data = self.data.data
 
 				if self.data.appear:
@@ -55,32 +57,44 @@ class Squid (object):
 				print 'Found Small Squid'
 				x = self.aicontrol.average (ax)
 				y = self.aicontrol.average (ay)
-				area = self.aicontrol.average (aarea)
+				area = max(aarea)
 
-				if self.aicontrol.is_center ([x, y], -0.1, 0.1, -0.2, 0.2):
+				if self.aicontrol.is_center ([x, y], -0.1, 0.1, -0.2, 0.2) or used:
 					self.aicontrol.stop (1)
-					if area > 0.1:
+					print area
+					if area > rad:
 						print 'Center Squid'
 						self.aicontrol.stop (2)
-						for i in xrange (3):
-							self.hardware.command ('fire_right', 'fire')
-							rospy.sleep (1)
-						# self.aicontrol.stop (1)
+						self.aicontrol.drive_xaxis (0.8)
+						rospy.sleep (5)
+						self.aicontrol.drive_zaxis (-0.5)
+						rospy.sleep (2)
+						self.aicontrol.stop (5)
+						# for i in xrange (3):
+						# 	self.hardware.command ('fire_right', 'fire')
+						# 	rospy.sleep (1)
+						self.aicontrol.stop (2)
 						break
+					elif area > rad / 2:
+						y = self.aicontrol.adjust (x, -0.3, -0.1, 0.1, 0.3)
+						# z = self.aicontrol.adjust (y, -0.2, -0.1, 0.0, 0.0)
+						self.aicontrol.drive ([0.1, y, 0, 0, 0, 0])
+						rospy.sleep (0.2)
 					else:
 						print 'Center but not near'
 						self.aicontrol.drive_xaxis (0.5)
 						rospy.sleep (0.5)
+						used = True
 						# self.aicontrol.stop (0.5)
 				else:
 					print ax
 					print x
 					print 'Not Center'
 					y = self.aicontrol.adjust (x, -0.3, -0.1, 0.1, 0.3)
-					z = self.aicontrol.adjust (y, -0.5, -0.3, 0.0, 0.0)
+					z = self.aicontrol.adjust (y, -0.2, -0.1, 0.0, 0.0)
 					if area < 0.2:
 						print 'Adjust'
-						self.aicontrol.drive ([0.1, y, z, 0, 0, 0])
+						self.aicontrol.drive ([0, y, z, 0, 0, 0])
 						rospy.sleep (0.2)
 					else:
 						print 'Forward'
@@ -91,23 +105,11 @@ class Squid (object):
 				rospy.sleep (0.3)
 				self.isFail -= 1
 
-
-	# def find_all (self):
-	# 	self.aicontrol.fix_zaxis (dep)
-	# 	while not rospy.is_shutdown ():
-	# 		self.data = self.detect_sq (String ('squid'), String ('a'))
-	# 		self.data = self.data.data
-
-	# 		self.sm = self.detect_sq (String ('squid'), String ('s'))
-	# 		self.sm = self.sm.data
-
-	# 		self.lg = self.detect_sq (String ('squid'), String ('b'))
-	# 		self.lg = self.lg.data
-
-	# 		if self.lg.appear and self.sm.appear:
-	# 			return True
-	# 		else:
-
+	def run (self):
+		self.find_circle (0.07, depth.SQUID_DETECTING_DOWN, 'b')
+		self.aicontrol.stop (5)
+		# self.aicontrol.fix_zaxis (depth.SQUID_DETECTING_TOP)
+		self.find_circle (0.04, depth.SQUID_DETECTING_TOP, 's')
 
 if __name__ == '__main__':
 	squid = Squid ()

@@ -205,7 +205,7 @@ class Bouy (object):
 			else:
 				print 'MOVE YZ'
 				vy = self.aicontrol.adjust (xImg, -0.6, -0.3, 0.3, 0.6)
-				vz = self.aicontrol.adjust (yImg, -1, -0.95, 0.2, 0.3)
+				vz = self.aicontrol.adjust (yImg, -1, -0.95, 0.05, 0.1)
 				
 				# self.distance.append (vy)
 				# self.distance.append (vz)
@@ -445,5 +445,5 @@ if __name__ == '__main__':
 	# bouy.find_num ()
 	# bouy.movement ('y')
 	# bouy.get_data ('y')
-	# bouy.test_move ('r')
-	bouy.test_comeback ()
+	bouy.test_move ('r')
+	# bouy.test_comeback ()

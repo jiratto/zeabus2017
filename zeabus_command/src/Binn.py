@@ -77,30 +77,30 @@ class Binn (object):
 					if prep == 3:
 						self.aicontrol.fix_zaxis (depth.BINN_FIRE)
 						rospy.sleep (5)
-						# self.aicontrol.drive_xaxis (-1)
+						# self.aicontrol.drive_xaxis (1)
 						# rospy.sleep (0.5)
 
-						# print 'FIRE LEFT'
-						# self.aicontrol.stop (2)
+						print 'FIRE LEFT'
+						self.aicontrol.stop (2)
 						# for i in xrange (3):
 						# 	self.hardware.command ('drop_left', 'drop')
 						# 	rospy.sleep (1)
-						# self.aicontrol.stop (1)
+						self.aicontrol.stop (5)
 
-						# print 'FIRE RIGHT'
-						# self.aicontrol.drive_yaxis (1)
-						# rospy.sleep (0.5)
-						# self.aicontrol.stop (2)
+						print 'FIRE RIGHT'
+						self.aicontrol.drive_yaxis (1)
+						rospy.sleep (1.2)
+						self.aicontrol.stop (2)
 						# for i in xrange (3):
 						# 	self.hardware.command ('drop_right', 'drop')
 						# 	rospy.sleep (1)
-						# self.aicontrol.stop (1)
+						self.aicontrol.stop (1)
 
 						# rospy.sleep (3)
 						# self.hardware.command ('drop_left', 'close')
 						# rospy.sleep (3)
 						# self.hardware.command ('drop_right', 'close')
-						self.aicontrol.stop (1)
+						# self.aicontrol.stop (1)
 						break
 				else:
 					x = self.aicontrol.adjust (x, -0.5, -0.1, 0.1, 0.5)
@@ -109,6 +109,7 @@ class Binn (object):
 					rospy.sleep (self.aicontrol.adjust (area, 0.2, 0.2, 0.2, 0.6))
 					# self.aicontrol.turn_yaw_relative (angle)
 					rospy.sleep (2)
+					self.isFail -= 0.2
 			else:
 				self.aicontrol.drive_xaxis (0.5)
 				rospy.sleep (1)
