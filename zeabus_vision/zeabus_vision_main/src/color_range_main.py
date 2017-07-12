@@ -13,9 +13,10 @@ is_mask = False
 img = None
 hsv = None
 wait = False
-width = 640
-height = 384
+width = int(1152 / 3)
+height = int(870 / 3)
 cameraPos = 'down'
+mission = None
 
 
 class window:
@@ -140,17 +141,20 @@ class window:
         return tmp
 
 
-def callback(msg):
-    global img, wait, hsv, width, height
+def camera_callback(msg):
+    global img, wait, hsv, width, height, mission
     if wait == False:
         arr = np.fromstring(msg.data, np.uint8)
-        img = cv2.imdecode(arr, 1)
-        img = cv2.resize(img, (width, height))
-
+        img_data = cv2.resize(cv2.imdecode(arr, 1), (width, height))
+        if
+        img = preprocess_squid(img_data)
+        # img = preprocess_navigate(img_data)
+        # img = preprocess_bouy(img_data)
+        hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
         # blur = cv2.bilateralFilter(img, 9, 75, 75)
-        cla = clahe(img)
-        hsv1 = cv2.cvtColor(cla, cv2.COLOR_BGR2HSV)
-        hsv = equalization_hsv(hsv1)
+        # cla = clahe(img)
+        # hsv1 = cv2.cvtColor(cla, cv2.COLOR_BGR2HSV)
+        # hsv = equalization_hsv(hsv1)
 
 
 def draw_circle(event, x, y, flags, param):
@@ -196,7 +200,7 @@ def compare_range(l, u, l1, u1):
 def select_color():
     global pixel, img, wait, hsv, click, is_mask, width, height
     window_name = ['mask', 'red', 'orange',
-                   'white', 'yellow', 'black', 'violet']
+                   'white', 'yellow', 'black', 'green ,']
 
     cv2.namedWindow('image_bgr', flags=cv2.WINDOW_NORMAL)
     cv2.moveWindow('image_bgr', 400, 400)
@@ -277,6 +281,7 @@ def select_color():
         w.show_image(window_name)
         cv2.circle(hsv, (int(x), int(y)), 5, (100, 255, 255), -1)
         cv2.imshow('image', hsv)
+        cv2.imshow('imageBGR', img)
         click = False
         status = False
     cv2.destroyAllWindows()
@@ -284,9 +289,10 @@ def select_color():
 if __name__ == '__main__':
     rospy.init_node('color_range_main')
     cameraPos = rospy.get_param('color_range/cameraPos', 'down')
-    print('camera: ' + str(cameraPos))
     cameraTopic = rospy.get_param('color_range/cameraTopic',
                                   '/rightcam_bottom/image_raw/compressed')
-    print('topic: ' + str(cameraTopic))
-    rospy.Subscriber(cameraTopic, CompressedImage, callback)
+    mission = rospy.get_param('color_range/mission', 'default')
+    print('topic: ' + str(cameraTopic) + ' camera: ' +
+          str(cameraPos) + ' mission: ' + str(mission))
+    rospy.Subscriber(cameraTopic, CompressedImage, camera_callback)
     select_color()
