@@ -30,14 +30,8 @@ class Bouy (object):
 		rospy.wait_for_service (bouy_srv)
 		self.detect_bouy = rospy.ServiceProxy (bouy_srv, vision_srv_bouy)
 
-	def test_one_ball (self):
-		while not rospy.is_shutdown ():
-			rospy.sleep (1)
-			self.data = self.detect_bouy (String ('bouy'), String('red'))
-			self.data = self.data.data
-
 	def find_num (self):
-		self.data = self.detect_bouy (String ('bouy'), String ('all'))
+		self.data = self.detect_bouy (String ('bouy'), String ('a'))
 		self.data = self.data.data
 
 		return self.data.num
@@ -156,6 +150,8 @@ class Bouy (object):
 			return True
 		else:
 			print 'NOT CENTER'
+
+			pos = self.aicontrol.get_position ()
 
 			if -0.05 <= pos[2] <= 0.05:
 				print 'FIX Z'
@@ -423,6 +419,7 @@ class Bouy (object):
 
 	def test_move (self, color):
 		self.startPos = self.aicontrol.get_position ()
+		self.aicontrol.fix_zaxis (-2.6)
 		while not self.movement (color) and not rospy.is_shutdown ():
 			print 'not pass'
 		print 'pass'
@@ -433,7 +430,7 @@ class Bouy (object):
 if __name__ == '__main__':
 	bouy = Bouy ()
 	# Bouy.run ()
-	# bouy.find_num ()
+	bouy.find_num ()
 	# bouy.movement ('y')
-	bouy.get_data ('y')
-	# bouy.test_move ('y')
+	# bouy.get_data ('y')
+	bouy.test_move ('y')

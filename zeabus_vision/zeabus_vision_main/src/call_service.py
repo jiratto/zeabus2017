@@ -13,9 +13,10 @@ if __name__ == '__main__':
     rospy.wait_for_service(binsrv)
     print('service start')
 
-    call = rospy.ServiceProxy(binsrv, vision_srv_default)
-    # call = rospy.ServiceProxy(serviceName, vision_srv_bouy)
+    # call = rospy.ServiceProxy(serviceName, vision_srv_navigate)
+    call = rospy.ServiceProxy(serviceName, vision_srv_bouy)
     while not rospy.is_shutdown():
-        res = call(String('Navigate'), String('nocover'))
+        # res = call(String('Navigate'), String('bot'))
+        res = call(String('bouy'), String('y'))
         print res
         rospy.sleep(0.1)

@@ -100,9 +100,12 @@ def adjust_exposure_time():
 
         if vMode >= 235:
             ev -= 0.1
+        elif 45 < vMode <= 90:
+             ev += 0.025
         elif vMode <= 45:
             ev += 0.1
-        max(0.5, ev)
+        ev = max(0.25, ev)
+	print ev
         set_param('exposure', ev)
         # print("SD: {0} mode: {1} mean: {2}".format(vSD, vMode, vMean))
         # print("SD: {0} mode: {1} mean: {2}".format(sSD, sMode, sMean))

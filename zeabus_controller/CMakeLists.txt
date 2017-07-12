@@ -23,6 +23,7 @@ add_service_files(
   DIRECTORY srv
   FILES
   drive_x.srv
+  navigation_srv.srv
 )
 #add_action_files(DIRECTORY action FILES BarrelRoll.action)
 generate_messages(DEPENDENCIES std_msgs)
@@ -90,3 +91,4 @@ target_link_libraries(zeabus_controller ${catkin_LIBRARIES})
 #   plugin.xml
 #   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 # )
+

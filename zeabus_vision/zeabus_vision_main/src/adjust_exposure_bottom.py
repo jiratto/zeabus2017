@@ -16,6 +16,7 @@ img = None
 hsv = None
 node = None
 client = None
+client1 = None
 width = 480
 height = 320
 
@@ -28,9 +29,10 @@ def callback(msg):
 
 
 def set_param(param, value):
-    global client
+    global client, client1
     params = {str(param): value}
     config = client.update_configuration(params)
+    #config1 = client1.update_configuration(params)
 
 
 def get_param(param):
@@ -104,6 +106,8 @@ def adjust_exposure_time():
         # MODE = get_mode(vOneD)
         if vMode >= 235:
             ev -= 0.1
+        elif 50 <= vMode <= 100:
+            ev += 0.05
         elif vMode <= 45:
             ev += 0.1
         max(0.5, ev)
@@ -124,8 +128,10 @@ if __name__ == '__main__':
     rospy.init_node('adjust_exposure_time_bottom')
     topic = '/bottom/left/image_raw/compressed'
     node = 'ueye_cam_nodelet_bottom_left/'
+    node1 = 'ueye_cam_nodelet_bottom_right/'
     rospy.Subscriber(topic, CompressedImage, callback)
     client = dynamic_reconfigure.client.Client(node)
+    #client1 = dynamic_reconfigure.client.Client(node1)
     set_param('auto_exposure', False)
     set_param('auto_frame_rate', True)
     ev = 0.7

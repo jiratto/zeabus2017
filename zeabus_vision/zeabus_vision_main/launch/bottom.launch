@@ -8,9 +8,9 @@
 	<arg name="image_height" value="768" />
 	<arg name="auto_gain" value="False"/>
 	<arg name="master_gain" value="0" />
-	<arg name="red_gain" value="60" />
+	<arg name="red_gain" value="100" />
 	<arg name="green_gain" value="0" />
-	<arg name="blue_gain" value="30" />
+	<arg name="blue_gain" value="20" />
 	<arg name="auto_exposure" value="False"/>
 	<arg name="exposure" value="10"/>
 	<arg name="auto_white_balance" value="False"/>
@@ -42,9 +42,9 @@
 		<param name="frame_rate" type="double" value="$(arg frame_rate)" />
 		<param name="pixel_clock" type="int" value="$(arg pixel_clock)" />
 		<param name="flip_lr" type="bool" value="$(arg flip_lr)" />
-	</node>
+	</node> 
 	<!-- =================== RIGHT CAMERA =================== -->
-	<arg name="nodelet_manager_name_right" value="bottom_right" />
+	<!-- <arg name="nodelet_manager_name_right" value="bottom_right" />
 	<arg name="camera_name_right" value="/bottom/right" />
 	<node pkg="nodelet" type="nodelet" name="$(arg nodelet_manager_name_right)" args="manager" output="screen" />
 	<node pkg="nodelet" type="nodelet" name="ueye_cam_nodelet_$(arg nodelet_manager_name_right)" args="load ueye_cam/ueye_cam_nodelet $(arg nodelet_manager_name_right)">
@@ -67,6 +67,6 @@
 		<param name="frame_rate" type="double" value="$(arg frame_rate)" />
 		<param name="pixel_clock" type="int" value="$(arg pixel_clock)" />
 		<param name="flip_lr" type="bool" value="$(arg flip_lr)" />
-	</node>
+	</node> -->
 	<node pkg="zeabus_vision" name="auto_exposure_bottom" type="adjust_exposure_bottom.py" output="screen"/>
 </launch>

@@ -20,7 +20,7 @@ class Hardware:
         srv = rospy.ServiceProxy(srv_name, IOCommand)
         print 'service complete'
 
-        equipment = ['drop_right', 'gripper', 'fire_left', 'drop_left', 'fire_right', 'eiei', 'HI', 'Seven']
+        equipment = ['fire_left', 'one', 'two', 'drop_left', 'fire_right', 'five', 'drop_right', 'seven']
         result = srv(equipment.index(eq))
 
         print result
@@ -29,26 +29,27 @@ if __name__ == '__main__':
     hw = Hardware()
     print 'hardware'
 
-    hw.command ('drop_right', 'drop')
-    # hw.command ('drop_right', 'close')
+    # hw.command ('fire_left', 'fire')
+    # hw.command ('fire_left', 'close')
 
-    hw.command ('gripper', 'grab')
-    # hw.command ('gripper', 'leave')
-    
-    hw.command ('drop_left', 'drop')
+    # hw.command ('one', 'fire')
+    # hw.command ('one', 'close')
+
+    # hw.command ('two', 'fire')
+    # hw.command ('two', 'close')
+
+    # hw.command ('drop_left', 'fire')
     # hw.command ('drop_left', 'close')
 
-    hw.command ('fire_left', 'fire')
-    # hw.command ('fire_left', 'close')
-    
-    hw.command ('fire_right', 'fire')
-    # hw.command ('fire_right', 'close')
+    # hw.command ('fire_right', 'fire')
+    hw.command ('fire_right', 'close')
 
-    hw.command ('eiei', 'fire')
-    # hw.command ('eiei', 'close')
+    # hw.command ('five', 'fire')
+    # hw.command ('five', 'close')
 
-    hw.command ('HI', 'fire')
-    # hw.command ('HI', 'close')
+    # hw.command ('drop_right', 'fire')
+    # hw.command ('drop_right', 'close')
 
-    hw.command ('Seven', 'fire')
-    # hw.command ('Seven', 'close')
+    # hw.command ('seven', 'fire')
+    # hw.command ('seven', 'close')
+

@@ -29,6 +29,8 @@ class Binn (object):
 
 	def nocover (self):
 		self.aicontrol.fix_zaxis (depth.BINN_DETECTING)
+		prep = 0
+		
 		while not rospy.is_shutdown () and not self.aicontrol.is_fail (self.isFail):
 			ax = []
 			ay = []
@@ -55,47 +57,59 @@ class Binn (object):
 			if count == 0:
 				found = False
 
-			x = self.aicontrol.average (ax)
-			y = self.aicontrol.average (ay)
-			area = self.aicontrol.average (aarea)
-			if self.aicontrol.average (aangle) < 0:
-				angle = min(aangle)
-			else:
-				angle = max(aangle)
-
 			if found:
 				print 'Found Binn'		
+				x = self.aicontrol.average (ax)
+				y = self.aicontrol.average (ay)
+				area = self.aicontrol.average (aarea)
+				
+				if self.aicontrol.average (aangle) < 0:
+					angle = min(aangle)
+				else:
+					angle = max(aangle)
 
-				if self.aicontrol.is_center ([x, y], -0.2, 0.2, -0.1, 0.1):
+				if self.aicontrol.is_center ([x, y], -0.1, 0.1, -0.1, 0.1):
 					print 'CENTER'
 					self.aicontrol.stop (1)
-					
-					print angle
 					self.aicontrol.turn_yaw_relative (angle)
-					rospy.sleep (2)
-					self.aicontrol.fix_zaxis (depth.BINN_FIRE)
-
-					# print 'FIRE RIGHT'
-					# self.aicontrol.drive_yaxis (0.5)
-					# rospy.sleep (1)
-					# self.aicontrol.stop (2)
-					# self.hardware.command (String ('drop_right'), String ('fire'))
-					# self.aicontrol.stop (1)
-					
-					print 'FIRE LEFT'
-					self.aicontrol.drive_yaxis (0.5)
-					rospy.sleep (1)
 					self.aicontrol.stop (2)
-					self.hardware.command (String ('drop_left'), String ('fire'))
-					self.aicontrol.stop (1)
-					break
+					prep += 1
+					if prep == 3:
+						self.aicontrol.fix_zaxis (depth.BINN_FIRE)
+						rospy.sleep (5)
+						# self.aicontrol.drive_xaxis (1)
+						# rospy.sleep (0.5)
+
+						print 'FIRE LEFT'
+						self.aicontrol.stop (2)
+						# for i in xrange (3):
+						# 	self.hardware.command ('drop_left', 'drop')
+						# 	rospy.sleep (1)
+						self.aicontrol.stop (5)
+
+						print 'FIRE RIGHT'
+						self.aicontrol.drive_yaxis (1)
+						rospy.sleep (1.2)
+						self.aicontrol.stop (2)
+						# for i in xrange (3):
+						# 	self.hardware.command ('drop_right', 'drop')
+						# 	rospy.sleep (1)
+						self.aicontrol.stop (1)
+
+						# rospy.sleep (3)
+						# self.hardware.command ('drop_left', 'close')
+						# rospy.sleep (3)
+						# self.hardware.command ('drop_right', 'close')
+						# self.aicontrol.stop (1)
+						break
 				else:
 					x = self.aicontrol.adjust (x, -0.5, -0.1, 0.1, 0.5)
 					y = self.aicontrol.adjust (y, -0.5, -0.1, 0.1, 0.5)
 					self.aicontrol.drive ([x, y, 0, 0, 0, 0])
-					rospy.sleep (self.aicontrol.adjust (area, 0.1, 0.1, 0.1, 0.5))
-					self.aicontrol.turn_yaw_relative (angle)
+					rospy.sleep (self.aicontrol.adjust (area, 0.2, 0.2, 0.2, 0.6))
+					# self.aicontrol.turn_yaw_relative (angle)
 					rospy.sleep (2)
+					self.isFail -= 0.2
 			else:
 				self.aicontrol.drive_xaxis (0.5)
 				rospy.sleep (1)
