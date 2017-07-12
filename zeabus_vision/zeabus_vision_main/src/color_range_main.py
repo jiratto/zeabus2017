@@ -20,7 +20,7 @@ mission = None
 
 
 class window:
-    global width, height, hsv, cameraPos
+    global width, height, hsv, cameraPos, mission
 
     def __init__(self):
         self.size = 250
@@ -69,9 +69,9 @@ class window:
             self.lower[name].pop()
             self.upper[name].pop()
             set_trackbar(self.lower[name][-1], self.upper[name][-1])
-            print('undo')
+            print_result('UNDO')
         else:
-            print('cannot undo')
+            print_result('Cannot Undo')
 
     def redo_range(self, name):
         if len(self.lower_tmp[name]) > 0:
@@ -80,15 +80,15 @@ class window:
             self.lower_tmp[name].pop()
             self.upper_tmp[name].pop()
             set_trackbar(self.lower[name][-1], self.upper[name][-1])
-            print('redo')
+            print_result('REDO')
         else:
-            print('cannot redo')
+            print_result('Cannot Redo')
 
     def reset_range(self, name):
         self.lower[name].append([179, 255, 255])
         self.upper[name].append([0, 0, 0])
         set_trackbar(self.lower[name][-1], self.upper[name][-1])
-        print('reset')
+        print_result('RESET')
 
     def show_image(self, window_name):
         for name in window_name:
@@ -107,9 +107,9 @@ class window:
 
     def get_param(self, name):
         self.param_lower = rospy.get_param(
-            'color_range/color_' + cameraPos + '/lower_' + name, '179,255,255')
+            'color_range_' + str(mission) + '/color_' + cameraPos + '/lower_' + name, '179,255,255')
         self.param_upper = rospy.get_param(
-            'color_range/color_' + cameraPos + '/upper_' + name, '0,0,0')
+            'color_range_' + str(mission) + '/color_' + cameraPos + '/upper_' + name, '0,0,0')
         self.param_lower = self.range_str2list(self.param_lower)
         self.param_upper = self.range_str2list(self.param_upper)
         return self.param_lower, self.param_upper
@@ -119,16 +119,17 @@ class window:
             if(name == 'mask'):
                 continue
             rospy.set_param(
-                '/color_range/color_' + cameraPos + '/lower_' + name, self.range_list2str(self.lower[name][-1]))
+                '/color_range_' + str(mission) + '/color_' + cameraPos + '/lower_' + name, self.range_list2str(self.lower[name][-1]))
             rospy.set_param(
-                '/color_range/color_' + cameraPos + '/upper_' + name, self.range_list2str(self.upper[name][-1]))
+                '/color_range_' + str(mission) + '/color_' + cameraPos + '/upper_' + name, self.range_list2str(self.upper[name][-1]))
 
-        f = open(self.path + "/params/color_" + cameraPos + ".yaml", "w")
+        f = open(self.path + '/params/color_' +
+                 cameraPos + '_' + str(mission) + '.yaml', 'w')
         x = self.genyaml()
         f.write(x)
         f.close()
 
-        print 'save'
+        print_result('save')
 
     def genyaml(self):
         tmp = " color_" + cameraPos + ":\n"
@@ -206,10 +207,14 @@ def compare_range(l, u, l1, u1):
     return not (l == l1 and u == u1)
 
 
+def print_result(msg):
+    print('<------------ ') + msg + (' ------------>')
+
+
 def select_color():
     global pixel, img, wait, hsv, click, is_mask, width, height
     window_name = ['mask', 'red', 'orange',
-                   'white', 'yellow', 'black', 'green ,']
+                   'white', 'yellow', 'black', 'green']
 
     cv2.namedWindow('image_bgr', flags=cv2.WINDOW_NORMAL)
     cv2.moveWindow('image_bgr', 400, 400)
@@ -296,12 +301,16 @@ def select_color():
     cv2.destroyAllWindows()
 
 if __name__ == '__main__':
+    # init node
     rospy.init_node('color_range_main')
+    # get params
     cameraPos = rospy.get_param('color_range/cameraPos', 'down')
     cameraTopic = rospy.get_param('color_range/cameraTopic',
                                   '/rightcam_bottom/image_raw/compressed')
     mission = rospy.get_param('color_range/mission', 'default')
-    print('topic: ' + str(cameraTopic) + ' camera: ' +
-          str(cameraPos) + ' mission: ' + str(mission))
+    print_result('TOPIC: ' + str(cameraTopic))
+    print_result('CAMERA: ' + str(cameraPos))
+    print_result('MISSION: ' + str(mission))
     rospy.Subscriber(cameraTopic, CompressedImage, camera_callback)
+    print_result('SELECT COLOR')
     select_color()
