@@ -11,30 +11,28 @@ image = None
 
 
 def range_str2list(str):
+    # '180,255,255' to [180,255,255]
     str = str.split(',')
     return np.array([int(str[0]), int(str[1]), int(str[2])], np.uint8)
 
 
-def delete_color(hsv, color, camera):
+def delete_color(imgHSV, color, camera):
     lower, upper = getColor(color, camera)
-    print lower
-    print upper
+    print(lower, upper)
     if not lower is None:
-        res = cv2.inRange(hsv, lower, upper)
+        resHSV = cv2.inRange(imgHSV, [0, 0, 0], [180, 255, 255])
     else:
-        h, s, v = cv2.split(hsv)
-        ret, res = cv2.threshold(v, 127, 255, cv2.THRESH_BINARY)
-    return res
+        h, s, v = cv2.split(imgHSV)
+        resHSV = cv2.inRange(imgHSV, lower, upper)
+    return resHSV
 
 
 def getColor(color, camera):
-    # Navigate
     lower = None
     upper = None
-    color_list_down = ['orange', 'white', 'yellow', 'red']
-    color_list_top = ['orange', 'white', 'yellow', 'red']
+    color_list = ['orange', 'white', 'yellow', 'red', 'black', 'violet']
 
-    for c in color_list_down:
+    for c in color_list:
         if color == c:
             lower = rospy.get_param(
                 '/color_range/color_' + camera + '/lower_' + c)
@@ -61,6 +59,31 @@ def find_shape(cnt, req):
     return False
 
 
+def crop(imgBGR, outerRow, outerCol):
+    rows, cols, ch = imgBGR.shape
+    innerRow = int(rows - (outerRow * 2))
+    maskOuterRow = np.zeros((int(outerRow), cols))
+    maskInnerRow = np.ones((innerRow, cols))
+    maskRow = np.concatenate(
+        (maskOuterRow, maskInnerRow, maskOuterRow), axis=0)
+
+    innerCol = int(cols - (outerCol * 2))
+    maskOuterCol = np.zeros((rows, int(outerCol)))
+    maskInnerCol = np.ones((rows, innerCol))
+    maskCol = np.concatenate(
+        (maskOuterCol, maskInnerCol, maskOuterCol), axis=1)
+
+    mask = cv2.add(maskRow, maskCol)
+    b, g, r = cv2.split(imgBGR)
+    b *= np.uint8(mask)
+    g *= np.uint8(mask)
+    r *= np.uint8(mask)
+
+    print mask.shape
+    print imgBGR.shape
+    return cv2.merge((b, g, r))
+
+
 def cut_contours(M, w, h, range_w, range_h):
     cx = None
     cy = None
@@ -74,6 +97,24 @@ def cut_contours(M, w, h, range_w, range_h):
     if cx <= range_w or cy <= range_h or cx >= w - range_w or cy >= h - range_h:
         return True
     return False
+
+
+def brightness(imgBGR, brightnessValue):
+    hsv = cv2.cvtColor(imgBGR, cv2.COLOR_BGR2HSV)
+    h, s, v = cv2.split(hsv)
+    v = np.int16(v)
+    v = np.clip(v + brightnessValue, 0, 255)
+    v = np.uint8(v)
+    hsv = cv2.merge((h, s, v))
+    return cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR)
+
+
+def clip_v(imgBGR, min, max):
+    hsv = cv2.cvtColor(imgBGR, cv2.COLOR_BGR2HSV)
+    h, s, v = cv2.split(hsv)
+    v = np.clip(v, min, max)
+    hsv = cv2.merge((h, s, v))
+    return cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR)
 
 
 def equalization_bgr(imgBGR):
@@ -102,7 +143,7 @@ def equalization_gray(imgGRAY):
 def clahe(imgBGR):
     lab = cv2.cvtColor(imgBGR, cv2.COLOR_BGR2Lab)
     l, a, b = cv2.split(lab)
-    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(4, 4))
+    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
     l = clahe.apply(l)
     lab = cv2.merge((l, a, b))
     resBGR = cv2.cvtColor(lab, cv2.COLOR_Lab2BGR)
@@ -122,8 +163,8 @@ def stretching_hsv(hsv):
 
 def stretching_bgr(bgr):
     b, g, r = cv2.split(bgr)
-    # b -= b.min()
-    # b *= int(round(255.0 / (b.max() - b.min())))
+    b -= b.min()
+    b *= int(round(255.0 / (b.max() - b.min())))
     g -= g.min()
     g *= int(round(255.0 / (g.max() - g.min())))
     r -= r.min()
@@ -141,7 +182,7 @@ def stretching(img):
     g -= g.min()
     g *= int(round(255.0 / (g.max() - g.min())))
     r -= r.min()
-    r *= int(round(255.0 / (g.max() - g.min())))
+    r *= int(round(255.0 / (r.max() - r.min())))
 
     img = cv2.merge((b, g, r))
     img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
@@ -206,45 +247,6 @@ def get_mode(v):
     return MODE
 
 
-def rebalance(image):
-    h, w, ch = image.shape
-    m = cv2.mean(image)
-    img = np.zeros((h, w), dtype=np.float)
-    img = image.copy()
-    b, g, r = cv2.split(img)
-
-    gg = m[0] * 1.0 / m[1] * 1.0
-    rr = m[0] * 1.0 / m[2] * 1.0
-
-    matrix_b = np.zeros((h, w), dtype=np.float32)
-    matrix_g = np.zeros((h, w), dtype=np.float32)
-    matrix_r = np.zeros((h, w), dtype=np.float32)
-    matrix_b.fill(1.0)
-    matrix_g.fill(gg)
-    matrix_r.fill(rr)
-
-    b = b * matrix_b
-    g = g * matrix_g
-    r = r * matrix_r
-
-    result = cv2.merge((b, g, r))
-    result_uint = result.astype(np.uint8)
-
-    # ____________________________ #
-
-    img = cv2.cvtColor(result_uint, cv2.COLOR_BGR2Lab)
-    L, a, b = cv2.split(img)
-    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
-    L = clahe.apply(L)
-
-    result = cv2.merge((L, a, b))
-    result_bgr = cv2.cvtColor(result, cv2.COLOR_Lab2BGR)
-    result_hsv = cv2.cvtColor(result_bgr, cv2.COLOR_BGR2HSV)
-    # h, s, v = cv2.split(result_hsv)
-    # print h.max(),s.max(),v.max()
-    return result_hsv
-
-
 def process_img_down(imgBGR):
     # bgr = stretching(imgBGR.copy())
     hsv = clahe(imgBGR.copy())
@@ -262,7 +264,7 @@ def process_img_top(img):
     return hsv
 
 
-def shrinking_hsv(img):
+def shrinking(img):
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
     h, s, v = cv2.split(hsv)
     hmin = h.min()
@@ -281,15 +283,16 @@ def shrinking_hsv(img):
     vs = ((v - vmin) / (vmax - vmin)) * (vl - 1)
 
     result = cv2.merge((hs, ss, vs))
-    return result
+    return cv2.cvtColor(result, cv2.COLOR_HSV2BGR)
 
 
 def publish_result(img, type, topicName):
-    if img == None:
-        return
+    if img is None:
+        img = np.zeros((200, 200))
+        type = "gray"
     bridge = CvBridge()
     pub = rospy.Publisher(
-        topicName, Image, queue_size=10)
+        str(topicName), Image, queue_size=10)
     if type == 'gray':
         msg = bridge.cv2_to_imgmsg(img, "mono8")
     elif type == 'bgr':
@@ -312,17 +315,13 @@ def adjust_gamma(imgBGR=None, gamma=1):
 def adjust_gamma_by_v(imgBGR=None):
     if imgBGR is None:
         print('given value to imgBGR argument\n' +
-              'adjust_gamma_by_value(imgBGR, gamma)')
+              'adjust_gamma_by_value(imgBGR)')
         return
+
     hsv = cv2.cvtColor(imgBGR, cv2.COLOR_BGR2HSV)
     h, s, v = cv2.split(hsv)
-
     vMean = cv2.mean(v)[0]
-
     gamma = vMean / 13
-
-    # print vMean
-    gamma = vMean / 155
     # print 'gamma : ' + str(gamma)
 
     if gamma == 0:
@@ -330,7 +329,6 @@ def adjust_gamma_by_v(imgBGR=None):
     else:
         g = gamma / 10.0
     invGamma = 1.0 / g
-    # print 'g : ' + str(g)
     table = []
     for i in np.arange(0, 256):
         table.append(((i / 255.0) ** invGamma) * 255)
@@ -361,8 +359,79 @@ def dilate(imgBin, ker):
 def close(imgBin, ker):
     return cv2.morphologyEx(imgBin, cv2.MORPH_CLOSE, ker)
 
+
 def open_morph(imgBin, ker):
     return cv2.morphologyEx(imgBin, cv2.MORPH_OPEN, ker)
+
+
+def preprocess_squid(imgBGR):
+    # img = crop(imgBGR, 20, 20)
+    imgMedian = cv2.medianBlur(imgBGR, 3)
+    hsv = cv2.cvtColor(imgMedian, cv2.COLOR_BGR2HSV)
+    h, s, v = cv2.split(hsv)
+    vMean = cv2.mean(v)[0]
+    vBright = int((255 - vMean + 5) / 1.5)
+    vDark = int((vMean - 5) / 1.5)
+
+    imageCLAHE = clahe(imgMedian)
+    imageDark = brightness(imageCLAHE, -vDark)
+    imageBright = brightness(imageCLAHE, vBright)
+    imageEqu = equalization_bgr(imgMedian)
+    imageDark1 = brightness(imageEqu, -vDark)
+    # imageBright1 = brightness(imageEqu, vBright)
+
+    images = [imageDark, imageBright, imageDark1]
+
+    mergeMertens = cv2.createMergeMertens()
+    resMertens = mergeMertens.process(images)
+    resBGR = np.clip(resMertens * 255, 0, 255).astype('uint8')
+    return resBGR
+
+
+def preprocess_navigate(imgBGR):
+    imgMedian = cv2.medianBlur(imgBGR, 9)
+    hsv = cv2.cvtColor(imgMedian, cv2.COLOR_BGR2HSV)
+    h, s, v = cv2.split(hsv)
+    vMean = cv2.mean(v)[0]
+    vBright = int((255 - vMean + 5) / 1.5)
+    vDark = int((vMean - 5) / 1.5)
+
+    imageCLAHE = clahe(imgBGR)
+    imageDark = brightness(imageCLAHE, -vDark)
+    imageBright = brightness(imageCLAHE, vBright)
+    imageEqu = equalization_bgr(imgBGR)
+    imageDark1 = brightness(imageEqu, -vDark)
+    imageBright1 = brightness(imageEqu, vBright)
+
+    images = [imageDark, imageBright, imageBright1, imageCLAHE]
+
+    mergeMertens = cv2.createMergeMertens()
+    resMertens = mergeMertens.process(images)
+    resBGR = np.clip(resMertens * 255, 0, 255).astype('uint8')
+    return resBGR
+
+
+def preprocess_bouy(imgBGR):
+    imgMedian = cv2.medianBlur(imgBGR, 7)
+    hsv = cv2.cvtColor(imgBGR, cv2.COLOR_BGR2HSV)
+    h, s, v = cv2.split(hsv)
+    vMean = cv2.mean(v)[0]
+    vBright = int((255 - vMean + 5) / 1.5)
+    vDark = int((vMean - 5) / 1.5)
+
+    imageCLAHE = clahe(imgBGR)
+    imageDark = brightness(imageCLAHE, -vDark)
+    imageBright = brightness(imageCLAHE, vBright)
+    imageEqu = equalization_bgr(imgBGR)
+    imageDark1 = brightness(imageEqu, -vDark)
+    imageBright1 = brightness(imageEqu, vBright)
+
+    images = [imageDark, imgBGR, imageBright, imageBright1]
+
+    mergeMertens = cv2.createMergeMertens()
+    resMertens = mergeMertens.process(images)
+    resBGR = np.clip(resMertens * 255, 0, 255).astype('uint8')
+    return resBGR
 
 
 def callback_raw(ros_data):
@@ -387,24 +456,26 @@ if __name__ == '__main__':
     #                        callback, queue_size=10)
     # sub = rospy.Subscriber('/leftcam_bottom/image_raw/compressed', CompressedImage,
     #                        callback1, queue_size=10)
-    # sub = rospy.Subscriber('/top/center/image_rect_color/compressed', CompressedImage,
-    #                        callback1, queue_size=10)HSVHSV
-    sub = rospy.Subscriber('/bottom/left/image_raw/compressed', CompressedImage,
+    sub = rospy.Subscriber('/top/center/image_rect_color/compressed', CompressedImage,
                            callback_compressed, queue_size=10)
+    # sub = rospy.Subscriber('/bottom/left/image_raw/compressed', CompressedImage,
+    #                        callback_compressed, queue_size=10)
     plt.ion()
     while not rospy.is_shutdown():
         if image is None:
             continue
 
-        claheimg = clahe(image)
-        equBGR = equalization_bgr(claheimg)
-        hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-        equHSV = equalization_hsv(hsv)
-        # cv2.imshow('image', claheimg)
-        cv2.imshow('equBGR', equBGR)
-        cv2.imshow('hsv', hsv)
-        cv2.imshow('equHSV', equHSV)
-        h, s, v = cv2.split(hsv)
+        # claheimg = clahe(image)
+        # # equBGR = equalization_bgr(image)
+        # hsv = cv2.cvtColor(claheimg, cv2.COLOR_BGR2HSV)
+        # equHSV = equalization_hsv(hsv)
+        # bgr = cv2.cvtColor(equHSV, cv2.COLOR_HSV2BGR)
+        bgr = crop(image, 20, 10)
+        cv2.imshow('image', bgr)
+        # cv2.imshow('equBGR', equBGR)
+        # cv2.imshow('hsv', hsv)
+        # cv2.imshow('equHSV', equHSV)
+        # h, s, v = cv2.split(hsv)
 
         k = cv2.waitKey(1) & 0xff
         if k == ord('q'):

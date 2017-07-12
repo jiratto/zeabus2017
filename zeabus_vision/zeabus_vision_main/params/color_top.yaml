@@ -1,25 +1,25 @@
  color_top:
-  upper_yellow: '82,255,255'
+  upper_yellow: '80,255,198'
 
-  lower_yellow: '32,3,0'
+  lower_yellow: '0,136,102'
 
   upper_black: '0,0,0'
 
   lower_black: '180,255,255'
 
-  upper_violet: '0,0,0'
+  upper_violet: '116,252,255'
 
-  lower_violet: '180,255,255'
+  lower_violet: '105,72,0'
 
-  upper_orange: '22,255,255'
+  upper_orange: '59,255,255'
 
-  lower_orange: '10,47,57'
+  lower_orange: '44,93,81'
 
-  upper_white: '0,0,0'
+  upper_white: '104,226,223'
 
-  lower_white: '180,255,255'
+  lower_white: '63,18,104'
 
-  upper_red: '0,0,0'
+  upper_red: '178,182,141'
 
-  lower_red: '180,255,255'
+  lower_red: '144,39,84'
 
