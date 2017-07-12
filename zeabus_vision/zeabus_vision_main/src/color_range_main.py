@@ -153,8 +153,21 @@ def camera_callback(msg):
         hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
         # blur = cv2.bilateralFilter(img, 9, 75, 75)
         # cla = clahe(img)
-        # hsv1 = cv2.cvtColor(cla, cv2.COLOR_BGR2HSV)
+        # hsv1 = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
         # hsv = equalization_hsv(hsv1)
+
+        # bgr = equalization_bgr(img)
+        # hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+
+        bgr = preprocess_navigate(img)
+        hsv = cv2.cvtColor(bgr, cv2.COLOR_BGR2HSV)
+
+        # hsv1 = preprocess_squid(img)
+        # hsv = cv2.cvtColor(hsv1, cv2.COLOR_BGR2HSV)
+
+        # image = cv2.imread('table.png')
+        # image = cv2.resize(image, (width, height))
+        # hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
 
 def draw_circle(event, x, y, flags, param):

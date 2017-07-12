@@ -16,13 +16,17 @@ if __name__ == '__main__':
 	# aicontrol.drive_xaxis (1)
 	# rospy.sleep (10)
 
-	# print 'Backward'
-	# aicontrol.drive_xaxis (-1)
-	# rospy.sleep (40)
+	print 'Backward'
+	aicontrol.drive_xaxis (-1)
+	rospy.sleep (20)
 
 	# print 'Slide left'
 	# aicontrol.drive_yaxis (1)
 	# rospy.sleep (5)
+
+	# print 'Top'
+	# aicontrol.drive_zaxis (1)
+	# rospy.sleep (2)
 
 	# print 'Slide right'
 	# aicontrol.drive_yaxis (-1)
@@ -55,11 +59,11 @@ if __name__ == '__main__':
 	# aicontrol.turn_yaw_relative (-90)
 	# rospy.sleep (3)
 
-	aicontrol.stop (2)
-	print 'Turn yaw absolute 0'
-	aicontrol.turn_yaw_absolute (0)
-	rospy.sleep (3)	
-	aicontrol.stop (1)
+	# aicontrol.stop (2)
+	# print 'Turn yaw absolute 0'
+	# aicontrol.turn_yaw_absolute (0)
+	# rospy.sleep (3)	
+	# aicontrol.stop (1)
 
 	# print 'FINISH STOP 5 sec'
 	# aicontrol.stop (5)
@@ -84,8 +88,10 @@ if __name__ == '__main__':
 	# aicontrol.trackback (data, 1)
 
 	# start_x = aicontrol.get_position ()[0]
-	aicontrol.drive_x_rel (3)
+	# aicontrol.drive_x_rel (3)
 	# dest_x = aicontrol.get_position ()[0]
 	# aicontrol.drive_x_rel (-2)
+
+	# aicontrol.go_to_xyz (0, 0, -3.32)
 
 	aicontrol.stop (1)

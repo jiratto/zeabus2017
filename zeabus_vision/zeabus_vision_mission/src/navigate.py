@@ -61,6 +61,7 @@ def navigate_top():
     im = None
     res = vision_msg_navigate()
     lower_yellow, upper_yellow = getColor('yellow', 'top') 
+    lower_white, upper_white = getColor('', 'top')
     while not rospy.is_shutdown():
         while img is None:
             print("img : None")
@@ -70,31 +71,20 @@ def navigate_top():
         offsetH = height/2
         im = img.copy()
         im_draw = img.copy()
-        offsetX = 45
+        offsetX = 0
 
-        hsv = cv2.cvtColor(img.copy(), cv2.COLOR_BGR2HSV)
+        bgr = preprocess_navigate(im)
+        hsv = cv2.cvtColor(bgr, cv2.COLOR_BGR2HSV)
 
-        # gamma = adjust_gamma_by_v(img.copy())
-        # gamma = cv2.cvtColor(gamma, cv2.COLOR_BGR2HSV)
-        # hsv = cv2.cvtColor(gamma, cv2.COLOR_BGR2HSV)
-        cla = clahe(im)
-        hsv1 = cv2.cvtColor(cla, cv2.COLOR_BGR2HSV)
-        hsv = equalization_hsv(hsv1)
-        # bgr = cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR)
-        # stretchBGR = stretching_bgr(im)
-
-        # stretchHSV = clahe(im)
-        # stretchHSV = cv2.cvtColor(stretchHSV, cv2.COLOR_HSV2BGR)
-
-        # stretchHSV = cv2.cvtColor(im, cv2.COLOR_BGR2HSV)
-        # stretchHSV = stretching_hsv(stretchHSV)
-        # stretchHSV = cv2.cvtColor(stretchHSV, cv2.COLOR_HSV2BGR)
-        # stretchHSV = clahe(stretchHSV)
+        bg = hsv
 
         print('lower_yellow', lower_yellow)
         print('upper_yellow', upper_yellow)
         im_yellow = cv2.inRange(hsv, lower_yellow, upper_yellow)
         
+        ret, im_yellow = cv2.threshold(im_yellow, 20, 255, cv2.THRESH_BINARY)
+
+        im_delnoise = close(im_yellow, rect_ker(3,3))
         im_delnoise = erode(im_yellow, rect_ker(3,3))
         im_delnoise = dilate(im_delnoise, cross_ker(3,3))
         im_delnoise2 = erode(im_yellow, cross_ker(5,1))
@@ -127,6 +117,8 @@ def navigate_top():
         x_bot = -999
         left = 0
         right = 0
+        range_h = 50
+        range_w = 50
         for c in contours_lr:
             M = cv2.moments(c)
             rect = (x,y), (ww,hh), angle = cv2.minAreaRect(c)
@@ -135,7 +127,10 @@ def navigate_top():
             # if not not_center_bot(x):
             #     continue
 
-            if isVertical(x) or isHorizon(y):
+            if cut_contours(M, width, height, range_w, range_h):
+                box = cv2.boxPoints(rect)
+                box = np.int0(box)
+                cv2.drawContours(im_draw, [c], -1, (255,255,0), 2)
                 continue
             if hh == 0:
                 continue
@@ -144,27 +139,16 @@ def navigate_top():
                 hh = ww
                 ww = temp
             rect_ratio = ww/hh
-            # if rect_ratio > 0.7:
-            #     continue
+
             if y > 450:
                 continue
-            if area < 500:
+            if area < 1500:
                 continue
             if area_h < ww:
                 area_h = ww
             if area_h < hh:
                 area_h = hh
-            # if x<width/2:
-            #     left = 1
-            #     cy += y
-            #     count_h += 1
-            # else:
-            #     right = 1
-            #     cy += y
-            #     count_h += 1
 
-            # if y > 320:
-            #     continue
             x_lr = x
             count_h += 1
             cy += y
@@ -184,6 +168,7 @@ def navigate_top():
 
         max = 0
         count_bot = 0
+        yy = -999
         for c in contours_bot:
             M = cv2.moments(c)
             rect = (x,y), (ww,hh), angle = cv2.minAreaRect(c)
@@ -230,6 +215,7 @@ def navigate_top():
                 where = 'right'
                 right = 1
                 left = 0
+            
 
         if count_bot == 0 and count_h == 1:
             if x_lr < width/2:
@@ -239,13 +225,20 @@ def navigate_top():
                 right = 1
                 left = 0
 
-        
+        diffY = abs(yy-cy)
+        if diffY < 5:
+            right = 0
+            left = 0
+
         lpr = left + right
         if lpr == 1:
             if left == 1:      
                 direction = -1
             else:
                 direction = 1
+
+        if lpr == 0:
+            direction = -999
         
         
         if count_h != 0 and area_w != 0:
@@ -258,9 +251,10 @@ def navigate_top():
         publish_result(im_draw,'bgr', 'debug' )
         publish_result(im_lr, 'gray', 'lr')
         publish_result(im_bot, 'gray', 'bot')
+        publish_result(im_yellow, 'gray', 'yellow')
         # publish_result(bgr, 'bgr', 'bgr')
         # publish_result(stretchBGR, 'bgr', 'bgr')
-        # publish_result(stretchHSV, 'bgr', 'hsv')
+        publish_result(hsv, 'bgr', 'hsv')
         print('direction', direction)
         print('where', where)
         print('cx', cx)
@@ -288,9 +282,8 @@ def navigate_bot():
         
 
         # hsv = cv2.cvtColor(im_bot.copy(), cv2.COLOR_BGR2HSV)
-        cla = clahe(im_bot)
-        hsv1 = cv2.cvtColor(cla, cv2.COLOR_BGR2HSV)
-        hsv = equalization_hsv(hsv1)
+        bgr = preprocess_navigate(im_bot)
+        hsv = cv2.cvtColor(bgr, cv2.COLOR_BGR2HSV)
 
         im_yellow = cv2.inRange(hsv, lower_yellow, upper_yellow)
         im_yellow = erode(im_yellow, rect_ker(5,5))
