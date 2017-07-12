@@ -142,32 +142,28 @@ class window:
 
 
 def camera_callback(msg):
-    global img, wait, hsv, width, height, mission
-    if wait == False:
-        arr = np.fromstring(msg.data, np.uint8)
-        img_data = cv2.resize(cv2.imdecode(arr, 1), (width, height))
-        if
-        img = preprocess_squid(img_data)
-        # img = preprocess_navigate(img_data)
-        # img = preprocess_bouy(img_data)
-        hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-        # blur = cv2.bilateralFilter(img, 9, 75, 75)
-        # cla = clahe(img)
-        # hsv1 = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-        # hsv = equalization_hsv(hsv1)
-
-        # bgr = equalization_bgr(img)
-        # hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-
-        bgr = preprocess_navigate(img)
-        hsv = cv2.cvtColor(bgr, cv2.COLOR_BGR2HSV)
-
-        # hsv1 = preprocess_squid(img)
-        # hsv = cv2.cvtColor(hsv1, cv2.COLOR_BGR2HSV)
-
-        # image = cv2.imread('table.png')
-        # image = cv2.resize(image, (width, height))
-        # hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+    global img, wait, hsv, width, height, mission, cameraPos
+    if wait:
+        return
+    arr = np.fromstring(msg.data, np.uint8)
+    img_data = cv2.resize(cv2.imdecode(arr, 1), (width, height))
+    if cameraPos == 'top':
+        if mission == 'squid':
+            img = preprocess_squid(img_data)
+        elif mission == 'navigate':
+            img = preprocess_navigate(img_data)
+        elif mission == 'bouy':
+            img = preprocess_bouy(img_data)
+        else:
+            img = img_data
+    else:
+        if mission == 'path':
+            img = preprocess_navigate(img_data)
+        elif mission == 'navigate':
+            img = preprocess_navigate(img_data)
+        else:
+            img = img_data
+    hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
 
 def draw_circle(event, x, y, flags, param):
