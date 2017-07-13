@@ -17,9 +17,13 @@ img_gray = None
 hsv = None
 width = int(1152 / 3)
 height = int(870 / 3)
+resultMemory = []
+getMemoryStatus = True
+xMemory = 0
+yMemory = 0
 
 
-def img_callback(msg):
+def image_callback(msg):
     global img, width, height
     arr = np.fromstring(msg.data, np.uint8)
     img = cv2.resize(cv2.imdecode(arr, 1), (width, height))
@@ -30,60 +34,6 @@ def mission_callback(msg):
     req = msg.req.data
     print('request: ') + str(req)
     return find_bouy(req)
-
-
-def find_circle(imgBIN, resImg):
-    global width, height
-    result = []
-    font = cv2.FONT_HERSHEY_SIMPLEX
-    # circles = cv2.HoughCircles(imgBIN.copy(), cv2.HOUGH_GRADIENT, dp=1,
-    # minDist=60, param1=40, param2=30, minRadius=10, maxRadius=150)
-
-    # if not circles is None:
-    #     print circles[0]
-    #     circles = sorted(circles[0], key=lambda l: l[2])
-    #     for circle in circles:
-    #         print circle
-    #         [x, y, r] = circle
-    #         if r > 100:
-    #             continue
-    #         area = (math.pi * (r**2)) / (width * height * 1.0)
-    #         cv2.circle(resImg, (x, y), r, (255, 255, 0), 3)
-    #         cv2.circle(resImg, (x, y), 2, (0, 255, 0), -1)
-    #         cv2.putText(resImg, 'R: ' + str(r) + 'Area: ' + str(area), (x, y), font, 0.25,
-    #                     (0, 255, 255), 1, cv2.LINE_AA)
-    #         result.append([x, y, area])
-    # result = sorted(result, key=lambda l: l[2], reverse=True)
-    # return result, resImg
-    # _, contours, _ = cv2.findContours(
-    #     imgBIN.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-    # for c in contours:
-    #     M = cv2.moments(c)
-    #     area = cv2.contourArea(c)
-    #     if area < 100:
-    #         continue
-    #     # if cut_contours(M, width, height, 50, 50):
-    #     #     continue
-    #     const = 0.04
-    #     peri = const * cv2.arcLength(c, True)
-    #     print cv2.arcLength(c, True)
-    # approxPolyDP(c,  const * peri, True)
-    #     approxLen = len(approx)
-    #     if approxLen >= 8:
-    #         rect = cv2.minAreaRect(c)
-    #         (x, y), (w, h), angle = rect
-    #         areaRect = int(w * h)
-    #         ratioScale = w * 1.0 / h
-    #         if areaRect >= 200 and 0.8 <= ratioScale <= 1.2:
-    #             areaScale = (areaRect * 1.0) / (width * height)
-    #             cv2.rectangle(resImg, (int(x - w / 2), int(y - h / 2)),
-    #                           (int(x + w / 2), int(y + h / 2)), (0, 0, 0), 2)
-    #             cv2.putText(resImg, str(area) + ' ' + str(areaScale) + ' ' + str(approxLen), (int(x - w / 2), int(y - h / 2)), font, 0.5,
-    #                         (0, 255, 255), 1, cv2.LINE_AA)
-    #             cv2.circle(resImg, ((int(x)),
-    #                                 int(y)), 4, (255, 0, 0), -1)
-    #             resultY.append([x, y, areaScale])
-    #     cv2.drawContours(resImg, [c], 0, (255, 255, 255), 2)
 
 
 def process_mask(imgBIN):
@@ -101,10 +51,10 @@ def process_mask(imgBIN):
 
 
 def find_bouy(req):
-    global img, width, height
+    global img, width, height, resultMemory, getMemoryStatus, xMemory, yMemory
     m = vision_msg_bouy()
-    lowerY, upperY = getColor('yellow', 'top')
-    lowerR, upperR = getColor('red', 'top')
+    lowerY, upperY = get_color('yellow', 'top', 'bouy')
+    lowerR, upperR = get_color('red', 'top', 'bouy')
     minArea = 30
     font = cv2.FONT_HERSHEY_SIMPLEX
 
@@ -128,137 +78,123 @@ def find_bouy(req):
     _, th = cv2.threshold(maskErode, 10, 255, 0)
     _, contours, _ = cv2.findContours(
         th.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-    statusFilter = False
-    resultCir = []
-    for c in contours:
-        area = cv2.contourArea(c)
-        cv2.drawContours(resImg, [c], -1, (222, 2, 222), 3)
-        if area < minArea:
-            continue
-        (x, y), r = cv2.minEnclosingCircle(c)
-        areaCir = (math.pi * (r**2))
-        if area / areaCir <= 0.35:
-            continue
-        if statusFilter and (x - x_before)**2 + (y - y_before)**2 <= 10**2:
-            continue
-        cv2.circle(resImg, (int(x), int(y)), int(r), (255, 255, 255), 3)
 
-        cv2.putText(resImg, 'Area: %.2f %d' %
-                    (((areaCir / (width * height))), (areaCir)),
-                    (int(x), int(y)), font, 0.5, (0, 255, 255), 1, cv2.LINE_AA)
-        resultCir.append([x, y, areaCir / (width * height)])
-        x_before = x
-        y_before = y
-        statusFilter = True
-
-    resultCir = sorted(resultCir, key=lambda l: l[0], reverse=False)
-    resultR = []
-    resultG = []
-    resultY = []
-    # mode = 1  r y g
-    # mode = 2 g y r
-    for i in xrange(min(3, len(resultCir))):
-        x, y, area = resultCir[i]
-        if i == 0:
-            if mode == 1:
-                resultR = [[x, y, area]]
-                color = (0, 0, 255)
-            else:
-                resultG = [[x, y, area]]
-                color = (0, 255, 0)
-            cv2.circle(resImg, (int(x), int(y)), 6, color, -1)
-        elif i == 1:
-            resultY = [[x, y, area]]
-            color = (255, 0, 0)
-            cv2.circle(resImg, (int(x), int(y)), 6, color, -1)
-        else:
-            if mode == 2:
-                resultR = [[x, y, area]]
-                color = (0, 0, 255)
-            else:
-                resultG = [[x, y, area]]
-                color = (0, 255, 0)
-            cv2.circle(resImg, (int(x), int(y)), 6, color, -1)
-
-    # resultR, resImg = find_circle(maskR, resImg)
-    # resultG, resImg = find_circle(maskG, resImg)
-    # resultY, resImg = find_circle(maskY, resImg)
     cx = 0
     cy = 0
-    if len(resultR) > 0:
-        m.num = 1
-        cx = resultR[0][0]
-        cy = resultR[0][1]
-        m.area = [resultR[0][2]]
-        m.color = [0]
-        m.appear = True
-    elif len(resultG) > 0:
-        m.num = 1
-        cx = resultG[0][0]
-        cy = resultG[0][1]
-        m.area = [resultG[0][2]]
-        m.color = [0]
-        m.appear = True
-    elif len(resultY) > 0:
-        m.num = 1
-        cx = resultY[0][0]
-        cy = resultY[0][1]
-        m.area = [resultY[0][2]]
-        m.color = [0]
-        m.appear = True
-    else:
-        not_found()
+    # mode = 1  r y g
+    # mode = 2 g y r
+    if req == 'a':
+        statusFilter = False
+        resultCir = []
+        ct = 0
+        for c in contours:
+            area = cv2.contourArea(c)
+            cv2.drawContours(resImg, [c], -1, (222, 2, 222), 3)
+            if area < minArea:
+                continue
+            (x, y), r = cv2.minEnclosingCircle(c)
+            areaCir = (math.pi * (r**2))
+            if area / areaCir <= 0.50:
+                continue
+            if statusFilter and (x - x_before)**2 + (y - y_before)**2 <= 10**2:
+                continue
+            cv2.circle(resImg, (int(x), int(y)), int(r), (255, 255, 255), 3)
 
-    # if req == 'r':
-    #     if len(resultR) > 0:
-    #         m.num = 1
-    #         cx = resultR[0][0]
-    #         cy = resultR[0][1]
-    #         m.area = [resultR[0][2]]
-    #         m.color[0]
-    #         m.appear = True
-    #     else:
-    #         not_found()
-    # elif req == 'g':
-    #     if len(resultG) > 0:
-    #         m.num = 1
-    #         cx = resultG[0][0]
-    #         cy = resultG[0][1]
-    #         m.area = [resultG[0][2]]
-    #         m.color[0]
-    #         m.appear = True
-    #     else:
-    #         not_found()
-    # elif req == 'y':
-    #     if len(resultY) > 0:
-    #         m.num = 1
-    #         cx = resultY[0][0]
-    #         cy = resultY[0][1]
-    #         m.area = [resultY[0][2]]
-    #         m.color = [0]
-    #         m.appear = True
-    #     else:
-    #         not_found()
-    # elif req == 'a':
-    #     ct = 0
-    #     if len(resultY) > 0:
-    #         ct += 1
-    #     if len(resultR) > 0:
-    #         ct += 1
-    #     if len(resultG) > 0:
-    #         ct += 1
-    #     if ct > 0:
-    #         m.num = ct
-    #         m.cx = [0]
-    #         m.cy = [0]
-    #         m.area = [0]
-    #         m.color = [0]
-    #         m.appear = True
-    #         return m
-    #     else:
-    #         not_found()
-    # else:
-    #     not_found()
+            cv2.putText(resImg, 'Area: %.2f %d' %
+                        (((areaCir / (width * height))), (areaCir)),
+                        (int(x), int(y)), font, 0.5, (0, 255, 255), 1, cv2.LINE_AA)
+            resultCir.append([x, y, areaCir / (width * height)])
+            x_before = x
+            y_before = y
+            statusFilter = True
+
+        resultCir = sorted(resultCir, key=lambda l: l[0], reverse=False)
+        resultR = []
+        resultG = []
+        resultY = []
+
+        for i in xrange(min(3, len(resultCir))):
+            x, y, area = resultCir[i]
+            if i == 0:
+                if mode == 1:
+                    resultR = [[x, y, area]]
+                    color = (0, 0, 255)
+                else:
+                    resultG = [[x, y, area]]
+                    color = (0, 255, 0)
+                cv2.circle(resImg, (int(x), int(y)), 6, color, -1)
+            elif i == 1:
+                resultY = [[x, y, area]]
+                color = (255, 0, 0)
+                cv2.circle(resImg, (int(x), int(y)), 6, color, -1)
+            else:
+                if mode == 2:
+                    resultR = [[x, y, area]]
+                    color = (0, 0, 255)
+                else:
+                    resultG = [[x, y, area]]
+                    color = (0, 255, 0)
+                cv2.circle(resImg, (int(x), int(y)), 6, color, -1)
+            ct += 1
+        m.cx = [0]
+        m.cy = [0]
+        m.area = [0]
+        m.color = [0]
+        if ct == 3:
+            resultMemory.append(resultR[0])
+            resultMemory.append(resultY[0])
+            resultMemory.append(resultG[0])
+            m.num = ct
+            m.appear = True
+        else:
+            m.num = ct
+            m.appear = False
+    else:
+        if getMemoryStatus:
+            if req == 'r':
+                resultMemory = resultMemory[0]
+            elif req == 'y':
+                resultMemory = resultMemory[1]
+            elif req == 'g':
+                resultMemory = resultMemory[2]
+            xMemory = resultMemory[0]
+            yMemory = resultMemory[1]
+
+            getMemoryStatus = False
+
+        resultCir = []
+
+        for c in contours:
+            area = cv2.contourArea(c)
+            cv2.drawContours(resImg, [c], -1, (222, 2, 222), 3)
+            if area < minArea:
+                continue
+            (x, y), r = cv2.minEnclosingCircle(c)
+            areaCir = (math.pi * (r**2))
+            if area / areaCir <= 0.50:
+                continue
+            if (x - xMemory)**2 + (y - yMemory)**2 >= 15**2:
+                continue
+            cv2.circle(resImg, (int(x), int(y)), int(r), (255, 255, 255), 3)
+
+            cv2.putText(resImg, 'Area: %.2f %d' %
+                        (((areaCir / (width * height))), (areaCir)),
+                        (int(x), int(y)), font, 0.5, (0, 255, 255), 1, cv2.LINE_AA)
+            resultCir.append([x, y, areaCir / (width * height)])
+
+        if len(resultCir) > 0:
+            resultCir = sorted(resultCir, key=lambda l: l[2], reverse=False)
+
+            m.num = 1
+            cx = resultCir[-1][0]
+            cy = resultCir[-1][1]
+            xMemory = cx
+            yMemory = cy
+            m.area = [resultCir[-1][2]]
+            m.color = [0]
+            m.appear = True
+        else:
+            not_found()
     cv2.circle(resImg, ((int(cx)),
                         int(cy)), 5, (0, 0, 0), -1)
     offsetW = width / 2.0
@@ -290,7 +226,7 @@ def not_found():
 if __name__ == '__main__':
     rospy.init_node('vision_squid', anonymous=True)
     topic = "/top/center/image_rect_color/compressed"
-    rospy.Subscriber(topic, CompressedImage, img_callback)
+    rospy.Subscriber(topic, CompressedImage, image_callback)
     # find_bouy()
     rospy.Service('vision_bouy', vision_srv_bouy(), mission_callback)
     rospy.spin()
