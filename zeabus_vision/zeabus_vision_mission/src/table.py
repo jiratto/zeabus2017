@@ -50,16 +50,17 @@ def find_bin(msg):
         blurClaGray = cv2.cvtColor(blur, cv2.COLOR_BGR2GRAY)
         blurClaGray = equalization_gray(blurClaGray)
         
-        ret, black = cv2.threshold(blurClaGray, 20, 255, cv2.THRESH_BINARY_INV)
-        black = erode(black, get_kernal('cross', (13,13)))
+        ret, black = cv2.threshold(blurClaGray, 30, 255, cv2.THRESH_BINARY_INV)
+        # ret, black1 = cv2.threshold(blurClaGray, 200, 255, cv2.THRESH_BINARY)
+        # black = np.invert(black1)
+        # black = erode(black, get_kernal('cross', (13,13)))
 
-        eqOrange = preprocess_navigate(image)
+        eqOrange = clahe(image)
         eqOrange = cv2.cvtColor(eqOrange, cv2.COLOR_BGR2HSV)
+        eqOrange = equalization_hsv(eqOrange)
         eqOrange = cv2.inRange(eqOrange, lowerOrange, upperOrange)
         
         orangeImage = close(eqOrange, get_kernal('rect',(15,15)))
-
-        black = cv2.subtract(black, eqOrange)
 
         _, orangeContours, _ = cv2.findContours(orangeImage.copy(), 
                                             cv2.RETR_TREE, 
@@ -106,48 +107,51 @@ def find_bin(msg):
                 boxCover = np.int0(boxCover)
                 coverAngle = 90-Oreintation(M)[0]*180/math.pi
         
-        # cv2.drawContours(imageForDraw,[boxCover], -1,(0,255,0),1)
+        cv2.drawContours(imageForDraw,[boxCover], -1,(0,0,255),3)
         
         for c in blackContours:
             M = cv2.moments(c)
-            rect = (x,y),(ww,hh),_ = cv2.minAreaRect(c)
+            rect = (x,y),(ww,hh),_ =cv2.minAreaRect(c)
             area = ww*hh
-            
-            realArea = cv2.contourArea(c)
-            
-
+            diff = abs(x-xBinCover)
+            if diff < 20:
+                continue
             if not find_shape(c, 'rect'):
                 continue
-
-            print('realArea',maxNoCover)
-
-            if realArea < 1000:
+            if area < 1000:
                 continue
-
-            if maxNoCover < realArea:
-                maxNoCover = realArea
-                boxNoCover = cv2.boxPoints(rect)
-                boxNoCover = np.int0(boxNoCover)
+            if cut_contours(M, width, height, range_w, range_h):
+                box = cv2.boxPoints(rect)
+                box = np.int0(box)
+                cv2.drawContours(imageForDraw, [c], -1, (255,255,0), 2)
+                continue
+            print('area', area)
+            # print('area',area)
+            
+            box = cv2.boxPoints(rect)
+            box = np.int0(box)
+            cv2.drawContours(imageForDraw, [c], -1, (255,0,0), 2)
+            
+            if maxNoCover < area:
+                maxNoCover = area
                 xBinNonCover = x
                 yBinNonCover = y
+                boxNoCover = box
                 noCoverAngle = 90-Oreintation(M)[0]*180/math.pi
-        print('----------------------')
-
-        print(maxNoCover)
-
-        print('=========================')
-
-        cv2.drawContours(imageForDraw, [boxNoCover], -1, (255,255,255), 2)
-
+                noCoverAppear = True
 
         if maxCover > 0:
             binAppear = True
         if maxNoCover > 0:
             noCoverAppear = True
 
-        # print('angle', noCoverAngle)
+        cv2.drawContours(imageForDraw,[boxNoCover], -1,(0,255,0),3)
+        cv2.drawContours(imageForDraw, [boxCover], -1, (255,255,0),3)
+
+        print('angle', noCoverAngle)
 
         xBinNonCover -= offsetShootX
+        # yBinNonCover += offsetShootY
 
         if req == 'nocover': # **Note** swap x and y for AI 
             cv2.circle(imageForDraw ,(int(xBinNonCover), int(yBinNonCover)), 5, (0, 255, 255), -1)

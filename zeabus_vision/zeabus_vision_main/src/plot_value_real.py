@@ -57,6 +57,7 @@ def plot_value():
 
 if __name__ == '__main__':
     rospy.init_node('adjust_exposure_time_bottom')
+    # topic = '/top/center/image_rect_color/compressed'
     topic = '/bottom/left/image_raw/compressed'
     node = 'ueye_cam_nodelet_bottom_left/'
     rospy.Subscriber(topic, CompressedImage, callback)
