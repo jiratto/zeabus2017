@@ -18,7 +18,7 @@ KDPpitch: 0.41
 KDPyaw: 0.62
 KPVx: 0.4
 KPVy: 0.4
-KPVz: 0.5
+KPVz: 0.3
 KPVroll: 1
 KPVpitch: 0
 KPVyaw: 0.6
@@ -30,7 +30,7 @@ KIVpitch: 0
 KIVyaw: 0.0008
 KDVx: 0.8
 KDVy: 0
-KDVz: 0.8
+KDVz: 1.2
 KDVroll: 2
 KDVpitch: 0
 KDVyaw: 0.01
