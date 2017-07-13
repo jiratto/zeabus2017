@@ -27,7 +27,7 @@ def delete_color(imgHSV, color, camera):
     return resHSV
 
 
-def getColor(color, camera):
+def get_color(color, camera, mission):
     lower = None
     upper = None
     color_list = ['orange', 'white', 'yellow', 'red', 'black', 'violet']
@@ -35,9 +35,9 @@ def getColor(color, camera):
     for c in color_list:
         if color == c:
             lower = rospy.get_param(
-                '/color_range/color_' + camera + '/lower_' + c)
+                '/color_range_' + str(mission) + '/color_' + camera + '/lower_' + c)
             upper = rospy.get_param(
-                '/color_range/color_' + camera + '/upper_' + c)
+                '/color_range_' + str(mission) + '/color_' + camera + '/upper_' + c)
 
     if not lower is None:
         lower = range_str2list(lower)
@@ -441,27 +441,6 @@ def preprocess_navigate(imgBGR):
 
 
 def preprocess_bouy(imgBGR):
-    # imgMedian = cv2.medianBlur(imgBGR, 5)
-    # hsv = cv2.cvtColor(imgBGR, cv2.COLOR_BGR2HSV)
-    # h, s, v = cv2.split(hsv)
-    # vMean = cv2.mean(v)[0]
-    # vBright = int((255 - vMean + 5) / 1.5)
-    # vDark = int((vMean - 5) / 1.5)
-
-    # imageCLAHE = clahe(imgMedian)
-    # imageDark = brightness(imageCLAHE, -vDark)
-    # imageBright = brightness(imageCLAHE, vBright)
-    # imageEqu = equalization_bgr(imgMedian)
-    # imageDark1 = brightness(imageEqu, -vDark)
-    # imageBright1 = brightness(imageEqu, vBright)
-
-    # images = [imageDark, imgMedian, imageBright, imageBright1]
-
-    # mergeMertens = cv2.createMergeMertens()
-    # resMertens = mergeMertens.process(images)
-    # resBGR = np.clip(resMertens * 255, 0, 255).astype('uint8')
-
-    # imgCombine = imgBGR.copy()
     b, g, r = cv2.split(imgBGR)
     r.fill(255)
     imgCombine = cv2.merge((b, g, r))
