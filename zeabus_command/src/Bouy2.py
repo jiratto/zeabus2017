@@ -2,6 +2,7 @@
 
 import rospy
 import math
+import Depth as depth
 from geometry_msgs.msg import Twist
 from std_msgs.msg import Float64, Bool, String
 from AIControl import AIControl
@@ -19,14 +20,15 @@ class Bouy (object):
 		self.ball = 0
 		self.data = None
 		self.nav = None
-		self.leftColor = None
 		self.state = 1
 		self.time = 1
 		self.startPos = None ## First point that you see three balls
+		self.startZ = None
+		self.startY = None
 		self.destPos = None ## Position that you hit ball
+		self.destY = None
 		self.command = rospy.Publisher ('/zeabus/cmd_vel', Twist, queue_size=10)
 		self.turn_yaw_rel = rospy.Publisher ('/fix/rel/yaw', Float64, queue_size=10)
-		# self.distance = []
 
 		bouy_srv = 'vision_bouy'
 		nav_srv = 'navigation'
@@ -40,29 +42,60 @@ class Bouy (object):
 
 		return self.data.num
 
+	def yellow_to_center (self):
+		print 'ADJUST YELLOW'
+
+		self.data = self.detect_bouy (String ('bouy'), String ('a'))
+		self.data = self.data.data
+
+		xImg = self.data.cx[0])
+
+		if xImg == -999:
+			self.aicontrol.drive_xaxis (0.6)
+			rospy.sleep (0.5)
+			return
+
+		print ('xImg: ', xImg)
+
+		if -0.04 <= xImg <= 0.04:
+			print 'CENTER'
+
+			return True
+		else:
+			print 'MOVE Y'
+			vy = self.aicontrol.adjust (xImg, -0.6, -0.3, 0.3, 0.6)
+			
+			self.aicontrol.drive_yaxis (vy)
+			rospy.sleep (self.time)
+			# self.aicontrol.stop (1)
+			return False
+
 	def see_yellow_ball (self):
-		yellow_data = self.detect_bouy (String ('bouy'), String ('y'))
+		yellow_data = self.detect_bouy (String ('bouy'), String ('o'))
 		yellow_data = yellow_data.data
 
+		xImg = self.data.cx[0]
+
 		if yellow_data.appear:
+			while not 0.04 <= xImg <= 0.04:
+				print 'MOVE Y'
+				print ('xImg: ', xImg)
+
+				vy = self.aicontrol.adjust (xImg, -0.6, -0.3, 0.3, 0.6)
+				
+				self.aicontrol.drive_yaxis (vy)
+				rospy.sleep (self.time)
+				# self.aicontrol.stop (1)
+				yellow_data = self.detect_bouy (String ('bouy'), String ('o'))
+				yellow_data = yellow_data.data
+
+				xImg = self.data.cx[0]
+
 			return True
 
 		return False
 
 	def see_all_balls (self):
-		# red_data = self.detect_bouy (String ('bouy'), String ('r'))
-		# red_data = red_data.data
-
-		# yellow_data = self.detect_bouy (String ('bouy'), String ('y'))
-		# yellow_data = yellow_data.data
-
-		# green_data = self.detect_bouy (String ('bouy'), String ('g'))
-		# green_data = green_data.data
-
-		# if red_data.appear and yellow_data.appear and green_data.appear:
-		# 	return True
-
-		# return False
 		n = self.find_num ()
 		if n < 3:
 			return False
@@ -109,23 +142,21 @@ class Bouy (object):
 			rospy.sleep (2)
 
 			return False
-		# self.time = self.data.area[0]
 
 		print ('xImg: ', xImg)
 		print ('yImg: ', yImg)
-		# print ('prob: ', prob)
 		print ('area: ', areaImg)
 		print ('appear: yes')
 		print ('-----------------')
 
-		if self.aicontrol.is_center ([xImg, yImg], -0.04, 0.04, -0.05, 0.05):
+		if self.aicontrol.is_center ([xImg, yImg], -0.04, 0.01, -0.05, 0.05):
 			print 'CENTER'
 			self.aicontrol.stop (5)
 			tempDist = []
 
 			print areaImg
 			## check ratio area before hit_and_back ##
-			while areaImg < 0.015 and not rospy.is_shutdown ():
+			while areaImg < 0.012 and not rospy.is_shutdown ():
 				print 'IN LOOP'
 
 				x = []
@@ -226,49 +257,52 @@ class Bouy (object):
 			return False 
 
 	def hit_and_back (self):
+		self.aicontrol.drive_yaxis (0.4)
+		rospy.sleep (2)
+
 		self.aicontrol.drive_xaxis (1)
-		rospy.sleep (8)
+		rospy.sleep (10)
 		self.aicontrol.stop (1)
 		# self.aicontrol.drive_x_rel (1)
 
 		print 'HIT BALL!'
 
 		self.aicontrol.drive_xaxis (-1)
-		rospy.sleep (8)
+		rospy.sleep (14)
 		self.aicontrol.stop (1)
 		# self.aicontrol.drive_x_rel (-1)
 		rospy.sleep (1)
 		self.destPos = self.aicontrol.get_position ()
+		self.destY = self.destPos[1]
+		print self.destPos[1]
+		rospy.sleep (5)
 
-		print self.destPos
+		# print self.destPos
 
 	def comeback (self):
-		start_x = self.startPos[0]
-		start_y = self.startPos[1]
-		start_z = self.startPos[2]
-		start_yaw = math.degrees (self.startPos[5])
-		dest_x = self.destPos[0]
-		dest_y = self.destPos[1]
-		dest_z = self.destPos[2]
+		print ('start_y: ', self.startY)
+		print ('dest_y: ', self.destY)
 
-		if dest_y > start_x:
+		if self.destY > self.startY:
 			dir = -1
-		elif dest_y < start_x:
+		elif self.destY < self.startY:
 			dir = 1
 		else:
 			dir = 0
+
+		print dir
 		
-		## Slide to see yellow
-		# while not self.see_yellow_ball ():
-		# 	self.aicontrol.drive_yaxis (0.7 * dir)
-		# 	rospy.sleep (0.5)
-			# self.aicontrol.stop (0.5)
-		if dir == 1:
-			self.aicontrol.drive_yaxis (1)
-			rospy.sleep (8)
-		elif dir == -1:
-			self.aicontrol.drive_yaxis (-1)
-			rospy.sleep (7)
+		# Slide to see yellow
+		while not self.see_yellow_ball ():
+			self.aicontrol.drive_yaxis (0.7 * dir)
+			rospy.sleep (1)
+			self.aicontrol.stop (0.5)
+		# if dir == 1:
+		# 	self.aicontrol.drive_yaxis (1)
+		# 	rospy.sleep (8)
+		# elif dir == -1:
+		# 	self.aicontrol.drive_yaxis (-1)
+		# 	rospy.sleep (7)
 
 		## Go backward
 		while not self.see_all_balls ():
@@ -280,25 +314,12 @@ class Bouy (object):
 		
 		print 'COMEBACK COMPLETE'
 
-		# ## comeback X
-		# print 'COMEBACK X'
-		# diff_x = -(dest_x - start_x)
-		# print diff_x
-		# self.aicontrol.drive_x_rel (diff_x)
-
-		# ## comeback Y
-		# print 'COMEBACK Y'
-		# diff_y = -(dest_y - start_y)
-		# print diff_y
-		# self.aicontrol.drive_y_rel (diff_y)
-
 		# nav_data = self.navigation (Float64 (start_x), Float64 (start_y), Float64 (start_yaw))
 
 		## comeback Z
 		print 'COMEBACK Z'
-		print start_z
-		print dest_z
-		self.aicontrol.fix_zaxis (start_z)
+		print self.startZ
+		self.aicontrol.fix_zaxis (self.startZ)
 
 	def one_ball (self):
 		red_data = self.detect_bouy (String ('bouy'), String ('r'))
@@ -454,7 +475,30 @@ class Bouy (object):
 			rospy.sleep (1)
 
 	def test_move (self, color):
+		self.aicontrol.fix_zaxis (depth.BOUY_DETECTING)
+		count = 0
+		while count < 3 and not rospy.is_shutdown ():
+			n = self.find_num ()
+			print n
+			if n == 3:
+				count += 1
+			elif n == 2:
+				print '2'
+				## Adjust center of yellow ball
+				while not rospy.is_shutdown () and not self.yellow_to_center ():
+					print 'YELLOW NOT CENTER'
+
+			self.aicontrol.drive_xaxis (0.7)
+			rospy.sleep (0.5)
+
+		print 'FOUND ALL BALLS'
+		self.aicontrol.stop (0.5)
+		rospy.sleep (1)
 		self.startPos = self.aicontrol.get_position ()
+		self.startY = self.startPos[1]
+		self.startZ = self.startPos[2]
+		print self.startPos[1]
+		rospy.sleep (5)
 		# self.aicontrol.fix_zaxis (-2.6)
 		while not self.movement (color) and not rospy.is_shutdown ():
 			print 'not pass'
@@ -462,25 +506,10 @@ class Bouy (object):
 		print 'COMPLETE'
 		self.aicontrol.stop (1)
 
-	def test_comeback (self):
-		rospy.sleep (1)
-		self.startPos = self.aicontrol.get_position ()
-		print self.startPos
-
-		self.aicontrol.drive_xaxis (1)
-		rospy.sleep (5)
-		self.aicontrol.stop (1)
-
-		# self.destPos = self.aicontrol.get_position ()
-		# print self.destPos
-
-		self.comeback ()
-
 if __name__ == '__main__':
 	bouy = Bouy ()
 	# Bouy.run ()
-	print bouy.find_num ()
 	# bouy.movement ('y')
 	# bouy.get_data ('r')
-	bouy.test_move ('y')
+	bouy.test_move ('g')
 	# bouy.test_comeback ()

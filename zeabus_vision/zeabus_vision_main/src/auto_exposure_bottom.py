@@ -18,8 +18,8 @@ nodeL = None
 nodeR = None
 clientL = None
 clientR = None
-width = None
-height = None
+width = int(1280/2)
+height = int(768/2)
 
 
 def imageL_callback(msg):
@@ -84,7 +84,7 @@ def adjust_exposure_time():
             print 'image is none'
             continue
 
-        h, s, v = cv2.split(hsv)
+        h, s, v = cv2.split(hsvL)
         vOneD = v.ravel()
         vMean = cv2.mean(vOneD)[0]
         vMode = get_mode(vOneD)
@@ -111,7 +111,7 @@ if __name__ == '__main__':
     topicL = rospy.get_param('cameraTopicLeft','/bottom/left/image_raw/compressed')
     print topicL
     # topicR = str(rospy.get_param('cameraTopicRight'))
-    nodeL = rospy.get_param('cameraNodeLeft', 'ueye_cam_nodelet_bottom_left')
+    nodeL = rospy.get_param('cameraNodeLeft', 'ueye_cam_nodelet_bottom_left/')
     # nodeR = str(rospy.get_param('cameraNodeRight'))
     rospy.init_node(nodeName)
     rospy.Subscriber(topicL, CompressedImage, imageL_callback)

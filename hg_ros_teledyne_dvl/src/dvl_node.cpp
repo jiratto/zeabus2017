@@ -74,7 +74,7 @@ int main(int argc, char **argv)
   int baudrate;
   std::string frame_id;
 
-  nh.param<std::string>("device", device,"/dev/usb2serial/ftdi_A4034AWG");
+  nh.param<std::string>("device", device,"/dev/usb2serial/ftdi_FT03OMNT_03");
 
   nh.param<int>("baudrate", baudrate, 115200);
 
@@ -400,8 +400,8 @@ int main(int argc, char **argv)
 		} else {
 			g_status_velocity_ok = true;
 			ROS_INFO("DVL : GOOD DATA");
-			dvl.twist.twist.linear.x = -vx * 0.001;
-			dvl.twist.twist.linear.y = vy * 0.001;
+			dvl.twist.twist.linear.x = vx * 0.001;
+			dvl.twist.twist.linear.y = -vy * 0.001;
 			dvl.twist.twist.linear.z = vz * 0.001;
 		}
 
