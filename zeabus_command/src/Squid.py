@@ -109,6 +109,9 @@ class Squid (object):
 		self.find_circle (0.07, depth.SQUID_DETECTING_DOWN, 'b')
 		self.aicontrol.stop (5)
 		# self.aicontrol.fix_zaxis (depth.SQUID_DETECTING_TOP)
+		self.aicontrol.drive_xaxis (-1)
+		rospy.sleep (3)
+		self.aicontrol.stop (1)
 		self.find_circle (0.04, depth.SQUID_DETECTING_TOP, 's')
 
 if __name__ == '__main__':
