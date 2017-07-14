@@ -35,9 +35,9 @@ def mission_callback(msg):
 def find_squid(req):
     global img, width, height
 
-    lowerY, upperY = getColor('yellow', 'top')
-    lowerW, upperW = getColor('white', 'top')
-    lowerR, upperR = getColor('red', 'top')
+    lowerY, upperY = get_color('yellow', 'top', 'squid')
+    lowerW, upperW = get_color('white', 'top', 'squid')
+    lowerR, upperR = get_color('red', 'top', 'squid')
 
     font = cv2.FONT_HERSHEY_SIMPLEX
 

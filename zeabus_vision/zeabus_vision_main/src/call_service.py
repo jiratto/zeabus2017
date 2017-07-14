@@ -8,8 +8,8 @@ if __name__ == '__main__':
     rospy.init_node('call_service')
     # serviceName = 'vision_bouy'
     # serviceName = 'vision_navigate'
-    serviceName = 'vision_squid'
-    # binsrv = 'vision_bin'
+    # serviceName = 'vision_squid'
+    serviceName = 'vision_bin'
     print('wait service')
     rospy.wait_for_service(serviceName)
     print('service start')
@@ -19,8 +19,8 @@ if __name__ == '__main__':
     call = rospy.ServiceProxy(serviceName, vision_srv_default)
     while not rospy.is_shutdown():
         # res = call(String('Navigate'), String('bot'))
-
-        res = call(String('squid'), String('b'))
+        res = call(String('bin'), String('nocover'))
+        # res = call(String('squid'), String('b'))
         # res = call(String('bouy'), String('y'))
         # res = res.data
         # print res.x
