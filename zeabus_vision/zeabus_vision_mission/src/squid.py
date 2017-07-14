@@ -4,6 +4,7 @@ import cv2
 import numpy as np
 import rospy
 from sensor_msgs.msg import CompressedImage, Image
+from geometry_msgs.msg import Twist
 sys.path.append(
     '/home/zeabus/catkin_ws/src/src_code/zeabus_vision/zeabus_vision_main/src/')
 from vision_lib import *
@@ -17,12 +18,17 @@ img_gray = None
 hsv = None
 width = int(1152 / 3)
 height = int(870 / 3)
+v = [0, 0]
 
 
-def img_callback(msg):
+def image_callback(msg):
     global img, width, height
     arr = np.fromstring(msg.data, np.uint8)
     img = cv2.resize(cv2.imdecode(arr, 1), (width, height))
+
+
+def velocity_callback(msg):
+    global v
 
 
 def mission_callback(msg):
@@ -32,12 +38,22 @@ def mission_callback(msg):
     return find_squid(req)
 
 
+def not_found():
+    m = vision_msg_default()
+    m.x = 0
+    m.y = 0
+    m.area = 0
+    m.angle = 0
+    m.appear = False
+    return m
+
+
 def find_squid(req):
     global img, width, height
 
-    lowerY, upperY = getColor('yellow', 'top')
-    lowerW, upperW = getColor('white', 'top')
-    lowerR, upperR = getColor('red', 'top')
+    lowerY, upperY = get_color('yellow', 'top', 'squid')
+    lowerW, upperW = get_color('white', 'top', 'squid')
+    lowerR, upperR = get_color('red', 'top', 'squid')
 
     font = cv2.FONT_HERSHEY_SIMPLEX
 
@@ -48,10 +64,12 @@ def find_squid(req):
     m = vision_msg_default()
     m.appear = False
     m.angle = 0
+    m.area = 0
     m.x = 0
     m.y = 0
     minArea = 500
-    resWhite = np.zeros((height, width))
+    offsetW = width / 2.0
+    offsetH = height / 2.0
 
     while img is None:
         print('img is none in loop')
@@ -59,7 +77,6 @@ def find_squid(req):
     resPreprocess = preprocess_squid(img)
     resHSV = cv2.cvtColor(resPreprocess.copy(), cv2.COLOR_BGR2HSV)
     resImg = resPreprocess.copy()
-
     resultFourCir = []
     resultTwoCir = []
 
@@ -74,14 +91,20 @@ def find_squid(req):
     mask = cv2.subtract(mask1, maskR)
     maskInv = np.invert(mask)
 
-    _, th = cv2.threshold(maskInv, 10, 255, 0)
-    _, contours, _ = cv2.findContours(
-        th.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-    statusFilter = False
+    _, th = cv2.threshold(maskInv, 20, 255, 0)
 
+    edges = cv2.Canny(th.copy(), 100, 200)
+    kernelFrame = get_kernal('plus', (5, 5))
+    edgesDilateInv = np.invert(dilate(edges, kernelFrame))
+
+    thEdge = cv2.bitwise_and(edgesDilateInv, edgesDilateInv, mask=th)
+
+    _, contours, _ = cv2.findContours(
+        thEdge.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    statusFilter = False
     for c in contours:
         area = cv2.contourArea(c)
-        # cv2.drawContours(resImg, [c], -1, (222, 2, 222), 3)
+        cv2.drawContours(resImg, [c], -1, (222, 2, 222), 2)
         if area < minArea:
             continue
         (x, y), r = cv2.minEnclosingCircle(c)
@@ -102,12 +125,13 @@ def find_squid(req):
 
     if len(resultFourCir) > 0:
         resultFourCir = sorted(resultFourCir, key=lambda l: l[0], reverse=True)
+        # if abs(resultFourCir[0][0] - resultFourCir[-1][0]) <= 20:
+        #     m = not_found()
         cutterX = (resultFourCir[0][0] + resultFourCir[-1][0]) / 2.0
         cv2.line(resImg, (int(cutterX - 10), 0),
                  (int(cutterX - 10), height), (212, 123, 132), 5)
         for res in resultFourCir:
             x = res[0]
-            # < x_before and abs(y - y_before) <= 20:
             if x <= cutterX - 10:  # statusFilter and
                 continue
             resultTwoCir.append(res)
@@ -115,15 +139,7 @@ def find_squid(req):
     if len(resultTwoCir) > 0:
         resultTwoCir = sorted(resultTwoCir, key=lambda l: l[2], reverse=True)
         m.appear = True
-        if req == 'a':
-            x = 0
-            ct = 0
-            for res in resultTwoCir:
-                x += resultTwoCir[0]
-                ct += 1
-            m.x = int(x / (ct * 1.0))
-            m.y = int(height / 2.0)
-        elif req == 's':
+        if req == 's':
             m.x = resultTwoCir[-1][0]
             m.y = resultTwoCir[-1][1]
             m.area = resultTwoCir[-1][2]
@@ -131,8 +147,6 @@ def find_squid(req):
             m.x = resultTwoCir[0][0]
             m.y = resultTwoCir[0][1]
             m.area = resultTwoCir[0][2]
-        offsetW = width / 2.0
-        offsetH = height / 2.0
 
         cv2.circle(resImg, ((int(m.x)), int(m.y)), 6, (255, 255, 255), -1)
 
@@ -140,18 +154,20 @@ def find_squid(req):
         m.y = (offsetH - m.y) / offsetH
 
     else:
-        m.appear = False
+        m = not_found()
 
     print m
 
-    publish_result(mask, 'gray', '/result_squid_range')
-    publish_result(th, 'gray', '/result_squid_range_inv')
-    publish_result(resImg, 'bgr', '/result_squid')
+    publish_result(th, 'gray', '/squid_result_gray')
+    publish_result(thEdge, 'gray', '/squid_result_range_inv')
+    publish_result(resImg, 'bgr', '/squid_result')
     return m
 
 if __name__ == '__main__':
     rospy.init_node('vision_squid', anonymous=True)
-    topic = "/top/center/image_rect_color/compressed"
-    rospy.Subscriber(topic, CompressedImage, img_callback)
+    imageTopic = "/top/center/image_rect_color/compressed"
+    velocityTopic = "/zeabus/cmd_vel"
+    rospy.Subscriber(imageTopic, CompressedImage, image_callback)
+    rospy.Subscriber(velocityTopic, Twist, velocity_callback)
     rospy.Service('vision_squid', vision_srv_default(), mission_callback)
     rospy.spin()

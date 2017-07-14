@@ -4,7 +4,7 @@
 	<arg name="bottom" default="False"/>
 	<arg name="file" value="auto_exposure.py"/>
 	<group if="$(arg top)">
-		<node pkg="zeabus_vision" name="auto_exposure_top" type="$(arg file)" output="screen">
+		<node pkg="zeabus_vision" name="auto_exposure" type="$(arg file)" output="screen">
 			<param name="imageWidth" value="1152" />
 			<param name="imageHeight" value="874" />
 			<param name="cameraPos" type="str" value="top" />
@@ -14,7 +14,7 @@
 		</node>
 	</group>
 	<group if="$(arg bottom)">
-		<node pkg="zeabus_vision" name="auto_exposure_bottom" type="$(arg file)" output="screen">
+		<node pkg="zeabus_vision" name="auto_exposure" type="$(arg file)" output="screen">
 			<param name="imageWidth" value="1280" />
 			<param name="imageHeight" value="768" />
 			<param name="cameraPos" type="str" value="bottom" />

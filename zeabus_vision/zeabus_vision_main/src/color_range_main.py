@@ -162,6 +162,10 @@ def camera_callback(msg):
             img = preprocess_navigate(img_data)
         elif mission == 'navigate':
             img = preprocess_navigate(img_data)
+        elif mission == 'bin':
+            img = preprocess_navigate(img_data)
+        elif mission == 'table':
+            img = preprocess_navigate(img_data)
         else:
             img = img_data
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)

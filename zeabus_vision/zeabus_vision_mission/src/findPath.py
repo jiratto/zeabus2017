@@ -15,7 +15,7 @@ img = None
 width = None
 height = None
 
-lower_red, upper_red = getColor('orange', 'down')
+lower_orange, upper_orange = get_color('orange', 'bottom', 'path')
 
 def find_path():
     global img, width, height
@@ -23,14 +23,17 @@ def find_path():
     t = True
     f = False
     cnt = None
-    kernel1 = np.ones((15,15), np.uint8)
-    kernel2 = np.ones((5,5), np.uint8)
+    # kernel1 = np.ones((15,15), np.uint8)
+    # kernel2 = np.ones((5,5), np.uint8)
     res = vision_msg_default()
+
 
     # while not rospy.is_shutdown():
     while img is None:
         print("img: None")
         rospy.sleep(0.01)
+    print('upper_or', upper_orange)
+    print('lower_or', lower_orange)
         # continue
     # print("2")
     im = img.copy()
@@ -49,25 +52,37 @@ def find_path():
     box = None
     imStretching = stretching(im)
     im_for_draw = img.copy()
-    im_for_draw = np.zeros((height, width))
     im_blur = cv2.GaussianBlur(im, (3,3), 0)
 
-    hsv = cv2.cvtColor(im_blur, cv2.COLOR_BGR2HSV)
-
-    # gamma = adjust_gamma_by_v(im_blur)
-    # gamma = cv2.cvtColor(gamma, cv2.COLOR_BGR2HSV)
-    # hsv = equalization(gamma)
+    bgr = preprocess_navigate(im)
+    hsv = cv2.cvtColor(bgr, cv2.COLOR_BGR2HSV)
 
     imgray = cv2.cvtColor(im_blur, cv2.COLOR_BGR2GRAY)
-    im_red = cv2.inRange(hsv, lower_red, upper_red)
-    dilation = cv2.dilate(im_red, kernel1, iterations =  1)
-    erosion = cv2.erode(dilation, kernel2, iterations = 1)
+    im_orange = cv2.inRange(hsv, lower_orange, upper_orange)
+    im_orange = close(im_orange, get_kernal())
+    # im_orange = erode(im_orange, get_kernal())
     ret, thresh = cv2.threshold(imgray, 200, 255, 0)
-    _, contours, hierarchy = cv2.findContours(dilation.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    _, contours, hierarchy = cv2.findContours(im_orange.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+
+    realArea = 0
+    ratioArea = 0
+    # area = 1
+
     for c in contours:
         M = cv2.moments(c)
         rect = (x,y),(ww,hh),angle1 =cv2.minAreaRect(c)
         area = ww*hh
+
+        realArea = cv2.contourArea(c)
+        print('========================')
+        print('area', area)
+        print('realarea', realArea)
+        print('========================')
+
+
+        if area != 0:
+            ratioArea = (realArea/area)*100 
+        
         if area < 500:
             continue
         if hh == 0 :
@@ -76,31 +91,31 @@ def find_path():
             tmp = hh
             hh = ww
             ww = tmp
-        diff = (ww/hh)
-        # if diff > 0.3:
+
+        # if ratioArea < 85:
+        #     print('wrong ratio')
         #     continue
+
+        # if not find_shape(c, 'rect'):
+        #     continue
+        diff = (ww/hh)
         epsilon = 0.1*cv2.arcLength(c, t)
         approx = cv2.approxPolyDP(c, epsilon,t)
         
         if area > max1:
             max1 = area
-            # cnt = c
             box = cv2.boxPoints(rect)
             box = np.int0(box)
             angle = 90-Oreintation(M)[0]*180/math.pi
             cx = x
             cy = y
-            # print('cx',cx)
-            # print('cy',cy)
             w = ww
             h = hh
-        # cv2.drawContours(im_for_draw,[box], -1,(0,0,255),1)
-        cv2.drawContours(im, [approx], 0, (0, 0, 255), 2)
-    # print('3')
+    # print('maxArea', max1)
     cv2.circle(im_for_draw,(int(cx), int(cy)), 5, (0, 0, 255), -1)
-    cv2.drawContours(im_for_draw,[box], -1,(0,0,255),1)
-    cv2.drawContours(im, contours, -1, (0,255,0), 3)
+    cv2.drawContours(im_for_draw,[box], -1,(0,255,255),3)
     publish_result(im_for_draw, 'bgr', 'debug_path')
+    publish_result(im_orange, 'gray', 'inRange')
     xx = (cx-offsetW)/offsetW
     yy = (offsetH-cy)/offsetH
     res.x = yy
@@ -121,14 +136,6 @@ def find_path():
     print('y', -xx)
     print('max',max1)
     print('angle', angle)
-    # cv2.imshow('img',img)
-    # print("4")
-    # cv2.waitKey(0)
-    # cv2.destroyAllWindow()
-    # k = cv2.waitKey(1) & 0xff
-    # print('kuykuy')
-    # if k == ord('q'):
-    #     rospy.signal_shutdown('')
     return res
     
 def img_callback(msg):
