@@ -14,7 +14,7 @@ class Navigate (object):
 	def __init__ (self):
 		print "Start Mission Navigate"
 
-		rospy.init_node ('navigate_node')
+		# rospy.init_node ('navigate_node')
 
 		self.aicontrol = AIControl ()
 		self.checkStateOne = 0
@@ -59,8 +59,8 @@ class Navigate (object):
 		if zero > one >= two:
 			print 'NOT FOUND NAVIGATE'
 
-			self.aicontrol.drive_xaxis (0.6)
-			rospy.sleep (0.5)
+			self.aicontrol.drive_xaxis (1)
+			rospy.sleep (3)
 			self.countStateZero -= 1
 		else:
 			print 'FOUND'
@@ -105,17 +105,17 @@ class Navigate (object):
 
 		if self.checkSlide >= 8:
 			self.aicontrol.drive_xaxis (1)
-			rospy.sleep (3)
+			rospy.sleep (4)
 			self.checkSlide = 0
 			return
 		elif self.checkSlide >= 6:
 			self.aicontrol.drive_xaxis (0.6)
-			rospy.sleep (2)
-			vy = self.aicontrol.adjust (vy, -0.2, -0.1, 0.1, 0.2)
+			rospy.sleep (3)
+			vy = self.aicontrol.adjust (vy, -0.3, -0.2, 0.2, 0.3)
 		elif self.checkSlide >= 4:
 			self.aicontrol.drive_xaxis (0.6)
-			rospy.sleep (2)
-			vy = self.aicontrol.adjust (vy, -0.3, -0.2, 0.2, 0.3)
+			rospy.sleep (3)
+			vy = self.aicontrol.adjust (vy, -0.4, -0.3, 0.3, 0.4)
 		
 		if two > one >= zero:
 			print 'TWO LEGS'
@@ -223,7 +223,7 @@ class Navigate (object):
 			# self.pos = self.aicontrol.get_position ()
 			self.aicontrol.stop (0.5)
 			self.aicontrol.drive_xaxis (-1)
-			rospy.sleep (5)
+			rospy.sleep (8)
 			self.aicontrol.stop (0.5)
 			self.aicontrol.fix_zaxis (depth.NAVIGATE_DETECTING)
 
@@ -306,9 +306,6 @@ class Navigate (object):
 			# print 'ROLL'
 			# self.aicontrol.drive_xaxis (1)
 			# rospy.sleep (3)
-
-			print 'NAVIGATE COMPLETE'
-			self.state = 4
 		elif one > two >= zero:
 			print 'ONE LEG'
 

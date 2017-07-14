@@ -106,22 +106,24 @@ def adjust_exposure_time():
             break
 
 if __name__ == '__main__':
-    cameraPos = rospy.get_param('cameraPos', 'node')
-    nodeName = 'Auto_Exposure_' + cameraPos
-    topicL = rospy.get_param('cameraTopicLeft', None)
-    print topicL
-    # topicR = str(rospy.get_param('cameraTopicRight'))
-    nodeL = rospy.get_param('cameraNodeLeft', None)
-    # nodeR = str(rospy.get_param('cameraNodeRight'))
-    rospy.init_node(nodeName)
-    rospy.Subscriber(topicL, CompressedImage, imageL_callback)
-    # rospy.Subscriber(topicR, CompressedImage, imageR_callback)
-    clientL = dynamic_reconfigure.client.Client(nodeL)
-    # clientR = dynamic_reconfigure.client.Client(nodeR)
-    set_param('L', 'auto_exposure', False)
-    set_param('L', 'auto_frame_rate', True)
-    ev = 0.7
-    print("Exposure Start: {0}".format(ev))
-    set_param('L', 'exposure', ev)
-    time.sleep(2)
-    adjust_exposure_time()
+    # cameraPos = rospy.get_param('cameraPos', 'node')
+    # nodeName = 'Auto_Exposure_' + cameraPos
+    # topicL = rospy.get_param('cameraTopicLeft', None)
+    # print topicL
+    # # topicR = str(rospy.get_param('cameraTopicRight'))
+    # nodeL = rospy.get_param('cameraNodeLeft', None)
+    # # nodeR = str(rospy.get_param('cameraNodeRight'))
+    # rospy.init_node(nodeName)
+    # rospy.Subscriber(topicL, CompressedImage, imageL_callback)
+    # # rospy.Subscriber(topicR, CompressedImage, imageR_callback)
+    # clientL = dynamic_reconfigure.client.Client(nodeL)
+    # # clientR = dynamic_reconfigure.client.Client(nodeR)
+    # set_param('L', 'auto_exposure', False)
+    # set_param('L', 'auto_frame_rate', True)
+    # ev = 0.7
+    # print("Exposure Start: {0}".format(ev))
+    # set_param('L', 'exposure', ev)
+    # time.sleep(2)
+    # adjust_exposure_time()
+    while not rospy.is_shutdown():
+        print 'test'

@@ -7,7 +7,7 @@ from std_msgs.msg import Float64, Bool, String
 from AIControl import AIControl
 from zeabus_vision_srv_msg.srv import vision_srv_bouy
 from zeabus_vision_srv_msg.msg import vision_msg_bouy
-from zeabus_controller.srv import navigation_srv
+# from zeabus_controller.srv import navigation_srv
 
 class Bouy (object):
 
@@ -32,7 +32,7 @@ class Bouy (object):
 		nav_srv = 'navigation'
 		rospy.wait_for_service (bouy_srv)
 		self.detect_bouy = rospy.ServiceProxy (bouy_srv, vision_srv_bouy)
-		self.navigation = rospy.ServiceProxy (nav_srv, navigation_srv)
+		# self.navigation = rospy.ServiceProxy (nav_srv, navigation_srv)
 
 	def find_num (self):
 		self.data = self.detect_bouy (String ('bouy'), String ('a'))
@@ -50,19 +50,24 @@ class Bouy (object):
 		return False
 
 	def see_all_balls (self):
-		red_data = self.detect_bouy (String ('bouy'), String ('r'))
-		red_data = red_data.data
+		# red_data = self.detect_bouy (String ('bouy'), String ('r'))
+		# red_data = red_data.data
 
-		yellow_data = self.detect_bouy (String ('bouy'), String ('y'))
-		yellow_data = yellow_data.data
+		# yellow_data = self.detect_bouy (String ('bouy'), String ('y'))
+		# yellow_data = yellow_data.data
 
-		green_data = self.detect_bouy (String ('bouy'), String ('g'))
-		green_data = green_data.data
+		# green_data = self.detect_bouy (String ('bouy'), String ('g'))
+		# green_data = green_data.data
 
-		if red_data.appear and yellow_data.appear and green_data.appear:
+		# if red_data.appear and yellow_data.appear and green_data.appear:
+		# 	return True
+
+		# return False
+		n = self.find_num ()
+		if n < 3:
+			return False
+		else:
 			return True
-
-		return False
 	
 	def movement (self, color):
 		count = 0
@@ -120,7 +125,7 @@ class Bouy (object):
 
 			print areaImg
 			## check ratio area before hit_and_back ##
-			while areaImg < 0.1 and not rospy.is_shutdown ():
+			while areaImg < 0.015 and not rospy.is_shutdown ():
 				print 'IN LOOP'
 
 				x = []
@@ -159,7 +164,7 @@ class Bouy (object):
 				else:
 					print 'NOT FOUND'
 
-					self.aicontrol.drive_xaxis (1)
+					self.aicontrol.drive_xaxis (0.6)
 					rospy.sleep (self.time)
 
 					continue
@@ -222,16 +227,17 @@ class Bouy (object):
 
 	def hit_and_back (self):
 		self.aicontrol.drive_xaxis (1)
-		rospy.sleep (4)
+		rospy.sleep (8)
 		self.aicontrol.stop (1)
 		# self.aicontrol.drive_x_rel (1)
 
 		print 'HIT BALL!'
 
 		self.aicontrol.drive_xaxis (-1)
-		rospy.sleep (4)
+		rospy.sleep (8)
 		self.aicontrol.stop (1)
 		# self.aicontrol.drive_x_rel (-1)
+		rospy.sleep (1)
 		self.destPos = self.aicontrol.get_position ()
 
 		print self.destPos
@@ -241,9 +247,38 @@ class Bouy (object):
 		start_y = self.startPos[1]
 		start_z = self.startPos[2]
 		start_yaw = math.degrees (self.startPos[5])
-		# dest_x = self.destPos[0]
-		# dest_y = self.destPos[1]
-		# dest_z = self.destPos[2]
+		dest_x = self.destPos[0]
+		dest_y = self.destPos[1]
+		dest_z = self.destPos[2]
+
+		if dest_y > start_x:
+			dir = -1
+		elif dest_y < start_x:
+			dir = 1
+		else:
+			dir = 0
+		
+		## Slide to see yellow
+		# while not self.see_yellow_ball ():
+		# 	self.aicontrol.drive_yaxis (0.7 * dir)
+		# 	rospy.sleep (0.5)
+			# self.aicontrol.stop (0.5)
+		if dir == 1:
+			self.aicontrol.drive_yaxis (1)
+			rospy.sleep (8)
+		elif dir == -1:
+			self.aicontrol.drive_yaxis (-1)
+			rospy.sleep (7)
+
+		## Go backward
+		while not self.see_all_balls ():
+			self.aicontrol.drive_xaxis (-1)
+			rospy.sleep (0.5)
+			self.aicontrol.stop (0.5)
+
+		self.aicontrol.stop (0.5)
+		
+		print 'COMEBACK COMPLETE'
 
 		# ## comeback X
 		# print 'COMEBACK X'
@@ -257,7 +292,7 @@ class Bouy (object):
 		# print diff_y
 		# self.aicontrol.drive_y_rel (diff_y)
 
-		nav_data = self.navigation (Float64 (start_x), Float64 (start_y), Float64 (start_yaw))
+		# nav_data = self.navigation (Float64 (start_x), Float64 (start_y), Float64 (start_yaw))
 
 		## comeback Z
 		print 'COMEBACK Z'
@@ -354,8 +389,8 @@ class Bouy (object):
 
 	def run (self):
 		while self.find_num () <= 0:
-			self.aicontrol.drive ([0.6, 0, 0, 0, 0, 0])
-			rospy.sleep (0.5)
+			self.aicontrol.drive_xaxis (0.6)
+			rospy.sleep (1)
 
 		num = self.find_num ()
 		print ('Found %d balls', num)
@@ -400,10 +435,12 @@ class Bouy (object):
 			else:
 				print 'NOT FOUND'
 
-				self.aicontrol.drive_xaxis (1)
-				rospy.sleep (2)
+				# self.aicontrol.drive_xaxis (1)
+				# rospy.sleep (2)
+				# self.aicontrol.stop (1)
 
-				return False
+				# return False
+				continue
 			# self.time = self.data.area[0]
 
 			count = 0
@@ -442,8 +479,8 @@ class Bouy (object):
 if __name__ == '__main__':
 	bouy = Bouy ()
 	# Bouy.run ()
-	# bouy.find_num ()
+	print bouy.find_num ()
 	# bouy.movement ('y')
-	# bouy.get_data ('y')
-	bouy.test_move ('r')
+	# bouy.get_data ('r')
+	bouy.test_move ('y')
 	# bouy.test_comeback ()

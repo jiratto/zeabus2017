@@ -29,8 +29,8 @@ def find_bin(msg):
     global img, width, height
     req = msg.req.data
     print('req', req)
-    lowerOrange, upperOrange = getColor('orange', 'down')
-    lowerWhite, upperWhite = getColor('white', 'down')
+    lowerOrange, upperOrange = get_color('orange', 'bottom', 'bin')
+    lowerWhite, upperWhite = get_color('white', 'bottom', 'bin')
     res = vision_msg_default()
 
     while not rospy.is_shutdown():

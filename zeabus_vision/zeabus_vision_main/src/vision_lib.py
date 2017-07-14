@@ -457,7 +457,7 @@ def preprocess_bouy(imgBGR):
     b, g, r = cv2.split(imgBGR)
     r.fill(255)
     imgCombine = cv2.merge((b, g, r))
-    resBGR = crop(imgCombine, 70, 40)
+    resBGR = crop(imgCombine, 60, 30)
     return resBGR
 
 

@@ -76,7 +76,7 @@ def find_bouy(req):
 
     mask = cv2.bitwise_or(processMaskR, processMaskR, mask=processMaskY)
     maskInv = np.invert(mask)
-    maskCrop = crop_gray(maskInv, 70, 40)
+    maskCrop = crop_gray(maskInv, 60, 30)
     kernelFrame = get_kernal('plus', (5, 5))
     maskErode = erode(maskCrop, kernelFrame)
     _, th = cv2.threshold(maskErode, 20, 255, 0)
@@ -98,7 +98,8 @@ def find_bouy(req):
                 continue
             (x, y), r = cv2.minEnclosingCircle(c)
             areaCir = (math.pi * (r**2))
-            if area / areaCir <= 0.50:
+	# edit_radius all
+            if area / areaCir <= 0.40:
                 continue
             if statusFilter and (x - x_before)**2 + (y - y_before)**2 <= 10**2:
                 continue
@@ -221,7 +222,8 @@ def find_bouy(req):
                 continue
             (x, y), r = cv2.minEnclosingCircle(c)
             areaCir = (math.pi * (r**2))
-            if area / areaCir <= 0.50:
+	# each bouy radius
+            if area / areaCir <= 0.30:
                 continue
             if (x - xMemory)**2 + (y - yMemory)**2 >= 15**2:
                 continue
