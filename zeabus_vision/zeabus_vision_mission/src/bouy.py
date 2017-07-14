@@ -55,7 +55,8 @@ def find_bouy(req):
     m = vision_msg_bouy()
     lowerY, upperY = get_color('yellow', 'top', 'bouy')
     lowerR, upperR = get_color('red', 'top', 'bouy')
-    minArea = 30
+    lowerYY, upperYY = get_color('orange', 'top', 'bouy')
+    minArea = 100
     font = cv2.FONT_HERSHEY_SIMPLEX
 
     while img is None:
@@ -70,12 +71,15 @@ def find_bouy(req):
     processMaskY = process_mask(resY)
     resR = cv2.inRange(resHSV, lowerR, upperR)
     processMaskR = process_mask(resR)
+    resYY = cv2.inRange(resHSV, lowerYY, upperYY)
+    processMaskYY = process_mask(resYY)
+
     mask = cv2.bitwise_or(processMaskR, processMaskR, mask=processMaskY)
     maskInv = np.invert(mask)
     maskCrop = crop_gray(maskInv, 70, 40)
     kernelFrame = get_kernal('plus', (5, 5))
     maskErode = erode(maskCrop, kernelFrame)
-    _, th = cv2.threshold(maskErode, 10, 255, 0)
+    _, th = cv2.threshold(maskErode, 20, 255, 0)
     _, contours, _ = cv2.findContours(
         th.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
@@ -149,6 +153,52 @@ def find_bouy(req):
         else:
             m.num = ct
             m.appear = False
+    elif req == 'o':
+        _, th = cv2.threshold(processMaskYY, 20, 255, 0)
+        _, contours, _ = cv2.findContours(
+            th.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+
+        statusFilter = False
+        resultCir = []
+        ct = 0
+        for c in contours:
+            area = cv2.contourArea(c)
+            cv2.drawContours(resImg, [c], -1, (222, 2, 222), 3)
+            if area < minArea:
+                continue
+            (x, y), r = cv2.minEnclosingCircle(c)
+            areaCir = (math.pi * (r**2))
+            if area / areaCir <= 0.50:
+                continue
+            if statusFilter and (x - x_before)**2 + (y - y_before)**2 <= 10**2:
+                continue
+            cv2.circle(resImg, (int(x), int(y)), int(r), (255, 255, 255), 3)
+
+            cv2.putText(resImg, 'Area: %.2f %d' %
+                        (((areaCir / (width * height))), (areaCir)),
+                        (int(x), int(y)), font, 0.5, (0, 255, 255), 1, cv2.LINE_AA)
+            resultCir.append([x, y, areaCir / (width * height)])
+            x_before = x
+            y_before = y
+            statusFilter = True
+        if len(resultCir) > 0:
+            resultCir = sorted(resultCir, key=lambda l: l[2], reverse=True)
+            resultCir = resultCir[0]
+            m.num = 1
+            m.cx = [resultCir[0]]
+            m.cy = [resultCir[1]]
+            m.area = [resultCir[2]]
+            m.color = [0]
+            m.appear = True
+            # return m
+        else:
+            m.num = 0
+            m.cx = [0]
+            m.cy = [0]
+            m.area = [0]
+            m.color = [0]
+            m.appear = False
+            return m
     else:
         if getMemoryStatus:
             if req == 'r':
@@ -204,11 +254,9 @@ def find_bouy(req):
     m.cx = [cx]
     m.cy = [cy]
 
-    publish_result(resImg, 'bgr', '/result_img')
-    publish_result(mask, 'gray', '/mask')
-    publish_result(th, 'gray', '/mask_inv')
-    # publish_result(maskG, 'gray', '/mask_g')
-    # publish_result(maskR, 'gray', '/mask_r')
+    publish_result(resImg, 'bgr', '/bouy_result')
+    publish_result(mask, 'gray', '/bouy_mask')
+    publish_result(th, 'gray', '/bouy_mask_inv')
 
     print m
     return m
@@ -223,6 +271,7 @@ def not_found():
     m.color = [0]
     m.appear = False
     return m
+
 if __name__ == '__main__':
     rospy.init_node('vision_squid', anonymous=True)
     topic = "/top/center/image_rect_color/compressed"
