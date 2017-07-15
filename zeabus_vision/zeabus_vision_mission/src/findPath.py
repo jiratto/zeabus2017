@@ -54,7 +54,7 @@ def find_path():
     im_for_draw = img.copy()
     im_blur = cv2.GaussianBlur(im, (3,3), 0)
 
-    bgr = preprocess_navigate(im)
+    bgr = preprocess_path(im)
     hsv = cv2.cvtColor(bgr, cv2.COLOR_BGR2HSV)
 
     imgray = cv2.cvtColor(im_blur, cv2.COLOR_BGR2GRAY)

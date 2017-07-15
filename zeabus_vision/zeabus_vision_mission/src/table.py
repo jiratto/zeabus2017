@@ -28,7 +28,7 @@ def find_table():
 
         imageForDraw = img.copy()
 
-        bgr = preprocess_navigate(image)
+        bgr = preprocess_table(image)
         hsv = cv2.cvtColor(bgr, cv2.COLOR_BGR2HSV)
 
         bg = cv2.inRange(hsv, lower_bg, upper_bg)
@@ -40,6 +40,7 @@ def find_table():
 
         _, bg = cv2.threshold(bg, 20, 255, cv2.THRESH_BINARY_INV)
         # bg = np.invert(bg)
+        bg = open_morph(bg, get_kernal())
         bg = close(bg, get_kernal())
 
         ret, thresh = cv2.threshold(imageGray, 60, 255, cv2.THRESH_BINARY_INV)
@@ -67,14 +68,18 @@ def find_table():
                     continue
                 if mn < 20:
                     continue
-                print('ellipse', ellipse)
+                # print('ellipse', ellipse)
                 # cv2.ellipse(imageForDraw, ellipse, (255,255,0),2)
 
         for c in rectContours:
-            rect = (x,y), (ww, hh), angle = cv2.minAreaRect(c)
+            M = cv2.moments(c)
+            rect = (x,y), (ww, hh), _ = cv2.minAreaRect(c)
             realArea = cv2.contourArea(c)
-            if realArea < 1000:
+            angle = 90-Oreintation(M)[0]*180/math.pi 
+            if realArea < 10000:
                 continue
+            print('realArea',realArea)
+            print('angle',angle)
             box = cv2.boxPoints(rect)
             box = np.int0(box)
             cv2.drawContours(imageForDraw,[box],0,(0,0,255),2)
