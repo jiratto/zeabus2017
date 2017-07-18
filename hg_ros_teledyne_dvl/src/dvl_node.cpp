@@ -117,7 +117,7 @@ int main(int argc, char **argv)
 
   //Set Heading Alignment to 0 degrees
   int heading_alignment;
-  serial.writeString("EA+04500\n");
+  serial.writeString("EA+09000\n");
 
   //Set manual transducer depth in case depth sensor fails (dm)
   //serial.writeString("ED0\n");
@@ -400,8 +400,8 @@ int main(int argc, char **argv)
 		} else {
 			g_status_velocity_ok = true;
 			ROS_INFO("DVL : GOOD DATA");
-			dvl.twist.twist.linear.x = -vx * 0.001;
-			dvl.twist.twist.linear.y = vy * 0.001;
+			dvl.twist.twist.linear.x = vx * 0.001;
+			dvl.twist.twist.linear.y = -vy * 0.001;
 			dvl.twist.twist.linear.z = vz * 0.001;
 		}
 
