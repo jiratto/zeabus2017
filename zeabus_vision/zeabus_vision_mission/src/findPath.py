@@ -19,27 +19,17 @@ lower_orange, upper_orange = get_color('orange', 'bottom', 'path')
 
 def find_path():
     global img, width, height
-    # print("1")
     t = True
     f = False
     cnt = None
-    # kernel1 = np.ones((15,15), np.uint8)
-    # kernel2 = np.ones((5,5), np.uint8)
     res = vision_msg_default()
 
-
-    # while not rospy.is_shutdown():
     while img is None:
         print("img: None")
         rospy.sleep(0.01)
     print('upper_or', upper_orange)
     print('lower_or', lower_orange)
-        # continue
-    # print("2")
     im = img.copy()
-    # height, width,_ = im.shape
-    # print('width', width)
-    # print('height', height)
     offsetW = width/2
     offsetH = height/2
     area = -999
@@ -50,19 +40,20 @@ def find_path():
     h = -999
     angle = -999
     box = None
+
     imStretching = stretching(im)
-    im_for_draw = img.copy()
-    im_blur = cv2.GaussianBlur(im, (3,3), 0)
+    imgForDraw = img.copy()
+    imgBlur = cv2.GaussianBlur(im, (3,3), 0)
 
     bgr = preprocess_path(im)
     hsv = cv2.cvtColor(bgr, cv2.COLOR_BGR2HSV)
 
-    imgray = cv2.cvtColor(im_blur, cv2.COLOR_BGR2GRAY)
-    im_orange = cv2.inRange(hsv, lower_orange, upper_orange)
-    im_orange = close(im_orange, get_kernal())
-    # im_orange = erode(im_orange, get_kernal())
+    imgray = cv2.cvtColor(imgBlur, cv2.COLOR_BGR2GRAY)
+    imgOrange = cv2.inRange(hsv, lower_orange, upper_orange)
+    imgOrange = close(imgOrange, get_kernal())
+
     ret, thresh = cv2.threshold(imgray, 200, 255, 0)
-    _, contours, hierarchy = cv2.findContours(im_orange.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    _, contours, hierarchy = cv2.findContours(imgOrange.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
     realArea = 0
     ratioArea = 0
@@ -91,13 +82,6 @@ def find_path():
             tmp = hh
             hh = ww
             ww = tmp
-
-        # if ratioArea < 85:
-        #     print('wrong ratio')
-        #     continue
-
-        # if not find_shape(c, 'rect'):
-        #     continue
         diff = (ww/hh)
         epsilon = 0.1*cv2.arcLength(c, t)
         approx = cv2.approxPolyDP(c, epsilon,t)
@@ -111,11 +95,11 @@ def find_path():
             cy = y
             w = ww
             h = hh
-    # print('maxArea', max1)
-    cv2.circle(im_for_draw,(int(cx), int(cy)), 5, (0, 0, 255), -1)
-    cv2.drawContours(im_for_draw,[box], -1,(0,255,255),3)
-    publish_result(im_for_draw, 'bgr', 'debug_path')
-    publish_result(im_orange, 'gray', 'inRange')
+
+    cv2.circle(imgForDraw,(int(cx), int(cy)), 5, (0, 0, 255), -1)
+    cv2.drawContours(imgForDraw,[box], -1,(0,255,255),3)
+    publish_result(imgForDraw, 'bgr', 'debug_path')
+    publish_result(imgOrange, 'gray', 'inRange')
     xx = (cx-offsetW)/offsetW
     yy = (offsetH-cy)/offsetH
     res.x = yy
@@ -155,10 +139,5 @@ if __name__ == '__main__':
     topic = '/bottom/left/image_raw/compressed'
     bot = '/bottom/left/image_raw/compressed'
     rospy.Subscriber(bot, CompressedImage, img_callback)
-    # find_path()
-    # while not rospy.is_shutdown():
-    #     res = vision_srv_default()
-    #     find_path()
-    #     print("555")
     rospy.Service('vision', vision_srv_default(), mission_callback)
     rospy.spin()
