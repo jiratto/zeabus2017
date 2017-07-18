@@ -60,8 +60,8 @@ def navigate_top():
     global img, width, height
     im = None
     res = vision_msg_navigate()
-    lower_yellow, upper_yellow = getColor('yellow', 'top') 
-    lower_white, upper_white = getColor('', 'top')
+    lower_yellow, upper_yellow = get_color('yellow', 'top', 'navigate') 
+    lower_white, upper_white = get_color('white', 'top', 'navigate')
     while not rospy.is_shutdown():
         while img is None:
             print("img : None")
@@ -80,8 +80,12 @@ def navigate_top():
 
         print('lower_yellow', lower_yellow)
         print('upper_yellow', upper_yellow)
+
         im_yellow = cv2.inRange(hsv, lower_yellow, upper_yellow)
-        
+        im_bg = cv2.inRange(hsv, lower_white, upper_white)
+
+        im_yellow = cv2.subtract(im_yellow, im_bg)
+
         ret, im_yellow = cv2.threshold(im_yellow, 20, 255, cv2.THRESH_BINARY)
 
         im_delnoise = close(im_yellow, rect_ker(3,3))
@@ -278,7 +282,7 @@ def navigate_bot():
         appear = False
         im_bot = img_bot.copy()
         imForDraw = img_bot.copy()
-        lower_yellow, upper_yellow = getColor('yellow', 'down')
+        lower_yellow, upper_yellow = get_color('yellow', 'bottom', 'navigate')
         
 
         # hsv = cv2.cvtColor(im_bot.copy(), cv2.COLOR_BGR2HSV)
@@ -286,6 +290,7 @@ def navigate_bot():
         hsv = cv2.cvtColor(bgr, cv2.COLOR_BGR2HSV)
 
         im_yellow = cv2.inRange(hsv, lower_yellow, upper_yellow)
+        
         im_yellow = erode(im_yellow, rect_ker(5,5))
         im_yellow = close(im_yellow, rect_ker(5,5))
 

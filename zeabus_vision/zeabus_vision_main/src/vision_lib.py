@@ -395,26 +395,39 @@ def open_morph(imgBin, ker):
 
 def preprocess_squid(imgBGR):
     # img = crop(imgBGR, 20, 20)
-    imgMedian = cv2.medianBlur(imgBGR, 3)
-    hsv = cv2.cvtColor(imgMedian, cv2.COLOR_BGR2HSV)
+    # imgMedian = cv2.medianBlur(imgBGR, 3)
+    hsv = cv2.cvtColor(imgBGR, cv2.COLOR_BGR2HSV)
     h, s, v = cv2.split(hsv)
     vMean = cv2.mean(v)[0]
-    vBright = int((255 - vMean + 5) / 1.5)
-    vDark = int((vMean - 5) / 1.5)
+    vBright = int((255 - vMean) / 1.5)
+    vDark = int(vMean / 1.5)
 
-    imageCLAHE = clahe(imgMedian)
+    imageCLAHE = clahe(imgBGR)
+    # cv2.imshow('clahe', imageCLAHE)
     imageDark = brightness(imageCLAHE, -vDark)
+    # cv2.imshow('Dark', imageDark)
     imageBright = brightness(imageCLAHE, vBright)
-    imageEqu = equalization_bgr(imgMedian)
+    # cv2.imshow('bright', imageBright)
+    imageEqu = equalization_bgr(imgBGR)
+    # cv2.imshow('equ', imageEqu)
     imageDark1 = brightness(imageEqu, -vDark)
-    # imageBright1 = brightness(imageEqu, vBright)
-
-    images = [imageDark, imageBright, imageDark1]
+    # cv2.imshow('Dark1', imageDark1)
+    imageBright1 = brightness(imageEqu, vBright)
+    # cv2.imshow('bright1', imageBright1)
+    images = [imageCLAHE, imageBright]
+    # images = [imageDark, imageCLAHE, imageBright, imageDark1]
 
     mergeMertens = cv2.createMergeMertens()
     resMertens = mergeMertens.process(images)
-    resBGR = np.clip(resMertens * 255, 0, 255).astype('uint8')
+    resClip = np.clip(resMertens * 255, 0, 255).astype('uint8')
+    # b, g, r = cv2.split(imageEqu)
+    # r += 10
+    # g += 10
+    # imgCombine = cv2.merge((b, g, r))
+    # resBGR = crop(imgCombine, 70, 40)
+    resBGR = crop(resClip, 20, 20)
     return resBGR
+    # return imgCombine
 
 
 def preprocess_navigate(imgBGR):
@@ -439,12 +452,99 @@ def preprocess_navigate(imgBGR):
     resBGR = np.clip(resMertens * 255, 0, 255).astype('uint8')
     return resBGR
 
+def preprocess_bin(imgBGR):
+    imgMedian = cv2.medianBlur(imgBGR, 9)
+    hsv = cv2.cvtColor(imgMedian, cv2.COLOR_BGR2HSV)
+    h, s, v = cv2.split(hsv)
+    vMean = cv2.mean(v)[0]
+    vBright = int((255 - vMean + 5) / 1.5)
+    vDark = int((vMean - 5) / 1.5)
+
+    imageCLAHE = clahe(imgBGR)
+    imageDark = brightness(imageCLAHE, -vDark)
+    imageBright = brightness(imageCLAHE, vBright)
+    imageEqu = equalization_bgr(imgBGR)
+    imageDark1 = brightness(imageEqu, -vDark)
+    imageBright1 = brightness(imageEqu, vBright)
+
+    images = [imageDark, imageBright, imageBright1, imageCLAHE]
+
+    mergeMertens = cv2.createMergeMertens()
+    resMertens = mergeMertens.process(images)
+    resBGR = np.clip(resMertens * 255, 0, 255).astype('uint8')
+    return resBGR
+    
+def preprocess_path(imgBGR):
+    imgMedian = cv2.medianBlur(imgBGR, 9)
+    hsv = cv2.cvtColor(imgMedian, cv2.COLOR_BGR2HSV)
+    h, s, v = cv2.split(hsv)
+    vMean = cv2.mean(v)[0]
+    vBright = int((255 - vMean + 5) / 1.5)
+    vDark = int((vMean - 5) / 1.5)
+
+    imageCLAHE = clahe(imgBGR)
+    imageDark = brightness(imageCLAHE, -vDark)
+    imageBright = brightness(imageCLAHE, vBright)
+    imageEqu = equalization_bgr(imgBGR)
+    imageDark1 = brightness(imageEqu, -vDark)
+    imageBright1 = brightness(imageEqu, vBright)
+
+    images = [imageDark, imageBright, imageBright1, imageCLAHE]
+
+    mergeMertens = cv2.createMergeMertens()
+    resMertens = mergeMertens.process(images)
+    resBGR = np.clip(resMertens * 255, 0, 255).astype('uint8')
+    return resBGR
+
+def preprocess_table(imgBGR):
+    imgMedian = cv2.medianBlur(imgBGR, 9)
+    hsv = cv2.cvtColor(imgMedian, cv2.COLOR_BGR2HSV)
+    h, s, v = cv2.split(hsv)
+    vMean = cv2.mean(v)[0]
+    vBright = int((255 - vMean + 5) / 1.5)
+    vDark = int((vMean - 5) / 1.5)
+
+    imageCLAHE = clahe(imgBGR)
+    imageDark = brightness(imageCLAHE, -vDark)
+    imageBright = brightness(imageCLAHE, vBright)
+    imageEqu = equalization_bgr(imgBGR)
+    imageDark1 = brightness(imageEqu, -vDark)
+    imageBright1 = brightness(imageEqu, vBright)
+
+    images = [imageDark, imageBright, imageBright1, imageCLAHE]
+
+    mergeMertens = cv2.createMergeMertens()
+    resMertens = mergeMertens.process(images)
+    resBGR = np.clip(resMertens * 255, 0, 255).astype('uint8')
+    return resBGR
+
+def preprocess_tower(imgBGR):
+    imgMedian = cv2.medianBlur(imgBGR, 9)
+    hsv = cv2.cvtColor(imgMedian, cv2.COLOR_BGR2HSV)
+    h, s, v = cv2.split(hsv)
+    vMean = cv2.mean(v)[0]
+    vBright = int((255 - vMean + 5) / 1.5)
+    vDark = int((vMean - 5) / 1.5)
+
+    imageCLAHE = clahe(imgBGR)
+    imageDark = brightness(imageCLAHE, -vDark)
+    imageBright = brightness(imageCLAHE, vBright)
+    imageEqu = equalization_bgr(imgBGR)
+    imageDark1 = brightness(imageEqu, -vDark)
+    imageBright1 = brightness(imageEqu, vBright)
+
+    images = [imageDark, imageBright, imageBright1, imageCLAHE]
+
+    mergeMertens = cv2.createMergeMertens()
+    resMertens = mergeMertens.process(images)
+    resBGR = np.clip(resMertens * 255, 0, 255).astype('uint8')
+    return resBGR
 
 def preprocess_bouy(imgBGR):
     b, g, r = cv2.split(imgBGR)
     r.fill(255)
     imgCombine = cv2.merge((b, g, r))
-    resBGR = crop(imgCombine, 70, 40)
+    resBGR = crop(imgCombine, 60, 30)
     return resBGR
 
 

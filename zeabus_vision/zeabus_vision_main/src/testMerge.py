@@ -130,8 +130,8 @@ def findAdjustRemapPanPoints(ref_image, float_image, x_ref, y_ref):
 
 def callbackL(ros_data):
     global imgL
-    width = 640
-    height = 320
+    width = int(1152 / 2)
+    height = int(874 / 2)
     np_arr = np.fromstring(ros_data.data, np.uint8)
     imgL = cv2.resize(cv2.imdecode(
         np_arr, 1), (width, height))
@@ -139,8 +139,8 @@ def callbackL(ros_data):
 
 def callbackR(ros_data):
     global imgR
-    width = 640
-    height = 320
+    width = int(1152 / 2)
+    height = int(874 / 2)
     np_arr = np.fromstring(ros_data.data, np.uint8)
     imgR = cv2.resize(cv2.imdecode(
         np_arr, 1), (width, height))
@@ -166,7 +166,7 @@ def main():
         bb, gg, rr = cv2.split(lena_move)
         lena_org_gray = cv2.cvtColor(lena_org, cv2.COLOR_BGR2GRAY)
         lena_move_gray = cv2.cvtColor(lena_move, cv2.COLOR_BGR2GRAY)
-        y, x = np.mgrid[:320, :640]
+        y, x = np.mgrid[:int(874 / 2), :int(1152 / 2)]
         x_m, y_m = findAdjustRemapPanPoints(lena_org_gray, lena_move, x, y)
         # print (x_m, y_m)
         print len(x_m)
@@ -198,8 +198,12 @@ def main():
     cv2.destroyAllWindows()
 if __name__ == "__main__":
     rospy.init_node('test_merge')
-    subL = rospy.Subscriber('/bottom/left/image_raw/compressed',
+    # subL = rospy.Subscriber('/bottom/left/image_raw/compressed',
+    #                         CompressedImage, callbackL, queue_size=10)
+    # subR = rospy.Subscriber('/bottom/right/image_raw/compressed',
+    #                         CompressedImage, callbackR, queue_size=10)
+    subL = rospy.Subscriber('/stereo/left/image_rect_color/compressed',
                             CompressedImage, callbackL, queue_size=10)
-    subR = rospy.Subscriber('/bottom/right/image_raw/compressed',
+    subR = rospy.Subscriber('/stereo/right/image_rect_color/compressed',
                             CompressedImage, callbackR, queue_size=10)
     main()

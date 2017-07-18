@@ -1,25 +1,21 @@
- color_top:
-  upper_yellow: '67,255,255'
-
-  lower_yellow: '8,78,21'
-
-  upper_black: '0,0,0'
-
-  lower_black: '180,255,255'
-
-  upper_violet: '116,252,255'
-
-  lower_violet: '105,72,0'
-
-  upper_orange: '59,255,255'
-
-  lower_orange: '44,93,81'
-
-  upper_white: '97,148,168'
-
-  lower_white: '77,72,105'
-
-  upper_red: '176,82,100'
-
-  lower_red: '7,13,72'
+image_width: 1936
+image_height: 1216
+camera_name: /top/center
+camera_matrix:
+  rows: 3
+  cols: 3
+  data: [1049.778552, 0.000000, 941.677753, 0.000000, 1049.761050, 628.571816, 0.000000, 0.000000, 1.000000]
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 5
+  data: [-0.135236, 0.055846, -0.000400, -0.001024, 0.000000]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data: [967.526978, 0.000000, 938.056394, 0.000000, 0.000000, 1004.695435, 629.151201, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000]
 
