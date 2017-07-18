@@ -4,23 +4,17 @@ from auto_exposure import AutoExposure
 
 
 def main():
-    subTopicL = rospy.get_param(
-        "/auto_exposure_top/imageTopicL", None)
-    clientL = rospy.get_param(
-        "/auto_exposure_top/imageClientL", None)
-    subTopicR = rospy.get_param(
-        "/auto_exposure_top/imageTopicR", None)
-    clientR = rospy.get_param(
-        "/auto_exposure_top/imageClientR", None)
+    EVmin = 0.4
+    EVdefault = 0.7
 
-    if not subTopicL is None:
-        AEL = AutoExposure(subTopicL, clientL)
-        AEL.adjust_exposure_time()
+    subTopicC = rospy.get_param(
+        "/auto_exposure_top/imageTopicC", None)
+    clientC = rospy.get_param(
+        "/auto_exposure_top/imageClientC", None)
 
-    if not subTopicR is None:
-        AER = AutoExposure(subTopicR, clientR)
-        AER.adjust_exposure_time()
-
+    if not subTopicC is None:
+        AEC = AutoExposure(subTopicC, clientC, EVdefault, EVmin)
+        AEC.adjust_exposure_time()
 
 if __name__ == '__main__':
     rospy.init_node('Auto_Exposure_Top')
