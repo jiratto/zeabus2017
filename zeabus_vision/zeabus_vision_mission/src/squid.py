@@ -29,6 +29,9 @@ def image_callback(msg):
 
 def velocity_callback(msg):
     global v
+    v[0] = msg.linear.y
+    v[1] = msg.linear.z
+    print v
 
 
 def mission_callback(msg):
@@ -57,9 +60,9 @@ def find_squid(req):
 
     font = cv2.FONT_HERSHEY_SIMPLEX
 
-    kernelFrame = get_kernal('plus', (5, 5))
-    kernelRow = get_kernal('rect', (3, 1))
-    kernelCol = get_kernal('rect', (1, 3))
+    kernelFrame = get_kernel('plus', (5, 5))
+    kernelRow = get_kernel('rect', (3, 1))
+    kernelCol = get_kernel('rect', (1, 3))
 
     m = vision_msg_default()
     m.appear = False
@@ -94,7 +97,7 @@ def find_squid(req):
     _, th = cv2.threshold(maskInv, 20, 255, 0)
 
     edges = cv2.Canny(th.copy(), 100, 200)
-    kernelFrame = get_kernal('plus', (5, 5))
+    kernelFrame = get_kernel('plus', (5, 5))
     edgesDilateInv = np.invert(dilate(edges, kernelFrame))
 
     thEdge = cv2.bitwise_and(edgesDilateInv, edgesDilateInv, mask=th)
@@ -165,7 +168,9 @@ def find_squid(req):
 
 if __name__ == '__main__':
     rospy.init_node('vision_squid', anonymous=True)
-    imageTopic = "/top/center/image_rect_color/compressed"
+    imageTopic = "/sy"
+    # imageTopic = "/top/center/image_rect_color/compressed"
+    # velocityTopic = "/syrena/cmd_vel"
     velocityTopic = "/zeabus/cmd_vel"
     rospy.Subscriber(imageTopic, CompressedImage, image_callback)
     rospy.Subscriber(velocityTopic, Twist, velocity_callback)
