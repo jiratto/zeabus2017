@@ -353,7 +353,7 @@ def adjust_gamma_by_v(imgBGR=None):
     return res
 
 
-def get_kernal(shape='rect', ksize=(5, 5)):
+def get_kernel(shape='rect', ksize=(5, 5)):
     if shape == 'rect':
         return cv2.getStructuringElement(cv2.MORPH_RECT, ksize)
     elif shape == 'ellipse':

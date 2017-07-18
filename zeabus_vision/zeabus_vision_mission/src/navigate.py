@@ -88,15 +88,15 @@ def navigate_top():
 
         ret, imgYellow = cv2.threshold(imgYellow, 20, 255, cv2.THRESH_BINARY)
 
-        im_delnoise = close(imgYellow, rect_ker(3,3))
-        im_delnoise = erode(imgYellow, rect_ker(3,3))
-        im_delnoise = dilate(im_delnoise, cross_ker(3,3))
-        im_delnoise2 = erode(imgYellow, cross_ker(5,1))
-        im_lr = dilate(im_delnoise, rect_ker(15,1))
-        im_lr = close(im_lr, rect_ker(11,11))
-        im_lr = erode(im_lr, rect_ker(1,55))
-        im_bot = dilate(im_delnoise2, rect_ker(1,23))
-        im_bot = erode(im_bot, rect_ker(35, 1))
+        # im_delnoise = close(imgYellow, rect_ker(3,3))
+        im_delnoise = erode(imgYellow, get_kernel('rect', (3,3)))
+        im_delnoise = dilate(im_delnoise, get_kernel('cross', (3,3)))
+        im_delnoise2 = erode(imgYellow, get_kernel('cross', (5,1)))
+        im_lr = dilate(im_delnoise, get_kernel('rect', (15,1)))
+        im_lr = close(im_lr, get_kernel('rect', (11,11)))
+        im_lr = erode(im_lr, get_kernel('rect', (1,55)))
+        im_bot = dilate(im_delnoise2, get_kernel('rect', (1,23)))
+        im_bot = erode(im_bot, get_kernel('rect', (35,1)))
         
         plate = im_lr+im_bot
         _, contours_lr, hierarchy = cv2.findContours(im_lr.copy(), 

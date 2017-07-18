@@ -8,12 +8,13 @@ from sensor_msgs.msg import CompressedImage
 import sys
 sys.path.append ('/home/zeabus/catkin_ws/src/src_code/zeabus_vision/zeabus_vision_main/src/')
 from vision_lib import *
+from constant import * as const
 from zeabus_vision_srv_msg.msg import vision_msg_default
 from zeabus_vision_srv_msg.srv import vision_srv_default
 
 img = None
-width = None
-height = None
+width = const.IMAGE_BOTTOM_WIDTH
+height = const.IMAGE_BOTTOM_HEIGHT
 
 lower_orange, upper_orange = get_color('orange', 'bottom', 'path')
 
@@ -50,7 +51,7 @@ def find_path():
 
     imgray = cv2.cvtColor(imgBlur, cv2.COLOR_BGR2GRAY)
     imgOrange = cv2.inRange(hsv, lower_orange, upper_orange)
-    imgOrange = close(imgOrange, get_kernal())
+    imgOrange = close(imgOrange, get_kernel())
 
     ret, thresh = cv2.threshold(imgray, 200, 255, 0)
     _, contours, hierarchy = cv2.findContours(imgOrange.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
@@ -125,8 +126,7 @@ def find_path():
 def img_callback(msg):
     global img, width, height
     arr = np.fromstring(msg.data, np.uint8)
-    img = cv2.resize(cv2.imdecode(arr, 1), (640, 512))
-    height, width,_ = img.shape
+    img = cv2.resize(cv2.imdecode(arr, 1), (width, height))
  
 
 
