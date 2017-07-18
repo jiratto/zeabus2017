@@ -11,9 +11,12 @@ image = None
 
 
 def range_str2list(str):
-    # '180,255,255' to [180,255,255]
     str = str.split(',')
     return np.array([int(str[0]), int(str[1]), int(str[2])], np.uint8)
+
+
+def print_result(msg):
+    print('<------------- ') + str(msg) + (' ------------->')
 
 
 def delete_color(imgHSV, color, camera):
@@ -82,12 +85,6 @@ def crop(imgBGR, outerRow, outerCol):
     g = cv2.subtract(sg, mask)
     r = cv2.subtract(sr, mask)
 
-    # b *= np.uint8(mask)
-    # g *= np.uint8(mask)
-    # r *= np.uint8(mask)
-
-    # print mask.shape
-    # print imgBGR.shape
     return cv2.merge((b, g, r))
 
 
@@ -266,31 +263,21 @@ def nothing(variable):
     pass
 
 
-def get_mode(v):
-    v = v.ravel()
+def get_mode(data):
+    data = np.array(data)
+    if len(data.shape) > 1:
+        data = data.ravel()
     try:
-        MODE = statistics.mode(v)
+        mode = statistics.mode(data)
     except ValueError:
-        MODE = 127
-
-    return MODE
-
-
-def process_img_down(imgBGR):
-    # bgr = stretching(imgBGR.copy())
-    hsv = clahe(imgBGR.copy())
-    bgr = cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR)
-    median = cv2.medianBlur(bgr.copy(), 7)
-    hsv = cv2.cvtColor(median, cv2.COLOR_BGR2HSV)
-
-    return hsv
+        mode = None
+    return mode
 
 
-def process_img_top(img):
-    bgr = stretching(img.copy())
-    # hsv = clahe(bgr.copy())
-    hsv = cv2.cvtColor(bgr, cv2.COLOR_BGR2HSV)
-    return hsv
+def get_cv(data):
+    mean = cv2.mean(data)[0]
+    sd = cv2.meanStdDev(data, mean)[0]
+    return sd / mean
 
 
 def shrinking(img):
@@ -403,28 +390,16 @@ def preprocess_squid(imgBGR):
     vDark = int(vMean / 1.5)
 
     imageCLAHE = clahe(imgBGR)
-    # cv2.imshow('clahe', imageCLAHE)
     imageDark = brightness(imageCLAHE, -vDark)
-    # cv2.imshow('Dark', imageDark)
     imageBright = brightness(imageCLAHE, vBright)
-    # cv2.imshow('bright', imageBright)
     imageEqu = equalization_bgr(imgBGR)
-    # cv2.imshow('equ', imageEqu)
     imageDark1 = brightness(imageEqu, -vDark)
-    # cv2.imshow('Dark1', imageDark1)
     imageBright1 = brightness(imageEqu, vBright)
-    # cv2.imshow('bright1', imageBright1)
     images = [imageCLAHE, imageBright]
-    # images = [imageDark, imageCLAHE, imageBright, imageDark1]
 
     mergeMertens = cv2.createMergeMertens()
     resMertens = mergeMertens.process(images)
     resClip = np.clip(resMertens * 255, 0, 255).astype('uint8')
-    # b, g, r = cv2.split(imageEqu)
-    # r += 10
-    # g += 10
-    # imgCombine = cv2.merge((b, g, r))
-    # resBGR = crop(imgCombine, 70, 40)
     resBGR = crop(resClip, 20, 20)
     return resBGR
     # return imgCombine
@@ -454,11 +429,12 @@ def preprocess_navigate(imgBGR):
 
 
 def preprocess_bouy(imgBGR):
-    b, g, r = cv2.split(imgBGR)
-    r.fill(255)
-    imgCombine = cv2.merge((b, g, r))
-    resBGR = crop(imgCombine, 60, 30)
-    return resBGR
+    # b, g, r = cv2.split(imgBGR)
+    # r.fill(255)
+    # imgCombine = cv2.merge((b, g, r))
+    # resBGR = crop(imgCombine, 50, 10)
+    # return resBGR
+    return imgBGR
 
 
 def callback_raw(ros_data):
