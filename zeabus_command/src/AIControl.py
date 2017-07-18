@@ -146,6 +146,43 @@ class AIControl ():
 	def drive_zaxis (self, z):
 		self.drive ([0, 0, z, 0, 0, 0])
 
+	def print_result(self,msg):
+		print('<---------- '+msg+' ---------->')
+	
+	def drive_x_relative(self,xf,yf,yawf):
+		self.print_result('Drive x relative')
+		getTotalDisStatus = True		
+		totalDistance = 0
+		while not rospy.is_shutdown():
+			pose = self.get_position ()
+			xi,yi,yawi = pose[0], pose[1], pose[5]
+			deltaX = xf - xi
+			deltaY = yf - yi
+			dirX = deltaX/abs(deltaX)
+			dirY = deltaY/abs(deltaY)
+			# check header of auv (front or rear) 
+			if math.pi/2 <= yawi <= math.pi or -math.pi <= yawi <= -math.pi/2:
+				dirX *= -1
+				dirY *= -1
+			distance = (deltaX**2 + deltaY**2)**0.5
+			if getTotalDisStatus :
+				totalDistance = distance
+				getTotalDisStatus = False
+			if distance <= self.errDistance:
+				self.stop(2)
+				self.turn_yaw_absolute(math.degrees(yawf))
+				rospy.sleep(2)				
+				self.print_result('finsih drive x relative')
+				break
+			print distance ,totalDistance
+			velocity = distance/(totalDistance*1.0)
+			vx ,vy = dirX*velocity,dirY*velocity
+			self.drive([vx,vy,0,0,0,0])
+			rospy.sleep(0.5)
+			self.print_result('drive_x_relative status')
+			print xi, yi, yawi
+			print xf,yf,yawf
+
 	def drive_x_rel (self, dis):
 		li = self.get_position ()
 		x = li[0]

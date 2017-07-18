@@ -8,35 +8,29 @@ from sensor_msgs.msg import CompressedImage
 import sys
 sys.path.append ('/home/zeabus/catkin_ws/src/src_code/zeabus_vision/zeabus_vision_main/src/')
 from vision_lib import *
+from constant import * as const
 from zeabus_vision_srv_msg.msg import vision_msg_default
 from zeabus_vision_srv_msg.srv import vision_srv_default
 
 img = None
-width = None
-height = None
+width = const.IMAGE_BOTTOM_WIDTH
+height = const.IMAGE_BOTTOM_HEIGHT
 
-lower_red, upper_red = getColor('orange', 'down')
+lower_orange, upper_orange = get_color('orange', 'bottom', 'path')
 
 def find_path():
     global img, width, height
-    # print("1")
     t = True
     f = False
     cnt = None
-    kernel1 = np.ones((15,15), np.uint8)
-    kernel2 = np.ones((5,5), np.uint8)
     res = vision_msg_default()
 
-    # while not rospy.is_shutdown():
     while img is None:
         print("img: None")
         rospy.sleep(0.01)
-        # continue
-    # print("2")
+    print('upper_or', upper_orange)
+    print('lower_or', lower_orange)
     im = img.copy()
-    # height, width,_ = im.shape
-    # print('width', width)
-    # print('height', height)
     offsetW = width/2
     offsetH = height/2
     area = -999
@@ -47,27 +41,40 @@ def find_path():
     h = -999
     angle = -999
     box = None
+
     imStretching = stretching(im)
-    im_for_draw = img.copy()
-    im_for_draw = np.zeros((height, width))
-    im_blur = cv2.GaussianBlur(im, (3,3), 0)
+    imgForDraw = img.copy()
+    imgBlur = cv2.GaussianBlur(im, (3,3), 0)
 
-    hsv = cv2.cvtColor(im_blur, cv2.COLOR_BGR2HSV)
+    bgr = preprocess_path(im)
+    hsv = cv2.cvtColor(bgr, cv2.COLOR_BGR2HSV)
 
-    # gamma = adjust_gamma_by_v(im_blur)
-    # gamma = cv2.cvtColor(gamma, cv2.COLOR_BGR2HSV)
-    # hsv = equalization(gamma)
+    imgray = cv2.cvtColor(imgBlur, cv2.COLOR_BGR2GRAY)
+    imgOrange = cv2.inRange(hsv, lower_orange, upper_orange)
+    imgOrange = close(imgOrange, get_kernel())
 
-    imgray = cv2.cvtColor(im_blur, cv2.COLOR_BGR2GRAY)
-    im_red = cv2.inRange(hsv, lower_red, upper_red)
-    dilation = cv2.dilate(im_red, kernel1, iterations =  1)
-    erosion = cv2.erode(dilation, kernel2, iterations = 1)
     ret, thresh = cv2.threshold(imgray, 200, 255, 0)
-    _, contours, hierarchy = cv2.findContours(dilation.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    _, contours, hierarchy = cv2.findContours(imgOrange.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+
+    realArea = 0
+    ratioArea = 0
+    # area = 1
+
     for c in contours:
         M = cv2.moments(c)
         rect = (x,y),(ww,hh),angle1 =cv2.minAreaRect(c)
         area = ww*hh
+
+        realArea = cv2.contourArea(c)
+        print('========================')
+        print('area', area)
+        print('realarea', realArea)
+        print('========================')
+
+
+        if area != 0:
+            ratioArea = (realArea/area)*100 
+        
         if area < 500:
             continue
         if hh == 0 :
@@ -77,30 +84,23 @@ def find_path():
             hh = ww
             ww = tmp
         diff = (ww/hh)
-        # if diff > 0.3:
-        #     continue
         epsilon = 0.1*cv2.arcLength(c, t)
         approx = cv2.approxPolyDP(c, epsilon,t)
         
         if area > max1:
             max1 = area
-            # cnt = c
             box = cv2.boxPoints(rect)
             box = np.int0(box)
             angle = 90-Oreintation(M)[0]*180/math.pi
             cx = x
             cy = y
-            # print('cx',cx)
-            # print('cy',cy)
             w = ww
             h = hh
-        # cv2.drawContours(im_for_draw,[box], -1,(0,0,255),1)
-        cv2.drawContours(im, [approx], 0, (0, 0, 255), 2)
-    # print('3')
-    cv2.circle(im_for_draw,(int(cx), int(cy)), 5, (0, 0, 255), -1)
-    cv2.drawContours(im_for_draw,[box], -1,(0,0,255),1)
-    cv2.drawContours(im, contours, -1, (0,255,0), 3)
-    publish_result(im_for_draw, 'bgr', 'debug_path')
+
+    cv2.circle(imgForDraw,(int(cx), int(cy)), 5, (0, 0, 255), -1)
+    cv2.drawContours(imgForDraw,[box], -1,(0,255,255),3)
+    publish_result(imgForDraw, 'bgr', 'debug_path')
+    publish_result(imgOrange, 'gray', 'inRange')
     xx = (cx-offsetW)/offsetW
     yy = (offsetH-cy)/offsetH
     res.x = yy
@@ -121,21 +121,12 @@ def find_path():
     print('y', -xx)
     print('max',max1)
     print('angle', angle)
-    # cv2.imshow('img',img)
-    # print("4")
-    # cv2.waitKey(0)
-    # cv2.destroyAllWindow()
-    # k = cv2.waitKey(1) & 0xff
-    # print('kuykuy')
-    # if k == ord('q'):
-    #     rospy.signal_shutdown('')
     return res
     
 def img_callback(msg):
     global img, width, height
     arr = np.fromstring(msg.data, np.uint8)
-    img = cv2.resize(cv2.imdecode(arr, 1), (640, 512))
-    height, width,_ = img.shape
+    img = cv2.resize(cv2.imdecode(arr, 1), (width, height))
  
 
 
@@ -148,10 +139,5 @@ if __name__ == '__main__':
     topic = '/bottom/left/image_raw/compressed'
     bot = '/bottom/left/image_raw/compressed'
     rospy.Subscriber(bot, CompressedImage, img_callback)
-    # find_path()
-    # while not rospy.is_shutdown():
-    #     res = vision_srv_default()
-    #     find_path()
-    #     print("555")
     rospy.Service('vision', vision_srv_default(), mission_callback)
     rospy.spin()

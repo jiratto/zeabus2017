@@ -73,7 +73,7 @@ double fixPointK[][3] = {{0.0,0.0,0.0},
 geometry_msgs::Pose fixPosition;
 nav_msgs::Odometry previousState;
 nav_msgs::Odometry currentState;
-double cmd_vel[6]={0,0,0,0,0,0},position[7],vel[6];
+double cmd_vel[6]={0,0,0,0,0,0},position[7],vel[6],fixpos[7];
 double prevPosition[6],prevVel[6];
 volatile bool is_switch_on = true; //false
 volatile bool isStateArrived = false;
@@ -96,6 +96,7 @@ int controllerMode = normalMode;
 void validateValue(double&);
 void PIDConstantCallBack(zeabus_controller::PIDConstantConfig &config,uint32_t level);
 void stateListenerCallBack(const nav_msgs::Odometry msg);
+void fixposCallBack(const nav_msgs::Odometry msg);
 void cmd_velCallBack(const geometry_msgs::Twist msg);
 void fixDepthCallBack(const std_msgs::Float64 msg);
 void fixYawCallBack(const std_msgs::Float64 msg);
@@ -133,6 +134,7 @@ void init(){
 		vel[i]=0;
 		cmd_vel[i]=0;
 		position[i]=0;
+		fixpos[i]=0;
 		pidV[i].resetPID();
 		pidP[i].resetPID();
 		pidP[i].setK(fixPointK[i][0],fixPointK[i][1],fixPointK[i][2]);
@@ -151,6 +153,7 @@ int main(int argc,char **argv) {
 	ros::init(argc,argv, "Controller");
 	ros::NodeHandle nh;
 	ros::Subscriber sub_state = nh.subscribe("/auv/state", 1000, &stateListenerCallBack);
+	//ros::Subscriber sub_fixpos = nh.subscribe("/auv/fixpos", 1000, &fixposCallBack);
 	ros::Subscriber sub_cmd_vel = nh.subscribe("/zeabus/cmd_vel", 1, &cmd_velCallBack);
 	//ros::Subscriber sub_cmd_vel = nh.subscribe("/zeabus/cmd_vel", 1000, &cmd_velCallBack);
 	ros::Subscriber sub_cmd_fix_pos = nh.subscribe("/cmd_fix_position", 1000, &cmd_fix_positionCallBack); //fix x,y,z=true
@@ -250,6 +253,17 @@ void stateListenerCallBack(const nav_msgs::Odometry msg){
 	vel[4] = msg.twist.twist.angular.y;
 	vel[5] = msg.twist.twist.angular.z;
 }
+/*
+void fixposCallBack(const nav_msgs::Odometry msg){
+	fixpos[0] = msg.fixPosition.position.x; // position = ตำแหน่ง
+	fixpos[1] = msg.fixPosition.position.y;
+	fixpos[2] = msg.fixPosition.position.z;
+	fixpos[3] = msg.fixPosition.orientation.x; // orientation = ทิศทางชี้หุ่น
+	fixpos[4] = msg.fixPosition.orientation.y;
+	fixpos[5] = msg.fixPosition.orientation.z;
+	fixpos[6] = msg.fixPosition.orientation.w;
+}
+*/
 
 void cmd_velCallBack(const geometry_msgs::Twist msg){
 	double cmd_vel_in[6];

@@ -9,7 +9,7 @@
 	
 	<arg name="imu_microstrain_serialport" default="/dev/microstrain/3dm_gx4_45_0000__6236.40569"/>
 	<arg name="hydrophone_serialport" default="/dev/usb2serial/ftdi_AJ038YFU"/>
-	<arg name="dvl_serialport" default="/dev/usb2serial/ftdi_FT03OMNT_02"/>
+	<arg name="dvl_serialport" default="/dev/usb2serial/ftdi_FT03OMNT_03"/>
 	<!--arg name="dvl_serialport" default="/dev/usb2serial/ftdi_AJ0390DD"/-->
 	<!--arg name="altimeter_serialport" default="/dev/usb2serial/ftdi_AJ0390D9"/-->		
 	<!--arg name="fog_serialport" default="/dev/usb2serial/ftdi_AJ0390D5"/-->

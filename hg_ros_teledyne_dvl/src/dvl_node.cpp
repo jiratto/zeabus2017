@@ -74,7 +74,7 @@ int main(int argc, char **argv)
   int baudrate;
   std::string frame_id;
 
-  nh.param<std::string>("device", device,"/dev/usb2serial/ftdi_A4034AWG");
+  nh.param<std::string>("device", device,"/dev/usb2serial/ftdi_FT03OMNT_03");
 
   nh.param<int>("baudrate", baudrate, 115200);
 

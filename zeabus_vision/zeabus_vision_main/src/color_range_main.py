@@ -13,19 +13,21 @@ is_mask = False
 img = None
 hsv = None
 wait = False
-width = int(1152 / 3)
-height = int(870 / 3)
+imageW = int(1152 / 3)
+imageH = int(874 / 3)
+screenW = 1920
+screenH = 1080
 cameraPos = 'down'
 mission = None
 
 
 class window:
-    global width, height, hsv, cameraPos, mission
+    global screenW, screenH, hsv, cameraPos, mission
 
     def __init__(self):
         self.size = 250
-        self.x = width / 3
-        self.y = 0
+        self.x = screenW / 3 + 10
+        self.y = 20
         self.lower = {}
         self.upper = {}
         self.lower_tmp = {}
@@ -43,7 +45,7 @@ class window:
 
     def update_position(self):
         self.y += self.size
-        if self.y + self.size >= height:
+        if self.y + self.size >= screenH:
             self.x += self.size
             self.y = 20
 
@@ -143,11 +145,11 @@ class window:
 
 
 def camera_callback(msg):
-    global img, wait, hsv, width, height, mission, cameraPos
+    global img, wait, hsv, imageW, imageH, mission, cameraPos
     if wait:
         return
     arr = np.fromstring(msg.data, np.uint8)
-    img_data = cv2.resize(cv2.imdecode(arr, 1), (width, height))
+    img_data = cv2.resize(cv2.imdecode(arr, 1), (imageW, imageH))
     if cameraPos == 'top':
         if mission == 'squid':
             img = preprocess_squid(img_data)
@@ -159,9 +161,15 @@ def camera_callback(msg):
             img = img_data
     else:
         if mission == 'path':
-            img = preprocess_navigate(img_data)
+            img = preprocess_path(img_data)
         elif mission == 'navigate':
             img = preprocess_navigate(img_data)
+        elif mission == 'bin':
+            img = preprocess_bin(img_data)
+        elif mission == 'table':
+            img = preprocess_table(img_data)
+        elif mission == 'tower':
+            img = preprocess_tower(img_data)
         else:
             img = img_data
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
@@ -212,19 +220,17 @@ def print_result(msg):
 
 
 def select_color():
-    global pixel, img, wait, hsv, click, is_mask, width, height
+    global pixel, img, wait, hsv, click, is_mask, imageH, imageW, screenH, screenW
     window_name = ['mask', 'red', 'orange',
                    'white', 'yellow', 'black', 'green']
 
     cv2.namedWindow('image_bgr', flags=cv2.WINDOW_NORMAL)
     cv2.moveWindow('image_bgr', 400, 400)
-    cv2.resizeWindow('image_bgr', (width / 3), (height / 3))
-    cv2.createTrackbar('gamma', 'image_bgr', 0, 100, nothing)
-    cv2.setTrackbarPos('gamma', 'image_bgr', 1)
+    cv2.resizeWindow('image_bgr', (screenW / 3) + 30, (screenH / 3) + 30)
 
     cv2.namedWindow('image', flags=cv2.WINDOW_NORMAL)
     cv2.moveWindow('image', 20, 20)
-    cv2.resizeWindow('image', (width / 3), height)
+    cv2.resizeWindow('image', (screenW / 3), screenH)
     cv2.createTrackbar('Hmin', 'image', 0, 179, nothing)
     cv2.createTrackbar('Smin', 'image', 0, 255, nothing)
     cv2.createTrackbar('Vmin', 'image', 0, 255, nothing)
@@ -232,11 +238,11 @@ def select_color():
     cv2.createTrackbar('Smax', 'image', 0, 255, nothing)
     cv2.createTrackbar('Vmax', 'image', 0, 255, nothing)
     cv2.createTrackbar('m <-> c', 'image', 0, 2, nothing)
-    cv2.createTrackbar('shoot_x', 'image', 0, width, nothing)
-    cv2.createTrackbar('shoot_y', 'image', 0, height, nothing)
+    cv2.createTrackbar('shoot_x', 'image', 0, imageW, nothing)
+    cv2.createTrackbar('shoot_y', 'image', 0, imageH, nothing)
     set_trackbar([179, 255, 255], [0, 0, 0])
-    cv2.setTrackbarPos('shoot_x', 'image', int(width / 2))
-    cv2.setTrackbarPos('shoot_y', 'image', int(height / 2))
+    cv2.setTrackbarPos('shoot_x', 'image', int(imageW / 2))
+    cv2.setTrackbarPos('shoot_y', 'image', int(imageH / 2))
     cv2.setMouseCallback('image', draw_circle)
 
     w = window()
@@ -301,9 +307,7 @@ def select_color():
     cv2.destroyAllWindows()
 
 if __name__ == '__main__':
-    # init node
     rospy.init_node('color_range_main')
-    # get params
     cameraPos = rospy.get_param('color_range/cameraPos', 'down')
     cameraTopic = rospy.get_param('color_range/cameraTopic',
                                   '/rightcam_bottom/image_raw/compressed')

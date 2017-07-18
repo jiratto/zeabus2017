@@ -60,8 +60,8 @@ def navigate_top():
     global img, width, height
     im = None
     res = vision_msg_navigate()
-    lower_yellow, upper_yellow = getColor('yellow', 'top') 
-    lower_white, upper_white = getColor('', 'top')
+    lower_yellow, upper_yellow = get_color('yellow', 'top', 'navigate') 
+    lower_white, upper_white = get_color('white', 'top', 'navigate')
     while not rospy.is_shutdown():
         while img is None:
             print("img : None")
@@ -80,19 +80,23 @@ def navigate_top():
 
         print('lower_yellow', lower_yellow)
         print('upper_yellow', upper_yellow)
-        im_yellow = cv2.inRange(hsv, lower_yellow, upper_yellow)
-        
-        ret, im_yellow = cv2.threshold(im_yellow, 20, 255, cv2.THRESH_BINARY)
 
-        im_delnoise = close(im_yellow, rect_ker(3,3))
-        im_delnoise = erode(im_yellow, rect_ker(3,3))
-        im_delnoise = dilate(im_delnoise, cross_ker(3,3))
-        im_delnoise2 = erode(im_yellow, cross_ker(5,1))
-        im_lr = dilate(im_delnoise, rect_ker(15,1))
-        im_lr = close(im_lr, rect_ker(11,11))
-        im_lr = erode(im_lr, rect_ker(1,55))
-        im_bot = dilate(im_delnoise2, rect_ker(1,23))
-        im_bot = erode(im_bot, rect_ker(35, 1))
+        imgYellow = cv2.inRange(hsv, lower_yellow, upper_yellow)
+        im_bg = cv2.inRange(hsv, lower_white, upper_white)
+
+        imgYellow = cv2.subtract(imgYellow, im_bg)
+
+        ret, imgYellow = cv2.threshold(imgYellow, 20, 255, cv2.THRESH_BINARY)
+
+        # im_delnoise = close(imgYellow, rect_ker(3,3))
+        im_delnoise = erode(imgYellow, get_kernel('rect', (3,3)))
+        im_delnoise = dilate(im_delnoise, get_kernel('cross', (3,3)))
+        im_delnoise2 = erode(imgYellow, get_kernel('cross', (5,1)))
+        im_lr = dilate(im_delnoise, get_kernel('rect', (15,1)))
+        im_lr = close(im_lr, get_kernel('rect', (11,11)))
+        im_lr = erode(im_lr, get_kernel('rect', (1,55)))
+        im_bot = dilate(im_delnoise2, get_kernel('rect', (1,23)))
+        im_bot = erode(im_bot, get_kernel('rect', (35,1)))
         
         plate = im_lr+im_bot
         _, contours_lr, hierarchy = cv2.findContours(im_lr.copy(), 
@@ -123,9 +127,6 @@ def navigate_top():
             M = cv2.moments(c)
             rect = (x,y), (ww,hh), angle = cv2.minAreaRect(c)
             area = ww*hh
-
-            # if not not_center_bot(x):
-            #     continue
 
             if cut_contours(M, width, height, range_w, range_h):
                 box = cv2.boxPoints(rect)
@@ -251,7 +252,7 @@ def navigate_top():
         publish_result(im_draw,'bgr', 'debug' )
         publish_result(im_lr, 'gray', 'lr')
         publish_result(im_bot, 'gray', 'bot')
-        publish_result(im_yellow, 'gray', 'yellow')
+        publish_result(imgYellow, 'gray', 'yellow')
         # publish_result(bgr, 'bgr', 'bgr')
         # publish_result(stretchBGR, 'bgr', 'bgr')
         publish_result(hsv, 'bgr', 'hsv')
@@ -278,18 +279,19 @@ def navigate_bot():
         appear = False
         im_bot = img_bot.copy()
         imForDraw = img_bot.copy()
-        lower_yellow, upper_yellow = getColor('yellow', 'down')
+        lower_yellow, upper_yellow = get_color('yellow', 'bottom', 'navigate')
         
 
         # hsv = cv2.cvtColor(im_bot.copy(), cv2.COLOR_BGR2HSV)
         bgr = preprocess_navigate(im_bot)
         hsv = cv2.cvtColor(bgr, cv2.COLOR_BGR2HSV)
 
-        im_yellow = cv2.inRange(hsv, lower_yellow, upper_yellow)
-        im_yellow = erode(im_yellow, rect_ker(5,5))
-        im_yellow = close(im_yellow, rect_ker(5,5))
+        imgYellow = cv2.inRange(hsv, lower_yellow, upper_yellow)
+        
+        imgYellow = erode(imgYellow, rect_ker(5,5))
+        imgYellow = close(imgYellow, rect_ker(5,5))
 
-        _, contours, hierarchy = cv2.findContours(im_yellow.copy(), 
+        _, contours, hierarchy = cv2.findContours(imgYellow.copy(), 
                                             cv2.RETR_TREE, 
                                             cv2.CHAIN_APPROX_SIMPLE)
         max_area = 0
