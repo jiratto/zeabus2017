@@ -1,1 +1,9 @@
 #!/usr/bin/env python
+
+GATE_DIRECTION = 0
+
+BOUY_DIRECTION = 0
+
+PATH2_DIRECTION = 0
+
+NAVIGATE_DIRECTION = 0

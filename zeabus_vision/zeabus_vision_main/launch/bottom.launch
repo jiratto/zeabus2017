@@ -3,8 +3,8 @@
 	<arg name="statusL" default="True"/>
 	<arg name="statusR" default="True"/>
 	<!-- =================== SET Argument =================== -->
-	<arg name="camera_id_left" value="3" />
-	<arg name="camera_id_right" value="4" />
+	<arg name="camera_id_left" value="1" />
+	<arg name="camera_id_right" value="2" />
 	<arg name="nodelet_manager_name_left" value="bottom_left" />
 	<arg name="nodelet_manager_name_right" value="bottom_right" />
 	<arg name="camera_name_left" value="/bottom/left" />
@@ -78,7 +78,6 @@
 			<param name="flip_lr" type="bool" value="$(arg flip_lr)" />
 		</node>
 	</group>
-	<!-- <node pkg="image_proc" name="image_proc" type="image_proc" output="screen" ns="$(arg camera_name_center)"/> -->
 	<arg name="imageType" value="image_raw/compressed"/>
 	<node pkg="zeabus_vision" name="auto_exposure_bottom" type="auto_exposure_bottom.py" output="screen">
 		<param name="imagebottomicL" type="str" value="/bottom/left/$(arg imageType)"/>

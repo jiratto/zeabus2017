@@ -84,12 +84,12 @@ class AutoExposure:
         return data
 
 
-def test_class():
-    subTopic = "/top/left/image_raw/compressed"
-    client = "ueye_cam_nodelet_top_left/"
-    ae = AutoExposure(subTopic, client)
-    ae.adjust_exposure_time()
+# def test_class():
+#     subTopic = "/top/left/image_raw/compressed"
+#     client = "ueye_cam_nodelet_top_left/"
+#     ae = AutoExposure(subTopic, client)
+#     ae.adjust_exposure_time()
 
-if __name__ == '__main__':
-    rospy.init_node('Auto_Exposure_Top')
-    test_class()
+# if __name__ == '__main__':
+#     rospy.init_node('Auto_Exposure_Top')
+#     test_class()

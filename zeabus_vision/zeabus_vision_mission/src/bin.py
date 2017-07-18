@@ -53,7 +53,7 @@ def find_bin(msg):
         ret, black = cv2.threshold(blurClaGray, 20, 255, cv2.THRESH_BINARY_INV)
         black = erode(black, get_kernal('cross', (13,13)))
 
-        eqOrange = preprocess_navigate(image)
+        eqOrange = preprocess_bin(image)
         eqOrange = cv2.cvtColor(eqOrange, cv2.COLOR_BGR2HSV)
         eqOrange = cv2.inRange(eqOrange, lowerOrange, upperOrange)
         

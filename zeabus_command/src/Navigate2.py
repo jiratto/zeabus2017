@@ -24,6 +24,7 @@ class Navigate (object):
 		self.countStateTwo = 20
 		self.countStateThree = 20
 		self.checkSlide = 0 # check one leg loop case
+		self.timeDriveX = 12
 		self.task = 'navigate'
 		self.state = 0 # state go to navigate
 		self.data = None
@@ -96,9 +97,9 @@ class Navigate (object):
 			rospy.sleep (0.1)
 		
 		if mul > 0:
-			vy = 0.5
+			vy = 0.4
 		elif mul < 0:
-			vy = -0.5
+			vy = -0.4
 		else:
 			vy = 0
 
@@ -109,12 +110,12 @@ class Navigate (object):
 			self.checkSlide = 0
 			return
 		elif self.checkSlide >= 6:
-			self.aicontrol.drive_xaxis (0.6)
-			rospy.sleep (3)
+			# self.aicontrol.drive_xaxis (0.6)
+			# rospy.sleep (3)
 			vy = self.aicontrol.adjust (vy, -0.3, -0.2, 0.2, 0.3)
 		elif self.checkSlide >= 4:
-			self.aicontrol.drive_xaxis (0.6)
-			rospy.sleep (3)
+			# self.aicontrol.drive_xaxis (0.6)
+			# rospy.sleep (3)
 			vy = self.aicontrol.adjust (vy, -0.4, -0.3, 0.3, 0.4)
 		
 		if two > one >= zero:
@@ -128,7 +129,10 @@ class Navigate (object):
 				self.checkSlide = 0
 				vx = (1 / area[2]) * 3
 				self.aicontrol.drive_xaxis (vx)
-				rospy.sleep (6)
+				rospy.sleep (self.timeDriveX)
+
+				if self.timeDriveX > 3:
+					self.timeDriveX /= 2
 			else:
 				print 'Drive to center'
 				vy = self.aicontrol.adjust (avrCx, -0.6, -0.3, 0.3, 0.6)
@@ -140,8 +144,8 @@ class Navigate (object):
 			print 'ONE LEG'
 
 			if self.aicontrol.is_fail (self.countStateOne):
-				print 'STATE 1 FAIL'
-				self.state = -1
+				print 'STATE 1 FAILED BUT TRY STATE 2'
+				self.state = 2
 
 			self.aicontrol.drive_yaxis (vy)
 			rospy.sleep (3)
@@ -196,19 +200,13 @@ class Navigate (object):
 					
 					if -180 <= self.data.angle <= 180:
 						angle.append (self.data.angle)
+				
 				if len (angle) != 0:
 					self.angleBot = self.aicontrol.average (angle)
 				else:
 					self.aicontrol.drive_xaxis (0.6)
 					rospy.sleep (0.5)
 					continue
-
-				# self.aicontrol.drive_xaxis (-0.8)
-				# rospy.sleep (3)
-				# self.pos = self.aicontrol.get_position ()[0]
-				# self.aicontrol.stop (0.5)
-				# self.aicontrol.drive_xaxis (-0.8)
-				# rospy.sleep (3)
 
 				print ('Turn angle: ', self.angleBot)
 				self.aicontrol.turn_yaw_relative (self.angleBot)
@@ -297,15 +295,6 @@ class Navigate (object):
 				rospy.sleep (3)
 				# self.aicontrol.stop (0.5)
 
-			# tmp = self.aicontrol.get_position ()
-			# dis = abs (self.pos[0] - tmp[0])
-			# print 'GO TO NAVIGATE BEFORE ROLL'
-			# self.aicontrol.drive_x_rel (dis)
-			# self.aicontrol.stop (1)
-
-			# print 'ROLL'
-			# self.aicontrol.drive_xaxis (1)
-			# rospy.sleep (3)
 		elif one > two >= zero:
 			print 'ONE LEG'
 
@@ -329,17 +318,7 @@ class Navigate (object):
 				print 'FORWARD TO ROLL'
 
 				self.aicontrol.fix_zaxis (depth.NAVIGATE_ROLL)
-				# self.aicontrol.drive_xaxis (1)
-				# rospy.sleep (3)
-				# x = self.aicontrol.get_position ()[0]
-				# y = self.aicontrol.get_position ()[1]
-				# print ('x: ', x)
-				# print ('dest_x: ', self.pos[0])
-				# self.aicontrol.drive_x_rel (self.pos[0] - x)
-				# print ('y: ', y)
-				# print ('dest_y: ', self.pos[1])
-				# self.aicontrol.drive_y_rel (self.pos[1] - y)
-				# if x >= self.pos:
+				
 				print 'ROLL'
 				# self.aicontrol.roll (2)
 				# self.aicontrol.stop (1)
@@ -351,7 +330,7 @@ class Navigate (object):
 			# rospy.sleep (2)
 			# self.countStateThree -= 1
 
-	def run (self):
+	def do_navigate (self):
 		task = 'navigate'
 		cam = 'top'
 
@@ -360,7 +339,7 @@ class Navigate (object):
 		self.aicontrol.drive_xaxis (1)
 		rospy.sleep (10)
 
-		while not rospy.is_shutdown ():
+		while not rospy.is_shutdown () and not self.aicontrol.is_fail (self.fail):
 			if self.state == 0:
 				self.check_found ()
 			if self.state == 1:
@@ -375,9 +354,10 @@ class Navigate (object):
 			self.aicontrol.stop (0.5)
 		self.aicontrol.stop (1)
 
-	def bot (self):
-		self.aicontrol.fix_zaxis (-1.7)
-		self.check_bottom ()
+		if self.state != -1:
+			return True
+		else:
+			return False
 
 if __name__ == '__main__':
 	navigate = Navigate ()

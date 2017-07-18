@@ -17,9 +17,7 @@ class Path (object):
         # rospy.init_node ('path_node')
 
         self.aicontrol = AIControl ()
-        self.data = None
-        self.command = rospy.Publisher ('/zeabus/cmd_vel', Twist, queue_size=10)
-        self.turn_yaw_rel = rospy.Publisher ('/fix/rel/yaw', Float64, queue_size=10)    
+        self.data = None  
         self.isFail = 30
         
         path_srv = 'vision'
@@ -29,7 +27,7 @@ class Path (object):
     def stop (self):
         self.aicontrol.stop (2)
 
-    def run (self):
+    def find (self):
         path = 'path'
         color = 'red'
         vx = 0
@@ -88,7 +86,8 @@ class Path (object):
             if not self.data.appear:
                 print 'NOT FOUND PATH'
 
-                self.aicontrol.drive ([0.5, 0, 0, 0, 0, 0])
+                self.aicontrol.drive_xaxis (0.7)
+                rospy.sleep (1)
                 self.isFail -= 1
             else:
                 print 'FOUND PATH'
@@ -107,10 +106,10 @@ class Path (object):
         print (self.check_path ())
 
     def check_path (self):
-        if self.aicontrol.is_fail (self.isFail):
-            return 'FIND PATH FAILED'
+        if not self.aicontrol.is_fail (self.isFail):
+            return True
         else:
-            return 'FIND PATH COMPLETE'
+            return False
 
             
 # if __name__ == '__main__':
