@@ -47,43 +47,15 @@ class thrust_mapper:
 	# 				[0, 0, 1],
 	# 				[math.cos(math.radians(40)), -math.sin(math.radians(40)), 0],
 	# 				[0, 0, 1]])
-	# self.d = array([[0, 0, 1],
-	# 				[0,0,1],
-	# 				[0, 0, 1],
-	# 				[0, 0, 1],
-	# 				[math.cos(math.radians(40)), math.sin(math.radians(40)), 0],
-	# 				[math.cos(math.radians(40)), -math.sin(math.radians(40)), 0],
-	# 				[-math.cos(math.radians(40)), -math.sin(math.radians(40)), 0],
-	# 				[-math.cos(math.radians(40)), math.sin(math.radians(40)), 0]])
-
-	#tul
-	#self.d = array([[0, 0, 0],
-	#				[0, 0, 0],
-	#				[0, 0, 0],
-	#				[0, 0, 0],
-	#				[math.cos(math.radians(40)), math.sin(math.radians(40)), 0],
-	#				[math.cos(math.radians(40)), -math.sin(math.radians(40)), 0],
-	#				[-math.cos(math.radians(40)), -math.sin(math.radians(40)), 0],
-	#				[-math.cos(math.radians(40)), math.sin(math.radians(40)), 0]])	
-
-	#ek
+	#newX
 	self.d = array([[0, 0, 1],
-			[0, 0, -1],
 			[0, 0, 1],
 			[0, 0, 1],
-			[-math.cos(math.radians(40)), math.sin(math.radians(40)), 0],
-			[math.cos(math.radians(40)), math.sin(math.radians(40)), 0],
-			[-math.cos(math.radians(40)), -math.sin(math.radians(40)), 0],
-			[math.cos(math.radians(40)), -math.sin(math.radians(40)), 0]])	
-	# V2
-	#self.d = array([[0, 0, -1],
-	#		[0, 0, -1],
-	#		[0, 0, -1],
-	#		[0, 0, -1],
-	#		[-math.cos(math.radians(40)), math.sin(math.radians(40)), 0],
-	#		[-math.cos(math.radians(40)), -math.sin(math.radians(40)), 0],
-	#		[math.cos(math.radians(40)), math.sin(math.radians(40)), 0],
-	#		[math.cos(math.radians(40)), -math.sin(math.radians(40)), 0]])		
+			[0, 0, 1],
+			[-math.cos(math.radians(45)), math.sin(math.radians(45)), 0],
+			[-math.cos(math.radians(45)), -math.sin(math.radians(45)), 0],
+			[math.cos(math.radians(45)), math.sin(math.radians(45)), 0],
+			[-math.cos(math.radians(45)), math.sin(math.radians(45)), 0]])		
 
 
 #perlican
@@ -107,50 +79,17 @@ class thrust_mapper:
 	# 	   			[-0.23594, 0.20304, 0.05816],
 	# 	   			[ 0.45728, 0.19104, 0.03993],
 	# 	   			[ 0.23594, 0.20304, 0.05816]])
-	#self.r = array([[ 0.45728,-0.19104, 0.03993],
-	# 	   			[-0.45728,-0.19104, 0.03993],
-	# 				[-0.45728, 0.19104, 0.03993],
-	# 				[ 0.45728, 0.19104, 0.03993],
-	# 				[ 0.23594,-0.20304, 0.05816],
-	# 	   			[-0.23594,-0.20304, 0.05816],
-	#	   			[-0.23594, 0.20304, 0.05816],
-	# 	   			[ 0.23594, 0.20304, 0.05816]])
-
-#	self.r = array([[ 0.23594,-0.20304, 0.05816],
- #                      	 [-0.23594,-0.20304, 0.05816],
-  #                     	 [-0.23594, 0.20304, 0.05816],
-   #                    	 [ 0.23594, 0.20304, 0.05816],
-#			 [ 0.45728,-0.19104, 0.03993],
-#		   	 [-0.45728,-0.19104, 0.03993],
-#			 [-0.45728, 0.19104, 0.03993],
-#			 [ 0.45728, 0.19104, 0.03993]])
+	
 	#ek 
-	self.r = array([[ 0.225,  0.2,   0.03],
-	               	[ 0.225, -0.2,   0.03],
-			[-0.225,  0.2,   0.03],  
-                       	[-0.225, -0.2,   0.03],
-			[ 0.375,  0.26, -0.04],
-		   	[ 0.375, -0.26, -0.04],
-			[-0.375,  0.26, -0.04],
-			[-0.375, -0.26, -0.04]])
-	#self.r = array([[ 0.332,  0.2202, -0.023], #0
-        #               	[ 0.332, -0.2108, -0.023], #1
-	#		[-0.332,  0.2202, -0.023], #2
-        #               	[-0.332, -0.2108, -0.023], #3
-	#		[ 0.332,  0.2202, -0.023], #4
-	#	   	[ 0.332, -0.2108, -0.023], #5
-	#		[-0.332,  0.2202, -0.023], #6
-	#		[-0.332, -0.2108, -0.023]]) #7
+	self.r = array([[ 0.332,  0.2202, -0.023], #0
+                       	[ 0.332, -0.2108, -0.023], #1
+			[-0.332,  0.2202, -0.023], #2
+                       	[-0.332, -0.2108, -0.023], #3
+			[ 0.332,  0.2202, -0.023], #4
+		   	[ 0.332, -0.2108, -0.023], #5
+			[-0.332,  0.2202, -0.023], #6
+			[-0.332, -0.2108, -0.023]]) #7
 
-
-#     r = array([[0.425, 0.140, -0.095+0.044],
-#                [0.330, 0.150, 0.080+0.044],
-#                [-0.150, 0.240, -0.060+0.044],
-#                [-0.330, 0.150, 0.080+0.044],
-#                [-0.425, -0.140, -0.095+0.044],
-#                [-0.330, -0.150, 0.080+0.044],
-#                [-0.150, -0.240, -0.060+0.044],
-#                [0.330, -0.150, 0.080+0.044]])
 
 	print self.r
 
@@ -214,9 +153,6 @@ class thrust_mapper:
 	#trusts_scale = [3,3,4.1,2.4,2.4,2.4]
 	F = array([message.linear.x*3, message.linear.y*3, message.linear.z*4.1,
 		   message.angular.x*2.4, message.angular.y*2.4, message.angular.z*1])
-	
-	#F = array([message.linear.x*6, message.linear.y*6, message.linear.z*8.2,
-		   message.angular.x*4.8, message.angular.y*4.8, message.angular.z*4.8])
 	print '======= F ========'
 	print F
 	print F.T
@@ -252,7 +188,7 @@ class thrust_mapper:
 
 	#ek+control
 	force = 1
-	pwm_command.pwm[0] = cmd[0]*force#500*t[0]; #thrust0		       
+	pwm_command.pwm[0] = cmd[0]*force#500*t[0]; #thrust0	       
 	pwm_command.pwm[1] = cmd[1]*force#500*t[1]; #thrust1
 	pwm_command.pwm[2] = cmd[2]*force#500*t[2]; #thrust2			 
 	pwm_command.pwm[3] = cmd[3]*force#500*t[3]; #thrust3			
@@ -265,10 +201,10 @@ class thrust_mapper:
 	print '\n============PWM before bound============='
 	print pwm_command
 	for i in range(8) :
-		if pwm_command.pwm[i] > 1800 :	#at first 1800 
-			pwm_command.pwm[i] = 1800
-		elif pwm_command.pwm[i] < 1200 :
-			pwm_command.pwm[i] = 1200  #at first 1200 
+		if pwm_command.pwm[i] > 1750 :	#at first 1800 
+			pwm_command.pwm[i] = 1750
+		elif pwm_command.pwm[i] < 1250 :
+			pwm_command.pwm[i] = 1250  #at first 1200 
 	
 	print '\n============PWM============='
 	print pwm_command

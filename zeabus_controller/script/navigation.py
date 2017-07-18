@@ -65,6 +65,8 @@ def turn_yaw_abs(degree):
 
 
 def go_to_xy(x=None, y=None, yaw=None):
+    #x = final_x
+    #y = final_y
     global position
     drive(0, 0, 0, 0, 0, 0)
     print ('goto')
@@ -87,63 +89,84 @@ def go_to_xy(x=None, y=None, yaw=None):
     #               -x
     start_x = position[0]
     start_y = position[1]
+    print ('start_x: ')+ str(start_x)
+    print ('start_y: ')+ str(start_y)
     while not rospy.is_shutdown():
-        begin_x = position[0]
-        begin_y = position[1]
+        now_x = position[0]
+        now_y = position[1]
 
         scale_x = abs(start_x - x)
         scale_y = abs(start_y - y)
         scale = scale_x**2 + scale_y**2
 
-        delta_x = x - begin_x
-        delta_y = -(y - begin_y)
+        delta_x = x - now_x
+	abs_delta_x = abs(x - now_x)
+        delta_y = -(y - now_y)
+	abs_delta_y = abs(y - now_y)
         # print('x y')
         # print(x, y)
         # print('begin')
-        # print (begin_x, begin_y)
+        # print (now_x, now_y)
         # print('deelta')
         # print(delta_x, delta_y)
         #######################################################################
-        begin_rad = math.atan2(delta_x, delta_y)
-        begin_deg = math.degrees(begin_rad)
-        if begin_deg < 0:
-            begin_deg += 360
-        print('begin deg')
-        print begin_deg
+        #begin_rad = math.atan2(delta_x, delta_y)
+        #begin_deg = math.degrees(begin_rad)
+        #if begin_deg < 0:
+        #    begin_deg += 360
+        #print('begin deg')
+        #print begin_deg
 
-        rad = position[5]
+        #rad = position[5]
         # print rad
-        deg = math.degrees(rad)
-        if deg < 0:
-            deg += 360
-        deg += 90
-        deg %= 360
-        print 'deg'
-        print deg
-        res_deg = [deg - begin_deg - 360,
-                   begin_deg - deg, deg - begin_deg + 360]
+        #deg = math.degrees(rad)
+        #if deg < 0:
+        #    deg += 360
+        #deg += 90
+        #deg %= 360
+        #print 'deg'
+       # print deg
+       # #res_deg = [deg - begin_deg - 360,
+       #   #         begin_deg - deg, deg - begin_deg + 360]
+#	res_deg = deg
 
-        res_deg = min(res_deg, key=abs)
+        #res_deg = min(res_deg, key=abs)
         # print('res degree')
         # print(res_deg)
-        turn_yaw_rel(res_deg)
-        rospy.sleep(4)
-        print 'drive'
+        #turn_yaw_rel(res_deg)
+        #rospy.sleep(4)
+        #print 'drive'
         #######################################################################
-        dis = (begin_x - x)**2 + (begin_y - y)**2
-        if begin_y < y:
-            vy = dis / scale
+
+        dis = (now_x - x)**2 + (now_y - y)**2
+	scale_vy = abs_delta_y/scale_y
+	if scale_vy < 0.16:
+	    scale_vy = 0.16
+        if now_y < y:
+            vy =  scale_vy #0.3
         else:
-            vy = -dis / scale
-        if abs(begin_y - y) <= 0.5:
+            vy =  -scale_vy #-0.3
+	print ('distance y: ') + str(abs(now_y - y))
+        if abs(now_y - y) <= 0.026:
             vy = 0
-        vx = dis / scale
+#-------------------------------------------------------------
+        scale_vx = abs_delta_x/scale_x
+	if scale_vx < 0.16:
+	    scale_vx = 0.16
+	if now_x < x:
+            vx =  scale_vx #0.5
+        else:
+            vx = -scale_vx #-0.5
+	print ('distance x: ') + str(abs(now_x - x))
+        if abs(now_x - x) <= 0.026:
+            vx = 0
         print('vx: ') + str(vx) + ' ' + ('vy: ') + str(vy)
-        drive(vx + 0.1, vy, 0, 0, 0, 0)
-        rospy.sleep(0.2)
-        print 'fin drive'
+        #drive(vx + 0.1, vy, 0, 0, 0, 0)
+	drive(vx, vy, 0, 0, 0, 0)
+        rospy.sleep(0.3)
+        print '---------finnal drive---------'
         print (dis)
-        if dis <= (0.25**2):
+        if dis <= (0.035**2):
             print('stop')
             drive(0, 0, 0, 0, 0, 0)
             rospy.sleep(2)

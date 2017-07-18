@@ -75,11 +75,9 @@ nav_msgs::Odometry previousState;
 nav_msgs::Odometry currentState;
 double cmd_vel[6]={0,0,0,0,0,0},position[7],vel[6];
 double prevPosition[6],prevVel[6];
-volatile bool is_switch_on = false;
+volatile bool is_switch_on = true; //false
 volatile bool isStateArrived = false;
 bool isFixed[] = {false,false,true,true,true,true};
-//bool isFixed[] = {true,true,true,true,true,true};
-//bool canFixed[] = {ttruerue,true,true,true,true,true};
 bool canFixed[] = {true,true,true,true,true,true};
 bool nearZeroBeforeFix[] = {false,false,false,false,false,false};
 //sk uncomment
@@ -179,12 +177,14 @@ int main(int argc,char **argv) {
 	ros::Rate rate(50);
 	while(nh.ok()) {
 		ros::spinOnce();
-		if(!isStateArrived || !is_switch_on){
+
+		if(!isStateArrived || !is_switch_on){ 
 			if(!isStateArrived) ROS_INFO("No state");
 			ROS_INFO("No state arrived or motor switch is off wait 1 sec");
 			ros::Duration(1).sleep();
 			continue;
 		}
+
 		changeFixedState();
 		if(!fixPositionQueue.empty()){
 			fixPosition.orientation = fixPositionQueue.front();
@@ -231,14 +231,6 @@ void stateListenerCallBack(const nav_msgs::Odometry msg){
 		tf::Quaternion fixY;
 		fixY.setRPY(0,0,Y);
 		tf::quaternionTFToMsg(fixY,fixPosition.orientation);
-		/*
-		tf::Quaternion fixP;
-		fixY.setRPY(0,P,0);
-		tf::quaternionTFToMsg(fixP,fixPosition.orientation);
-		tf::Quaternion fixR;
-		fixY.setRPY(R,0,0);
-		tf::quaternionTFToMsg(fixR,fixPosition.orientation);
-		*/
 		fixPosition.position.x = msg.pose.pose.position.x;
 		fixPosition.position.y = msg.pose.pose.position.y;
 		fixPosition.position.z = msg.pose.pose.position.z;
