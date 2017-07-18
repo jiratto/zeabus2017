@@ -14,15 +14,19 @@ from zeabus_vision_srv_msg.srv import *
 from zeabus_vision_srv_msg.msg import *
 
 img = None
-width = int(1152 / 3)
+img_gray = None
+hsv = None
+# width = int(1152 / 3)
 height = int(870 / 3)
+width = None
+height = None
 resultMemory = []
 getMemoryStatus = True
 xMemory = 0.0
 yMemory = 0.0
 radiusOverlay = 15
-ratioAreaCir = 0.57
-minAreaCir = 70
+ratioAreaCir = 0.5
+minAreaCir = 30
 mode = 1
 resImg = None
 trackRadius = 50
@@ -47,6 +51,8 @@ def mission_callback(msg):
     req = msg.req.data
     print('request: ') + str(req)
     return find_bouy(req)
+
+# def velocity_callback():
 
 
 def process_mask(imgBIN):
@@ -128,7 +134,7 @@ def find_all_bouy(contours):
         cv2.circle(resImg, (int(x), int(y)), int(r), (255, 255, 255), 3)
         cv2.putText(resImg, 'Area: %.2f %.2f %d ' %
                     (cirPerScreen,
-                     ratio_area(area, areaCir), (areaCir)),
+                     ratio_area(area, areaCir), (area)),
                     (int(x), int(y)), font, 0.5, (0, 255, 255), 1, cv2.LINE_AA)
 
     # min to max
@@ -142,22 +148,22 @@ def find_all_bouy(contours):
         if i == 0:
             if mode == 1:
                 resultR = [x, y, area]
-                color = (0, 0, 255)
+                color = CONST.COLOR_RED
             else:
                 resultG = [x, y, area]
-                color = (0, 255, 0)
+                color = CONST.COLOR_GREEN
             cv2.circle(resImg, (int(x), int(y)), 6, color, -1)
         elif i == 1:
             resultY = [x, y, area]
-            color = (255, 0, 0)
+            color = CONST.COLOR_YELLOW
             cv2.circle(resImg, (int(x), int(y)), 6, color, -1)
         else:
             if mode == 2:
                 resultR = [x, y, area]
-                color = (0, 0, 255)
+                color = CONST.COLOR_GREEN
             else:
                 resultG = [x, y, area]
-                color = (0, 255, 0)
+                color = CONST.COLOR_GREEN
             cv2.circle(resImg, (int(x), int(y)), 6, color, -1)
         publish_result(resImg, 'bgr', '/bouy_result')
         count += 1
@@ -200,7 +206,7 @@ def find_yellow_bouy(contours):
         x = resultCir[0]
         y = resultCir[1]
         cv2.circle(resImg, ((int(x)),
-                            int(y)), 5, (0, 0, 0), -1)
+                            int(y + 10)), 5, CONST.COLOR_ORANGE, -1)
         publish_result(resImg, 'bgr', '/bouy_result')
         x, y = offset_centroid(x, y)
         area = resultCir[2]
@@ -249,14 +255,13 @@ def find_one_bouy(contours):
         (x, y), r = cv2.minEnclosingCircle(c)
         areaCir = circle_area(r)
         cirPerScreen = ratio_area(areaCir, (width * height))
-        resultCir.append([x, y, cirPerScreen])
 
         if not identify_circle(area, areaCir):
             continue
 
         if radius_distance(x, xMemory, y, yMemory) >= trackRadius**2:
             continue
-
+        resultCir.append([x, y, cirPerScreen])
         cv2.circle(resImg, (int(x), int(y)), int(r), (255, 255, 255), 2)
         cv2.putText(resImg, 'Area: %.2f %.2f %d ' %
                     (cirPerScreen, ratio_area(area, areaCir), areaCir),
@@ -289,9 +294,9 @@ def find_bouy(req):
 
     m = vision_msg_bouy()
 
-    lowerY, upperY = get_color('yellow', 'top', 'bouy')
-    lowerR, upperR = get_color('red', 'top', 'bouy')
-    lowerYY, upperYY = get_color('orange', 'top', 'bouy')
+    lowerY, upperY = get_color('yellow', 'top', 'bouy_sim')
+    lowerR, upperR = get_color('red', 'top', 'bouy_sim')
+    lowerYY, upperYY = get_color('orange', 'top', 'bouy_sim')
 
     while img is None:
         print('img is none in loop')
@@ -356,7 +361,9 @@ def find_bouy(req):
 
 if __name__ == '__main__':
     rospy.init_node('vision_squid', anonymous=True)
-    topic = "/top/center/image_rect_color/compressed"
+    # topic = "/top/center/image_rect_color/compressed"
+    topic = "/syrena/front_cam/image_raw/compressed"
     rospy.Subscriber(topic, CompressedImage, image_callback)
+    # find_bouy()
     rospy.Service('vision_bouy', vision_srv_bouy(), mission_callback)
     rospy.spin()
