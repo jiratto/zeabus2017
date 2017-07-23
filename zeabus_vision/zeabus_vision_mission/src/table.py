@@ -19,6 +19,7 @@ def find_table():
     global img, width, height
 
     lower_bg, upper_bg = get_color('black', 'bottom', 'table')
+    lower_red, upper_red = get_color('red', 'bottom', 'table')
     while not rospy.is_shutdown():
         while img is None:
             print('None img') 
@@ -34,23 +35,13 @@ def find_table():
 
         bg = cv2.inRange(hsv, lower_bg, upper_bg)
 
-        cla = clahe(image)
-        blur = cv2.bilateralFilter(cla, 15, 75, 75)
-        blurClaGray = cv2.cvtColor(blur, cv2.COLOR_BGR2GRAY)
-        blurClaGray = equalization_gray(blurClaGray)
-
         _, bg = cv2.threshold(bg, 20, 255, cv2.THRESH_BINARY_INV)
         # bg = np.invert(bg)
-        bg = open_morph(bg, get_kernal())
-        bg = close(bg, get_kernal())
+        bg = open_morph(bg, get_kernel())
+        bg = close(bg, get_kernel())
 
-        ret, thresh = cv2.threshold(imageGray, 60, 255, cv2.THRESH_BINARY_INV)
-        _, thresh1 = cv2.threshold(blurClaGray, 50, 255, cv2.THRESH_BINARY_INV)
 
-        # thresh1 = cv2.subtract(thresh1, bg)
-
-        thresh1 = close(thresh1, get_kernal())
-
+        redContours = c2.inRange(hsv, )
         _, contours, hierarchy = cv2.findContours(thresh1.copy(), 
                                             cv2.RETR_TREE, 
                                             cv2.CHAIN_APPROX_SIMPLE)
@@ -81,7 +72,7 @@ def find_table():
             M = cv2.moments(c)
             rect = (x,y), (ww, hh), angle1 = cv2.minAreaRect(c)
             temp = angle1
-            rect = (x,y), (ww,hh), 0
+            # rect = (x,y), (ww,hh), 0
             area = ww*hh
             realArea = cv2.contourArea(c)
             # angle = 90-Oreintation(M)[0]*180/math.pi 
