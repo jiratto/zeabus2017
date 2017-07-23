@@ -29,6 +29,7 @@ sudo apt-get install libatlas-base-dev gfortran;
 echo " Install Python 2.7 ";
 echo
 sudo apt-get install python2.7-dev
+pip install numpy
 echo "<--------------- Install OpencCV 3 with Python 2 --------------->"
 echo
 sleep 5
@@ -46,7 +47,7 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
 	-D CMAKE_INSTALL_PREFIX=/usr/local \
 	-D INSTALL_C_EXAMPLES=ON \
 	-D INSTALL_PYTHON_EXAMPLES=ON \
-	-D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules \
+	-D OPENCV_EXTRA_MODULES_PATH=~/install_opencv/opencv_contrib/modules \
 	-D BUILD_EXAMPLES=ON ..
 make -j4
 sudo make install
