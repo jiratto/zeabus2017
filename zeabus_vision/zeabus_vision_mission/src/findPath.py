@@ -8,7 +8,7 @@ from sensor_msgs.msg import CompressedImage
 import sys
 sys.path.append ('/home/zeabus/catkin_ws/src/src_code/zeabus_vision/zeabus_vision_main/src/')
 from vision_lib import *
-from constant import * as const
+import constant as const
 from zeabus_vision_srv_msg.msg import vision_msg_default
 from zeabus_vision_srv_msg.srv import vision_srv_default
 

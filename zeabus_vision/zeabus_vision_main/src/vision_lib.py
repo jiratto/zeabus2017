@@ -516,12 +516,12 @@ def preprocess_tower(imgBGR):
     return resBGR
 
 def preprocess_bouy(imgBGR):
-    # b, g, r = cv2.split(imgBGR)
-    # r.fill(255)
-    # imgCombine = cv2.merge((b, g, r))
-    # resBGR = crop(imgCombine, 50, 10)
-    # return resBGR
-    return imgBGR
+    b, g, r = cv2.split(imgBGR)
+    r.fill(255)
+    imgCombine = cv2.merge((b, g, r))
+    resBGR = crop(imgCombine, 50, 10)
+    return resBGR
+    # return imgBGR
 
 
 def callback_raw(ros_data):
