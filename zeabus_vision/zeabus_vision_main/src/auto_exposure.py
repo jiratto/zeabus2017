@@ -23,6 +23,7 @@ class AutoExposure:
         self.minEV = EVmin
         self.subImage = rospy.Subscriber(
             subTopic, CompressedImage, self.img_callback,  queue_size=10)
+	print_result("subscriber")
         self.client = dynamic_reconfigure.client.Client(self.clientName)
         print_result('set_client')
         self.set_param('exposure', self.EVdefault)
