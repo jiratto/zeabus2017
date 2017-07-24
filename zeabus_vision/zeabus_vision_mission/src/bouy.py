@@ -14,8 +14,8 @@ from zeabus_vision_srv_msg.srv import *
 from zeabus_vision_srv_msg.msg import *
 
 img = None
-width = int(1152 / 3)
-height = int(870 / 3)
+width = CONST.IMAGE_TOP_WIDTH
+height = CONST.IMAGE_TOP_HEIGHT
 resultMemory = []
 getMemoryStatus = True
 xMemory = 0.0
@@ -35,11 +35,7 @@ font = cv2.FONT_HERSHEY_SIMPLEX
 def image_callback(msg):
     global img, width, height
     arr = np.fromstring(msg.data, np.uint8)
-    img1 = cv2.imdecode(arr, 1)
-    h, w, ch = img1.shape
-    width = w / 2
-    height = h / 2
-    img = cv2.resize(img1, (width, height))
+    img = cv2.resize(cv2.imdecode(arr, 1), (width, height))
 
 
 def mission_callback(msg):
@@ -61,10 +57,6 @@ def process_mask(imgBIN):
     resErode1 = erode(resDilate, kernelFrame)
     resErode = erode(resErode1, kernelFrame)
     return resErode
-
-
-def print_result(msg):
-    print '<---------- ' + str(msg) + ' ---------->'
 
 
 def radius_distance(preX, curX, preY, curY):
