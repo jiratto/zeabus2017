@@ -36,7 +36,7 @@ class Bouy (object):
 		nav_srv = 'navigation'
 		rospy.wait_for_service (bouy_srv)
 		self.detect_bouy = rospy.ServiceProxy (bouy_srv, vision_srv_bouy)
-		# self.navigation = rospy.ServiceProxy (nav_srv, navigation_srv)
+		self.navigation = rospy.ServiceProxy (nav_srv, navigation_srv)
 
 	def find_num (self):
 		self.data = self.detect_bouy (String ('bouy'), String ('a'))
@@ -283,7 +283,13 @@ class Bouy (object):
 
 		## comeback XY
 		print 'COMEBACK XY'
-		self.aicontrol.drive_x_relative (self.startX, self.startY, self.startYaw)
+		# self.aicontrol.drive_x_relative (self.startX, self.startY, self.startYaw)
+		self.xy = self.navigation (self.startX, self.startY, self.startYaw)
+		self.xy = self.xy.data
+		if self.xy:
+			print 'COMEBACK COMPLETE'
+		else:
+			print 'COMEBACK FAILED'
 
 		## comeback Z
 		print 'COMEBACK Z'

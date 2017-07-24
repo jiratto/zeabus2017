@@ -23,7 +23,7 @@ yMemory = 0.0
 radiusOverlay = 15
 ratioAreaCir = 0.57
 minAreaCir = 70
-mode = 1
+mode = 2
 resImg = None
 trackRadius = 50
 req = None
@@ -35,7 +35,13 @@ font = cv2.FONT_HERSHEY_SIMPLEX
 def image_callback(msg):
     global img, width, height
     arr = np.fromstring(msg.data, np.uint8)
-    img = cv2.resize(cv2.imdecode(arr, 1), (width, height))
+    img1 = cv2.imdecode(arr, 1)
+    # h, w, ch = img1.shape
+    w = CONST.IMAGE_TOP_WIDTH
+    h = CONST.IMAGE_TOP_HEIGHT
+    width = w / 2
+    height = h / 2
+    img = cv2.resize(img1, (width, height))
 
 
 def mission_callback(msg):

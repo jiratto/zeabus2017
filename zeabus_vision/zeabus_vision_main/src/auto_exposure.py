@@ -34,6 +34,7 @@ class AutoExposure:
         self.hsv = cv2.cvtColor(self.image, cv2.COLOR_BGR2HSV)
 
     def set_param(self, param, value):
+        value = max(self.minEV, value)
         params = {str(param): value}
         config = self.client.update_configuration(params)
 
@@ -63,12 +64,14 @@ class AutoExposure:
                 continue
             if vMode >= 235:
                 ev -= 0.1
+                self.set_param('exposure', ev)
             elif 50 <= vMode <= 100:
                 ev += 0.05
+                self.set_param('exposure', ev)
             elif vMode <= 45:
                 ev += 0.1
-            max(self.minEV, ev)
-            self.set_param('exposure', ev)
+                self.set_param('exposure', ev)
+            
 
     def inrange_ratio(self, min, ratio, max):
         if min <= ratio <= max:
