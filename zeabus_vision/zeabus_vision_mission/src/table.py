@@ -8,8 +8,8 @@ import sys
 sys.path.append ('/home/zeabus/catkin_ws/src/src_code/zeabus_vision/zeabus_vision_main/src/')
 from vision_lib import *
 from sensor_msgs.msg import CompressedImage
-# from zeabus_vision_srv_msg.msg import vision_msg_default
-# from zeabus_vision_srv_msg.srv import vision_srv_default
+from zeabus_vision_srv_msg.msg import vision_msg_default
+from zeabus_vision_srv_msg.srv import vision_srv_default
 
 img = None
 height = None
@@ -18,8 +18,13 @@ width = None
 def find_table():
     global img, width, height
 
+    minArea = 200
+
     lower_bg, upper_bg = get_color('black', 'bottom', 'table')
     lower_red, upper_red = get_color('red', 'bottom', 'table')
+    lower_orange, upper_orange = get_color('orange', 'bottom', 'table')
+    lower_blue, upper_blue = get_color('white', 'bottom', 'table')
+    lower_green, upper_green = get_color('yellow', 'bottom', 'table')
     while not rospy.is_shutdown():
         while img is None:
             print('None img') 
@@ -40,27 +45,43 @@ def find_table():
         bg = open_morph(bg, get_kernel())
         bg = close(bg, get_kernel())
 
-
-        redContours = c2.inRange(hsv, )
-        _, contours, hierarchy = cv2.findContours(thresh1.copy(), 
-                                            cv2.RETR_TREE, 
-                                            cv2.CHAIN_APPROX_SIMPLE)
+        orange = cv2.inRange(hsv, lower_orange, upper_orange)
+        blue = cv2.inRange(hsv, lower_blue, upper_blue)
+        green = cv2.inRange(hsv, lower_green, upper_green)
+        red = cv2.inRange(hsv, lower_red, upper_red)
 
         _, rectContours, _ = cv2.findContours(bg.copy(),
                                             cv2.RETR_EXTERNAL,
                                             cv2.CHAIN_APPROX_SIMPLE)
 
+        _, redContours, hierarchy = cv2.findContours(red.copy(), 
+                                            cv2.RETR_EXTERNAL, 
+                                            cv2.CHAIN_APPROX_SIMPLE)
 
-        # for c in contours:
-        #     M = cv2.moments(c)
-        #     if len(c) >= 5: 
-        #         ellipse = (x,y), (mn,mj), angle = cv2.fitEllipse(c)
-        #         if mj < 20 or mj > 100:
-        #             continue
-        #         if mn < 20:
-        #             continue
-                # print('ellipse', ellipse)
-                # cv2.ellipse(imageForDraw, ellipse, (255,255,0),2)
+
+        maxRed = 0
+        angleRed = -999
+
+        for c in redContours:
+            M = cv2.moments(c)
+            rect = (x,y), (ww,hh), angle = cv2.minAreaRect(c)
+            area = ww*hh
+            realArea = cv2.contourArea(c)
+            if realArea < minArea:
+                continue
+            if maxRed < area:
+                maxRed = area
+                boxRed = cv2.boxPoints(rect)
+                boxRed = np.int0(boxRed)
+                xRed = x
+                yRed = y
+                angleRed = 90-Oreintation(M)[0]*180/math.pi
+        if maxRed != 0:
+            cv2.drawContours(imageForDraw, [boxRed], -1, (0,0,255), 2)
+            # appearRed = True
+            print('angleRed', angleRed)
+
+        
         dst = np.zeros((width, height))
         box = np.zeros((width, height))
         maxArea = 0
@@ -96,13 +117,8 @@ def find_table():
         dst = cv2.warpAffine(rectPlate,M1,(width,height))
         # dst = cv2.resize(dst, (width, height))
 
-        cv2.imshow('bg', bg)
-        cv2.imshow('dst', dst)
-        # cv2.imshow('thresh1', thresh1)
-        # cv2.imshow('thresh', thresh)
-        # cv2.imshow('grayScale', imageGray)
+        cv2.imshow('red', red)
         cv2.imshow('imageForDraw', imageForDraw)
-        cv2.imshow('rect plate', rectPlate)
         cv2.waitKey(30)
 
 def img_callback(msg):
