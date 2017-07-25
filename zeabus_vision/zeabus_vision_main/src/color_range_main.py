@@ -19,6 +19,7 @@ screenW = 1920
 screenH = 1080
 cameraPos = 'down'
 mission = None
+time = None
 
 
 class window:
@@ -125,7 +126,7 @@ class window:
             rospy.set_param(
                 '/color_range_' + str(mission) + '/color_' + cameraPos + '/upper_' + name, self.range_list2str(self.upper[name][-1]))
 
-        f = open(self.path + '/params/color_' +
+        f = open(self.path + '/params/' + str(time) + '/color_' +
                  cameraPos + '_' + str(mission) + '.yaml', 'w')
         x = self.genyaml()
         f.write(x)
@@ -310,8 +311,9 @@ if __name__ == '__main__':
     rospy.init_node('color_range_main')
     cameraPos = rospy.get_param('color_range/cameraPos', 'down')
     cameraTopic = rospy.get_param('color_range/cameraTopic',
-                                  '/rightcam_bottom/image_raw/compressed')
+                                  '/leftcam_bottom/image_raw/compressed')
     mission = rospy.get_param('color_range/mission', 'default')
+    time = rospy.get_param('time', 'morning')
     print_result('TOPIC: ' + str(cameraTopic))
     print_result('CAMERA: ' + str(cameraPos))
     print_result('MISSION: ' + str(mission))
