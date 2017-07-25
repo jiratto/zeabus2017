@@ -14,7 +14,7 @@ def main():
         "/auto_exposure_bottom/imageTopicR", None)
     clientR = rospy.get_param(
         "/auto_exposure_bottom/imageClientR", None)
-
+   
     if not subTopicL is None:
         AEL = AutoExposure(subTopicL, clientL, EVdefault, EVmin)
         AEL.adjust_exposure_time()

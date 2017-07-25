@@ -216,7 +216,7 @@ class thrust_mapper:
 		   message.angular.x*2.4, message.angular.y*2.4, message.angular.z*1])
 	
 	#F = array([message.linear.x*6, message.linear.y*6, message.linear.z*8.2,
-		   message.angular.x*4.8, message.angular.y*4.8, message.angular.z*4.8])
+		  # message.angular.x*4.8, message.angular.y*4.8, message.angular.z*4.8])
 	print '======= F ========'
 	print F
 	print F.T

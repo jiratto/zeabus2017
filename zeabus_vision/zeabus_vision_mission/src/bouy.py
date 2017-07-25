@@ -14,8 +14,8 @@ from zeabus_vision_srv_msg.srv import *
 from zeabus_vision_srv_msg.msg import *
 
 img = None
-width = int(1152 / 3)
-height = int(870 / 3)
+width = CONST.IMAGE_TOP_WIDTH
+height = CONST.IMAGE_TOP_HEIGHT
 resultMemory = []
 getMemoryStatus = True
 xMemory = 0.0
@@ -63,10 +63,6 @@ def process_mask(imgBIN):
     resErode1 = erode(resDilate, kernelFrame)
     resErode = erode(resErode1, kernelFrame)
     return resErode
-
-
-def print_result(msg):
-    print '<---------- ' + str(msg) + ' ---------->'
 
 
 def radius_distance(preX, curX, preY, curY):
