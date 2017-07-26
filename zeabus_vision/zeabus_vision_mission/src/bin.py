@@ -42,6 +42,7 @@ def find_bin(msg):
 
         image = img.copy()
         
+        blackThreshold = 200
 
         imageForDraw = img.copy()
 
@@ -49,20 +50,31 @@ def find_bin(msg):
         blur = cv2.bilateralFilter(cla, 15, 75, 75)
         blurClaGray = cv2.cvtColor(blur, cv2.COLOR_BGR2GRAY)
         blurClaGray = equalization_gray(blurClaGray)
-        
-        ret, black = cv2.threshold(blurClaGray, 20, 255, cv2.THRESH_BINARY_INV)
-        black = erode(black, get_kernel('cross', (13,13)))
 
+        # imgBgr = preprocess_bin
         eqOrange = preprocess_bin(image)
+
+        gray = cv2.cvtColor(eqOrange, cv2.COLOR_BGR2GRAY)
+
         eqOrange = cv2.cvtColor(eqOrange, cv2.COLOR_BGR2HSV)
         eqOrange = cv2.inRange(eqOrange, lowerOrange, upperOrange)
+        
+        # ret, black = cv2.threshold(blurClaGray, blackThreshold, 255, cv2.THRESH_BINARY_INV)
+        # ret, black = cv2.threshold(gray, blackThreshold, 255, cv2.THRESH_BINARY_INV)
+        ret, black = cv2.threshold(gray, blackThreshold, 255, cv2.THRESH_BINARY)
+
+        black = open_morph(black, get_kernel('cross', (17,17)))
+        # black = dilate(black, get_kernel('cross', (5,5)))
+        black = erode(black, get_kernel('cross', (9,9)))
+        black = erode(black, get_kernel('rect', (1,3)))
+
         
         orangeImage = close(eqOrange, get_kernel('rect',(15,15)))
 
         black = cv2.subtract(black, eqOrange)
 
         _, orangeContours, _ = cv2.findContours(orangeImage.copy(), 
-                                            cv2.RETR_TREE, 
+                                            cv2.RETR_EXTERNAL, 
                                             cv2.CHAIN_APPROX_SIMPLE)
         _, blackContours, hierarchy = cv2.findContours(black.copy(), 
                                             cv2.RETR_EXTERNAL, 
@@ -96,8 +108,8 @@ def find_bin(msg):
             area = ww*hh
             if not find_shape(c, 'rect'):
                 continue
-            if area < 500:
-                continue
+            # if area < 500:
+            #     continue
             if maxCover < area:
                 maxCover = area
                 xBinCover = x
@@ -106,13 +118,18 @@ def find_bin(msg):
                 boxCover = np.int0(boxCover)
                 coverAngle = 90-Oreintation(M)[0]*180/math.pi
         
-        # cv2.drawContours(imageForDraw,[boxCover], -1,(0,255,0),1)
+        cv2.drawContours(imageForDraw,[boxCover], -1,(0,255,0),1)
         
         for c in blackContours:
             M = cv2.moments(c)
             rect = (x,y),(ww,hh),_ = cv2.minAreaRect(c)
             area = ww*hh
             
+            diff = abs(xBinCover-x)
+
+            if diff < 20:
+                continue
+
             realArea = cv2.contourArea(c)
             
 
@@ -164,9 +181,11 @@ def find_bin(msg):
         else:
             print('error no req')
         publish_result(imageForDraw, 'bgr', 'debug')
-        publish_result(blurClaGray, 'gray', 'blurClaGray')
+        # publish_result(blurClaGray, 'gray', 'blurClaGray')
         publish_result(blur, 'bgr', 'blur')
         publish_result(black, 'gray', 'black')
+        publish_result(gray, 'gray', 'gray')
+
 
 
         return res

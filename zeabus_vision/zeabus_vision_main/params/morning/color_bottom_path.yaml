@@ -7,9 +7,9 @@
 
   lower_black: '179,255,255'
 
-  upper_orange: '14,255,140'
+  upper_orange: '179,140,255'
 
-  lower_orange: '4,100,45'
+  lower_orange: '2,20,248'
 
   upper_green: '0,0,0'
 

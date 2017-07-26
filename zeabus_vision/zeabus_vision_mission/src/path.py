@@ -51,6 +51,8 @@ def find_path():
 
     imgray = cv2.cvtColor(imgBlur, cv2.COLOR_BGR2GRAY)
     imgOrange = cv2.inRange(hsv, lower_orange, upper_orange)
+
+    imgOrange = open_morph(imgOrange, get_kernel('cross', (5,5)))
     imgOrange = close(imgOrange, get_kernel())
 
     ret, thresh = cv2.threshold(imgray, 200, 255, 0)
@@ -75,7 +77,7 @@ def find_path():
         if area != 0:
             ratioArea = (realArea/area)*100 
         
-        if area < 500:
+        if area < 1500:
             continue
         if hh == 0 :
             continue
