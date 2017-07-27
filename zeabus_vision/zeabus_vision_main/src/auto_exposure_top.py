@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 import rospy
 from auto_exposure import AutoExposure
+import constant as CONST
 
 
 def main():
-    EVmin = 0.4
-    EVdefault = 0.7
+    EVmin = CONST.EV_MIN_TOP
+    EVdefault = CONST.EV_MIN_DEFAULT
 
     subTopicC = rospy.get_param(
         "/auto_exposure_top/imageTopicC", None)
