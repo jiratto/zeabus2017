@@ -305,8 +305,8 @@ def select_color():
     cv2.destroyAllWindows()
 
 if __name__ == '__main__':
-    rospy.init_node('color_range_main')
-    nodeName = 'color_range_sk'
+    rospy.init_node('color_range_top_cello')
+    nodeName = 'color_range_top_cello'
     cameraPos = rospy.get_param(nodeName + '/cameraPos', 'down')
     cameraTopic = rospy.get_param(nodeName + '/cameraTopic',
                                   '/leftcam_bottom/image_raw/compressed')
