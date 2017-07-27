@@ -11,10 +11,10 @@ from vision_lib import *
 
 class AutoExposure:
 
-    def __init__(self, subTopic, clientName, EVdefault=1, EVmin=0.5):
+    def __init__(self, subTopic, clientName, width, height, EVdefault=1, EVmin=0.5):
         print_result("init_node_auto_exposure")
-        self.imageW = CONST.IMAGE_TOP_WIDTH
-        self.imageH = CONST.IMAGE_TOP_HEIGHT
+        self.imageW = width
+        self.imageH = height
         self.hsv = None
         self.image = None
         self.subTopic = subTopic

@@ -5,8 +5,8 @@ import constant as CONST
 
 
 def main():
-    EVmin = CONST.EV_MIN_TOP
-    EVdefault = CONST.EV_MIN_DEFAULT
+    EVmin = CONST.EV_TOP_MIN
+    EVdefault = CONST.EV_TOP_DEFAULT
 
     subTopicC = rospy.get_param(
         "/auto_exposure_top/imageTopicC", None)
@@ -14,7 +14,8 @@ def main():
         "/auto_exposure_top/imageClientC", None)
 
     if not subTopicC is None:
-        AEC = AutoExposure(subTopicC, clientC, EVdefault, EVmin)
+        AEC = AutoExposure(subTopicC, clientC, CONST.IMAGE_TOP_WIDTH,
+                           CONST.IMAGE_TOP_HEIGHT, EVdefault, EVmin)
         AEC.adjust_exposure_time()
 
 if __name__ == '__main__':
