@@ -156,16 +156,20 @@ def camera_callback(msg):
         if mission == 'squid':
             img = preprocess_squid(img_data)
         elif mission == 'navigate':
-            img = preprocess_navigate(img_data)
+            # img = preprocess_navigate(img_data)
+            # img = clahe(img_data)
+            img = equalization_bgr(img_data)
         elif mission == 'bouy':
             img = preprocess_bouy(img_data)
         else:
             img = img_data
     else:
         if mission == 'path':
-            img = preprocess_path(img_data)
+            # img = preprocess_path(img_data)
+            img = img_data
         elif mission == 'navigate':
-            img = preprocess_navigate(img_data)
+            # img = preprocess_navigate(img_data)
+            img = img_data
         elif mission == 'bin':
             img = preprocess_bin(img_data)
         elif mission == 'table':

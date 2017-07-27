@@ -33,6 +33,8 @@ def find_bin(msg):
     lowerWhite, upperWhite = get_color('white', 'bottom', 'bin')
     res = vision_msg_default()
 
+    ratio = -999
+
     while not rospy.is_shutdown():
         while img is None:
             print('None')
@@ -106,6 +108,7 @@ def find_bin(msg):
             M = cv2.moments(c)
             rect = (x,y),(ww,hh),_ =cv2.minAreaRect(c)
             area = ww*hh
+            
             if not find_shape(c, 'rect'):
                 continue
             # if area < 500:
@@ -119,7 +122,7 @@ def find_bin(msg):
                 coverAngle = 90-Oreintation(M)[0]*180/math.pi
         
         cv2.drawContours(imageForDraw,[boxCover], -1,(0,255,0),1)
-        
+        cv2.circle(imageForDraw ,(int(xBinCover), int(yBinCover)), 5, (0, 255, 255), -1)
         for c in blackContours:
             M = cv2.moments(c)
             rect = (x,y),(ww,hh),_ = cv2.minAreaRect(c)
@@ -141,6 +144,15 @@ def find_bin(msg):
 
             if area < 2000:
                 continue
+
+            if ww > hh:
+                temp = ww
+                ww = hh
+                hh = temp
+
+            ratio = float(ww/hh)
+            # if ratio > 0.7:
+            #     continue
 
             if maxNoCover < realArea:
                 maxNoCover = realArea
@@ -165,7 +177,7 @@ def find_bin(msg):
 
         # print('angle', noCoverAngle)
 
-        xBinNonCover -= offsetShootX
+        # xBinNonCover -= offsetShootX
 
         if req == 'nocover': # **Note** swap x and y for AI 
             cv2.circle(imageForDraw ,(int(xBinNonCover), int(yBinNonCover)), 5, (0, 255, 255), -1)
@@ -187,7 +199,12 @@ def find_bin(msg):
         publish_result(black, 'gray', 'black')
         publish_result(gray, 'gray', 'gray')
 
-
+        if ratio > 0.7:
+            res.appear = False
+            print("not found")
+        else:
+            res.appear = True
+            print("found")
 
         return res
 
@@ -213,4 +230,3 @@ if __name__ == '__main__':
     # find_bin()
     rospy.Service('vision_bin', vision_srv_default(), mission_callback)
     rospy.spin()
-    # find_bin()

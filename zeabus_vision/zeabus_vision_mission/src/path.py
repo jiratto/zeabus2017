@@ -17,6 +17,7 @@ width = const.IMAGE_BOTTOM_WIDTH
 height = const.IMAGE_BOTTOM_HEIGHT
 
 lower_orange, upper_orange = get_color('orange', 'bottom', 'path')
+lower_white, upper_white = get_color('white', 'bottom', 'path')
 
 def find_path():
     global img, width, height
@@ -42,15 +43,31 @@ def find_path():
     angle = -999
     box = None
 
+    blackThreshold = 127
+
     imStretching = stretching(im)
     imgForDraw = img.copy()
     imgBlur = cv2.GaussianBlur(im, (3,3), 0)
 
-    bgr = preprocess_path(im)
+    # bgr = preprocess_path(im)
+    bgr = img
     hsv = cv2.cvtColor(bgr, cv2.COLOR_BGR2HSV)
 
     imgray = cv2.cvtColor(imgBlur, cv2.COLOR_BGR2GRAY)
     imgOrange = cv2.inRange(hsv, lower_orange, upper_orange)
+
+    bg = cv2.inRange(hsv, lower_white, upper_white)
+
+
+    # ret, black = cv2.threshold(imgray, blackThreshold, 255, cv2.THRESH_BINARY)
+    black = cv2.adaptiveThreshold(imgray,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,\
+            cv2.THRESH_BINARY,11,2)
+
+    black = cv2.subtract(black, bg)
+
+    imgOrange = cv2.subtract(imgOrange, bg)
+
+    imgOrange = open_morph(imgOrange, get_kernel('cross', (5,5)))
     imgOrange = close(imgOrange, get_kernel())
 
     ret, thresh = cv2.threshold(imgray, 200, 255, 0)
@@ -75,7 +92,7 @@ def find_path():
         if area != 0:
             ratioArea = (realArea/area)*100 
         
-        if area < 500:
+        if realArea < 1000:
             continue
         if hh == 0 :
             continue
@@ -83,6 +100,9 @@ def find_path():
             tmp = hh
             hh = ww
             ww = tmp
+
+        # if not find_shape(c, 'rect'):
+        #         continue
         diff = (ww/hh)
         epsilon = 0.1*cv2.arcLength(c, t)
         approx = cv2.approxPolyDP(c, epsilon,t)
@@ -98,9 +118,10 @@ def find_path():
             h = hh
 
     cv2.circle(imgForDraw,(int(cx), int(cy)), 5, (0, 0, 255), -1)
-    cv2.drawContours(imgForDraw,[box], -1,(0,255,255),3)
+    cv2.drawContours(imgForDraw,[box], -1,(255,0,255),3)
     publish_result(imgForDraw, 'bgr', 'debug_path')
     publish_result(imgOrange, 'gray', 'inRange')
+    publish_result(black, 'gray', 'black')
     xx = (cx-offsetW)/offsetW
     yy = (offsetH-cy)/offsetH
     res.x = yy

@@ -19,6 +19,10 @@ img_bot = None
 height_bot = None
 width_bot = None
 
+def find_edge(cnt):
+    peri = cv2.arcLength(cnt, True)
+    approx = cv2.approxPolyDP(cnt, 0.04 * peri, True)
+    return len(approx)
 
 def rect_ker(x,y):
     return cv2.getStructuringElement(cv2.MORPH_RECT,(x,y))
@@ -149,6 +153,10 @@ def navigate_top():
                 area_h = ww
             if area_h < hh:
                 area_h = hh
+            edge = find_edge(c)
+            print('edge', edge)
+            # if not edge == 4 or edge == 2:
+            #     continue
 
             x_lr = x
             count_h += 1
@@ -184,6 +192,9 @@ def navigate_top():
                 area_w = hh
             if area < 1500:
                 continue
+            edge = find_edge(c)
+            # if not edge == 4 or edge == 2:
+            #     continue
             # if y > 320:
             #     continue
             print(area)
