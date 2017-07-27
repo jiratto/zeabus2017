@@ -4,31 +4,35 @@ import rospy
 from zeabus_vision_srv_msg.msg import *
 from zeabus_vision_srv_msg.srv import *
 from std_msgs.msg import String
+from vision_lib import *
+
+
+def call_service(mission, request):
+    print_result('wait service')
+
+    if mission == 'bouy':
+        vision_srv = vision_srv_bouy
+    elif mission == 'navigate':
+        vision_srv = vision_srv_navigate
+    elif mission == 'squid':
+        vision_srv = vision_srv_squid
+    elif mission == 'bin':
+        vision_srv = vision_srv_default
+
+    serviceName = 'vision_' + str(mission)
+    rospy.wait_for_service(serviceName)
+    print_result('service start')
+
+    call = rospy.ServiceProxy(serviceName, vision_srv)
+
+    while not rospy.is_shutdown():
+        res = call(String(mission), String(request))
+        print_result('')
+        print res
+        rospy.sleep(0.1)
 
 if __name__ == '__main__':
     rospy.init_node('call_service')
-    serviceName = 'vision_bouy'
-    # serviceName = 'vision_navigate'
-    # serviceName = 'vision_squid'
-    # binsrv = 'vision_bin'
-    print('wait service')
-    rospy.wait_for_service(serviceName)
-    print('service start')
-
-    # call = rospy.ServiceProxy(serviceName, vision_srv_navigate)
-    call = rospy.ServiceProxy(serviceName, vision_srv_bouy)
-    # call = rospy.ServiceProxy(serviceName, vision_srv_default)
-    while not rospy.is_shutdown():
-        # res = call(String('Navigate'), String('bot'))
-
-        # res = call(String('squid'), String('b'))
-        # res = call(String('bouy'), String('a'))
-        res = call(String('bouy'), String('o'))
-        # res = call(String('bouy'), String('g'))
-        # res = res.data
-        # print res.x
-        # print res.y
-        # print res.appear
-        print res
-
-        rospy.sleep(0.1)
+    mission = 'bouy'
+    request = 'a'
+    call_service(mission, request)
