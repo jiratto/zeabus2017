@@ -157,19 +157,15 @@ def camera_callback(msg):
             img = preprocess_squid(img_data)
         elif mission == 'navigate':
             img = preprocess_navigate(img_data)
-            # img = clahe(img_data)
-            # img = equalization_bgr(img_data)
         elif mission == 'bouy':
             img = preprocess_bouy(img_data)
         else:
             img = img_data
     else:
         if mission == 'path':
-            # img = preprocess_path(img_data)
-            img = img_data
+            img = preprocess_path(img_data)
         elif mission == 'navigate':
             img = preprocess_navigate(img_data)
-            # img = img_data
         elif mission == 'bin':
             img = preprocess_bin(img_data)
         elif mission == 'table':
@@ -309,8 +305,8 @@ def select_color():
     cv2.destroyAllWindows()
 
 if __name__ == '__main__':
-    rospy.init_node('color_range_main')
-    nodeName = 'color_range_sk'
+    rospy.init_node('color_range_top_sk')
+    nodeName = 'color_range_top_sk'
     cameraPos = rospy.get_param(nodeName + '/cameraPos', 'down')
     cameraTopic = rospy.get_param(nodeName + '/cameraTopic',
                                   '/leftcam_bottom/image_raw/compressed')

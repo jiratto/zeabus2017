@@ -11,12 +11,13 @@ import time
 import statistics
 from matplotlib import pyplot as plt
 from vision_lib import *
+import constant as CONST
 
 img = None
 hsv = None
 
-width = 480
-height = 320
+width = CONST.IMAGE_TOP_WIDTH
+height = CONST.IMAGE_TOP_HEIGHT
 
 
 def callback(msg):
@@ -31,7 +32,6 @@ def plot_value():
     cv2.namedWindow('image', flags=cv2.WINDOW_NORMAL)
     cv2.moveWindow('image', 20, 20)
     cv2.resizeWindow('image', width, height)
-    # cv2.createTrackbar('v', 'image', 0, 255, nothing)
     plt.ion()
     while not rospy.is_shutdown():
 
@@ -42,10 +42,9 @@ def plot_value():
 
         h, s, v = cv2.split(hsv)
         vOneD = v.ravel()
-        # sOneD = s.ravel()
 
         cv2.imshow('image', img)
-        cv2.imshow('hsv', hsv)
+        cv2.imshow('v', v)
         plt.hist(vOneD, 256, [0, 256])
         plt.pause(0.01)
         plt.cla()
@@ -53,12 +52,9 @@ def plot_value():
         if key == ord('q'):
             break
 
-        # rospy.sleep(0.1)
-
 if __name__ == '__main__':
-    rospy.init_node('adjust_exposure_time_bottom')
-    # topic = '/top/center/image_rect_color/compressed'
-    topic = '/bottom/left/image_raw/compressed'
-    node = 'ueye_cam_nodelet_bottom_left/'
+    rospy.init_node('adjust_exposure_time_top')
+
+    topic = '/top/center/image_rect_color/compressed'
     rospy.Subscriber(topic, CompressedImage, callback)
     plot_value()
