@@ -335,7 +335,8 @@ def navigate_bot():
         res.direction = -999
         res.ratioArea = -999
         res.numVertical = -999
-        res.angle = -angle
+        # res.angle = -angle
+        res.angle = 0
         res.appear = appear
         return res
 

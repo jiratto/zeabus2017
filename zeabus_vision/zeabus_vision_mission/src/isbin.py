@@ -161,9 +161,9 @@ def find_bin(msg):
                 xBinNonCover = x
                 yBinNonCover = y
                 noCoverAngle = 90-Oreintation(M)[0]*180/math.pi
-        print('----------------------')
+        # print('----------------------')
 
-        print(maxNoCover)
+        # print(maxNoCover)
 
         print('=========================')
 
@@ -199,7 +199,9 @@ def find_bin(msg):
         publish_result(black, 'gray', 'black')
         publish_result(gray, 'gray', 'gray')
 
-        if ratio > 0.7:
+        print('ratio', ratio)
+
+        if ratio > 0.8:
             res.appear = False
             print("not found")
         else:
@@ -221,12 +223,12 @@ def img_callback(msg):
     
 
 if __name__ == '__main__':
-    rospy.init_node('findBin')
+    rospy.init_node('isBin')
     bag = '/leftcam_bottom/image_raw/compressed'
     topic = '/bottom/left/image_raw/compressed'
     bot = '/bottom/left/image_raw/compressed'
     rospy.Subscriber(bot, CompressedImage, img_callback)
     # rospy.Subscriber(bag, CompressedImage, img_callback)
     # find_bin()
-    rospy.Service('vision_bin', vision_srv_default(), mission_callback)
+    rospy.Service('vision_where', vision_srv_default(), mission_callback)
     rospy.spin()

@@ -42,7 +42,7 @@ def find_bin(msg):
 
         image = img.copy()
         
-        blackThreshold = 200
+        blackThreshold = 150
 
         imageForDraw = img.copy()
 
