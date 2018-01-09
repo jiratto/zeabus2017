@@ -123,7 +123,7 @@ void ZeabusTeleop::publish()
 }
 int main(int argc, char** argv)
 {
-  ros::init(argc, argv, "zeabus_teleop");
+  ros::init(argc, argv, "zeabus_teleop1");
   ZeabusTeleop Zeabus_teleop;
   ros::spin();
 }
